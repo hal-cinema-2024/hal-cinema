@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@tanstack/react-router": "^1.29.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1"
+  }
+}

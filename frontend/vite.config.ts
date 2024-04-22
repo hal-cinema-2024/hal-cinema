@@ -1,8 +1,6 @@
-// vite.config.ts
 import { defineConfig } from "vite";
 import { TanStackRouterVite } from "@tanstack/router-vite-plugin";
-
-// https://vitejs.dev/config/
+import react from "@vitejs/plugin-react";
 export default defineConfig({
-  plugins: [TanStackRouterVite()],
+  plugins: [react(), TanStackRouterVite()],
 });
