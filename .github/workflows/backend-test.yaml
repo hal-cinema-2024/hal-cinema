@@ -1,0 +1,48 @@
+name: backend test
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend-test.yml'
+  pull_request:
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend-test.yml'
+
+defaults:
+  run:
+    working-directory: ./backend
+
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version-file: 'backend/go.mod'
+        cache: true
+    
+    - name: Install dependencies
+      run: go mod download
+
+    - name: Build
+      run: go build -v ./...
+
+    - name: Test
+      run: make test ./... -coverpkg=./... -v -json | go run github.com/mfridman/tparse@v0.13.2
+
+    - name: golangci-lint
+      uses: golangci/golangci-lint-action@v3
+      with:
+        version: latest
+        working-directory: api
+        skip-pkg-cache: true
+        args: --timeout=2m
