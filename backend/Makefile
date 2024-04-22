@@ -7,8 +7,8 @@ get-u:
 build:
 	docker compose build
 
-run-backned: build
+run: build
 	docker compose up
 
-run-backned-d: build
+rund: build
 	docker compose up -d

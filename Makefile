@@ -1,5 +1,5 @@
 run:
-	cd backend && make run-backned-d
+	cd backend && make rund
 	cd frontend && npm run dev
 	
 setup: 
