@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"net/http"
 
-	"github.com/hal-cinema-2024/backend/internal/router"
+	"github.com/hal-cinema-2024/backend/internal/framework/router"
 	"go.uber.org/dig"
 )
 
@@ -20,6 +20,7 @@ func NewContainer() (http.Handler, *sql.DB) {
 
 	args := []provideArg{
 		// {constructor: db.Connect, opts: []dig.ProvideOption{}},
+		// {constructor: cloudflare.ConnectR2Bucket, opts: []dig.ProvideOption{}},
 		{constructor: router.NewRouter, opts: []dig.ProvideOption{}},
 	}
 
