@@ -7,13 +7,13 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type Router struct {
+type router struct {
 	echo *echo.Echo
 }
 
 func NewRouter() http.Handler {
 	echo := echo.New()
-	router := &Router{
+	router := &router{
 		echo: echo,
 	}
 
@@ -27,7 +27,7 @@ func NewRouter() http.Handler {
 	return router.echo
 }
 
-func (r *Router) health() {
+func (r *router) health() {
 	r.echo.GET("/healthz", func(c echo.Context) error {
 		return c.String(http.StatusOK, `{"status:":"ok"}`)
 	})
