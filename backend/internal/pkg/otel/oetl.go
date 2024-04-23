@@ -18,7 +18,7 @@ import (
 	"google.golang.org/grpc"
 )
 
-func InitProvider() func() {
+func InitProvider() (func(), error) {
 	ctx := context.Background()
 
 	res, err := resource.New(ctx,
@@ -28,11 +28,11 @@ func InitProvider() func() {
 		resource.WithHost(),
 		resource.WithAttributes(
 			// the service name used to display traces in backends
-			semconv.ServiceNameKey.String("demo-server"),
+			semconv.ServiceNameKey.String(config.Config.Otel.ProjectID),
 		),
 	)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	metricExp, err := otlpmetricgrpc.New(
@@ -40,7 +40,7 @@ func InitProvider() func() {
 		otlpmetricgrpc.WithInsecure(),
 		otlpmetricgrpc.WithEndpoint(config.Config.Otel.Addr))
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	meterProvider := sdkmetric.NewMeterProvider(
@@ -60,7 +60,7 @@ func InitProvider() func() {
 		otlptracegrpc.WithDialOption(grpc.WithBlock()))
 	traceExp, err := otlptrace.New(ctx, traceClient)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	bsp := sdktrace.NewBatchSpanProcessor(traceExp)
@@ -84,5 +84,5 @@ func InitProvider() func() {
 		if err := meterProvider.Shutdown(cxt); err != nil {
 			otel.Handle(err)
 		}
-	}
+	}, nil
 }

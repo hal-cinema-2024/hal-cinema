@@ -43,7 +43,10 @@ func main() {
 }
 
 func run() error {
-	shutdown := otel.InitProvider()
+	shutdown, err := otel.InitProvider()
+	if err != nil {
+		return err
+	}
 	defer shutdown()
 
 	srv, db := internal.NewContainer()
