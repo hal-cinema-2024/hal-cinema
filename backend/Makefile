@@ -12,3 +12,6 @@ run: build
 
 rund: build
 	docker compose up -d
+
+down:
+	docker compose down

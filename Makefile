@@ -1,8 +1,11 @@
 run:
 	cd backend && make rund
-	cd admin && npm run dev
-	cd website && npm run dev
+	cd admin && npm run dev &
+	cd website && npm run dev &
 	
+down:
+	cd backend && make down
+
 setup: 
 	proto use
 	cd admin && npm ci
