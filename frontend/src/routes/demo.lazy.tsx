@@ -1,14 +1,13 @@
-import { createLazyFileRoute } from "@tanstack/react-router";
 import { DemoFormProvider } from "../demo/DemoFormProvider";
-
-export const Route = createLazyFileRoute("/demo")({
-  component: Index,
-});
-
-function Index() {
+import { FormProvider } from "../demo/DemoFormContext";
+function App() {
   return (
-    <div>
-      <DemoFormProvider />
-    </div>
+    <>
+      <FormProvider>
+        <DemoFormProvider />
+      </FormProvider>
+    </>
   );
 }
+
+export default App;

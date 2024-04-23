@@ -1,25 +1,25 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Input } from "@nextui-org/input";
-import { useForm } from "react-hook-form";
-import { ZodType } from "zod";
+// InputField.tsx
+import React from "react";
+import { useFormContext } from "react-hook-form";
+import { Textarea } from "@nextui-org/react"; // Next UIのTextFieldコンポーネントを利用
 
-type InputFieldProps = {
+interface InputFieldProps {
   id: string;
   label: string;
-  schema: ZodType;
-};
-export const InputField = (props: InputFieldProps) => {
-  const { label, schema, id } = props;
+  type?: string;
+}
 
-  const methods = useForm({
-    resolver: zodResolver(schema),
-  });
+export const InputField: React.FC<InputFieldProps> = ({
+  id,
+  label,
+  type = "text",
+}) => {
+  const { register } = useFormContext();
 
   return (
     <div>
-      <label>{label}</label>
-      <Input {...methods.register(id)} />
-      {methods.formState.errors.id?.message as string}
+      <label htmlFor={id}>{label}</label>
+      <Textarea {...register(id)} id={id} type={type} fullWidth />
     </div>
   );
 };
