@@ -8,6 +8,7 @@ import (
 
 	"github.com/hal-cinema-2024/backend/cmd/config"
 	"github.com/hal-cinema-2024/backend/internal"
+	"github.com/hal-cinema-2024/backend/internal/pkg/otel"
 	"github.com/hal-cinema-2024/backend/internal/server"
 )
 
@@ -31,6 +32,7 @@ func init() {
 	if err := config.LoadEnv(envFile...); err != nil {
 		log.Fatal("Error loading .env file")
 	}
+	log.Println(config.Config.App.Env)
 }
 
 func main() {
@@ -41,6 +43,9 @@ func main() {
 }
 
 func run() error {
+	shutdown := otel.InitProvider()
+	defer shutdown()
+
 	srv, db := internal.NewContainer()
 	defer db.Close()
 

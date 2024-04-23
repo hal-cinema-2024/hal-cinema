@@ -2,10 +2,20 @@ package config
 
 var Config *config
 
+type Env string
+
+const (
+	EnvProduction  Env = "production"
+	EnvDevelopment Env = "development"
+	ENVLocal       Env = "local"
+	EnvTesting     Env = "testing"
+)
+
 type config struct {
 	App struct {
-		Addr string `env:"SERVER_ADDR" envDefault:":8080"`
-		Env  string `env:"ENV"`
+		Addr        string `env:"SERVER_ADDR" envDefault:":8080"`
+		Env         Env    `env:"ENV"`
+		AllowOrigin string `env:"ALLOW_ORIGINS"`
 	}
 
 	Database struct {
@@ -17,7 +27,9 @@ type config struct {
 	}
 
 	Otel struct {
-		IsUse bool `env:"OTEL_USE"`
+		Addr      string `env:"OTEL_ADDR"`
+		ProjectID string `env:"OTEL_PROJECT_ID"`
+		IsUse     bool   `env:"OTEL_USE"`
 	}
 
 	Cloudflare struct {
