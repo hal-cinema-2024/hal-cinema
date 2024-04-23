@@ -1,3 +1,4 @@
 *.env
-backend/.docker/data/*
 *.bin/
+*/tmp
+backend/.docker/data/*
