@@ -1,8 +1,10 @@
 run:
 	cd backend && make rund
-	cd frontend && npm run dev
+	cd admin && npm run dev
+	cd website && npm run dev
 	
 setup: 
 	proto use
-	cd frontend && npm ci
+	cd admin && npm ci
+	cd website && npm ci
 	cd backend && cp .env.example .env
