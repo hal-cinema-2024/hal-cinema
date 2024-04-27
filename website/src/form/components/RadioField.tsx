@@ -1,28 +1,29 @@
-import { Select, SelectItem } from "@nextui-org/select";
+import { Radio, RadioGroup } from "@nextui-org/radio";
 import { FieldValues, useFormContext } from "react-hook-form";
 
-type InputFieldProps = {
+type RadioFieldProps = {
   id: string;
   label: string;
   options: option[];
 };
-
 type option = {
   label: string;
   value: string;
 };
-export const SelectField = (props: InputFieldProps) => {
+export const RadioField = (props: RadioFieldProps) => {
   const { id, label, options } = props;
   const data = useFormContext();
+
   return (
     <>
-      <Select label={label} {...data.register(id as FieldValues[typeof id])}>
+      <label>{label}</label>
+      <RadioGroup {...data.register(id as FieldValues[typeof id])}>
         {options.map((option) => (
-          <SelectItem key={option.value} value={option.value}>
+          <Radio key={option.value} value={option.value}>
             {option.label}
-          </SelectItem>
+          </Radio>
         ))}
-      </Select>
+      </RadioGroup>
     </>
   );
 };

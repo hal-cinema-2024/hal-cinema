@@ -1,12 +1,16 @@
-import { Input } from "@nextui-org/input";
 import { useFormContext } from "react-hook-form";
-
 type InputFieldProps = {
-  name: string;
+  id: string;
   label: string;
 };
 export const InputField = (props: InputFieldProps) => {
-  const { name, label } = props;
-  const data = useFormContext();
-  return <Input label={label} {...data.register(name)} />;
+  const { register } = useFormContext();
+  const { id, label } = props;
+
+  return (
+    <>
+      <label>{label}</label>
+      <input {...register(id as string)} />
+    </>
+  );
 };

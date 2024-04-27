@@ -1,0 +1,47 @@
+
+
+```:tsx
+import { useForm, FormProvider } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+export const movieFormSchema = z.object({
+  number_of_people: z.number(),
+});
+
+export const MovieFormProvider = () => {
+  const methods = useForm({
+    resolver: zodResolver(movieFormSchema),
+    defaultValues: {
+      number_of_people: null,
+    },
+  });
+  const { handleSubmit } = methods;
+  return (
+    <FormProvider {...methods}>
+      <form onSubmit={handleSubmit((data) => console.log(data))}>
+        <InputField id='number_of_people' label='Number of People' />
+        <button type='submit'>Submit</button>
+      </form>
+    </FormProvider>
+  );
+};
+
+
+import { useFormContext } from "react-hook-form";
+type InputFieldProps = {
+  id: string;
+  label: string;
+};
+export const InputField = (props: InputFieldProps) => {
+  const { register } = useFormContext();
+  const { id, label } = props;
+
+  return (
+    <>
+      <label>{label}</label>
+      <input {...register(id as string)} />
+    </>
+  );
+};
+```

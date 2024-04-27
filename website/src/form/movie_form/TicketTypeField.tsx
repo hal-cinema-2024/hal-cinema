@@ -1,22 +1,21 @@
 import { Select, SelectItem } from "@nextui-org/select";
-import { FieldValues, useFormContext } from "react-hook-form";
-
-type InputFieldProps = {
-  id: string;
-  label: string;
-  options: option[];
-};
+import { useFormContext } from "react-hook-form";
 
 type option = {
   label: string;
   value: string;
 };
-export const SelectField = (props: InputFieldProps) => {
-  const { id, label, options } = props;
+export const TicketTypeField = () => {
   const data = useFormContext();
+  const label = "Ticket Type";
+  const options: option[] = [
+    { label: "Regular", value: "regular" },
+    { label: "VIP", value: "vip" },
+    { label: "VVIP", value: "vvip" },
+  ];
   return (
     <>
-      <Select label={label} {...data.register(id as FieldValues[typeof id])}>
+      <Select label={label} {...data.register("ticket_type")}>
         {options.map((option) => (
           <SelectItem key={option.value} value={option.value}>
             {option.label}
