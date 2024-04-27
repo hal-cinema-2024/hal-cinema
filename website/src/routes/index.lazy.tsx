@@ -1,10 +1,10 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { Formp } from "../components/form/demoFormProvideer";
+import { MovieFormProvider } from "../form/movie_form/movieFormProvider";
 
 export const Route = createLazyFileRoute("/")({
   component: Index,
 });
 
 function Index() {
-  return <Formp />;
+  return <MovieFormProvider />;
 }
