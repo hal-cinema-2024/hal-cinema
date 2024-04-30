@@ -11,8 +11,8 @@ export function ProfileFormProvider() {
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit((data) => console.log(data))}>
         {/* 各入力フィールドに異なる fieldName を渡します */}
-        <InputField fieldName='user_name' />
-
+        <InputField fieldName='name' />
+        <InputField fieldName='phone_number' />
         <InputField fieldName='age' />
         <Button type='submit'>Submit</Button>
       </form>
