@@ -8,5 +8,5 @@ export const profileFormSchema = z.object({
     .int({ message: "年齢は整数で入力してください" })
     .min(1, { message: "年齢は1歳以上でなければなりません" })
     .max(150, { message: "年齢は150歳以下でなければなりません" }),
-  gender: z.string().nonempty({ message: "性別は必須です" }),
+  gender: z.string().transform((val) => Number(val)),
 });

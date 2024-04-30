@@ -15,7 +15,7 @@ export const InputField = (props: InputFieldProps) => {
     fieldName === "age"
       ? {
           ...register(fieldName, {
-            setValueAs: (value) => (value === "" ? undefined : parseInt(value)),
+            setValueAs: (value) => (value === "" ? undefined : parseInt(value)), // 入力値が空の場合、undefined を返します。
           }),
         }
       : register(fieldName);
