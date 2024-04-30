@@ -9,6 +9,8 @@ interface Seat {
 interface SeatSelectionContextType {
   selectedSeats: Seat[];
   toggleSeatSelection: (seat: Seat) => void;
+  seatCount: number;
+  countSeats: () => void;
 }
 
 const SeatSelectionContext = createContext<
@@ -27,6 +29,7 @@ export const useSeatSelection = () => {
 
 export const SeatSelectionProvider = ({ children }: ReactNode) => {
   const [selectedSeats, setSelectedSeats] = useState<Seat[]>([]);
+  const [seatCount, setSeatCount] = useState<number>(selectedSeats.length + 1);
 
   const toggleSeatSelection = (seat: Seat) => {
     setSelectedSeats((prev) => {
@@ -46,9 +49,13 @@ export const SeatSelectionProvider = ({ children }: ReactNode) => {
     });
   };
 
+  const countSeats = () => {
+    setSeatCount(selectedSeats.length + 1);
+  };
+
   return (
     <SeatSelectionContext.Provider
-      value={{ selectedSeats, toggleSeatSelection }}
+      value={{ selectedSeats, toggleSeatSelection, seatCount, countSeats }}
     >
       {children}
     </SeatSelectionContext.Provider>
