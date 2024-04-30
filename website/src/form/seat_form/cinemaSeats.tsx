@@ -1,8 +1,8 @@
 import React from "react";
 import { useSeatSelection } from "./SeatSelectionContext";
 
-const ROWS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".slice(0, 26);
-const SEATS_PER_ROW = 12;
+const ROWS = "ABCD".slice(0).split("");
+const SEATS_PER_ROW = 10;
 
 const CinemaSeats: React.FC = () => {
   const { selectedSeats, toggleSeatSelection } = useSeatSelection();
@@ -24,10 +24,12 @@ const CinemaSeats: React.FC = () => {
                     backgroundColor: selectedSeats.some(
                       (s) => s.row === seat.row && s.number === seat.number
                     )
-                      ? "green"
+                      ? "red"
                       : "gray",
                   }}
-                  onClick={() => toggleSeatSelection(seat)}
+                  onClick={() => {
+                    toggleSeatSelection(seat);
+                  }}
                 >
                   {seat.row}
                   {seat.number}

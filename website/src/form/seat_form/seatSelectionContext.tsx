@@ -1,5 +1,4 @@
-import { ReactNode } from "@tanstack/react-router";
-import React, { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 interface Seat {
   row: string;
@@ -10,7 +9,7 @@ interface SeatSelectionContextType {
   selectedSeats: Seat[];
   toggleSeatSelection: (seat: Seat) => void;
   seatCount: number;
-  countSeats: () => void;
+  setSeatCount: () => void;
 }
 
 const SeatSelectionContext = createContext<
@@ -27,35 +26,34 @@ export const useSeatSelection = () => {
   return context;
 };
 
-export const SeatSelectionProvider = ({ children }: ReactNode) => {
+export const SeatSelectionProvider: React.FC = ({ children }) => {
   const [selectedSeats, setSelectedSeats] = useState<Seat[]>([]);
-  const [seatCount, setSeatCount] = useState<number>(selectedSeats.length + 1);
+  const [seatCount, setSeatCount] = useState(0);
 
   const toggleSeatSelection = (seat: Seat) => {
     setSelectedSeats((prev) => {
-      // すでに選択されている座席かどうかを確認します。
       const isAlreadySelected = prev.some(
         (s) => s.row === seat.row && s.number === seat.number
       );
-      // すでに選択されている場合、選択を解除します。
       if (isAlreadySelected) {
         return prev.filter(
           (s) => s.row !== seat.row || s.number !== seat.number
         );
       } else {
-        // すでに選択されていない場合prevに新しい座席を追加します。
         return [...prev, seat];
       }
     });
   };
 
-  const countSeats = () => {
-    setSeatCount(selectedSeats.length + 1);
-  };
+  useEffect(() => {
+    setSeatCount(selectedSeats.length);
+    console.log(selectedSeats);
+    console.log(seatCount);
+  }, [selectedSeats, seatCount]);
 
   return (
     <SeatSelectionContext.Provider
-      value={{ selectedSeats, toggleSeatSelection, seatCount, countSeats }}
+      value={{ selectedSeats, toggleSeatSelection, seatCount, setSeatCount }}
     >
       {children}
     </SeatSelectionContext.Provider>
