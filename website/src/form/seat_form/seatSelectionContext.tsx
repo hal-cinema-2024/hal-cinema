@@ -1,4 +1,11 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  FC,
+} from "react";
 
 interface Seat {
   row: string;
@@ -9,7 +16,6 @@ interface SeatSelectionContextType {
   selectedSeats: Seat[];
   toggleSeatSelection: (seat: Seat) => void;
   seatCount: number;
-  setSeatCount: () => void;
 }
 
 const SeatSelectionContext = createContext<
@@ -26,7 +32,9 @@ export const useSeatSelection = () => {
   return context;
 };
 
-export const SeatSelectionProvider: React.FC = ({ children }) => {
+export const SeatSelectionProvider: FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const [selectedSeats, setSelectedSeats] = useState<Seat[]>([]);
   const [seatCount, setSeatCount] = useState(0);
 
@@ -53,7 +61,7 @@ export const SeatSelectionProvider: React.FC = ({ children }) => {
 
   return (
     <SeatSelectionContext.Provider
-      value={{ selectedSeats, toggleSeatSelection, seatCount, setSeatCount }}
+      value={{ selectedSeats, toggleSeatSelection, seatCount }}
     >
       {children}
     </SeatSelectionContext.Provider>

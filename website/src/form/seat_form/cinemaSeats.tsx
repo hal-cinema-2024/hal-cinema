@@ -4,7 +4,7 @@ import { useSeatSelection } from "./SeatSelectionContext";
 const ROWS = "ABCD".slice(0).split("");
 const SEATS_PER_ROW = 10;
 
-const CinemaSeats: React.FC = () => {
+const CinemaSeats = () => {
   const { selectedSeats, toggleSeatSelection } = useSeatSelection();
 
   return (
