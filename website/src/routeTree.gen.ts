@@ -17,6 +17,7 @@ import { Route as rootRoute } from './routes/__root'
 // Create Virtual Routes
 
 const TopLazyImport = createFileRoute('/top')()
+const ProfileLazyImport = createFileRoute('/profile')()
 const MovieLazyImport = createFileRoute('/movie')()
 const DemoLazyImport = createFileRoute('/demo')()
 const IndexLazyImport = createFileRoute('/')()
@@ -27,6 +28,11 @@ const TopLazyRoute = TopLazyImport.update({
   path: '/top',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/top.lazy').then((d) => d.Route))
+
+const ProfileLazyRoute = ProfileLazyImport.update({
+  path: '/profile',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/profile.lazy').then((d) => d.Route))
 
 const MovieLazyRoute = MovieLazyImport.update({
   path: '/movie',
@@ -59,6 +65,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MovieLazyImport
       parentRoute: typeof rootRoute
     }
+    '/profile': {
+      preLoaderRoute: typeof ProfileLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/top': {
       preLoaderRoute: typeof TopLazyImport
       parentRoute: typeof rootRoute
@@ -72,6 +82,7 @@ export const routeTree = rootRoute.addChildren([
   IndexLazyRoute,
   DemoLazyRoute,
   MovieLazyRoute,
+  ProfileLazyRoute,
   TopLazyRoute,
 ])
 
