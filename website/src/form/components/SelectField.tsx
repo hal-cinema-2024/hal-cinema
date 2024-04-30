@@ -1,8 +1,8 @@
 import { Select, SelectItem } from "@nextui-org/select";
-import { FieldValues, useFormContext } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
 type InputFieldProps = {
-  id: string;
+  fieldName: string;
   label: string;
   options: option[];
 };
@@ -12,11 +12,11 @@ type option = {
   value: string;
 };
 export const SelectField = (props: InputFieldProps) => {
-  const { id, label, options } = props;
-  const data = useFormContext();
+  const { fieldName, label, options } = props;
+  const { register } = useFormContext();
   return (
     <>
-      <Select label={label} {...data.register(id as FieldValues[typeof id])}>
+      <Select label={label} {...register(fieldName)}>
         {options.map((option) => (
           <SelectItem key={option.value} value={option.value}>
             {option.label}
