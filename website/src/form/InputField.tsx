@@ -5,11 +5,14 @@ type InputFieldProps = {
 };
 export const InputField = (props: InputFieldProps) => {
   const { fieldName } = props;
-  const { register } = useFormContext();
+  const { register, formState } = useFormContext();
   return (
     <>
       <label htmlFor={fieldName}>{fieldName}</label>
       <Input {...register(fieldName)} />
+      {formState.errors[fieldName] && (
+        <span>{formState.errors[fieldName]!.message! as string}</span>
+      )}
     </>
   );
 };

@@ -1,7 +1,8 @@
-import { Select } from "@nextui-org/react";
+import { Select, SelectItem } from "@nextui-org/react";
 import { useFormContext } from "react-hook-form";
 type InputFieldProps = {
   fieldName: string;
+  label: string;
   option: Option[];
 };
 
@@ -10,20 +11,23 @@ type Option = {
   label: string;
 };
 
-export const InputField = (props: InputFieldProps) => {
-  const { fieldName, option } = props;
-  const { register } = useFormContext();
+export const SelectField = (props: InputFieldProps) => {
+  const { fieldName, label, option } = props;
+  const { register, formState } = useFormContext();
 
   return (
     <>
-      <label htmlFor={fieldName}>{fieldName}</label>
+      <label htmlFor={fieldName}>{label}</label>
       <Select {...register(fieldName)}>
         {option.map((item) => (
-          <option key={item.value} value={item.value}>
+          <SelectItem key={item.value} value={item.value}>
             {item.label}
-          </option>
+          </SelectItem>
         ))}
       </Select>
+      {formState.errors[fieldName] && (
+        <span>{formState.errors[fieldName]!.message! as string}</span>
+      )}
     </>
   );
 };
