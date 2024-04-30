@@ -26,7 +26,7 @@ export const SelectField = (props: InputFieldProps) => {
         ))}
       </Select>
       {formState.errors[fieldName] && (
-        <span>{formState.errors[fieldName]!.message! as string}</span>
+        <span>{formState.errors[fieldName]!.message as string}</span>
       )}
     </>
   );

@@ -7,7 +7,16 @@ import { InputField } from "../InputField";
 import { option } from "./genderOption";
 import { SelectField } from "../SelectField";
 export function ProfileFormProvider() {
-  const methods = useForm({ resolver: zodResolver(profileFormSchema) });
+  const methods = useForm({
+    resolver: zodResolver(profileFormSchema),
+
+    defaultValues: {
+      name: "",
+      phone_number: "",
+      age: 0,
+      gender: "2",
+    },
+  });
   const { handleSubmit } = methods;
 
   return (
@@ -16,7 +25,7 @@ export function ProfileFormProvider() {
         {/* 各入力フィールドに異なる fieldName を渡します */}
         <InputField fieldName='name' />
         <InputField fieldName='phone_number' />
-        <InputField fieldName='age' />
+        <InputField fieldName='age' type='number' />
         <SelectField fieldName='gender' label='性別' option={option} />
         <Button type='submit'>Submit</Button>
       </form>
