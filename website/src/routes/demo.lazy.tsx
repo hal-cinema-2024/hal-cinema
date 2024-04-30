@@ -1,5 +1,14 @@
-function App() {
-  return <>demo</>;
-}
+import { createLazyFileRoute } from "@tanstack/react-router";
+import CinemaSeats from "../form/seat_form/cinemaSeats";
 
-export default App;
+export const Route = createLazyFileRoute("/demo")({
+  component: Index,
+});
+
+function Index() {
+  return (
+    <>
+      <CinemaSeats />
+    </>
+  );
+}
