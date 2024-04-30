@@ -1,5 +1,5 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import CinemaSeats from "../form/seat_form/cinemaSeats";
+import CinemaSeats from "../seat_selector/cinemaSeats";
 
 export const Route = createLazyFileRoute("/demo")({
   component: Index,

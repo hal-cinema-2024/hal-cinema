@@ -1,4 +1,3 @@
-import React from "react";
 import { useSeatSelection } from "./SeatSelectionContext";
 
 const ROWS = "ABCD".slice(0).split("");
