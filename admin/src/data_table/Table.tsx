@@ -56,13 +56,6 @@ export const DataTable: FC = () => {
         </div>
         <div style={{ padding: "10px" }}>
           <Input
-            placeholder='email検索'
-            value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-            onChange={(e) =>
-              table.getColumn("email")?.setFilterValue(e.target.value)
-            }
-          />
-          <Input
             placeholder='検索'
             value={(table.getState().globalFilter as string) ?? ""}
             onChange={(e) => table.setGlobalFilter(e.target.value)}

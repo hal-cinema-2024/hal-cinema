@@ -1,5 +1,5 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { DataTable } from "../data_table/Table";
+import { LoginFormProvider } from "../form/login_form/LoginFormProvider";
 export const Route = createLazyFileRoute("/")({
   component: Index,
 });
@@ -7,7 +7,7 @@ export const Route = createLazyFileRoute("/")({
 function Index() {
   return (
     <div>
-      <DataTable />
+      <LoginFormProvider />
     </div>
   );
 }
