@@ -18,10 +18,10 @@ function Index() {
 
 const Container = styled.div`
   margin: 0 auto;
-
+  background-color: #e2e2e2;
   padding-top: 100px;
   padding: 50px 140px;
-  background-color: #bcbcbc;
+  border-radius: 20px;
 `;
 
 const Sh2 = styled.h2`

@@ -25,8 +25,12 @@ export function LoginFormProvider() {
 }
 const SButton = styled(Button)`
   margin-top: 20px;
-
+  background-color: #a5a5a5;
+  font-weight: bold;
+  font-size: 15px;
+  height: 40px;
+  width: 90px;
   &:hover {
-    background-color: #fff;
+    background-color: #636363;
   }
 `;
