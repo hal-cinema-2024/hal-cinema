@@ -143,9 +143,11 @@ export const Table: FC = () => {
           <input
             type='date'
             value={
-              (table.getColumn("createdAt")?.getFilterValue()?.[
-                "to"
-              ] as string) ?? ""
+              (
+                table.getColumn("createdAt")?.getFilterValue() as {
+                  to?: string;
+                }
+              )?.to ?? ""
             }
             onChange={(e) =>
               table
