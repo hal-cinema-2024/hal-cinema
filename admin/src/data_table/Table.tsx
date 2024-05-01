@@ -1,69 +1,16 @@
 import "./style.css";
 
-import {
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-import { FC, useEffect, useState } from "react";
+import { flexRender } from "@tanstack/react-table";
+import { FC } from "react";
 
-import { columns, User } from "./column";
-import { getData } from "./data";
+import { Button, Input } from "@nextui-org/react";
+import { useTable } from "./hooks/useReactTable";
 
-export const Table: FC = () => {
-  const [data, setData] = useState<User[]>([]);
-
-  const initialPageIndex = 0;
-  const initialPageSize = 10;
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setData(await getData());
-    };
-    fetchData();
-  }, []);
-
-  const table = useReactTable<User>({
-    columns,
-    data,
-    initialState: {
-      pagination: {
-        pageIndex: initialPageIndex,
-        pageSize: initialPageSize,
-      },
-    },
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-  });
-
+export const DataTable: FC = () => {
+  const { table } = useTable();
   return (
     <div>
       <main>
-        <table>
-          <tbody>
-            <tr>
-              <td>PaginationState</td>
-              <td>{JSON.stringify(table.getState().pagination)}</td>
-            </tr>
-            <tr>
-              <td>SortingState</td>
-              <td>{JSON.stringify(table.getState().sorting)}</td>
-            </tr>
-            <tr>
-              <td>FiltersState</td>
-              <td>{JSON.stringify(table.getState().columnFilters)}</td>
-            </tr>
-            <tr>
-              <td>GlobalFilterState</td>
-              <td>{JSON.stringify(table.getState().globalFilter)}</td>
-            </tr>
-          </tbody>
-        </table>
         <div
           style={{
             margin: "5px",
@@ -82,12 +29,13 @@ export const Table: FC = () => {
               </option>
             ))}
           </select>
-          <button
+
+          <Button
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
             {"<"}
-          </button>
+          </Button>
           {table.getPageOptions().map((page) => {
             return (
               <button
@@ -99,27 +47,27 @@ export const Table: FC = () => {
               </button>
             );
           })}
-          <button
+          <Button
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
             {">"}
-          </button>
+          </Button>
         </div>
         <div style={{ padding: "10px" }}>
-          <input
-            placeholder='Filter emails...'
+          <Input
+            placeholder='email検索'
             value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
             onChange={(e) =>
               table.getColumn("email")?.setFilterValue(e.target.value)
             }
           />
-          <input
-            placeholder='Filter all...'
+          <Input
+            placeholder='検索'
             value={(table.getState().globalFilter as string) ?? ""}
             onChange={(e) => table.setGlobalFilter(e.target.value)}
           />
-          <input
+          <Input
             type='date'
             value={
               (
@@ -140,7 +88,7 @@ export const Table: FC = () => {
             }
           />
           〜
-          <input
+          <Input
             type='date'
             value={
               (

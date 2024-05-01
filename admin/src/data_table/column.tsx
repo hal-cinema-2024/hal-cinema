@@ -15,7 +15,6 @@ export type User = {
   lastName: string;
   email: string;
   createdAt: number; // UNIX timestamp（ミリ秒）
-  createdAtStr: string; // ISO時刻文字列
 };
 
 const getSortIcon = (sortDirection: false | SortDirection): JSX.Element => {
@@ -95,11 +94,6 @@ export const columns: ColumnDef<User>[] = [
         (!to || createdAt <= parse(to, "yyyy-MM-dd", new Date()).getTime())
       );
     },
-    enableGlobalFilter: false,
-  },
-  {
-    accessorKey: "createdAtStr",
-    header: sortableHeader("登録日時(ISO時刻)"),
     enableGlobalFilter: false,
   },
 ];
