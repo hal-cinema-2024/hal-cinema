@@ -1,7 +1,7 @@
 import { Button } from "@nextui-org/react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { InputField } from "../InputField";
+import { InputField } from "../components/InputField";
 import { loginFormSchema } from "./loginFormSchema";
 export function LoginFormProvider() {
   const methods = useForm({

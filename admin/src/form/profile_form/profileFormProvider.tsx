@@ -2,10 +2,10 @@ import { Button } from "@nextui-org/react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { profileFormSchema } from "./profileSchema";
-import { InputField } from "../InputField";
+import { InputField } from "../components/InputField";
 
 import { option } from "./genderOption";
-import { SelectField } from "../SelectField";
+import { SelectField } from "../components/SelectField";
 export function ProfileFormProvider() {
   const methods = useForm({
     resolver: zodResolver(profileFormSchema),

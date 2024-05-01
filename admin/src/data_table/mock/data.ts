@@ -1,4 +1,4 @@
-import { User } from "./column";
+import { User } from "../column";
 
 const data: User[] = [
   {

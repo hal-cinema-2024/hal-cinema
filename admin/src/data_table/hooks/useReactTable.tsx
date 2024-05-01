@@ -6,7 +6,7 @@ import {
 } from "@tanstack/react-table";
 import { User, columns } from "../column";
 import { useReactTable } from "@tanstack/react-table";
-import { getData } from "../data";
+import { getData } from "../mock/data";
 import { useState, useEffect } from "react";
 export const useTable = () => {
   const [data, setData] = useState<User[]>([]);
