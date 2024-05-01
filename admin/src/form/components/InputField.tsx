@@ -1,6 +1,6 @@
 import { Input } from "@nextui-org/react";
 import { useFormContext } from "react-hook-form";
-
+import styled from "styled-components";
 type InputFieldProps = {
   fieldName: string;
   type?: string;
@@ -21,12 +21,35 @@ export const InputField = (props: InputFieldProps) => {
       : register(fieldName);
 
   return (
-    <>
-      <label htmlFor={fieldName}>{fieldName}</label>
-      <Input type={type || "text"} {...registerOptions} />
+    <SContainer>
+      <SLabel htmlFor={fieldName}>{fieldName}</SLabel>
+      <SInput type={type || "text"} {...registerOptions} />
       {formState.errors[fieldName] && (
-        <span>{formState.errors[fieldName]!.message as string}</span>
+        <Span>{formState.errors[fieldName]!.message as string}</Span>
       )}
-    </>
+    </SContainer>
   );
 };
+
+const SContainer = styled.div`
+  margin: 10px 0;
+  height: 100px;
+  width: 220px;
+`;
+const Span = styled.span`
+  color: red;
+  font-size: 12px;
+  display: block;
+  margin-bottom: 20px;
+`;
+
+const SInput = styled(Input)`
+  margin-bottom: 10px;
+`;
+
+const SLabel = styled.label`
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+`;
