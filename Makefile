@@ -11,3 +11,6 @@ setup:
 	cd admin && npm ci
 	cd website && npm ci
 	cd backend && cp .env.example .env
+
+goMigrate:
+migrate create -ext sql -dir backend/cmd/migrate/schema -seq ${name}
