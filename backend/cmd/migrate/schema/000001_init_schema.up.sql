@@ -8,8 +8,8 @@ CREATE TABLE "users" (
   "age" smallint NOT NULL,
   "gender" smallint NOT NULL,
   "phone_number" varchar(15) NOT NULL,
-  "created_at" TIMESTAMPZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  "updated_at" timestampz NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  "created_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "updated_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   "is_delete" boolean NOT NULL DEFAULT false
 );
 
@@ -17,7 +17,7 @@ CREATE TABLE "schedules" (
   "schedule_id" varchar(63) PRIMARY KEY,
   "theater_id" varchar(63) NOT NULL,
   "movie_id" varchar(63) NOT NULL,
-  "start_date" timestampz NOT NULL
+  "start_date" timestamptz NOT NULL
 );
 
 CREATE TABLE "theaters" (
@@ -40,8 +40,8 @@ CREATE TABLE "movies" (
   "thumbnail_path" verchar(255) NOT NULL,
   "link" text NOT NULL,
   "term" int NOT NULL,
-  "release_date" timestampz NOT NULL,
-  "end_date" timestampz NOT NULL,
+  "release_date" timestamptz NOT NULL,
+  "end_date" timestamptz NOT NULL,
   "is_delete" bool NOT NULL DEFAULT false
 );
 
@@ -61,7 +61,7 @@ CREATE TABLE "theaters_seats" (
 CREATE TABLE "orders" (
   "order_id" varchar(63) PRIMARY KEY,
   "user_id" varchar(63) NOT NULL,
-  "created_at" timestampz NOT NULL DEFAULT CURRENT_TIMESTAMP
+  "created_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE "orders_details" (
@@ -74,5 +74,5 @@ CREATE TABLE "orders_details" (
 CREATE TABLE "price_types" (
   "price_type_id" varchar(63) PRIMARY KEY,
   "name" varchar(63) NOT NULL,
-  "price" uint NOT NULL
+  "price" int NOT NULL
 );
