@@ -76,3 +76,23 @@ CREATE TABLE "price_types" (
   "name" varchar(63) NOT NULL,
   "price" int NOT NULL
 );
+
+ALTER TABLE "orders" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("user_id");
+
+ALTER TABLE "schedules" ADD FOREIGN KEY ("theater_id") REFERENCES "theaters" ("theater_id");
+
+ALTER TABLE "schedules" ADD FOREIGN KEY ("movie_id") REFERENCES "movies" ("movie_id");
+
+ALTER TABLE "theaters_seats" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("user_id");
+
+ALTER TABLE "theaters_seats" ADD FOREIGN KEY ("schedule_id") REFERENCES "schedules" ("schedule_id");
+
+ALTER TABLE "theaters" ADD FOREIGN KEY ("theater_size_id") REFERENCES "theaters_sizes" ("theater_size_id");
+
+ALTER TABLE "orders_details" ADD FOREIGN KEY ("price_type_id") REFERENCES "price_types" ("price_type_id");
+
+ALTER TABLE "orders_details" ADD FOREIGN KEY ("theaters_seats_id") REFERENCES "theaters_seats" ("theater_seat_id");
+
+ALTER TABLE "orders_details" ADD FOREIGN KEY ("order_id") REFERENCES "orders" ("order_id");
+
+ALTER TABLE "movie_images" ADD FOREIGN KEY ("movie_id") REFERENCES "movies" ("movie_id");
