@@ -5,11 +5,11 @@ CREATE TABLE "users" (
   "first_name_reading" varchar(31) NOT NULL,
   "last_name_reading" varchar(31) NOT NULL,
   "icon_path" varchar(255),
-  "age" smallint NOT NULL,
+  "age" int NOT NULL,
   "gender" smallint NOT NULL,
   "phone_number" varchar(15) NOT NULL,
   "created_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  "updated_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  "updated_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
   "is_delete" boolean NOT NULL DEFAULT false
 );
 
@@ -34,7 +34,7 @@ CREATE TABLE "theaters_sizes" (
 
 CREATE TABLE "movies" (
   "movie_id" varchar(63) PRIMARY KEY,
-  "name" varchar(127) NOT NULL,
+  "name" varchar(255) NOT NULL,
   "director" varchar(63) NOT NULL,
   "summary" text NOT NULL,
   "thumbnail_path" varchar(255) NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE "movies" (
   "term" int NOT NULL,
   "release_date" timestamptz NOT NULL,
   "end_date" timestamptz NOT NULL,
-  "is_delete" bool NOT NULL DEFAULT false
+  "is_delete" boolean NOT NULL DEFAULT false
 );
 
 CREATE TABLE "movie_images" (
@@ -76,6 +76,8 @@ CREATE TABLE "price_types" (
   "name" varchar(63) NOT NULL,
   "price" int NOT NULL
 );
+
+ALTER TABLE  "price_types" ADD CHECK (price >= 0);
 
 ALTER TABLE "orders" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("user_id");
 
