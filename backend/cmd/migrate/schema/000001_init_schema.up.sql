@@ -4,7 +4,7 @@ CREATE TABLE "users" (
   "last_name" varchar(31) NOT NULL,
   "first_name_reading" varchar(31) NOT NULL,
   "last_name_reading" varchar(31) NOT NULL,
-  "icon_path" string(255),
+  "icon_path" varchar(255),
   "age" smallint NOT NULL,
   "gender" smallint NOT NULL,
   "phone_number" varchar(15) NOT NULL,
@@ -36,8 +36,8 @@ CREATE TABLE "movies" (
   "movie_id" varchar(63) PRIMARY KEY,
   "name" varchar(127) NOT NULL,
   "director" varchar(63) NOT NULL,
-  "sammary" text NOT NULL,
-  "thumbnail_path" verchar(255) NOT NULL,
+  "summary" text NOT NULL,
+  "thumbnail_path" varchar(255) NOT NULL,
   "link" text NOT NULL,
   "term" int NOT NULL,
   "release_date" timestamptz NOT NULL,
@@ -46,8 +46,8 @@ CREATE TABLE "movies" (
 );
 
 CREATE TABLE "movie_images" (
-  "movie_id" verchar(63),
-  "file_path" verchar(255) NOT NULL,
+  "movie_id" varchar(63),
+  "file_path" varchar(255) NOT NULL,
   "order" int NOT NULL
 );
 
