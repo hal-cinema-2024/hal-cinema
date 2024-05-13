@@ -7,3 +7,4 @@ export const Route = createLazyFileRoute("/profile")({
 function Index() {
   return <>top</>;
 }
+ 

@@ -18,8 +18,8 @@ import { Route as rootRoute } from './routes/__root'
 
 const TopLazyImport = createFileRoute('/top')()
 const ProfileLazyImport = createFileRoute('/profile')()
+const MoviesLazyImport = createFileRoute('/movies')()
 const MovieLazyImport = createFileRoute('/movie')()
-const DemoLazyImport = createFileRoute('/demo')()
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
@@ -34,15 +34,15 @@ const ProfileLazyRoute = ProfileLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/profile.lazy').then((d) => d.Route))
 
+const MoviesLazyRoute = MoviesLazyImport.update({
+  path: '/movies',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/movies.lazy').then((d) => d.Route))
+
 const MovieLazyRoute = MovieLazyImport.update({
   path: '/movie',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/movie.lazy').then((d) => d.Route))
-
-const DemoLazyRoute = DemoLazyImport.update({
-  path: '/demo',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/demo.lazy').then((d) => d.Route))
 
 const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
@@ -57,12 +57,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyImport
       parentRoute: typeof rootRoute
     }
-    '/demo': {
-      preLoaderRoute: typeof DemoLazyImport
-      parentRoute: typeof rootRoute
-    }
     '/movie': {
       preLoaderRoute: typeof MovieLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/movies': {
+      preLoaderRoute: typeof MoviesLazyImport
       parentRoute: typeof rootRoute
     }
     '/profile': {
@@ -80,8 +80,8 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren([
   IndexLazyRoute,
-  DemoLazyRoute,
   MovieLazyRoute,
+  MoviesLazyRoute,
   ProfileLazyRoute,
   TopLazyRoute,
 ])
