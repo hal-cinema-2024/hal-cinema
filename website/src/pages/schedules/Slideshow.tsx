@@ -3,54 +3,104 @@ import styled from "styled-components";
 
 type Slide = {
   bg: string;
-  text: string;
+  // text: string;
+  month: string;
+  day: string;
+  week: string;
 };
+// type Slide = {
+//   bg: string;
+//   text: string;
+// };
 const slide: Slide[] = [
   {
     bg: "primary",
-    text: "1",
+    month: "5",
+    day: "1",
+    week: "月",
   },
   {
     bg: "secondary",
-    text: "2",
+    month: "5",
+    day: "2",
+    week: "火",
   },
   {
     bg: "warning",
-    text: "3",
+    month: "5",
+    day: "3",
+    week: "水",
   },
   {
     bg: "danger",
-    text: "4",
+    month: "5",
+    day: "4",
+    week: "木",
   },
   {
     bg: "primary",
-    text: "5",
+    month: "5",
+    day: "5",
+    week: "金",
   },
   {
     bg: "secondary",
-    text: "6",
+    month: "5",
+    day: "6",
+    week: "土",
   },
   {
     bg: "danger",
-    text: "7",
+    month: "5",
+    day: "7",
+    week: "日",
   },
   {
     bg: "primary",
-    text: "8",
+    month: "5",
+    day: "8",
+    week: "月",
   },
   {
     bg: "secondary",
-    text: "9",
+    month: "5",
+    day: "9",
+    week: "火",
   },
+  {
+    bg: "secondary",
+    month: "5",
+    day: "10",
+    week: "水",
+  },
+  {
+    bg: "link",
+    month: "5",
+    day: "11",
+    week: "木",
+  },
+  {
+    bg: "secondary",
+    month: "5",
+    day: "12",
+    week: "金",
+  },
+  // {
+  //   bg: "secondary",
+  //   text: "12",
+  // }
 ];
 
 const Slideshow = () => {
   return (
     <Sdiv>
-      <SCarousel slideSize="33.333%" slidesToScroll={3} loop={false}>
+      <SCarousel slideSize="25%" slidesToScroll={4} loop={false}>
         {slide.map((item, index) => (
           <CarouselSlide key={index} bg={item.bg}>
-            <Sp>{item.text}</Sp>
+            <Spp>
+              {item.month}/{item.day}
+            </Spp>
+            <Sp>（{item.week}）</Sp>
           </CarouselSlide>
         ))}
       </SCarousel>
@@ -72,8 +122,17 @@ const SCarousel = styled(Carousel)`
   width: 100%;
 `;
 
+const Spp = styled.p`
+  //htmlは.
+  /* margin: 100px 0 0 0; */
+  font-size: 60px;
+  color: white;
+  text-align: center;
+`;
+
 const Sp = styled.p`
   //htmlは.
+  /* margin: 60px 0 0 0; */
   font-size: 40px;
   color: white;
   text-align: center;
