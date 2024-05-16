@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Carousel, CarouselSlide } from "@yamada-ui/carousel";
 import styled from "styled-components";
 
@@ -92,11 +93,21 @@ const slide: Slide[] = [
 ];
 
 const Slideshow = () => {
+  const [color, setColor] = useState<number | null>(null);
+
+  const changeColor = (index: number) => {
+    setColor(index);
+  };
+
   return (
     <Sdiv>
       <SCarousel slideSize="25%" slidesToScroll={4} loop={false}>
         {slide.map((item, index) => (
-          <CarouselSlide key={index} bg={item.bg}>
+          <CarouselSlide
+            key={index}
+            bg={index === color ? "blue" : item.bg}
+            onClick={() => changeColor(index)}
+          >
             <Spp>
               {item.month}/{item.day}
             </Spp>
