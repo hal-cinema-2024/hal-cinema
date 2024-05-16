@@ -13,6 +13,33 @@ CREATE TABLE "users" (
   "is_delete" boolean NOT NULL DEFAULT false
 );
 
+CREATE TABLE "user_roles" (
+  "user_id" varchar(63),
+  "role_id" varchar(63),
+  "created_at" timestamptz
+);
+
+CREATE TABLE "roles" (
+  "role_id" varchar(63),
+  "name" varchar(255)
+);
+
+CREATE TABLE "permissions" (
+  "permisson_id" verchar(63),
+  "role_id" varchar(63),
+  "uri" text,
+  "action" varchar(63),
+  "effect" boolean
+);
+
+CREATE TABLE "session" (
+  "session_id" varchar(63),
+  "user_id" varchar(63),
+  "token" text,
+  "expiration_time" timestamptz,
+  "refresh_token" text
+);
+
 CREATE TABLE "schedules" (
   "schedule_id" varchar(63) PRIMARY KEY,
   "theater_id" varchar(63) NOT NULL,
@@ -79,6 +106,12 @@ CREATE TABLE "price_types" (
 
 ALTER TABLE  "price_types" ADD CHECK (price >= 0);
 
+CREATE UNIQUE INDEX ON "theaters_seats" ("schedule_id", "seat_name");
+
+COMMENT ON COLUMN "movies"."term" IS '上映時間';
+
+ALTER TABLE "session" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("user_id");
+
 ALTER TABLE "orders" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("user_id");
 
 ALTER TABLE "schedules" ADD FOREIGN KEY ("theater_id") REFERENCES "theaters" ("theater_id");
@@ -98,3 +131,9 @@ ALTER TABLE "orders_details" ADD FOREIGN KEY ("theaters_seats_id") REFERENCES "t
 ALTER TABLE "orders_details" ADD FOREIGN KEY ("order_id") REFERENCES "orders" ("order_id");
 
 ALTER TABLE "movie_images" ADD FOREIGN KEY ("movie_id") REFERENCES "movies" ("movie_id");
+
+ALTER TABLE "user_roles" ADD FOREIGN KEY ("role_id") REFERENCES "roles" ("role_id");
+
+ALTER TABLE "user_roles" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("user_id");
+
+ALTER TABLE "permissions" ADD FOREIGN KEY ("role_id") REFERENCES "roles" ("role_id");
