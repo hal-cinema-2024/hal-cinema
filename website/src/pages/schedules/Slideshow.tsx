@@ -93,7 +93,8 @@ const slide: Slide[] = [
 ];
 
 const Slideshow = () => {
-  const [color, setColor] = useState<number | null>(null);
+  // const [color, setColor] = useState<number | null>(null);
+  const [color, setColor] = useState<number>(0);
 
   const changeColor = (index: number) => {
     setColor(index);
@@ -105,7 +106,8 @@ const Slideshow = () => {
         {slide.map((item, index) => (
           <CarouselSlide
             key={index}
-            bg={index === color ? "blue" : item.bg}
+            // bg={index === color ? "#049D82" : item.bg}
+            bg={index === color ? "#049D82" : "#BF06B3"}
             onClick={() => changeColor(index)}
           >
             <Spp>
@@ -131,7 +133,13 @@ const Sdiv = styled.div`
 
 const SCarousel = styled(Carousel)`
   width: 100%;
+  opacity: 0.7;
 `;
+
+// const SCarouselSlide = styled(CarouselSlide)`
+//   cursor: pointer;
+//   display: flex;
+// `;
 
 const Spp = styled.p`
   //htmlは.
