@@ -4,6 +4,7 @@ CREATE TABLE "users" (
   "last_name" varchar(31) NOT NULL,
   "first_name_reading" varchar(31) NOT NULL,
   "last_name_reading" varchar(31) NOT NULL,
+  "email" varchar(255) NOT NULL,
   "icon_path" varchar(255),
   "age" int NOT NULL,
   "gender" smallint NOT NULL,
@@ -11,6 +12,33 @@ CREATE TABLE "users" (
   "created_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
   "updated_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
   "is_delete" boolean NOT NULL DEFAULT false
+);
+
+CREATE TABLE "user_roles" (
+  "user_id" varchar(63) NOT NULL,
+  "role_id" varchar(63) NOT NULL,
+  "created_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE "roles" (
+  "role_id" varchar(63) NOT NULL,
+  "name" varchar(255) NOT NULL
+);
+
+CREATE TABLE "permissions" (
+  "permission_id" varchar(63),
+  "role_id" varchar(63) NOT NULL,
+  "uri" text NOT NULL,
+  "req_method" varchar(63) NOT NULL,
+  "effect" boolean NOT NULL
+);
+
+CREATE TABLE "session" (
+  "session_id" varchar(63),
+  "user_id" varchar(63) NOT NULL,
+  "token" text NOT NULL,
+  "expiration_time" timestamptz NOT NULL,
+  "refresh_token" text NOT NULL
 );
 
 CREATE TABLE "schedules" (
@@ -79,6 +107,14 @@ CREATE TABLE "price_types" (
 
 ALTER TABLE  "price_types" ADD CHECK (price >= 0);
 
+CREATE UNIQUE INDEX ON "theaters_seats" ("schedule_id", "seat_name");
+
+COMMENT ON COLUMN "permissions"."effect" IS '許可or不許可';
+
+COMMENT ON COLUMN "movies"."term" IS '上映時間';
+
+ALTER TABLE "session" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("user_id");
+
 ALTER TABLE "orders" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("user_id");
 
 ALTER TABLE "schedules" ADD FOREIGN KEY ("theater_id") REFERENCES "theaters" ("theater_id");
@@ -98,3 +134,9 @@ ALTER TABLE "orders_details" ADD FOREIGN KEY ("theaters_seats_id") REFERENCES "t
 ALTER TABLE "orders_details" ADD FOREIGN KEY ("order_id") REFERENCES "orders" ("order_id");
 
 ALTER TABLE "movie_images" ADD FOREIGN KEY ("movie_id") REFERENCES "movies" ("movie_id");
+
+ALTER TABLE "user_roles" ADD FOREIGN KEY ("role_id") REFERENCES "roles" ("role_id");
+
+ALTER TABLE "user_roles" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("user_id");
+
+ALTER TABLE "permissions" ADD FOREIGN KEY ("role_id") REFERENCES "roles" ("role_id");
