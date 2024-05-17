@@ -14,30 +14,30 @@ CREATE TABLE "users" (
 );
 
 CREATE TABLE "user_roles" (
-  "user_id" varchar(63),
-  "role_id" varchar(63),
-  "created_at" timestamptz
+  "user_id" varchar(63) NOT NULL,
+  "role_id" varchar(63) NOT NULL,
+  "created_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE "roles" (
-  "role_id" varchar(63),
-  "name" varchar(255)
+  "role_id" varchar(63) NOT NULL,
+  "name" varchar(255) NOT NULL
 );
 
 CREATE TABLE "permissions" (
-  "permisson_id" verchar(63),
-  "role_id" varchar(63),
-  "uri" text,
-  "action" varchar(63),
-  "effect" boolean
+  "permission_id" varchar(63),
+  "role_id" varchar(63) NOT NULL,
+  "uri" text NOT NULL,
+  "action" varchar(63) NOT NULL,
+  "effect" boolean NOT NULL
 );
 
 CREATE TABLE "session" (
   "session_id" varchar(63),
-  "user_id" varchar(63),
-  "token" text,
-  "expiration_time" timestamptz,
-  "refresh_token" text
+  "user_id" varchar(63) NOT NULL,
+  "token" text NOT NULL,
+  "expiration_time" timestamptz NOT NULL,
+  "refresh_token" text NOT NULL
 );
 
 CREATE TABLE "schedules" (
