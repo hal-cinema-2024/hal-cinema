@@ -11,8 +11,8 @@ const screen: Screen[] = [
   {
     startTime: "10:40",
     endTime: "~ 13:10",
-    buy: "購入",
-    img: "src/assets/circle.svg",
+    buy: "販売終了",
+    img: "src/assets/x.svg",
   },
   {
     startTime: "18:20",
@@ -23,7 +23,7 @@ const screen: Screen[] = [
   {
     startTime: "20:00",
     endTime: "~ 22:30",
-    buy: "購入",
+    buy: "販売",
     img: "src/assets/circle.svg",
   },
 ];
@@ -58,10 +58,11 @@ const ScreenContainer = styled.div`
 `;
 
 const TimeContainer = styled.div`
-  height: 230px;
-  width: 230px;
+  height: 200px;
+  width: 200px;
   position: relative;
-  background-color: #ddd;
+  /* background-color: #ddd; */
+  border: 1px solid #000;
 `;
 
 const Start = styled.p`
@@ -77,15 +78,19 @@ const End = styled.p`
 
 const BuyContainer = styled.div`
   width: 100%;
-  height: 70px;
+  /* height: 70px; */
+  height: 33.333%;
   position: absolute;
   bottom: 0;
   left: 0;
   display: flex;
   align-items: center;
   text-align: center;
+  justify-content: center;
 
-  background-color: red;
+  /* background-color: #049d82;
+  opacity: 0.7; */
+  background-color: rgb(4 157 130 / 0.6);
   img {
     width: 50px;
     height: 50px;
@@ -96,9 +101,9 @@ const BuyContainer = styled.div`
 const AvailContainer = styled.div`
   text-align: center;
   p {
-    width: 100px;
+    width: 130px;
     font-size: 25px;
 
-    background-color: pink;
+    /* background-color: pink; */
   }
 `;
