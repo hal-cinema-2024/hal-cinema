@@ -33,7 +33,7 @@ const ScreenTime = () => {
             <Start>{item.startTime}</Start>
             <End>{item.endTime}</End>
             <BuyContainer>
-              <img src="assets/circle.svg" alt="" />
+              <img src="src/assets/circle.svg" alt="" />
               <p>{item.buy}</p>
             </BuyContainer>
           </TimeContainer>
@@ -70,12 +70,17 @@ const End = styled.p`
 
 const BuyContainer = styled.div`
   width: 100%;
-  height: 70px;
+  /* height: 70px; */
   position: absolute;
   bottom: 0;
   left: 0;
+  display: flex;
   text-align: center;
   background-color: #f5f5f5;
+  img {
+    width: 60px;
+    background-color: #fff;
+  }
   p {
     font-size: 25px;
   }
