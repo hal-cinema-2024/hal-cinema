@@ -4,23 +4,27 @@ type Screen = {
   startTime: string;
   endTime: string;
   buy: string;
+  img: string;
 };
 
 const screen: Screen[] = [
   {
     startTime: "10:40",
     endTime: "~ 13:10",
-    buy: "‹óÈ",
+    buy: "è³¼å…¥",
+    img: "src/assets/circle.svg",
   },
   {
     startTime: "18:20",
     endTime: "~ 20:50",
-    buy: "–žÈ",
+    buy: "æº€å¸­",
+    img: "src/assets/x.svg",
   },
   {
     startTime: "20:00",
     endTime: "~ 22:30",
-    buy: "‹óÈ",
+    buy: "è³¼å…¥",
+    img: "src/assets/circle.svg",
   },
 ];
 
@@ -33,8 +37,10 @@ const ScreenTime = () => {
             <Start>{item.startTime}</Start>
             <End>{item.endTime}</End>
             <BuyContainer>
-              <img src="src/assets/circle.svg" alt="" />
-              <p>{item.buy}</p>
+              <img src={item.img} alt="" />
+              <AvailContainer>
+                <p>{item.buy}</p>
+              </AvailContainer>
             </BuyContainer>
           </TimeContainer>
         ))}
@@ -52,36 +58,47 @@ const ScreenContainer = styled.div`
 `;
 
 const TimeContainer = styled.div`
-  height: 250px;
-  width: 250px;
+  height: 230px;
+  width: 230px;
   position: relative;
   background-color: #ddd;
 `;
 
 const Start = styled.p`
   text-align: center;
-  font-size: 40px;
+  font-size: 50px;
 `;
+
 const End = styled.p`
   text-align: right;
   margin-right: 50px;
-  font-size: 20px;
+  font-size: 25px;
 `;
 
 const BuyContainer = styled.div`
   width: 100%;
-  /* height: 70px; */
+  height: 70px;
   position: absolute;
   bottom: 0;
   left: 0;
   display: flex;
+  align-items: center;
   text-align: center;
-  background-color: #f5f5f5;
+
+  background-color: red;
   img {
-    width: 60px;
+    width: 50px;
+    height: 50px;
     background-color: #fff;
   }
+`;
+
+const AvailContainer = styled.div`
+  text-align: center;
   p {
+    width: 100px;
     font-size: 25px;
+
+    background-color: pink;
   }
 `;
