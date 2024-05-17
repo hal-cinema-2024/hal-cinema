@@ -4,6 +4,7 @@ CREATE TABLE "users" (
   "last_name" varchar(31) NOT NULL,
   "first_name_reading" varchar(31) NOT NULL,
   "last_name_reading" varchar(31) NOT NULL,
+  "email" varchar(255) NOT NULL,
   "icon_path" varchar(255),
   "age" int NOT NULL,
   "gender" smallint NOT NULL,
