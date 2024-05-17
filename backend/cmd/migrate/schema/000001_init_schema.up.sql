@@ -28,7 +28,7 @@ CREATE TABLE "permissions" (
   "permission_id" varchar(63),
   "role_id" varchar(63) NOT NULL,
   "uri" text NOT NULL,
-  "action" varchar(63) NOT NULL,
+  "req_method" varchar(63) NOT NULL,
   "effect" boolean NOT NULL
 );
 
@@ -107,6 +107,8 @@ CREATE TABLE "price_types" (
 ALTER TABLE  "price_types" ADD CHECK (price >= 0);
 
 CREATE UNIQUE INDEX ON "theaters_seats" ("schedule_id", "seat_name");
+
+COMMENT ON COLUMN "permissions"."effect" IS '許可or不許可';
 
 COMMENT ON COLUMN "movies"."term" IS '上映時間';
 
