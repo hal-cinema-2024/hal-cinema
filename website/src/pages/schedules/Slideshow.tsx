@@ -9,16 +9,12 @@ type Slide = {
   day: string;
   week: string;
 };
-// type Slide = {
-//   bg: string;
-//   text: string;
-// };
 const slide: Slide[] = [
   {
     bg: "primary",
     month: "5",
     day: "1",
-    week: "Êúà",
+    week: "Êú?",
   },
   {
     bg: "secondary",
@@ -42,13 +38,13 @@ const slide: Slide[] = [
     bg: "primary",
     month: "5",
     day: "5",
-    week: "Èáë",
+    week: "Èá?",
   },
   {
     bg: "secondary",
     month: "5",
     day: "6",
-    week: "Âúü",
+    week: "Âú?",
   },
   {
     bg: "danger",
@@ -60,7 +56,7 @@ const slide: Slide[] = [
     bg: "primary",
     month: "5",
     day: "8",
-    week: "Êúà",
+    week: "Êú?",
   },
   {
     bg: "secondary",
@@ -84,16 +80,11 @@ const slide: Slide[] = [
     bg: "secondary",
     month: "5",
     day: "12",
-    week: "Èáë",
+    week: "Èá?",
   },
-  // {
-  //   bg: "secondary",
-  //   text: "12",
-  // }
 ];
 
 const Slideshow = () => {
-  // const [color, setColor] = useState<number | null>(null);
   const [color, setColor] = useState<number>(0);
 
   const changeColor = (index: number) => {
@@ -106,14 +97,16 @@ const Slideshow = () => {
         {slide.map((item, index) => (
           <CarouselSlide
             key={index}
-            // bg={index === color ? "#049D82" : item.bg}
+            style={{ cursor: "pointer", position: "relative" }}
             bg={index === color ? "#049D82" : "#BF06B3"}
             onClick={() => changeColor(index)}
           >
-            <Spp>
-              {item.month}/{item.day}
-            </Spp>
-            <Sp>Ôºà{item.week}Ôºâ</Sp>
+            <SSdiv>
+              <Spp>
+                {item.month}/{item.day}
+              </Spp>
+              <Sp>?º?{item.week}?º?</Sp>
+            </SSdiv>
           </CarouselSlide>
         ))}
       </SCarousel>
@@ -136,23 +129,21 @@ const SCarousel = styled(Carousel)`
   opacity: 0.7;
 `;
 
-// const SCarouselSlide = styled(CarouselSlide)`
-//   cursor: pointer;
-//   display: flex;
-// `;
+const SSdiv = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
 
 const Spp = styled.p`
-  //html„ÅØ.
-  /* margin: 100px 0 0 0; */
-  font-size: 60px;
+  font-size: 65px;
   color: white;
   text-align: center;
 `;
 
 const Sp = styled.p`
-  //html„ÅØ.
-  /* margin: 60px 0 0 0; */
-  font-size: 40px;
+  font-size: 35px;
   color: white;
   text-align: center;
 `;
