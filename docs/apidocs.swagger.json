@@ -1,0 +1,877 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "projects/hal_cinema.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "ApiService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/movies": {
+      "get": {
+        "summary": "Get all movies",
+        "description": "Get all movies",
+        "operationId": "ApiService_GetMovies",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetMoviesResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {},
+            "examples": {
+              "application/json": {
+                "status:": 1,
+                "title": "titleExample",
+                "detail": "detailExample"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Movies"
+        ]
+      },
+      "post": {
+        "summary": "Create movie",
+        "description": "Create movie",
+        "operationId": "ApiService_CreateMovie",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateMovieResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {},
+            "examples": {
+              "application/json": {
+                "status:": 1,
+                "title": "titleExample",
+                "detail": "detailExample"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateMovieRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Movies"
+        ]
+      }
+    },
+    "/movies/{movieId}": {
+      "get": {
+        "summary": "Get movie details",
+        "description": "Get movie details",
+        "operationId": "ApiService_GetMovie",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetMovieResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {},
+            "examples": {
+              "application/json": {
+                "status:": 1,
+                "title": "titleExample",
+                "detail": "detailExample"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "movieId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Movies"
+        ]
+      },
+      "delete": {
+        "summary": "Delete movie",
+        "description": "Delete movie",
+        "operationId": "ApiService_DeleteMovie",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteMovieResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {},
+            "examples": {
+              "application/json": {
+                "status:": 1,
+                "title": "titleExample",
+                "detail": "detailExample"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "movieId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Movies"
+        ]
+      },
+      "put": {
+        "summary": "Update movie",
+        "description": "Update movie",
+        "operationId": "ApiService_UpdateMovie",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateMovieResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {},
+            "examples": {
+              "application/json": {
+                "status:": 1,
+                "title": "titleExample",
+                "detail": "detailExample"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "movieId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiServiceUpdateMovieBody"
+            }
+          }
+        ],
+        "tags": [
+          "Movies"
+        ]
+      }
+    },
+    "/schedules": {
+      "get": {
+        "summary": "Get all schedules",
+        "description": "Get all schedules",
+        "operationId": "ApiService_GetSchedules",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetSchedulesResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {},
+            "examples": {
+              "application/json": {
+                "status:": 1,
+                "title": "titleExample",
+                "detail": "detailExample"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Schedules"
+        ]
+      },
+      "post": {
+        "summary": "Create schedule",
+        "description": "Create schedule",
+        "operationId": "ApiService_CreateSchedule",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateScheduleResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {},
+            "examples": {
+              "application/json": {
+                "status:": 1,
+                "title": "titleExample",
+                "detail": "detailExample"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateScheduleRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Schedules"
+        ]
+      }
+    },
+    "/schedules/{scheduleId}": {
+      "delete": {
+        "summary": "Delete schedule",
+        "description": "Delete schedule",
+        "operationId": "ApiService_DeleteSchedule",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteScheduleResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {},
+            "examples": {
+              "application/json": {
+                "status:": 1,
+                "title": "titleExample",
+                "detail": "detailExample"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Schedules"
+        ]
+      },
+      "put": {
+        "summary": "Update schedule",
+        "description": "Update schedule",
+        "operationId": "ApiService_UpdateSchedule",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateScheduleResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {},
+            "examples": {
+              "application/json": {
+                "status:": 1,
+                "title": "titleExample",
+                "detail": "detailExample"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiServiceUpdateScheduleBody"
+            }
+          }
+        ],
+        "tags": [
+          "Schedules"
+        ]
+      }
+    },
+    "/users": {
+      "post": {
+        "summary": "Create user",
+        "description": "Create user",
+        "operationId": "ApiService_CreateUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateUserResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {},
+            "examples": {
+              "application/json": {
+                "status:": 1,
+                "title": "titleExample",
+                "detail": "detailExample"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateUserReqest"
+            }
+          }
+        ],
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/users/{userId}": {
+      "get": {
+        "summary": "Get user",
+        "description": "Get user",
+        "operationId": "ApiService_GetUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetUsersResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {},
+            "examples": {
+              "application/json": {
+                "status:": 1,
+                "title": "titleExample",
+                "detail": "detailExample"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Users"
+        ]
+      },
+      "delete": {
+        "summary": "Delete user",
+        "description": "Delete user",
+        "operationId": "ApiService_DeleteUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteUserResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {},
+            "examples": {
+              "application/json": {
+                "status:": 1,
+                "title": "titleExample",
+                "detail": "detailExample"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Users"
+        ]
+      },
+      "put": {
+        "summary": "Update user",
+        "description": "Update user",
+        "operationId": "ApiService_UpdateUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateUserResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {},
+            "examples": {
+              "application/json": {
+                "status:": 1,
+                "title": "titleExample",
+                "detail": "detailExample"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiServiceUpdateUserBody"
+            }
+          }
+        ],
+        "tags": [
+          "Users"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ApiServiceUpdateMovieBody": {
+      "type": "object",
+      "properties": {
+        "movieName": {
+          "type": "string"
+        },
+        "director": {
+          "type": "string"
+        },
+        "sammary": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "link": {
+          "type": "string"
+        },
+        "term": {
+          "type": "string"
+        },
+        "releaseDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        }
+      }
+    },
+    "ApiServiceUpdateScheduleBody": {
+      "type": "object",
+      "properties": {
+        "movieId": {
+          "type": "string"
+        },
+        "theaterId": {
+          "type": "string"
+        },
+        "startTime": {
+          "type": "string"
+        }
+      }
+    },
+    "ApiServiceUpdateUserBody": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "firstNameReading": {
+          "type": "string"
+        },
+        "lastNameReading": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "age": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "gender": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "phoneNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CreateMovieRequest": {
+      "type": "object",
+      "properties": {
+        "movieName": {
+          "type": "string"
+        },
+        "director": {
+          "type": "string"
+        },
+        "sammary": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "link": {
+          "type": "string"
+        },
+        "term": {
+          "type": "string"
+        },
+        "releaseDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CreateMovieResponse": {
+      "type": "object",
+      "properties": {
+        "movieId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CreateScheduleRequest": {
+      "type": "object",
+      "properties": {
+        "movieId": {
+          "type": "string"
+        },
+        "theaterId": {
+          "type": "string"
+        },
+        "startTime": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CreateScheduleResponse": {
+      "type": "object",
+      "properties": {
+        "scheduleId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CreateUserReqest": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "firstNameReading": {
+          "type": "string"
+        },
+        "lastNameReading": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "age": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "gender": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "phoneNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CreateUserResponse": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1DeleteMovieResponse": {
+      "type": "object",
+      "properties": {
+        "movieId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1DeleteScheduleResponse": {
+      "type": "object",
+      "properties": {
+        "scheduleId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1DeleteUserResponse": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GetMovieResponse": {
+      "type": "object",
+      "properties": {
+        "movie": {
+          "$ref": "#/definitions/v1Movie"
+        }
+      }
+    },
+    "v1GetMoviesResponse": {
+      "type": "object",
+      "properties": {
+        "movie": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Movie"
+          }
+        }
+      }
+    },
+    "v1GetSchedulesResponse": {
+      "type": "object",
+      "properties": {
+        "schedule": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Schedule"
+          }
+        }
+      }
+    },
+    "v1GetUsersResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1User"
+          }
+        }
+      }
+    },
+    "v1Movie": {
+      "type": "object",
+      "properties": {
+        "movieId": {
+          "type": "string"
+        },
+        "movieName": {
+          "type": "string"
+        },
+        "director": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string"
+        },
+        "sammary": {
+          "type": "string"
+        },
+        "link": {
+          "type": "string"
+        },
+        "term": {
+          "type": "string"
+        }
+      }
+    },
+    "v1Schedule": {
+      "type": "object",
+      "properties": {
+        "scheduleId": {
+          "type": "string"
+        },
+        "movieName": {
+          "type": "string"
+        },
+        "theaterId": {
+          "type": "string"
+        },
+        "startTime": {
+          "type": "string"
+        },
+        "term": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "theaterCapacity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "reservedSeats": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1UpdateMovieResponse": {
+      "type": "object",
+      "properties": {
+        "movieId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1UpdateScheduleResponse": {
+      "type": "object",
+      "properties": {
+        "scheduleId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1UpdateUserResponse": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1User": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
