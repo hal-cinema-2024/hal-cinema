@@ -14,10 +14,12 @@ func Setup(engine *echo.Group) {
 	}
 
 	v1.anyRoute()
-
-	return
 }
 
 func (v1 *v1Router) anyRoute() {
-	// plz impl
+	// no check auth
+	v1.login()
+
+	// required authz
+	//...
 }
