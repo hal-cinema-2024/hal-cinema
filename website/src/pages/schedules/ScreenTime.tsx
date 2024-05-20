@@ -40,7 +40,7 @@ export default ScreenTime;
 
 const ScreenContainer = styled.div`
   width: 850px;
-  padding: 20px;
+  /* padding: 20px; */
   background-color: #f5f5f5;
   display: flex;
   justify-content: space-between;
