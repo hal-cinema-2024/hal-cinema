@@ -1,6 +1,7 @@
 package container
 
 import (
+	"github.com/hal-cinema-2024/backend/internal/driver/db"
 	"github.com/hal-cinema-2024/backend/internal/framework/router"
 	"go.uber.org/dig"
 )
@@ -16,7 +17,7 @@ func NewContainer() error {
 	container = dig.New()
 
 	args := []provideArg{
-		// {constructor: db.Connect, opts: []dig.ProvideOption{}},
+		{constructor: db.Connect, opts: []dig.ProvideOption{}},
 		// {constructor: cloudflare.ConnectR2Bucket, opts: []dig.ProvideOption{}},
 		{constructor: router.NewRouter, opts: []dig.ProvideOption{}},
 	}
