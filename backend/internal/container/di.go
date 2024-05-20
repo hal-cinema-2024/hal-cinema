@@ -1,22 +1,19 @@
-package internal
+package container
 
 import (
-	"database/sql"
-	"net/http"
-
 	"github.com/hal-cinema-2024/backend/internal/framework/router"
 	"go.uber.org/dig"
 )
 
-var Container *dig.Container
+var container *dig.Container
 
 type provideArg struct {
 	constructor any
 	opts        []dig.ProvideOption
 }
 
-func NewContainer() (http.Handler, *sql.DB) {
-	Container = dig.New()
+func NewContainer() error {
+	container = dig.New()
 
 	args := []provideArg{
 		// {constructor: db.Connect, opts: []dig.ProvideOption{}},
@@ -25,21 +22,14 @@ func NewContainer() (http.Handler, *sql.DB) {
 	}
 
 	for _, arg := range args {
-		if err := Container.Provide(arg.constructor, arg.opts...); err != nil {
-			panic(err)
+		if err := container.Provide(arg.constructor, arg.opts...); err != nil {
+			return err
 		}
 	}
 
-	var (
-		srv http.Handler
-		db  *sql.DB
-	)
-	Container.Invoke(func(h http.Handler) {
-		srv = h
-	})
-	Container.Invoke(func(d *sql.DB) {
-		db = d
-	})
+	return nil
+}
 
-	return srv, db
+func Invoke(f any) error {
+	return container.Invoke(f)
 }
