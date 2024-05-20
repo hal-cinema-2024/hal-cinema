@@ -1,52 +1,16 @@
 import styled from "styled-components";
-
-type Screen = {
-  startTime: string;
-  endTime: string;
-  buy: string;
-  // img: string;
-  // bg: string;
-};
-
-const screen: Screen[] = [
-  {
-    startTime: "10:40",
-    endTime: "~ 13:10",
-    buy: "販売終了",
-    // img: "src/assets/x.svg",
-    // bg: "#ddd",
-  },
-  {
-    startTime: "18:20",
-    endTime: "~ 20:50",
-    buy: "満席",
-    // img: "src/assets/x.svg",
-    // bg: "#ddd",
-  },
-  {
-    startTime: "20:00",
-    endTime: "~ 22:30",
-    buy: "購入",
-    // img: "src/assets/circle.svg",
-    // bg: "rgb(4, 157, 130, 0.6)",
-  },
-  {
-    startTime: "21:05",
-    endTime: "~ 23:35",
-    buy: "購入",
-    // img: "src/assets/circle.svg",
-    // bg: "rgb(4, 157, 130, 0.6)",
-  },
-];
+import { ScreenType, ScreenData } from "./TimeData";
+import x from "/src/assets/x.svg";
+import circle from "/src/assets/circle.svg";
 
 const ScreenTime = () => {
   const getImg = (buy: string) => {
     switch (buy) {
       case "販売終了":
       case "満席":
-        return "src/assets/x.svg";
+        return x;
       case "購入":
-        return "src/assets/circle.svg";
+        return circle;
       default:
         return "";
     }
@@ -55,7 +19,7 @@ const ScreenTime = () => {
   return (
     <>
       <ScreenContainer>
-        {screen.map((item, index) => (
+        {ScreenData.map((item: ScreenType, index) => (
           <TimeContainer key={index}>
             <Start>{item.startTime}</Start>
             <End>{item.endTime}</End>
