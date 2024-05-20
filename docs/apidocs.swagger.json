@@ -21,6 +21,9 @@
         "summary": "Get all movies",
         "description": "Get all movies",
         "operationId": "ApiService_GetMovies",
+        "produces": [
+          "multipart/form-data"
+        ],
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -64,6 +67,9 @@
         "summary": "Create movie",
         "description": "Create movie",
         "operationId": "ApiService_CreateMovie",
+        "consumes": [
+          "multipart/form-data"
+        ],
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -103,6 +109,9 @@
         "summary": "Get movie details",
         "description": "Get movie details",
         "operationId": "ApiService_GetMovie",
+        "produces": [
+          "multipart/form-data"
+        ],
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -173,6 +182,9 @@
         "summary": "Update movie",
         "description": "Update movie",
         "operationId": "ApiService_UpdateMovie",
+        "consumes": [
+          "multipart/form-data"
+        ],
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -210,6 +222,263 @@
         ],
         "tags": [
           "Movies"
+        ]
+      }
+    },
+    "/orders": {
+      "get": {
+        "summary": "Get all orders",
+        "description": "Get all orders",
+        "operationId": "ApiService_GetOrders",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetOrdersResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {},
+            "examples": {
+              "application/json": {
+                "status:": 1,
+                "title": "titleExample",
+                "detail": "detailExample"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Orders"
+        ]
+      },
+      "post": {
+        "summary": "Create order",
+        "description": "Create order",
+        "operationId": "ApiService_CreateOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateOrderResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {},
+            "examples": {
+              "application/json": {
+                "status:": 1,
+                "title": "titleExample",
+                "detail": "detailExample"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/orders/{orderId}": {
+      "get": {
+        "summary": "Get order",
+        "description": "Get order",
+        "operationId": "ApiService_GetOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetOrderResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {},
+            "examples": {
+              "application/json": {
+                "status:": 1,
+                "title": "titleExample",
+                "detail": "detailExample"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Orders"
+        ]
+      },
+      "delete": {
+        "summary": "Delete order",
+        "description": "Delete order",
+        "operationId": "ApiService_DeleteOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteOrderResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {},
+            "examples": {
+              "application/json": {
+                "status:": 1,
+                "title": "titleExample",
+                "detail": "detailExample"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/reservations": {
+      "get": {
+        "summary": "Get all reservations",
+        "description": "Get all reservations",
+        "operationId": "ApiService_GetSeatReservations",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetSeatReservationsResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {},
+            "examples": {
+              "application/json": {
+                "status:": 1,
+                "title": "titleExample",
+                "detail": "detailExample"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Reservations"
+        ]
+      },
+      "post": {
+        "summary": "Create reservation",
+        "description": "Create reservation",
+        "operationId": "ApiService_CreateSeatReservation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateSeatReservationResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {},
+            "examples": {
+              "application/json": {
+                "status:": 1,
+                "title": "titleExample",
+                "detail": "detailExample"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateSeatReservationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Reservations"
+        ]
+      }
+    },
+    "/reservations/{reservationId}": {
+      "delete": {
+        "summary": "Delete reservation",
+        "description": "Delete reservation",
+        "operationId": "ApiService_DeleteSeatReservation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteSeatReservationResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {},
+            "examples": {
+              "application/json": {
+                "status:": 1,
+                "title": "titleExample",
+                "detail": "detailExample"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "reservationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Reservations"
         ]
       }
     },
@@ -563,8 +832,15 @@
         },
         "endDate": {
           "type": "string"
+        },
+        "movieImage": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
-      }
+      },
+      "title": "multipart/form-dataにする"
     },
     "ApiServiceUpdateScheduleBody": {
       "type": "object",
@@ -605,9 +881,6 @@
         "gender": {
           "type": "integer",
           "format": "int32"
-        },
-        "phoneNumber": {
-          "type": "string"
         }
       }
     },
@@ -630,13 +903,20 @@
           "type": "string"
         },
         "term": {
-          "type": "string"
+          "type": "integer",
+          "format": "int32"
         },
         "releaseDate": {
           "type": "string"
         },
         "endDate": {
           "type": "string"
+        },
+        "movieImage": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -644,6 +924,29 @@
       "type": "object",
       "properties": {
         "movieId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CreateOrderRequest": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "order": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Order"
+          }
+        }
+      }
+    },
+    "v1CreateOrderResponse": {
+      "type": "object",
+      "properties": {
+        "userId": {
           "type": "string"
         }
       }
@@ -663,6 +966,31 @@
       }
     },
     "v1CreateScheduleResponse": {
+      "type": "object",
+      "properties": {
+        "scheduleId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CreateSeatReservationRequest": {
+      "type": "object",
+      "properties": {
+        "scheduleId": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "seatId": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v1CreateSeatReservationResponse": {
       "type": "object",
       "properties": {
         "scheduleId": {
@@ -695,9 +1023,6 @@
         "gender": {
           "type": "integer",
           "format": "int32"
-        },
-        "phoneNumber": {
-          "type": "string"
         }
       }
     },
@@ -717,10 +1042,26 @@
         }
       }
     },
+    "v1DeleteOrderResponse": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string"
+        }
+      }
+    },
     "v1DeleteScheduleResponse": {
       "type": "object",
       "properties": {
         "scheduleId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1DeleteSeatReservationResponse": {
+      "type": "object",
+      "properties": {
+        "reservationId": {
           "type": "string"
         }
       }
@@ -753,6 +1094,32 @@
         }
       }
     },
+    "v1GetOrderResponse": {
+      "type": "object",
+      "properties": {
+        "order": {
+          "$ref": "#/definitions/v1Order"
+        }
+      }
+    },
+    "v1GetOrdersResponse": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "order": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Order"
+          }
+        }
+      }
+    },
     "v1GetSchedulesResponse": {
       "type": "object",
       "properties": {
@@ -761,6 +1128,23 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/v1Schedule"
+          }
+        }
+      }
+    },
+    "v1GetSeatReservationsResponse": {
+      "type": "object",
+      "properties": {
+        "reservationId": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "seatId": {
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }
@@ -799,6 +1183,33 @@
           "type": "string"
         },
         "term": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "releaseDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        },
+        "movieImage": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v1Order": {
+      "type": "object",
+      "properties": {
+        "theaterSeatId": {
+          "type": "string"
+        },
+        "seatId": {
+          "type": "string"
+        },
+        "priceTypeId": {
           "type": "string"
         }
       }
