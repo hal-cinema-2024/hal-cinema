@@ -8,7 +8,6 @@ CREATE TABLE "users" (
   "icon_path" varchar(255),
   "age" int NOT NULL,
   "gender" smallint NOT NULL,
-  "phone_number" varchar(15) NOT NULL,
   "created_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
   "updated_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
   "is_delete" boolean NOT NULL DEFAULT false
