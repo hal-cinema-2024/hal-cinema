@@ -33,7 +33,7 @@ func GoogleLogin(googleLogin *google.Login) func(ctx echo.Context) error {
 
 		ctx.Set(hcontext.UserID.String(), userInfo.UserID)
 
-		// Cookie Sessionを作る
+		// TODO: Cookie Sessionを作る
 
 		return ctx.JSON(http.StatusOK, &LoginResponse{
 			UserID: userInfo.UserID,
