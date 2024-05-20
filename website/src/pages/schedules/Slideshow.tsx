@@ -38,6 +38,7 @@ export default Slideshow;
 
 const Sdiv = styled.div`
   width: 1000px;
+  margin: 0 auto 0 auto;
   padding: 20px;
   background-color: #f5f5f5;
   border-radius: 10px;
