@@ -4,7 +4,7 @@ type Screen = {
   startTime: string;
   endTime: string;
   buy: string;
-  img: string;
+  // img: string;
   // bg: string;
 };
 
@@ -13,26 +13,45 @@ const screen: Screen[] = [
     startTime: "10:40",
     endTime: "~ 13:10",
     buy: "販売終了",
-    img: "src/assets/x.svg",
+    // img: "src/assets/x.svg",
     // bg: "#ddd",
   },
   {
     startTime: "18:20",
     endTime: "~ 20:50",
     buy: "満席",
-    img: "src/assets/x.svg",
+    // img: "src/assets/x.svg",
     // bg: "#ddd",
   },
   {
     startTime: "20:00",
     endTime: "~ 22:30",
-    buy: "販売",
-    img: "src/assets/circle.svg",
+    buy: "購入",
+    // img: "src/assets/circle.svg",
+    // bg: "rgb(4, 157, 130, 0.6)",
+  },
+  {
+    startTime: "21:05",
+    endTime: "~ 23:35",
+    buy: "購入",
+    // img: "src/assets/circle.svg",
     // bg: "rgb(4, 157, 130, 0.6)",
   },
 ];
 
 const ScreenTime = () => {
+  const getImg = (buy: string) => {
+    switch (buy) {
+      case "販売終了":
+      case "満席":
+        return "src/assets/x.svg";
+      case "購入":
+        return "src/assets/circle.svg";
+      default:
+        return "";
+    }
+  };
+
   return (
     <>
       <ScreenContainer>
@@ -41,7 +60,7 @@ const ScreenTime = () => {
             <Start>{item.startTime}</Start>
             <End>{item.endTime}</End>
             <BuyContainer buy={item.buy}>
-              <img src={item.img} alt="" />
+              <img src={getImg(item.buy)} alt="" />
               <AvailContainer>
                 <p>{item.buy}</p>
               </AvailContainer>
@@ -56,7 +75,7 @@ const ScreenTime = () => {
 export default ScreenTime;
 
 const ScreenContainer = styled.div`
-  width: 650px;
+  width: 850px;
   padding: 20px;
   background-color: #f5f5f5;
   display: flex;
