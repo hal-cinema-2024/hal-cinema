@@ -1,8 +1,6 @@
 import styled from "styled-components";
+import { Card } from "@nextui-org/card";
 
-{
-  /* <Movies img={} movieName="" /> */
-}
 type MovieType = {
   // img: File;
   movieName: string;
@@ -32,7 +30,6 @@ const MovieList: MovieType[] = [
     performerName: "江戸川コナン",
   },
 ];
-
 const Movies = () => {
   return (
     <>
@@ -69,7 +66,7 @@ export default Movies;
 
 //-------------------------style-------------------------
 // 全体
-const MoviesContainer = styled.div`
+const MoviesContainer = styled(Card)`
   padding: 10px;
   margin: 0 0 15px 0;
   background-color: #d9d9d9;
