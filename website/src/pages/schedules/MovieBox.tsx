@@ -20,7 +20,7 @@ const MovieBox = () => {
         <ListContainer key={index}>
           <NameContainer>
             <p>{item.name}</p>
-            <span>作品詳細へ</span>
+            <a href="#">作品詳細へ</a>
           </NameContainer>
           <MovieContainer>
             <Number>スクリーン{item.number}</Number>
@@ -41,18 +41,18 @@ const ListContainer = styled.div`
 const NameContainer = styled.div`
   width: 100%;
   height: 50px;
-  padding: 20px 30px;
+  padding: 30px 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* background-color: blue; */
   background-color: #919191;
 
   p {
     font-size: 35px;
     color: #fff;
   }
-  span {
+  a {
+    text-decoration: none;
     color: #fff;
   }
 `;
