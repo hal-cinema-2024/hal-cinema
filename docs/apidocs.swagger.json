@@ -372,41 +372,6 @@
       }
     },
     "/reservations": {
-      "get": {
-        "summary": "Get all reservations",
-        "description": "Get all reservations",
-        "operationId": "ApiService_GetSeatReservations",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1GetSeatReservationsResponse"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {},
-            "examples": {
-              "application/json": {
-                "status:": 1,
-                "title": "titleExample",
-                "detail": "detailExample"
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "Reservations"
-        ]
-      },
       "post": {
         "summary": "Create reservation",
         "description": "Create reservation",
@@ -445,7 +410,7 @@
         ]
       }
     },
-    "/reservations/{reservationId}": {
+    "/reservations/{theaterSeatId}": {
       "delete": {
         "summary": "Delete reservation",
         "description": "Delete reservation",
@@ -471,7 +436,7 @@
         },
         "parameters": [
           {
-            "name": "reservationId",
+            "name": "theaterSeatId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -651,6 +616,47 @@
       }
     },
     "/users": {
+      "get": {
+        "summary": "Get user",
+        "description": "Get user",
+        "operationId": "ApiService_GetUsers",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetUsersResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {},
+            "examples": {
+              "application/json": {
+                "status:": 1,
+                "title": "titleExample",
+                "detail": "detailExample"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Users"
+        ]
+      },
       "post": {
         "summary": "Create user",
         "description": "Create user",
@@ -698,7 +704,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1GetUsersResponse"
+              "$ref": "#/definitions/v1GetUserResponse"
             }
           },
           "500": {
@@ -819,7 +825,8 @@
           "type": "string"
         },
         "thumbnail": {
-          "type": "string"
+          "type": "string",
+          "format": "byte"
         },
         "link": {
           "type": "string"
@@ -871,13 +878,6 @@
         "lastNameReading": {
           "type": "string"
         },
-        "email": {
-          "type": "string"
-        },
-        "age": {
-          "type": "integer",
-          "format": "int32"
-        },
         "gender": {
           "type": "integer",
           "format": "int32"
@@ -897,7 +897,8 @@
           "type": "string"
         },
         "thumbnail": {
-          "type": "string"
+          "type": "string",
+          "format": "byte"
         },
         "link": {
           "type": "string"
@@ -931,14 +932,11 @@
     "v1CreateOrderRequest": {
       "type": "object",
       "properties": {
-        "userId": {
-          "type": "string"
-        },
         "order": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v1Order"
+            "$ref": "#/definitions/v1Orders"
           }
         }
       }
@@ -946,7 +944,7 @@
     "v1CreateOrderResponse": {
       "type": "object",
       "properties": {
-        "userId": {
+        "orderId": {
           "type": "string"
         }
       }
@@ -993,7 +991,7 @@
     "v1CreateSeatReservationResponse": {
       "type": "object",
       "properties": {
-        "scheduleId": {
+        "theaterSeatId": {
           "type": "string"
         }
       }
@@ -1001,28 +999,8 @@
     "v1CreateUserReqest": {
       "type": "object",
       "properties": {
-        "firstName": {
-          "type": "string"
-        },
-        "lastName": {
-          "type": "string"
-        },
-        "firstNameReading": {
-          "type": "string"
-        },
-        "lastNameReading": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        },
-        "age": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "gender": {
-          "type": "integer",
-          "format": "int32"
+        "user": {
+          "$ref": "#/definitions/v1User"
         }
       }
     },
@@ -1061,7 +1039,7 @@
     "v1DeleteSeatReservationResponse": {
       "type": "object",
       "properties": {
-        "reservationId": {
+        "theaterSeatId": {
           "type": "string"
         }
       }
@@ -1098,24 +1076,18 @@
       "type": "object",
       "properties": {
         "order": {
-          "$ref": "#/definitions/v1Order"
+          "$ref": "#/definitions/v1Orders"
         }
       }
     },
     "v1GetOrdersResponse": {
       "type": "object",
       "properties": {
-        "orderId": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
         "order": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v1Order"
+            "$ref": "#/definitions/v1Orders"
           }
         }
       }
@@ -1132,20 +1104,11 @@
         }
       }
     },
-    "v1GetSeatReservationsResponse": {
+    "v1GetUserResponse": {
       "type": "object",
       "properties": {
-        "reservationId": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "seatId": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "user": {
+          "$ref": "#/definitions/v1User"
         }
       }
     },
@@ -1174,7 +1137,8 @@
           "type": "string"
         },
         "thumbnail": {
-          "type": "string"
+          "type": "string",
+          "format": "byte"
         },
         "sammary": {
           "type": "string"
@@ -1200,17 +1164,42 @@
         }
       }
     },
-    "v1Order": {
+    "v1Orders": {
       "type": "object",
       "properties": {
-        "theaterSeatId": {
+        "orderId": {
           "type": "string"
         },
-        "seatId": {
+        "userId": {
           "type": "string"
         },
-        "priceTypeId": {
+        "movieName": {
           "type": "string"
+        },
+        "screen": {
+          "type": "string"
+        },
+        "orderDetail": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1OrdersDetail"
+          }
+        }
+      }
+    },
+    "v1OrdersDetail": {
+      "type": "object",
+      "properties": {
+        "seatName": {
+          "type": "string"
+        },
+        "priceType": {
+          "type": "string"
+        },
+        "price": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -1233,13 +1222,8 @@
           "type": "integer",
           "format": "int32"
         },
-        "theaterCapacity": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "reservedSeats": {
-          "type": "integer",
-          "format": "int32"
+        "isFull": {
+          "type": "boolean"
         }
       }
     },
@@ -1273,14 +1257,21 @@
         "userId": {
           "type": "string"
         },
-        "userName": {
+        "firstName": {
           "type": "string"
         },
-        "email": {
+        "lastName": {
           "type": "string"
         },
-        "password": {
+        "firstNameReading": {
           "type": "string"
+        },
+        "lastNameReading": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     }
