@@ -843,7 +843,8 @@
         "movieImage": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "byte"
           }
         }
       },
@@ -916,7 +917,8 @@
         "movieImage": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "byte"
           }
         }
       }
@@ -1159,7 +1161,8 @@
         "movieImage": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "byte"
           }
         }
       }
