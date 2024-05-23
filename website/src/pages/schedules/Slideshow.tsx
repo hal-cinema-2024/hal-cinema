@@ -25,7 +25,7 @@ const Slideshow = () => {
               <Spp>
                 {item.month}/{item.day}
               </Spp>
-              <Sp>?¼?{item.week}?¼?</Sp>
+              <Sp>({item.week})</Sp>
             </SSdiv>
           </CarouselSlide>
         ))}
