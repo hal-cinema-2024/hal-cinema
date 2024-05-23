@@ -1,13 +1,15 @@
 package main
 
 import (
+	"database/sql"
 	"flag"
 	"log"
+	"net/http"
 	"os"
 	"strings"
 
 	"github.com/hal-cinema-2024/backend/cmd/config"
-	"github.com/hal-cinema-2024/backend/internal"
+	"github.com/hal-cinema-2024/backend/internal/container"
 	"github.com/hal-cinema-2024/backend/internal/pkg/otel"
 	"github.com/hal-cinema-2024/backend/internal/server"
 )
@@ -49,7 +51,27 @@ func run() error {
 	}
 	defer shutdown()
 
-	srv, db := internal.NewContainer()
+	if err := container.NewContainer(); err != nil {
+		return err
+	}
+
+	var (
+		db  *sql.DB
+		srv http.Handler
+	)
+
+	if err := container.Invoke(func(sqlDB *sql.DB) {
+		db = sqlDB
+	}); err != nil {
+		return err
+	}
+
+	if err := container.Invoke(func(handler http.Handler) {
+		srv = handler
+	}); err != nil {
+		return err
+	}
+
 	defer db.Close()
 
 	if err := server.New(config.Config.App.Addr, srv).RunWithGraceful(); err != nil {
