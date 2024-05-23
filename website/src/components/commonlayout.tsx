@@ -1,17 +1,12 @@
 import { Outlet, Link } from "@tanstack/react-router";
+import React from "react";
+import "./Commonlayout.css";
 
-const style = {
-  width: "200px",
-  height: "400px",
-  backgroundImage: `url(../images/bg.jpg)`,
-  backgroundSize: "cover",
-};
-
-export const CommonLayout = () => {
+function CommonLayout() {
   return (
-    <div>
+    <>
       <header className="header">
-        <Link to="/" className="logo">
+        <Link to="/" className="logo1">
           LOGO
         </Link>
         <nav>
@@ -28,17 +23,40 @@ export const CommonLayout = () => {
             <li>
               <Link to="">上映スケジュール</Link>
             </li>
+            <li>
+              <Link to="">マイページ</Link>
+            </li>
           </ul>
         </nav>
       </header>
-
-      <section style={style}></section>
-
-      <div></div>
-
       <Outlet />
-    </div>
+
+      <footer className="footer">
+        <Link to="/" className="logo2">
+          LOGO
+        </Link>
+
+        <ul className="nav">
+          <li>
+            <Link to="">マイページ</Link>
+          </li>
+          <li>
+            <Link to="">マイページ</Link>
+          </li>
+          <li>
+            <Link to="">マイページ</Link>
+          </li>
+          <li>
+            <Link to="">マイページ</Link>
+          </li>
+          <li>
+            <Link to="">マイページ</Link>
+          </li>
+        </ul>
+        <p className="copyright">©HALCinema.All rights Reserved.</p>
+      </footer>
+    </>
   );
-};
+}
 
 export default CommonLayout;
