@@ -28,10 +28,11 @@ function Index() {
 const Moviesboxdiv = styled.div`
   width: 100vw;
   margin: 0 auto;
-  background-color: #67e3e6; //後で消す
+  background-color: #151515; //後で消す
 `;
 
 const Pagetitle = styled.h1`
+  margin: 0 0 50px 0;
   text-align: center;
   color: #fff;
 `;

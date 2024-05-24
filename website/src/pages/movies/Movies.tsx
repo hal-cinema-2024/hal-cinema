@@ -1,43 +1,22 @@
 import styled from "styled-components";
 import { Card } from "@nextui-org/card";
+// import sam01 from "/src/assets/sample01.jpg";
+// import sam02 from "/src/assets/sample02.jpg";
+// import sam03 from "/src/assets/sample03.jpg";
 
-type MovieType = {
-  // img: File;
-  movieName: string;
-  directorName: string;
-  performerName: string;
-};
+import type { MovieType } from "./MoviesDate";
+import { MovieList } from "./MoviesDate";
 
-const MovieList: MovieType[] = [
-  {
-    movieName: "名探偵コナン 漆黒の白",
-    directorName: "山田太郎",
-    performerName: "江戸川コナン",
-  },
-  {
-    movieName: "名探偵コナン 2",
-    directorName: "山田太郎",
-    performerName: "江戸川コナン",
-  },
-  {
-    movieName: "名探偵コナン 純白の黒",
-    directorName: "山田太郎",
-    performerName: "江戸川コナン",
-  },
-  {
-    movieName: "名探偵コナン 4",
-    directorName: "山田太郎",
-    performerName: "江戸川コナン",
-  },
-];
 const Movies = () => {
   return (
     <>
-      {MovieList.map((item, index) => (
+      {MovieList.map((item: MovieType, index: number) => (
         <MoviesContainer key={index}>
           <SSdev>
             <MovieName>
-              <MovieImage>ここに画像</MovieImage>
+              <MovieImage>
+                <img src={item.img} alt="fas8" />
+              </MovieImage>
               <MovieTextDiv>
                 <MovieFlexdiv>
                   <MoviesTitle>作品名：</MoviesTitle>
@@ -69,11 +48,11 @@ export default Movies;
 //-------------------------style-------------------------
 // 全体
 const MoviesContainer = styled(Card)`
-  padding: 10px;
+  padding: 15px 15px 40px 15px;
   width: 100vw;
   /* margin: 0 0 15px 0;*/
-  margin: 0 auto 15px auto;
-  background-color: #d9d9d9;
+  margin: 0 auto 30px auto;
+  background-color: #969696;
   color: #fff;
   display: flex;
   justify-content: space-between;
@@ -89,12 +68,18 @@ const SSdev = styled.div`
 
 // 作品の画像（仮）
 const MovieImage = styled.div`
-  margin: 0 10px 0 0;
-  height: 250px;
-  width: 400px;
+  /* height: 250px;
+  width: 400px; */
   background-color: #002200;
   text-align: center;
-  padding: 100px 0;
+  overflow: hidden;
+  border-radius: 10px;
+
+  img {
+    height: 250px;
+    width: 400px;
+    object-fit: scale-down;
+  }
 `;
 const MovieName = styled.div`
   display: flex;
