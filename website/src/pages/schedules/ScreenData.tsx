@@ -1,16 +1,6 @@
 import styled from "styled-components";
 import ScreenTime from "./ScreenTime";
-// import { MovieType } from "./TimeData";
 import { Movie } from "./TimeData";
-
-// type Movie = {
-//   screenings: MovieType[];//omit nammeをのぞく
-// };
-// type ScreenDataProps = {
-//     screenings: MovieType[];//omit nammeをのぞく
-//   };
-
-// type Movie = Omit<MovieType, "name">;
 
 const ScreenData = (props: Movie) => {
   const { screenings } = props;
