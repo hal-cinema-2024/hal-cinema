@@ -1,12 +1,15 @@
 import styled from "styled-components";
-import ScreenTime from "./ScreenTime";
+// import ScreenTime from "./ScreenTime";
 import { MovieType } from "./TimeData";
+import ScreenData from "./ScreenData";
 
 type MovieBoxProps = {
   infoList: MovieType[];
 };
 
-const MovieBox = ({ infoList }: MovieBoxProps) => {
+const MovieBox = (props: MovieBoxProps) => {
+  const { infoList } = props;
+
   return (
     <>
       {infoList.map((item, index) => (
@@ -15,14 +18,15 @@ const MovieBox = ({ infoList }: MovieBoxProps) => {
             <p>{item.name}</p>
             <a href="#">作品詳細へ</a>
           </NameContainer>
-          <MovieContainer>
+          <ScreenData screenings={item.screenings} />
+          {/* <MovieContainer>
             {item.screenings.map((screening, screenIndex) => (
               <ScreenContainer key={screenIndex}>
                 <Number>スクリーン{screening.screenNumber}</Number>
                 <ScreenTime screenData={screening.screenData} />
               </ScreenContainer>
             ))}
-          </MovieContainer>
+          </MovieContainer> */}
         </ListContainer>
       ))}
     </>
@@ -54,18 +58,18 @@ const NameContainer = styled.div`
   }
 `;
 
-const MovieContainer = styled.div`
-  width: 100%;
-  padding: 10px 5px;
-`;
+// const MovieContainer = styled.div`
+//   width: 100%;
+//   padding: 10px 5px;
+// `;
 
-const ScreenContainer = styled.div`
-  padding: 10px 0px;
-  justify-content: space-between;
-  display: flex;
-  align-items: center;
-`;
+// const ScreenContainer = styled.div`
+//   padding: 10px 0px;
+//   justify-content: space-between;
+//   display: flex;
+//   align-items: center;
+// `;
 
-const Number = styled.div`
-  font-size: 30px;
-`;
+// const Number = styled.div`
+//   font-size: 30px;
+// `;

@@ -7,7 +7,9 @@ type ScreenTimeProps = {
   screenData: ScreenType[];
 };
 
-const ScreenTime = ({ screenData }: ScreenTimeProps) => {
+const ScreenTime = (props: ScreenTimeProps) => {
+  const { screenData } = props;
+
   const getImg = (buy: string) => {
     switch (buy) {
       case "販売終了":

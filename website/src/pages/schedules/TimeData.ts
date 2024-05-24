@@ -12,6 +12,8 @@ export type MovieType = {
   }[];
 };
 
+export type Movie = Omit<MovieType, "name">;
+
 export const InfoList: MovieType[] = [
   {
     name: "HAL特別編",
