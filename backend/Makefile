@@ -15,3 +15,6 @@ rund: build
 
 down:
 	docker compose down
+
+migrate_up:
+	DATABASE_HOST=localhost DATABASE_PORT=5432 DATABASE_USER=postgres DATABASE_PASSWORD=postgres DATABASE_NAME=hal_cinema go run cmd/migrate/main.go -f cmd/migrate/schema/
