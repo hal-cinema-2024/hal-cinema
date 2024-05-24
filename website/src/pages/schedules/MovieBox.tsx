@@ -1,30 +1,27 @@
 import styled from "styled-components";
 import ScreenTime from "./ScreenTime";
+import { MovieType } from "./TimeData";
 
-type ScreenInfo = {
-  name: string;
-  number: string;
+type MovieBoxProps = {
+  infoList: MovieType[];
 };
 
-const InfoList: ScreenInfo[] = [
-  {
-    name: "HALシネマ特別編",
-    number: "5",
-  },
-];
-
-const MovieBox = () => {
+const MovieBox = ({ infoList }: MovieBoxProps) => {
   return (
     <>
-      {InfoList.map((item, index) => (
+      {infoList.map((item, index) => (
         <ListContainer key={index}>
           <NameContainer>
             <p>{item.name}</p>
             <a href="#">作品詳細へ</a>
           </NameContainer>
           <MovieContainer>
-            <Number>スクリーン{item.number}</Number>
-            <ScreenTime />
+            {item.screenings.map((screening, screenIndex) => (
+              <ScreenContainer key={screenIndex}>
+                <Number>スクリーン{screening.screenNumber}</Number>
+                <ScreenTime screenData={screening.screenData} />
+              </ScreenContainer>
+            ))}
           </MovieContainer>
         </ListContainer>
       ))}
@@ -59,8 +56,11 @@ const NameContainer = styled.div`
 
 const MovieContainer = styled.div`
   width: 100%;
-  padding: 20px 5px;
+  padding: 10px 5px;
+`;
 
+const ScreenContainer = styled.div`
+  padding: 10px 0px;
   justify-content: space-between;
   display: flex;
   align-items: center;

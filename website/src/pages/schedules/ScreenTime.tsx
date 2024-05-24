@@ -1,9 +1,13 @@
 import styled from "styled-components";
-import { ScreenType, ScreenData } from "./TimeData";
+import { ScreenType } from "./TimeData";
 import x from "/src/assets/x.svg";
 import circle from "/src/assets/circle.svg";
 
-const ScreenTime = () => {
+type ScreenTimeProps = {
+  screenData: ScreenType[];
+};
+
+const ScreenTime = ({ screenData }: ScreenTimeProps) => {
   const getImg = (buy: string) => {
     switch (buy) {
       case "販売終了":
@@ -19,7 +23,7 @@ const ScreenTime = () => {
   return (
     <>
       <ScreenContainer>
-        {ScreenData.map((item: ScreenType, index) => (
+        {screenData.map((item: ScreenType, index) => (
           <TimeContainer key={index}>
             <a href="#">
               <Start>{item.startTime}</Start>
@@ -84,8 +88,6 @@ const BuyContainer = styled.div<{ buy: string }>`
       : props.buy === "満席"
         ? "#ddd"
         : "rgba(4, 157, 130, 0.6)"};
-
-  /* background-color: rgb(4 157 130 / 0.6); */
   img {
     width: 50px;
     height: 50px;
