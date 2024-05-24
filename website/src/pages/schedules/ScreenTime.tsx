@@ -1,9 +1,15 @@
 import styled from "styled-components";
-import { ScreenType, ScreenData } from "./TimeData";
+import { ScreenType } from "./TimeData";
 import x from "/src/assets/x.svg";
 import circle from "/src/assets/circle.svg";
 
-const ScreenTime = () => {
+type ScreenTimeProps = {
+  screenData: ScreenType[];
+};
+
+const ScreenTime = (props: ScreenTimeProps) => {
+  const { screenData } = props;
+
   const getImg = (buy: string) => {
     switch (buy) {
       case "販売終了":
@@ -19,16 +25,18 @@ const ScreenTime = () => {
   return (
     <>
       <ScreenContainer>
-        {ScreenData.map((item: ScreenType, index) => (
+        {screenData.map((item: ScreenType, index) => (
           <TimeContainer key={index}>
-            <Start>{item.startTime}</Start>
-            <End>{item.endTime}</End>
-            <BuyContainer buy={item.buy}>
-              <img src={getImg(item.buy)} alt="" />
-              <AvailContainer>
-                <p>{item.buy}</p>
-              </AvailContainer>
-            </BuyContainer>
+            <a href="#">
+              <Start>{item.startTime}</Start>
+              <End>{item.endTime}</End>
+              <BuyContainer buy={item.buy}>
+                <img src={getImg(item.buy)} alt="" />
+                <AvailContainer>
+                  <p>{item.buy}</p>
+                </AvailContainer>
+              </BuyContainer>
+            </a>
           </TimeContainer>
         ))}
       </ScreenContainer>
@@ -40,17 +48,15 @@ export default ScreenTime;
 
 const ScreenContainer = styled.div`
   width: 850px;
-  padding: 20px;
-  background-color: #f5f5f5;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
 `;
 
 const TimeContainer = styled.div`
-  height: 200px;
-  width: 200px;
+  width: 23.8%;
+  margin: 5px;
+  aspect-ratio: 1 / 1;
   position: relative;
-  /* background-color: #ddd; */
   border: 1px solid #000;
 `;
 
@@ -66,10 +72,8 @@ const End = styled.p`
   font-size: 25px;
 `;
 
-// const BuyContainer = styled.div<{ bg: string }>`
 const BuyContainer = styled.div<{ buy: string }>`
   width: 100%;
-  /* height: 70px; */
   height: 33.333%;
   position: absolute;
   bottom: 0;
@@ -85,8 +89,6 @@ const BuyContainer = styled.div<{ buy: string }>`
       : props.buy === "満席"
         ? "#ddd"
         : "rgba(4, 157, 130, 0.6)"};
-
-  /* background-color: rgb(4 157 130 / 0.6); */
   img {
     width: 50px;
     height: 50px;
@@ -99,7 +101,5 @@ const AvailContainer = styled.div`
   p {
     width: 130px;
     font-size: 25px;
-
-    /* background-color: pink; */
   }
 `;
