@@ -12,13 +12,15 @@ ALTER TABLE "orders_details" DROP CONSTRAINT IF EXISTS "orders_details_order_id_
 ALTER TABLE "movie_images" DROP CONSTRAINT IF EXISTS "movie_images_movie_id_fkey";
 ALTER TABLE "user_roles" DROP CONSTRAINT IF EXISTS "user_roles_role_id_fkey";
 ALTER TABLE "user_roles" DROP CONSTRAINT IF EXISTS "user_roles_user_id_fkey";
-ALTER TABLE "permissions" DROP CONSTRAINT IF EXISTS "permissions_role_id_fkey";
+ALTER TABLE "role_permissions" DROP CONSTRAINT IF EXISTS "role_permissions_role_id_fkey";
+ALTER TABLE "role_permissions" DROP CONSTRAINT IF EXISTS "role_permissions_permission_id_fkey";
 
 -- テーブルを削除します
 DROP TABLE IF EXISTS "session";
 DROP TABLE IF EXISTS "user_roles";
 DROP TABLE IF EXISTS "roles";
 DROP TABLE IF EXISTS "permissions";
+DROP TABLE IF EXISTS "role_permissions";
 DROP TABLE IF EXISTS "orders_details";
 DROP TABLE IF EXISTS "orders";
 DROP TABLE IF EXISTS "theaters_seats";
