@@ -20,20 +20,24 @@ CREATE TABLE "user_roles" (
 );
 
 CREATE TABLE "roles" (
-  "role_id" varchar(63) NOT NULL,
+  "role_id" varchar(63) PRIMARY KEY,
   "name" varchar(255) NOT NULL
 );
 
 CREATE TABLE "permissions" (
-  "permission_id" varchar(63),
-  "role_id" varchar(63) NOT NULL,
+  "permission_id" varchar(63) PRIMARY KEY,
   "uri" text NOT NULL,
   "req_method" varchar(63) NOT NULL,
   "effect" boolean NOT NULL
 );
 
+CREATE TABLE "role_permissions" (
+  "role_id" varchar(63) NOT NULL,
+  "permission_id" varchar(63) NOT NULL
+);
+
 CREATE TABLE "session" (
-  "session_id" varchar(63),
+  "session_id" varchar(63) PRIMARY KEY,
   "user_id" varchar(63) NOT NULL,
   "token" text NOT NULL,
   "expiration_time" timestamptz NOT NULL,
@@ -138,4 +142,6 @@ ALTER TABLE "user_roles" ADD FOREIGN KEY ("role_id") REFERENCES "roles" ("role_i
 
 ALTER TABLE "user_roles" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("user_id");
 
-ALTER TABLE "permissions" ADD FOREIGN KEY ("role_id") REFERENCES "roles" ("role_id");
+ALTER TABLE "role_permissions" ADD FOREIGN KEY ("role_id") REFERENCES "roles" ("role_id");
+
+ALTER TABLE "role_permissions" ADD FOREIGN KEY ("permission_id") REFERENCES "permissions" ("permission_id");
