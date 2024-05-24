@@ -72,7 +72,6 @@ const End = styled.p`
   font-size: 25px;
 `;
 
-// const BuyContainer = styled.div<{ bg: string }>`
 const BuyContainer = styled.div<{ buy: string }>`
   width: 100%;
   height: 33.333%;
