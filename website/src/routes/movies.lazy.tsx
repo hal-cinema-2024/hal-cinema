@@ -24,11 +24,11 @@ function Index() {
   );
 }
 
+//-------------------------style-------------------------
 const Moviesboxdiv = styled.div`
-  width: 100%;
-  margin: 0 auto 0 auto;
-
-  background-color: pink; //後で消す
+  width: 100vw;
+  margin: 0 auto;
+  background-color: #67e3e6; //後で消す
 `;
 
 const Pagetitle = styled.h1`
@@ -40,4 +40,11 @@ const Moviesdiv = styled.div`
   /* margin: 0 auto; */
 `;
 
-const Pagenationdiv = styled.div``;
+const Pagenationdiv = styled.div`
+  width: fit-content; /* コンテンツに合わせた幅 */
+  margin: 0 auto; /* 水平方向に中央寄せ */
+  display: flex; /* Flexboxを使用してコンテンツを中央寄せ */
+  justify-content: center;
+`;
+
+export default Index;

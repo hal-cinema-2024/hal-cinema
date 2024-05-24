@@ -35,27 +35,29 @@ const Movies = () => {
     <>
       {MovieList.map((item, index) => (
         <MoviesContainer key={index}>
-          <MovieName>
-            <MovieImage>ここに画像</MovieImage>
-            <MovieTextDiv>
-              <MovieFlexdiv>
-                <MoviesTitle>作品名：</MoviesTitle>
-                <MoviesTitleName>{item.movieName}</MoviesTitleName>
-              </MovieFlexdiv>
-              <MovieFlexdiv>
-                <MoviesDirector>監督名：</MoviesDirector>
-                <MoviesDirectorName>{item.directorName}</MoviesDirectorName>
-              </MovieFlexdiv>
-              <MovieFlexdiv>
-                <MoviePerformer>出演者：</MoviePerformer>
-                <MoviePerformerName>{item.performerName}</MoviePerformerName>
-              </MovieFlexdiv>
-            </MovieTextDiv>
-          </MovieName>
-          <DetailsButton>
-            <p>詳細へ </p>
-            <Arrow></Arrow>
-          </DetailsButton>
+          <SSdev>
+            <MovieName>
+              <MovieImage>ここに画像</MovieImage>
+              <MovieTextDiv>
+                <MovieFlexdiv>
+                  <MoviesTitle>作品名：</MoviesTitle>
+                  <MoviesTitleName>{item.movieName}</MoviesTitleName>
+                </MovieFlexdiv>
+                <MovieFlexdiv>
+                  <MoviesDirector>監督名：</MoviesDirector>
+                  <MoviesDirectorName>{item.directorName}</MoviesDirectorName>
+                </MovieFlexdiv>
+                <MovieFlexdiv>
+                  <MoviePerformer>出演者：</MoviePerformer>
+                  <MoviePerformerName>{item.performerName}</MoviePerformerName>
+                </MovieFlexdiv>
+              </MovieTextDiv>
+            </MovieName>
+            <DetailsButton>
+              <p>詳細へ </p>
+              <Arrow></Arrow>
+            </DetailsButton>
+          </SSdev>
         </MoviesContainer>
       ))}
     </>
@@ -68,7 +70,9 @@ export default Movies;
 // 全体
 const MoviesContainer = styled(Card)`
   padding: 10px;
-  margin: 0 0 15px 0;
+  width: 100vw;
+  /* margin: 0 0 15px 0;*/
+  margin: 0 auto 15px auto;
   background-color: #d9d9d9;
   color: #fff;
   display: flex;
@@ -77,6 +81,10 @@ const MoviesContainer = styled(Card)`
 `;
 const MovieTextDiv = styled.div`
   margin: 0 0 0 25px;
+`;
+
+const SSdev = styled.div`
+  display: flex;
 `;
 
 // 作品の画像（仮）
@@ -94,6 +102,7 @@ const MovieName = styled.div`
 `;
 // 詳細の横の矢印
 const DetailsButton = styled.div`
+  margin: 0 0 0 auto;
   display: flex;
 `;
 const Arrow = styled.div`
