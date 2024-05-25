@@ -1,5 +1,4 @@
 #parent {
-  background-color: gray;
   max-width: 1500px;
   margin: 0 auto;
   padding-bottom: 10vh;
@@ -101,4 +100,10 @@
 }
 #official-links a:hover {
   opacity: 0.5;
+}
+
+#backimage {
+  background-position: left top;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
 }
