@@ -1,0 +1,28 @@
+#parent {
+  background-color: gray;
+}
+
+#page-title {
+  position: relative;
+  text-align: center;
+  margin-top: 5vh;
+  font-size: 1.7rem;
+  color: white;
+}
+
+#img {
+  position: relative;
+  max-width: 339px;
+  max-height: 480px;
+  margin-top: 7vh;
+  margin-left: 20vw;
+  background-color: white;
+}
+
+#release-date {
+  display: flex;
+  width: 190px;
+  height: 57px;
+  margin-top: 7vh;
+  margin-left: 8vw;
+}
