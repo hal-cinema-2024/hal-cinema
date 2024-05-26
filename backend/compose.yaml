@@ -12,22 +12,6 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: hal_cinema
 
-  migrate:
-    build:
-      context: .docker/migrate
-      dockerfile: Dockerfile
-    restart: "no"
-    environment:
-      - DATABASE_HOST=postgres
-      - DATABASE_PORT=5432
-      - DATABASE_USER=postgres
-      - DATABASE_PASSWORD=postgres
-      - DATABASE_NAME=hal_cinema
-    volumes:
-    - ./:/migrate
-    depends_on:
-      - postgres
-
   # Jaeger
   jaeger-all-in-one:
     image: jaegertracing/all-in-one:latest
