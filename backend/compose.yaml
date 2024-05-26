@@ -12,38 +12,14 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: hal_cinema
 
-  migrate:
-    build:
-      context: .docker/migrate
-      dockerfile: Dockerfile
-    restart: "no"
-    environment:
-      - DATABASE_HOST=postgres
-      - DATABASE_PORT=5432
-      - DATABASE_USER=postgres
-      - DATABASE_PASSWORD=postgres
-      - DATABASE_NAME=hal_cinema
-    volumes:
-    - ./:/migrate
-    depends_on:
-      - postgres
-
-  # Zipkin
-  zipkin-all-in-one:
-    image: openzipkin/zipkin:latest
-    environment:
-      - JAVA_OPTS=-Xms1024m -Xmx1024m -XX:+ExitOnOutOfMemoryError
+  # Jaeger
+  jaeger-all-in-one:
+    image: jaegertracing/all-in-one:latest
     restart: always
     ports:
-      - "9411:9411"
-
-  prometheus:
-    image: prom/prometheus:latest
-    restart: always
-    volumes:
-      - .docker/metric/prometheus.yaml:/etc/prometheus/prometheus.yml
-    ports:
-      - "9090:9090"
+      - "16686:16686"
+      - "14268"
+      - "14250"
 
   # Collector
   otel-collector:
@@ -54,13 +30,11 @@ services:
       - .docker/metric/otel-collector-config.yaml:/etc/otel-collector-config.yaml
     ports:
       - "1888:1888"   # pprof extension
-      - "8888:8888"   # Prometheus metrics exposed by the collector
-      - "8889:8889"   # Prometheus exporter metrics
       - "13133:13133" # health_check extension
       - "4317:4317"   # OTLP gRPC receiver
       - "55679:55679" # zpages extension
     depends_on:
-      - zipkin-all-in-one
+      - jaeger-all-in-one
 
   backend:
     build:
@@ -71,7 +45,8 @@ services:
       - 8080:8080
     volumes:
       - ./:/app
+    environment:
+      - DATABASE_HOST=postgres
     depends_on:
-      - migrate
       - otel-collector
   
