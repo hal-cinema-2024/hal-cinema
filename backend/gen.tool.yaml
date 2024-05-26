@@ -5,7 +5,7 @@ database:
   # input mysql or postgres or sqlite or sqlserver. consult[https://gorm.io/docs/connecting_to_the_database.html]
   db  : "postgres"
   # specify a directory for output
-  outPath :  "./internal/entities"
+  outPath :  "./internal/adapter/gateways/gorm"
   # query code file name, default: gen.go
   outFile :  ""
   # generate unit test for query code
