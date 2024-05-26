@@ -35,7 +35,6 @@ services:
       - "55679:55679" # zpages extension
     depends_on:
       - jaeger-all-in-one
-      - zipkin-all-in-one
 
   backend:
     build:
@@ -47,6 +46,5 @@ services:
     volumes:
       - ./:/app
     depends_on:
-      - migrate
       - otel-collector
   
