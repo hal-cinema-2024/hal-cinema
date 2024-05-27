@@ -29,7 +29,7 @@ export default MovieBox;
 
 const ListContainer = styled.div`
   width: 1050px;
-  margin: 20px auto 20px auto;
+  margin: 0px auto 0px auto;
 `;
 const NameContainer = styled.div`
   width: 100%;

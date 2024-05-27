@@ -85,10 +85,10 @@ const BuyContainer = styled.div<{ buy: string }>`
 
   background-color: ${(props) =>
     props.buy === "販売終了"
-      ? "#ddd"
+      ? "#ADAAAA"
       : props.buy === "満席"
-        ? "#ddd"
-        : "rgba(4, 157, 130, 0.6)"};
+        ? "#ADAAAA"
+        : "rgba(4, 157, 130, 0.5)"};
   img {
     width: 50px;
     height: 50px;
@@ -101,5 +101,6 @@ const AvailContainer = styled.div`
   p {
     width: 130px;
     font-size: 25px;
+    color: #fff;
   }
 `;

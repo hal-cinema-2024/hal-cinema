@@ -1,15 +1,19 @@
 import { useState } from "react";
 import { Carousel, CarouselSlide } from "@yamada-ui/carousel";
 import styled from "styled-components";
-import type { SlideType } from "./daliy";
-import { slideData } from "./daliy";
+import { SlideType, slideData } from "./daliy";
+import DateDisp from "./DateDisp";
 
 const Slideshow = () => {
   const [color, setColor] = useState<number>(0);
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
   const changeColor = (index: number) => {
     setColor(index);
+    setSelectedIndex(index);
   };
+
+  const selectedDate = slideData[selectedIndex];
 
   return (
     <Sdiv>
@@ -30,6 +34,7 @@ const Slideshow = () => {
           </CarouselSlide>
         ))}
       </SCarousel>
+      {selectedDate && <DateDisp date={selectedDate} />}
     </Sdiv>
   );
 };
