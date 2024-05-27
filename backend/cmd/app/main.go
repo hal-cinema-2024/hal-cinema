@@ -10,8 +10,8 @@ import (
 
 	"github.com/hal-cinema-2024/backend/cmd/config"
 	"github.com/hal-cinema-2024/backend/internal/container"
-	"github.com/hal-cinema-2024/backend/internal/pkg/otel"
-	"github.com/hal-cinema-2024/backend/internal/server"
+	"github.com/hal-cinema-2024/backend/internal/framework/server"
+	"github.com/hal-cinema-2024/backend/pkg/otel"
 )
 
 type envFlag []string

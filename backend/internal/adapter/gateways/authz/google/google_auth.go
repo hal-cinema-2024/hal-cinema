@@ -3,7 +3,7 @@ package google
 import (
 	"context"
 
-	"github.com/hal-cinema-2024/backend/internal/gateways/authz"
+	"github.com/hal-cinema-2024/backend/internal/adapter/gateways/authz"
 	"golang.org/x/oauth2"
 	v2 "google.golang.org/api/oauth2/v2"
 	"google.golang.org/api/option"

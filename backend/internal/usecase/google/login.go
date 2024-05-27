@@ -2,12 +2,17 @@ package google
 
 import (
 	"context"
+	"time"
 
-	"github.com/hal-cinema-2024/backend/internal/gateways/authz"
+	"github.com/google/uuid"
+	"github.com/hal-cinema-2024/backend/internal/adapter/gateways/authz"
+	"github.com/hal-cinema-2024/backend/internal/adapter/gateways/model"
+	"github.com/hal-cinema-2024/backend/internal/usecase/dai"
 )
 
 type Login struct {
-	authz authz.OAuth2
+	authz        authz.OAuth2
+	Repositories dai.DataAccess
 }
 
 func NewGoogleLogin(
@@ -18,7 +23,13 @@ func NewGoogleLogin(
 	}
 }
 
-func (gl *Login) Login(ctx context.Context, authorizationCode string) (*authz.UserInfo, error) {
+type LoginResult struct {
+	SessionID string
+	UserID    string
+	Icon      string
+}
+
+func (gl *Login) Login(ctx context.Context, authorizationCode string) (*LoginResult, error) {
 	token, err := gl.authz.FetchToken(ctx, authorizationCode)
 	if err != nil {
 		return nil, err
@@ -29,7 +40,50 @@ func (gl *Login) Login(ctx context.Context, authorizationCode string) (*authz.Us
 		return nil, err
 	}
 
-	// TODO: Tokenを保存する
+	// userが存在するかチェック
+	found, err := gl.Repositories.ValidUser(ctx, userInfo.UserID)
+	if err != nil {
+		return nil, err
+	}
 
-	return userInfo, nil
+	// 居ないなら作る
+	if !found {
+		_, err := gl.Repositories.CreateUser(ctx, &model.User{
+			UserID:    userInfo.UserID,
+			Email:     userInfo.Email,
+			IconPath:  userInfo.Icon,
+			CreatedAt: time.Now(),
+			UpdatedAt: time.Now(),
+			IsDelete:  false,
+		})
+
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	sessionID, err := uuid.NewRandom()
+	if err != nil {
+		return nil, err
+	}
+
+	// Tokenを更新
+	_, err = gl.Repositories.SyncSession(ctx, &model.Session{
+		SessionID:    sessionID.String(),
+		UserID:       userInfo.UserID,
+		Token:        token.AccessToken,
+		Expired:      int32(token.Expiry.Unix()),
+		RefreshToken: token.RefreshToken,
+		UpdatedAt:    time.Now(),
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &LoginResult{
+		SessionID: sessionID.String(),
+		UserID:    userInfo.UserID,
+		Icon:      userInfo.Icon,
+	}, nil
 }

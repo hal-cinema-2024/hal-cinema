@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/hal-cinema-2024/backend/cmd/config"
-	"github.com/hal-cinema-2024/backend/internal/framework/middleware/cors"
-	v1 "github.com/hal-cinema-2024/backend/internal/framework/router/v1"
+	"github.com/hal-cinema-2024/backend/internal/adapter/middleware/cors"
+	v1 "github.com/hal-cinema-2024/backend/internal/router/v1"
 	"github.com/labstack/echo-contrib/echoprometheus"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
