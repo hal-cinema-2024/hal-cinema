@@ -4,6 +4,13 @@
   padding-bottom: 10vh;
 }
 
+#wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+
 #page-title {
   position: relative;
   text-align: center;
@@ -25,7 +32,7 @@
 #img {
   position: relative;
   margin-top: 7vh;
-  margin-left: 7vw;
+  margin-left: 4vw;
   background-color: white;
 }
 
@@ -95,7 +102,7 @@
 #official-links {
   position: relative;
   margin-top: 1vh;
-  margin-left: 18vw;
+  margin-left: 5vw;
   color: skyblue;
 }
 #official-links a:hover {
