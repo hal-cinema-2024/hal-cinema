@@ -85,7 +85,7 @@ func (s *Server) RunWithGraceful() error {
 	})
 
 	if err := group.Wait(); err != nil && err != context.Canceled {
-		log.Println("server shutdown failed, Error: %v", err)
+		log.Println("server shutdown failed, Error: %w", err)
 		return err
 	}
 

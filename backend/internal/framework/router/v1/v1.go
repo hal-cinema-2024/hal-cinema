@@ -15,7 +15,6 @@ func Setup(engine *echo.Group) {
 
 	v1.anyRoute()
 
-	return
 }
 
 func (v1 *v1Router) anyRoute() {
