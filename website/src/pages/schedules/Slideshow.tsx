@@ -16,7 +16,7 @@ const Slideshow = () => {
   const selectedDate = slideData[selectedIndex];
 
   return (
-    <Sdiv>
+    <SlideContainer>
       <SCarousel slideSize="25%" slidesToScroll={4} loop={false}>
         {slideData.map((item: SlideType, index: number) => (
           <CarouselSlide
@@ -35,13 +35,13 @@ const Slideshow = () => {
         ))}
       </SCarousel>
       {selectedDate && <DateDisp date={selectedDate} />}
-    </Sdiv>
+    </SlideContainer>
   );
 };
 
 export default Slideshow;
 
-const Sdiv = styled.div`
+const SlideContainer = styled.div`
   width: 1000px;
   margin: 0 auto 0 auto;
   padding: 20px;
