@@ -18,7 +18,7 @@ func NewContainer() error {
 
 	args := []provideArg{
 		{constructor: db.Connect, opts: []dig.ProvideOption{}},
-		// {constructor: cloudflare.ConnectR2Bucket, opts: []dig.ProvideOption{}},
+		{constructor: db.NewGORM, opts: []dig.ProvideOption{}},
 		{constructor: router.NewRouter, opts: []dig.ProvideOption{}},
 	}
 

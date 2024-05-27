@@ -14,8 +14,6 @@ import (
 	"go.opentelemetry.io/otel/sdk/resource"
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 	semconv "go.opentelemetry.io/otel/semconv/v1.17.0"
-
-	"google.golang.org/grpc"
 )
 
 func InitProvider() (func(), error) {
@@ -56,8 +54,7 @@ func InitProvider() (func(), error) {
 
 	traceClient := otlptracegrpc.NewClient(
 		otlptracegrpc.WithInsecure(),
-		otlptracegrpc.WithEndpoint(config.Config.Otel.Addr),
-		otlptracegrpc.WithDialOption(grpc.WithBlock()))
+		otlptracegrpc.WithEndpoint(config.Config.Otel.Addr))
 	traceExp, err := otlptrace.New(ctx, traceClient)
 	if err != nil {
 		return nil, err
