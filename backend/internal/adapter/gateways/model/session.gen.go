@@ -4,20 +4,15 @@
 
 package model
 
-import (
-	"time"
-)
-
 const TableNameSession = "session"
 
 // Session mapped from table <session>
 type Session struct {
-	SessionID    string    `gorm:"column:session_id" json:"session_id"`
-	UserID       string    `gorm:"column:user_id;not null" json:"user_id"`
-	Token        string    `gorm:"column:token;not null" json:"token"`
-	Expired      int32     `gorm:"column:expired;not null" json:"expired"`
-	RefreshToken string    `gorm:"column:refresh_token;not null" json:"refresh_token"`
-	UpdatedAt    time.Time `gorm:"column:updated_at;not null" json:"updated_at"`
+	SessionID      string `gorm:"column:session_id;primaryKey" json:"session_id"`
+	UserID         string `gorm:"column:user_id;not null" json:"user_id"`
+	Token          string `gorm:"column:token;not null" json:"token"`
+	ExpirationTime int32  `gorm:"column:expiration_time;not null" json:"expiration_time"`
+	RefreshToken   string `gorm:"column:refresh_token;not null" json:"refresh_token"`
 }
 
 // TableName Session's table name

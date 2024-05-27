@@ -25,6 +25,7 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 		Permission:      newPermission(db, opts...),
 		PriceType:       newPriceType(db, opts...),
 		Role:            newRole(db, opts...),
+		RolePermission:  newRolePermission(db, opts...),
 		Schedule:        newSchedule(db, opts...),
 		SchemaMigration: newSchemaMigration(db, opts...),
 		Session:         newSession(db, opts...),
@@ -46,6 +47,7 @@ type Query struct {
 	Permission      permission
 	PriceType       priceType
 	Role            role
+	RolePermission  rolePermission
 	Schedule        schedule
 	SchemaMigration schemaMigration
 	Session         session
@@ -68,6 +70,7 @@ func (q *Query) clone(db *gorm.DB) *Query {
 		Permission:      q.Permission.clone(db),
 		PriceType:       q.PriceType.clone(db),
 		Role:            q.Role.clone(db),
+		RolePermission:  q.RolePermission.clone(db),
 		Schedule:        q.Schedule.clone(db),
 		SchemaMigration: q.SchemaMigration.clone(db),
 		Session:         q.Session.clone(db),
@@ -97,6 +100,7 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 		Permission:      q.Permission.replaceDB(db),
 		PriceType:       q.PriceType.replaceDB(db),
 		Role:            q.Role.replaceDB(db),
+		RolePermission:  q.RolePermission.replaceDB(db),
 		Schedule:        q.Schedule.replaceDB(db),
 		SchemaMigration: q.SchemaMigration.replaceDB(db),
 		Session:         q.Session.replaceDB(db),
@@ -116,6 +120,7 @@ type queryCtx struct {
 	Permission      *permissionDo
 	PriceType       *priceTypeDo
 	Role            *roleDo
+	RolePermission  *rolePermissionDo
 	Schedule        *scheduleDo
 	SchemaMigration *schemaMigrationDo
 	Session         *sessionDo
@@ -135,6 +140,7 @@ func (q *Query) WithContext(ctx context.Context) *queryCtx {
 		Permission:      q.Permission.WithContext(ctx),
 		PriceType:       q.PriceType.WithContext(ctx),
 		Role:            q.Role.WithContext(ctx),
+		RolePermission:  q.RolePermission.WithContext(ctx),
 		Schedule:        q.Schedule.WithContext(ctx),
 		SchemaMigration: q.SchemaMigration.WithContext(ctx),
 		Session:         q.Session.WithContext(ctx),

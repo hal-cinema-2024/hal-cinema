@@ -35,8 +35,7 @@ func newUser(db *gorm.DB, opts ...gen.DOOption) user {
 	_user.Email = field.NewString(tableName, "email")
 	_user.IconPath = field.NewString(tableName, "icon_path")
 	_user.Age = field.NewInt32(tableName, "age")
-	_user.Gender = field.NewInt16(tableName, "gender")
-	_user.PhoneNumber = field.NewString(tableName, "phone_number")
+	_user.Gender = field.NewInt32(tableName, "gender")
 	_user.CreatedAt = field.NewTime(tableName, "created_at")
 	_user.UpdatedAt = field.NewTime(tableName, "updated_at")
 	_user.IsDelete = field.NewBool(tableName, "is_delete")
@@ -58,8 +57,7 @@ type user struct {
 	Email            field.String
 	IconPath         field.String
 	Age              field.Int32
-	Gender           field.Int16
-	PhoneNumber      field.String
+	Gender           field.Int32
 	CreatedAt        field.Time
 	UpdatedAt        field.Time
 	IsDelete         field.Bool
@@ -87,8 +85,7 @@ func (u *user) updateTableName(table string) *user {
 	u.Email = field.NewString(table, "email")
 	u.IconPath = field.NewString(table, "icon_path")
 	u.Age = field.NewInt32(table, "age")
-	u.Gender = field.NewInt16(table, "gender")
-	u.PhoneNumber = field.NewString(table, "phone_number")
+	u.Gender = field.NewInt32(table, "gender")
 	u.CreatedAt = field.NewTime(table, "created_at")
 	u.UpdatedAt = field.NewTime(table, "updated_at")
 	u.IsDelete = field.NewBool(table, "is_delete")
@@ -116,7 +113,7 @@ func (u *user) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (u *user) fillFieldMap() {
-	u.fieldMap = make(map[string]field.Expr, 13)
+	u.fieldMap = make(map[string]field.Expr, 12)
 	u.fieldMap["user_id"] = u.UserID
 	u.fieldMap["first_name"] = u.FirstName
 	u.fieldMap["last_name"] = u.LastName
@@ -126,7 +123,6 @@ func (u *user) fillFieldMap() {
 	u.fieldMap["icon_path"] = u.IconPath
 	u.fieldMap["age"] = u.Age
 	u.fieldMap["gender"] = u.Gender
-	u.fieldMap["phone_number"] = u.PhoneNumber
 	u.fieldMap["created_at"] = u.CreatedAt
 	u.fieldMap["updated_at"] = u.UpdatedAt
 	u.fieldMap["is_delete"] = u.IsDelete

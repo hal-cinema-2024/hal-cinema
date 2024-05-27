@@ -30,9 +30,8 @@ func newSession(db *gorm.DB, opts ...gen.DOOption) session {
 	_session.SessionID = field.NewString(tableName, "session_id")
 	_session.UserID = field.NewString(tableName, "user_id")
 	_session.Token = field.NewString(tableName, "token")
-	_session.Expired = field.NewInt32(tableName, "expired")
+	_session.ExpirationTime = field.NewInt32(tableName, "expiration_time")
 	_session.RefreshToken = field.NewString(tableName, "refresh_token")
-	_session.UpdatedAt = field.NewTime(tableName, "updated_at")
 
 	_session.fillFieldMap()
 
@@ -42,13 +41,12 @@ func newSession(db *gorm.DB, opts ...gen.DOOption) session {
 type session struct {
 	sessionDo sessionDo
 
-	ALL          field.Asterisk
-	SessionID    field.String
-	UserID       field.String
-	Token        field.String
-	Expired      field.Int32
-	RefreshToken field.String
-	UpdatedAt    field.Time
+	ALL            field.Asterisk
+	SessionID      field.String
+	UserID         field.String
+	Token          field.String
+	ExpirationTime field.Int32
+	RefreshToken   field.String
 
 	fieldMap map[string]field.Expr
 }
@@ -68,9 +66,8 @@ func (s *session) updateTableName(table string) *session {
 	s.SessionID = field.NewString(table, "session_id")
 	s.UserID = field.NewString(table, "user_id")
 	s.Token = field.NewString(table, "token")
-	s.Expired = field.NewInt32(table, "expired")
+	s.ExpirationTime = field.NewInt32(table, "expiration_time")
 	s.RefreshToken = field.NewString(table, "refresh_token")
-	s.UpdatedAt = field.NewTime(table, "updated_at")
 
 	s.fillFieldMap()
 
@@ -95,13 +92,12 @@ func (s *session) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *session) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 6)
+	s.fieldMap = make(map[string]field.Expr, 5)
 	s.fieldMap["session_id"] = s.SessionID
 	s.fieldMap["user_id"] = s.UserID
 	s.fieldMap["token"] = s.Token
-	s.fieldMap["expired"] = s.Expired
+	s.fieldMap["expiration_time"] = s.ExpirationTime
 	s.fieldMap["refresh_token"] = s.RefreshToken
-	s.fieldMap["updated_at"] = s.UpdatedAt
 }
 
 func (s session) clone(db *gorm.DB) session {
