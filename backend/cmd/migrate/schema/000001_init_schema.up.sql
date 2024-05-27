@@ -7,22 +7,28 @@ CREATE TABLE "users" (
   "email" varchar(255) NOT NULL,
   "icon_path" varchar(255),
   "age" int,
-  "gender" smallint,
-  "phone_number" varchar(15) NOT NULL,
-  "created_at" timestamptz NOT NULL DEFAULT (CURRENT_TIMESTAMP),
-  "updated_at" timestamptz NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+  "gender" int,
+  "created_at" timestamptz NOT NULL,
+  "updated_at" timestamptz NOT NULL,
   "is_delete" boolean NOT NULL DEFAULT false
 );
 
 CREATE TABLE "user_roles" (
   "user_id" varchar(63) NOT NULL,
   "role_id" varchar(63) NOT NULL,
+<<<<<<< HEAD
   "created_at" timestamptz NOT NULL DEFAULT (CURRENT_TIMESTAMP)
+=======
+  "created_at" timestamptz NOT NULL
+>>>>>>> master
 );
 
 CREATE TABLE "roles" (
   "role_id" varchar(63) PRIMARY KEY,
+<<<<<<< HEAD
   "permission" varchar(63) NOT NULL,
+=======
+>>>>>>> master
   "name" varchar(255) NOT NULL
 );
 
@@ -33,13 +39,23 @@ CREATE TABLE "permissions" (
   "effect" boolean NOT NULL
 );
 
+CREATE TABLE "role_permissions" (
+  "role_id" varchar(63) NOT NULL,
+  "permission_id" varchar(63) NOT NULL
+);
+
 CREATE TABLE "session" (
-  "session_id" varchar(63),
+  "session_id" varchar(63) PRIMARY KEY,
   "user_id" varchar(63) NOT NULL,
   "token" text NOT NULL,
+<<<<<<< HEAD
   "expired" int NOT NULL,
   "refresh_token" text NOT NULL,
   "updated_at" timestamptz NOT NULL
+=======
+  "expiration_time" int NOT NULL,
+  "refresh_token" text NOT NULL
+>>>>>>> master
 );
 
 CREATE TABLE "schedules" (
@@ -90,7 +106,11 @@ CREATE TABLE "theaters_seats" (
 CREATE TABLE "orders" (
   "order_id" varchar(63) PRIMARY KEY,
   "user_id" varchar(63) NOT NULL,
+<<<<<<< HEAD
   "created_at" timestamptz NOT NULL DEFAULT (CURRENT_TIMESTAMP)
+=======
+  "created_at" timestamptz NOT NULL
+>>>>>>> master
 );
 
 CREATE TABLE "orders_details" (
@@ -138,4 +158,10 @@ ALTER TABLE "user_roles" ADD FOREIGN KEY ("role_id") REFERENCES "roles" ("role_i
 
 ALTER TABLE "roles" ADD FOREIGN KEY ("permission") REFERENCES "permissions" ("permission_id");
 
+<<<<<<< HEAD
 ALTER TABLE "user_roles" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("user_id");
+=======
+ALTER TABLE "role_permissions" ADD FOREIGN KEY ("role_id") REFERENCES "roles" ("role_id");
+
+ALTER TABLE "role_permissions" ADD FOREIGN KEY ("permission_id") REFERENCES "permissions" ("permission_id");
+>>>>>>> master
