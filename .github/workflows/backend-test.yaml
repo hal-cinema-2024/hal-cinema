@@ -36,13 +36,14 @@ jobs:
     - name: Build
       run: go build -v ./...
 
-    - name: Test
-      run: make test ./... -coverpkg=./... -v -json | go run github.com/mfridman/tparse@v0.13.2
+# TODO: テストが追加されたら戻す
+    # - name: Test
+    #   run: make test ./... -coverpkg=./... -v -json | go run github.com/mfridman/tparse@v0.13.2
 
     - name: golangci-lint
       uses: golangci/golangci-lint-action@v3
       with:
         version: latest
-        working-directory: api
+        working-directory: backend
         skip-pkg-cache: true
         args: --timeout=2m

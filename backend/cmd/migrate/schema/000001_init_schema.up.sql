@@ -1,16 +1,48 @@
 CREATE TABLE "users" (
   "user_id" varchar(63) PRIMARY KEY,
-  "first_name" varchar(31) NOT NULL,
-  "last_name" varchar(31) NOT NULL,
-  "first_name_reading" varchar(31) NOT NULL,
-  "last_name_reading" varchar(31) NOT NULL,
+
+  "first_name" varchar(31),
+  "last_name" varchar(31),
+  "first_name_reading" varchar(31),
+  "last_name_reading" varchar(31),
+  "email" varchar(255) NOT NULL,
   "icon_path" varchar(255),
-  "age" int NOT NULL,
-  "gender" smallint NOT NULL,
-  "phone_number" varchar(15) NOT NULL,
-  "created_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  "updated_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "age" int,
+  "gender" int,
+  "created_at" timestamptz NOT NULL,
+  "updated_at" timestamptz NOT NULL,
   "is_delete" boolean NOT NULL DEFAULT false
+);
+
+CREATE TABLE "user_roles" (
+  "user_id" varchar(63) NOT NULL,
+  "role_id" varchar(63) NOT NULL,
+  "created_at" timestamptz NOT NULL
+);
+
+CREATE TABLE "roles" (
+  "role_id" varchar(63) PRIMARY KEY,
+  "name" varchar(255) NOT NULL
+);
+
+CREATE TABLE "permissions" (
+  "permission_id" varchar(63) PRIMARY KEY,
+  "uri" text NOT NULL,
+  "req_method" varchar(63) NOT NULL,
+  "effect" boolean NOT NULL
+);
+
+CREATE TABLE "role_permissions" (
+  "role_id" varchar(63) NOT NULL,
+  "permission_id" varchar(63) NOT NULL
+);
+
+CREATE TABLE "session" (
+  "session_id" varchar(63) PRIMARY KEY,
+  "user_id" varchar(63) NOT NULL,
+  "token" text NOT NULL,
+  "expiration_time" int NOT NULL,
+  "refresh_token" text NOT NULL
 );
 
 CREATE TABLE "schedules" (
@@ -61,7 +93,8 @@ CREATE TABLE "theaters_seats" (
 CREATE TABLE "orders" (
   "order_id" varchar(63) PRIMARY KEY,
   "user_id" varchar(63) NOT NULL,
-  "created_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP
+
+  "created_at" timestamptz NOT NULL
 );
 
 CREATE TABLE "orders_details" (
@@ -78,6 +111,14 @@ CREATE TABLE "price_types" (
 );
 
 ALTER TABLE  "price_types" ADD CHECK (price >= 0);
+
+CREATE UNIQUE INDEX ON "theaters_seats" ("schedule_id", "seat_name");
+
+COMMENT ON COLUMN "permissions"."effect" IS '許可or不許可';
+
+COMMENT ON COLUMN "movies"."term" IS '上映時間';
+
+ALTER TABLE "session" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("user_id");
 
 ALTER TABLE "orders" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("user_id");
 
@@ -98,3 +139,12 @@ ALTER TABLE "orders_details" ADD FOREIGN KEY ("theaters_seats_id") REFERENCES "t
 ALTER TABLE "orders_details" ADD FOREIGN KEY ("order_id") REFERENCES "orders" ("order_id");
 
 ALTER TABLE "movie_images" ADD FOREIGN KEY ("movie_id") REFERENCES "movies" ("movie_id");
+
+
+ALTER TABLE "user_roles" ADD FOREIGN KEY ("role_id") REFERENCES "roles" ("role_id");
+
+ALTER TABLE "user_roles" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("user_id");
+
+ALTER TABLE "role_permissions" ADD FOREIGN KEY ("role_id") REFERENCES "roles" ("role_id");
+
+ALTER TABLE "role_permissions" ADD FOREIGN KEY ("permission_id") REFERENCES "permissions" ("permission_id");

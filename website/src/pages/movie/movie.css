@@ -1,0 +1,116 @@
+#parent {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding-bottom: 10vh;
+}
+
+#wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+
+#page-title {
+  position: relative;
+  text-align: center;
+  padding-top: 4vh;
+  margin-bottom: -2.5vh;
+  font-size: 2rem;
+  color: white;
+}
+
+#work-name {
+  max-width: 450px;
+  position: relative;
+  margin-top: 7vh;
+  margin-left: 3vw;
+  font-size: 2.5rem;
+  color: white;
+}
+
+#img {
+  position: relative;
+  margin-top: 7vh;
+  margin-left: 4vw;
+  background-color: white;
+}
+
+#release-date {
+  display: flex;
+  width: 180px;
+  height: 50px;
+  margin-top: 1.5vh;
+  margin-left: 3vw;
+  margin-bottom: 4vh;
+  text-shadow: 0 2px 5px #333;
+}
+
+#box-1 {
+  position: relative;
+  margin-left: 3.3vw;
+  padding: 5px 20px;
+  background-color: #adaaaa;
+  color: #ffffff;
+}
+#box-2 {
+  position: relative;
+  margin-left: 3.3vw;
+  padding: 5px 20px;
+  background-color: #adaaaa;
+  color: #ffffff;
+}
+#box-3 {
+  position: relative;
+  margin-left: 3.3vw;
+  padding: 5px 20px;
+  background-color: #adaaaa;
+  color: #ffffff;
+}
+#synopsis-detail {
+  position: relative;
+  margin-top: 1.5vh;
+  margin-left: 4vw;
+  margin-bottom: 5vh;
+  max-width: 630px;
+  line-height: 30px;
+  color: white;
+  font-size: 0.9rem;
+}
+#manager {
+  position: relative;
+  margin-top: 1.5vh;
+  margin-bottom: 2vh;
+  margin-left: 4vw;
+  max-width: 630px;
+  line-height: 30px;
+  color: white;
+  font-size: 1.2rem;
+}
+
+#cast {
+  position: relative;
+  margin-top: 1.5vh;
+  margin-bottom: 2vh;
+  margin-left: 4vw;
+  max-width: 630px;
+  line-height: 30px;
+  color: white;
+  font-size: 1.2rem;
+}
+
+#official-links {
+  position: relative;
+  margin-top: 1vh;
+  margin-left: 5vw;
+  color: skyblue;
+}
+#official-links a:hover {
+  opacity: 0.5;
+}
+
+#backimage {
+  background-position: left top;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}

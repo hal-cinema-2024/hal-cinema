@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/hal-cinema-2024/backend/cmd/config"
@@ -14,12 +15,27 @@ import (
 
 var migratefile string
 
+type envFlag []string
+
+func (e *envFlag) String() string {
+	return strings.Join(*e, ",")
+}
+
+func (e *envFlag) Set(v string) error {
+	*e = append(*e, v)
+	return nil
+}
+
 func init() {
+	var envFile envFlag
 	flag.StringVar(&migratefile, "f", "", "migrate file path")
+	flag.Var(&envFile, "e", "path to .env file \n eg. -e .env -e another.env . ")
 	flag.Parse()
-	if err := config.LoadEnv(); err != nil {
-		log.Fatalln(err)
+
+	if err := config.LoadEnv(envFile...); err != nil {
+		log.Fatal("Error loading .env file")
 	}
+	log.Println(config.Config.App.Env)
 }
 
 func main() {
