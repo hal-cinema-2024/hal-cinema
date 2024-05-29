@@ -2,6 +2,7 @@ package container
 
 import (
 	"github.com/hal-cinema-2024/backend/internal/driver/db"
+	"github.com/hal-cinema-2024/backend/internal/framework/cookie"
 	"github.com/hal-cinema-2024/backend/internal/router"
 	"go.uber.org/dig"
 )
@@ -20,6 +21,8 @@ func NewContainer() error {
 		{constructor: db.Connect, opts: []dig.ProvideOption{}},
 		{constructor: db.NewGORM, opts: []dig.ProvideOption{}},
 		{constructor: router.NewRouter, opts: []dig.ProvideOption{}},
+		{constructor: cookie.DefaultCookieOptions, opts: []dig.ProvideOption{}},
+		{constructor: cookie.NewCoockieSetter, opts: []dig.ProvideOption{}},
 	}
 
 	for _, arg := range args {

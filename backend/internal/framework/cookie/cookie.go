@@ -35,7 +35,7 @@ func NewCoockieSetter(option CookieOptions) *CoockieSetter {
 	}
 }
 func (f *CoockieSetter) CreateCookieSetter(c echo.Context) *EchoCookieSetter {
-	setter := NewGinCookieSetter(c, f.CookieOptions)
+	setter := NewEchoCookieSetter(c, f.CookieOptions)
 	return setter
 }
 
@@ -45,7 +45,7 @@ type EchoCookieSetter struct {
 	defaultOptions CookieOptions
 }
 
-func NewGinCookieSetter(c echo.Context, defaultOptions CookieOptions) *EchoCookieSetter {
+func NewEchoCookieSetter(c echo.Context, defaultOptions CookieOptions) *EchoCookieSetter {
 	return &EchoCookieSetter{
 		origin:         c.Request().Header.Get("Origin"),
 		ctx:            c,
@@ -54,7 +54,6 @@ func NewGinCookieSetter(c echo.Context, defaultOptions CookieOptions) *EchoCooki
 }
 
 func (ecs *EchoCookieSetter) SetCookie(name, value string, maxAge int, path string, secure, httponly bool) {
-	// always should be empty
 	domain := ""
 	ecs.ctx.SetCookie(&http.Cookie{
 		Name:     name,
