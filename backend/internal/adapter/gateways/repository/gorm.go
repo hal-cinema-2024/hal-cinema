@@ -7,12 +7,14 @@ import (
 type GormRepo struct {
 	gorm *gorm.DB
 
-	UserRepo
+	*UserRepo
+	*SessionRepo
 }
 
 func NewGormRepo(gorm *gorm.DB) *GormRepo {
 	return &GormRepo{
-		gorm:     gorm,
-		UserRepo: *NewUserRepo(gorm),
+		gorm:        gorm,
+		UserRepo:    NewUserRepo(gorm),
+		SessionRepo: NewSessionRepo(gorm),
 	}
 }
