@@ -18,8 +18,6 @@ func Setup(engine *echo.Group) {
 }
 
 func (v1 *v1Router) anyRoute() {
-	// no check auth
-	v1.login()
 
 	// required authz
 	//...

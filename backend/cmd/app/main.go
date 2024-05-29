@@ -4,13 +4,13 @@ import (
 	"database/sql"
 	"flag"
 	"log"
-	"net/http"
 	"os"
 	"strings"
 
 	"github.com/hal-cinema-2024/backend/cmd/config"
 	"github.com/hal-cinema-2024/backend/internal/container"
 	"github.com/hal-cinema-2024/backend/internal/framework/server"
+	"github.com/hal-cinema-2024/backend/internal/router"
 	"github.com/hal-cinema-2024/backend/pkg/otel"
 )
 
@@ -55,22 +55,9 @@ func run() error {
 		return err
 	}
 
-	var (
-		db  *sql.DB
-		srv http.Handler
-	)
+	db := container.Invoke[*sql.DB]()
 
-	if err := container.Invoke(func(sqlDB *sql.DB) {
-		db = sqlDB
-	}); err != nil {
-		return err
-	}
-
-	if err := container.Invoke(func(handler http.Handler) {
-		srv = handler
-	}); err != nil {
-		return err
-	}
+	srv := router.NewRouter()
 
 	defer db.Close()
 

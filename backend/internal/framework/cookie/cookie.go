@@ -66,3 +66,7 @@ func (ecs *EchoCookieSetter) SetCookie(name, value string, maxAge int, path stri
 		HttpOnly: httponly,
 	})
 }
+
+func (ecs *EchoCookieSetter) SetCookieValue(name, value string) {
+	ecs.SetCookie(name, value, ecs.defaultOptions.MaxAge, ecs.defaultOptions.Path, ecs.defaultOptions.Secure, ecs.defaultOptions.Httponly)
+}

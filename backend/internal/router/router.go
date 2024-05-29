@@ -4,8 +4,12 @@ import (
 	"net/http"
 
 	"github.com/hal-cinema-2024/backend/cmd/config"
+	"github.com/hal-cinema-2024/backend/internal/adapter/controller/user"
 	"github.com/hal-cinema-2024/backend/internal/adapter/middleware/cors"
+	"github.com/hal-cinema-2024/backend/internal/container"
+	"github.com/hal-cinema-2024/backend/internal/framework/cookie"
 	v1 "github.com/hal-cinema-2024/backend/internal/router/v1"
+	"github.com/hal-cinema-2024/backend/internal/usecase/interactor/google"
 	"github.com/labstack/echo-contrib/echoprometheus"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -32,11 +36,21 @@ func NewRouter() http.Handler {
 	router.metric()
 
 	{
+		router.GoogleLogin()
+
 		v1Group := echo.Group("/v1")
 		v1.Setup(v1Group)
 	}
 
 	return router.echo
+}
+
+func (r *router) GoogleLogin() {
+	googleLogin := container.Invoke[*google.Login]()
+	coockieSetter := container.Invoke[*cookie.CoockieSetter]()
+
+	r.echo.POST("/login/google", user.GoogleLogin(googleLogin, coockieSetter))
+
 }
 
 func (r *router) health() {

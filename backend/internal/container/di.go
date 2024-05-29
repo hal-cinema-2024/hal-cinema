@@ -1,9 +1,12 @@
 package container
 
 import (
+	"github.com/hal-cinema-2024/backend/internal/adapter/gateway/authz"
+	googleAuth "github.com/hal-cinema-2024/backend/internal/adapter/gateway/authz/google"
+	"github.com/hal-cinema-2024/backend/internal/adapter/gateway/repository"
 	"github.com/hal-cinema-2024/backend/internal/driver/db"
 	"github.com/hal-cinema-2024/backend/internal/framework/cookie"
-	"github.com/hal-cinema-2024/backend/internal/router"
+	"github.com/hal-cinema-2024/backend/internal/usecase/interactor/google"
 	"go.uber.org/dig"
 )
 
@@ -18,11 +21,14 @@ func NewContainer() error {
 	container = dig.New()
 
 	args := []provideArg{
+		{constructor: googleAuth.DefaultOAuth2Config, opts: []dig.ProvideOption{}},
 		{constructor: db.Connect, opts: []dig.ProvideOption{}},
 		{constructor: db.NewGORM, opts: []dig.ProvideOption{}},
-		{constructor: router.NewRouter, opts: []dig.ProvideOption{}},
 		{constructor: cookie.DefaultCookieOptions, opts: []dig.ProvideOption{}},
 		{constructor: cookie.NewCoockieSetter, opts: []dig.ProvideOption{}},
+		{constructor: googleAuth.NewOAuth, opts: []dig.ProvideOption{dig.As(new(authz.OAuth2))}},
+		{constructor: repository.NewGormRepo, opts: []dig.ProvideOption{}},
+		{constructor: google.NewGoogleLogin, opts: []dig.ProvideOption{}},
 	}
 
 	for _, arg := range args {
@@ -34,6 +40,14 @@ func NewContainer() error {
 	return nil
 }
 
-func Invoke(f any) error {
-	return container.Invoke(f)
+func Invoke[T any]() T {
+	var r T
+	if err := container.Invoke(func(t T) error {
+		r = t
+		return nil
+	}); err != nil {
+		panic(err)
+	}
+
+	return r
 }

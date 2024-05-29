@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/hal-cinema-2024/backend/internal/adapter/gateways/repository"
+	"github.com/hal-cinema-2024/backend/internal/adapter/gateway/repository"
 	"github.com/hal-cinema-2024/backend/internal/entities/model"
 	"github.com/hal-cinema-2024/backend/internal/test"
 	"github.com/hal-cinema-2024/backend/internal/test/factory"

@@ -3,7 +3,8 @@ package google
 import (
 	"context"
 
-	"github.com/hal-cinema-2024/backend/internal/adapter/gateways/authz"
+	"github.com/hal-cinema-2024/backend/cmd/config"
+	"github.com/hal-cinema-2024/backend/internal/adapter/gateway/authz"
 	"golang.org/x/oauth2"
 	v2 "google.golang.org/api/oauth2/v2"
 	"google.golang.org/api/option"
@@ -11,6 +12,19 @@ import (
 
 type OAuth2 struct {
 	oac oauth2.Config
+}
+
+func DefaultOAuth2Config() oauth2.Config {
+	return oauth2.Config{
+		ClientID:     config.Config.Google.ClientID,
+		ClientSecret: config.Config.Google.ClientSecret,
+		Scopes:       []string{},
+		Endpoint: oauth2.Endpoint{
+			AuthURL:  "https://accounts.google.com/o/oauth2/auth",
+			TokenURL: "https://accounts.google.com/o/oauth2/token",
+		},
+		RedirectURL: config.Config.Google.RedirectURI,
+	}
 }
 
 func NewOAuth(oac oauth2.Config) *OAuth2 {
