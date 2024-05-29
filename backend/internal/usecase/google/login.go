@@ -46,37 +46,43 @@ func (gl *Login) Login(ctx context.Context, authorizationCode string) (*LoginRes
 		return nil, err
 	}
 
-	// 居ないなら作る
-	if !found {
-		_, err := gl.Repositories.CreateUser(ctx, &model.User{
-			UserID:    userInfo.UserID,
-			Email:     userInfo.Email,
-			IconPath:  userInfo.Icon,
-			CreatedAt: time.Now(),
-			UpdatedAt: time.Now(),
-			IsDelete:  false,
-		})
-
-		if err != nil {
-			return nil, err
-		}
-	}
-
 	sessionID, err := uuid.NewRandom()
 	if err != nil {
 		return nil, err
 	}
 
-	// Tokenを更新
-	_, err = gl.Repositories.SyncSession(ctx, &model.Session{
-		SessionID:    sessionID.String(),
-		UserID:       userInfo.UserID,
-		Token:        token.AccessToken,
-		ExpirationTime: int32(token.Expiry.Unix()),
-		RefreshToken: token.RefreshToken,
-	})
+	if err := gl.Repositories.Transaction(ctx, func(ctx context.Context, da dai.DataAccess) error {
+		// 居ないなら作る
+		if !found {
+			_, err := gl.Repositories.CreateUser(ctx, &model.User{
+				UserID:    userInfo.UserID,
+				Email:     userInfo.Email,
+				IconPath:  userInfo.Icon,
+				CreatedAt: time.Now(),
+				UpdatedAt: time.Now(),
+				IsDelete:  false,
+			})
 
-	if err != nil {
+			if err != nil {
+				return err
+			}
+		}
+
+		// Tokenを更新
+		_, err = gl.Repositories.SyncSession(ctx, &model.Session{
+			SessionID:      sessionID.String(),
+			UserID:         userInfo.UserID,
+			Token:          token.AccessToken,
+			ExpirationTime: int32(token.Expiry.Unix()),
+			RefreshToken:   token.RefreshToken,
+		})
+
+		if err != nil {
+			return err
+		}
+
+		return nil
+	}); err != nil {
 		return nil, err
 	}
 
