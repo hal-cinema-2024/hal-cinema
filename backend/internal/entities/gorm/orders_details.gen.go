@@ -16,7 +16,7 @@ import (
 
 	"gorm.io/plugin/dbresolver"
 
-	"github.com/hal-cinema-2024/backend/internal/adapter/gateways/model"
+	"github.com/hal-cinema-2024/backend/internal/entities/model"
 )
 
 func newOrdersDetail(db *gorm.DB, opts ...gen.DOOption) ordersDetail {

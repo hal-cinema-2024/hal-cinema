@@ -3,7 +3,7 @@ package factory
 import (
 	"testing"
 
-	"github.com/hal-cinema-2024/backend/internal/adapter/gateways/model"
+	"github.com/hal-cinema-2024/backend/internal/entities/model"
 	"github.com/k-yomo/fixtory/v2"
 	"gorm.io/gorm"
 )

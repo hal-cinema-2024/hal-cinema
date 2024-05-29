@@ -6,7 +6,7 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/hal-cinema-2024/backend/internal/adapter/gateways/authz"
-	"github.com/hal-cinema-2024/backend/internal/adapter/gateways/model"
+	"github.com/hal-cinema-2024/backend/internal/entities/model"
 	"github.com/hal-cinema-2024/backend/internal/usecase/dai"
 )
 

@@ -3,7 +3,7 @@ package repository
 import (
 	"context"
 
-	"github.com/hal-cinema-2024/backend/internal/adapter/gateways/model"
+	"github.com/hal-cinema-2024/backend/internal/entities/model"
 	"gorm.io/gorm"
 )
 

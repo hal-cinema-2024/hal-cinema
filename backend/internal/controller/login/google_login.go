@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/hal-cinema-2024/backend/internal/framework/hcontext"
-	"github.com/hal-cinema-2024/backend/internal/usecase/google"
+	"github.com/hal-cinema-2024/backend/internal/usecase/interactor/google"
 	"github.com/labstack/echo/v4"
 )
 
