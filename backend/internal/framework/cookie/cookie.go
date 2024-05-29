@@ -3,6 +3,8 @@ package cookie
 import (
 	"net/http"
 	"time"
+
+	"github.com/labstack/echo/v4"
 )
 
 type CookieOptions struct {
@@ -23,12 +25,45 @@ func DefaultCookieOptions() CookieOptions {
 	}
 }
 
-type GinCoockieSetter struct {
+type CoockieSetter struct {
 	CookieOptions CookieOptions
 }
 
-func NewGinCoockieSetter(option CookieOptions) *GinCoockieSetter {
-	return &GinCoockieSetter{
+func NewCoockieSetter(option CookieOptions) *CoockieSetter {
+	return &CoockieSetter{
 		CookieOptions: option,
 	}
+}
+func (f *CoockieSetter) CreateCookieSetter(c echo.Context) *EchoCookieSetter {
+	setter := NewGinCookieSetter(c, f.CookieOptions)
+	return setter
+}
+
+type EchoCookieSetter struct {
+	origin         string
+	ctx            echo.Context
+	defaultOptions CookieOptions
+}
+
+func NewGinCookieSetter(c echo.Context, defaultOptions CookieOptions) *EchoCookieSetter {
+	return &EchoCookieSetter{
+		origin:         c.Request().Header.Get("Origin"),
+		ctx:            c,
+		defaultOptions: defaultOptions,
+	}
+}
+
+func (ecs *EchoCookieSetter) SetCookie(name, value string, maxAge int, path string, secure, httponly bool) {
+	// always should be empty
+	domain := ""
+	ecs.ctx.SetCookie(&http.Cookie{
+		Name:     name,
+		Value:    value,
+		MaxAge:   maxAge,
+		Path:     path,
+		Domain:   domain,
+		SameSite: ecs.defaultOptions.SameSite,
+		Secure:   secure,
+		HttpOnly: httponly,
+	})
 }
