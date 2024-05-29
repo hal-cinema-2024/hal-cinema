@@ -1,0 +1,1 @@
+CREATE DATABASE "hal_cinema_test";

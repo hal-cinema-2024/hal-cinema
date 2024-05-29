@@ -16,6 +16,10 @@ rund: build
 migrate:
 	go run cmd/migrate/main.go -e .env -f cmd/migrate/schema
 
+migrate-test:
+	go run cmd/migrate/main.go -e .env.test -f cmd/migrate/schema
+
+
 dsn=postgres://postgres:postgres@localhost:5432/hal_cinema
 
 gen-model: migrate

@@ -72,9 +72,8 @@ func (gl *Login) Login(ctx context.Context, authorizationCode string) (*LoginRes
 		SessionID:    sessionID.String(),
 		UserID:       userInfo.UserID,
 		Token:        token.AccessToken,
-		Expired:      int32(token.Expiry.Unix()),
+		ExpirationTime: int32(token.Expiry.Unix()),
 		RefreshToken: token.RefreshToken,
-		UpdatedAt:    time.Now(),
 	})
 
 	if err != nil {
