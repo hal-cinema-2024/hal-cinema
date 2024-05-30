@@ -1,6 +1,6 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import Movie from "../pages/movie/movie";
-import { PvSlide } from "../pages/movie/PvSlideshow";
+import { PvSlideshow } from "../pages/movie/PvSlideshow";
 import { videoIds } from "../pages/movie/youtubeIds";
 
 export const Route = createLazyFileRoute("/movie")({
@@ -8,11 +8,10 @@ export const Route = createLazyFileRoute("/movie")({
 });
 
 function Index() {
-  // here?
   return (
     <>
       <Movie />
-      <PvSlide MovieId={videoIds} />
+      <PvSlideshow MovieIds={videoIds} />
     </>
   );
 }

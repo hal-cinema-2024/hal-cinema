@@ -6,7 +6,7 @@ import headerImage from "/src/assets/bg.jpg";
 function CommonLayout() {
   return (
     <>
-      <body style={{ backgroundImage: `url(${headerImage})` }}>
+      <div style={{ backgroundImage: `url(${headerImage})` }}>
         <header className="header">
           <Link to="/" className="logo1">
             LOGO
@@ -57,7 +57,7 @@ function CommonLayout() {
           </ul>
           <p className="copyright">©HALCinema.All rights Reserved.</p>
         </footer>
-      </body>
+      </div>
     </>
   );
 }
