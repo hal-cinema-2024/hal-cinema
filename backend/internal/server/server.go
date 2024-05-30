@@ -2,12 +2,13 @@ package server
 
 import (
 	"context"
-	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
+
+	"github.com/hal-cinema-2024/backend/pkg/log"
 
 	"golang.org/x/sync/errgroup"
 )
@@ -44,10 +45,10 @@ func New(addr string, handler http.Handler, opts ...Option) *Server {
 }
 
 // Run はHTTPサーバを起動する。
-func (s *Server) Run() error {
-	log.Println("server listening at ...", s.srv.Addr)
+func (s *Server) Run(ctx context.Context) error {
+	log.Info(ctx, "server listening at ...", "address", s.srv.Addr)
 	if err := s.srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-		log.Println("server failed to start", err)
+		log.Error(ctx, "server failed to start", "error", err)
 		return err
 	}
 
@@ -56,7 +57,7 @@ func (s *Server) Run() error {
 
 // Shutdown はhttp serverを停止する
 func (s *Server) Shutdown(ctx context.Context) error {
-	log.Println("server shutting down ...")
+	log.Error(ctx, "server shutting down ...")
 	return s.srv.Shutdown(ctx)
 }
 
@@ -68,7 +69,7 @@ func (s *Server) RunWithGraceful() error {
 	group, gCtx := errgroup.WithContext(ctx)
 
 	group.Go(func() error {
-		return s.Run()
+		return s.Run(ctx)
 	})
 
 	group.Go(func() error {
@@ -85,10 +86,10 @@ func (s *Server) RunWithGraceful() error {
 	})
 
 	if err := group.Wait(); err != nil && err != context.Canceled {
-		log.Println("server shutdown failed, Error: %w", err)
+		log.Error(ctx, "server shutdown failed, Error", "error", err)
 		return err
 	}
 
-	log.Println("server shutdown successfully")
+	log.Info(ctx, "server shutdown successfully")
 	return nil
 }

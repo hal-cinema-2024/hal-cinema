@@ -1,10 +1,12 @@
 package db
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
-	"log"
 	"time"
+
+	"github.com/hal-cinema-2024/backend/pkg/log"
 
 	"github.com/XSAM/otelsql"
 	"github.com/hal-cinema-2024/backend/cmd/config"
@@ -13,6 +15,8 @@ import (
 )
 
 func Connect() *sql.DB {
+	ctx := context.Background()
+
 	dsn := fmt.Sprintf(
 		"user=%s password=%s host=%s port=%d database=%s sslmode=disable",
 		config.Config.Database.User,
@@ -25,7 +29,7 @@ func Connect() *sql.DB {
 	var db *sql.DB
 	pgxConfig, err := pgx.ParseConfig(dsn)
 	if err != nil {
-		log.Fatalf("Error parsing config: %s", err)
+		log.Fatal(ctx, "Error parsing config", "error", err)
 	}
 	conn := stdlib.GetConnector(*pgxConfig)
 	if config.Config.Otel.IsUse {
@@ -41,8 +45,8 @@ func Connect() *sql.DB {
 		db = sql.OpenDB(conn)
 	}
 
-	const maxRetries = 3
-	const retryDelay = 2 * time.Second
+	const maxRetries = 5
+	const retryDelay = 2
 
 	for i := 1; i <= maxRetries; i++ {
 		err = db.Ping()
@@ -50,7 +54,7 @@ func Connect() *sql.DB {
 			break
 		}
 
-		log.Printf("Error pinging DB (Attempt %d/%d): %s\n", i, maxRetries, err)
+		log.Warn(ctx, fmt.Sprintf("Error pinging DB (Attempt %d/%d): %s\n", i, maxRetries, err))
 
 		if i < maxRetries {
 			time.Sleep(retryDelay)
@@ -58,7 +62,7 @@ func Connect() *sql.DB {
 	}
 
 	if err != nil {
-		log.Fatalf("Exceeded maximum retries: Error pinging DB: %s", err)
+		log.Fatal(ctx, "Exceeded maximum retries: Error pinging DB", "error", err)
 	}
 
 	return db
