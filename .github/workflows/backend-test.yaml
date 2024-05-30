@@ -12,7 +12,8 @@ on:
     paths:
       - 'backend/**'
       - '.github/workflows/backend-test.yml'
-
+  workflow_dispatch:
+    
 defaults:
   run:
     working-directory: ./backend
