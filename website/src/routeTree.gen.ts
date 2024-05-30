@@ -54,22 +54,37 @@ const IndexLazyRoute = IndexLazyImport.update({
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
       preLoaderRoute: typeof IndexLazyImport
       parentRoute: typeof rootRoute
     }
     '/movie': {
+      id: '/movie'
+      path: '/movie'
+      fullPath: '/movie'
       preLoaderRoute: typeof MovieLazyImport
       parentRoute: typeof rootRoute
     }
     '/movies': {
+      id: '/movies'
+      path: '/movies'
+      fullPath: '/movies'
       preLoaderRoute: typeof MoviesLazyImport
       parentRoute: typeof rootRoute
     }
     '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
       preLoaderRoute: typeof ProfileLazyImport
       parentRoute: typeof rootRoute
     }
     '/schedules': {
+      id: '/schedules'
+      path: '/schedules'
+      fullPath: '/schedules'
       preLoaderRoute: typeof SchedulesLazyImport
       parentRoute: typeof rootRoute
     }
@@ -78,12 +93,44 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren([
+export const routeTree = rootRoute.addChildren({
   IndexLazyRoute,
   MovieLazyRoute,
   MoviesLazyRoute,
   ProfileLazyRoute,
   SchedulesLazyRoute,
-])
+})
 
 /* prettier-ignore-end */
+
+/* ROUTE_MANIFEST_START
+{
+  "routes": {
+    "__root__": {
+      "filePath": "__root.tsx",
+      "children": [
+        "/",
+        "/movie",
+        "/movies",
+        "/profile",
+        "/schedules"
+      ]
+    },
+    "/": {
+      "filePath": "index.lazy.tsx"
+    },
+    "/movie": {
+      "filePath": "movie.lazy.tsx"
+    },
+    "/movies": {
+      "filePath": "movies.lazy.tsx"
+    },
+    "/profile": {
+      "filePath": "profile.lazy.tsx"
+    },
+    "/schedules": {
+      "filePath": "schedules.lazy.tsx"
+    }
+  }
+}
+ROUTE_MANIFEST_END */
