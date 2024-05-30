@@ -26,7 +26,9 @@ export const Top = () => {
         <h2>上映中の作品</h2>
         <div className="movies-list">
           <div className="movie-card">
-            <div className="movie-image"></div>
+            <div className="movie-image">
+              <img src="/src/assets/sample01.jpg" alt="fas8" height={"150px"} />
+            </div>
             <div className="movie-info">
               <p>2020.10.01</p>
               <p>映画名</p>
@@ -35,7 +37,9 @@ export const Top = () => {
             </div>
           </div>
           <div className="movie-card">
-            <div className="movie-image"></div>
+            <div className="movie-image">
+              <img src="/src/assets/sample01.jpg" alt="fas8" height={"150px"} />
+            </div>
             <div className="movie-info">
               <p>2020.10.01</p>
               <p>映画名</p>
@@ -44,7 +48,9 @@ export const Top = () => {
             </div>
           </div>
           <div className="movie-card">
-            <div className="movie-image"></div>
+            <div className="movie-image">
+              <img src="/src/assets/sample01.jpg" alt="fas8" height={"150px"} />
+            </div>
             <div className="movie-info">
               <p>2020.10.01</p>
               <p>映画名</p>
@@ -53,7 +59,9 @@ export const Top = () => {
             </div>
           </div>
           <div className="movie-card">
-            <div className="movie-image"></div>
+            <div className="movie-image">
+              <img src="/src/assets/sample01.jpg" alt="fas8" height={"150px"} />
+            </div>
             <div className="movie-info">
               <p>2020.10.01</p>
               <p>映画名</p>
@@ -62,16 +70,20 @@ export const Top = () => {
             </div>
           </div>
           <div className="movie-card">
-            <div className="movie-image"></div>
+            <div className="movie-image">
+              <img src="/src/assets/sample01.jpg" alt="fas8" height={"150px"} />
+            </div>
             <div className="movie-info">
               <p>2020.10.01</p>
-              <p>映画名</p>
+              <h1>映画名</h1>
               <p>監督名</p>
               <p>出演者</p>
             </div>
           </div>
           <div className="movie-card">
-            <div className="movie-image"></div>
+            <div className="movie-image">
+              <img src="/src/assets/sample01.jpg" alt="fas8" height={"150px"} />
+            </div>
             <div className="movie-info">
               <p>2020.10.01</p>
               <p>映画名</p>
@@ -86,7 +98,9 @@ export const Top = () => {
         <h2>公開予定の作品</h2>
         <div className="movies-list">
           <div className="movie-card">
-            <div className="movie-image"></div>
+            <div className="movie-image">
+              <img src="/src/assets/sample01.jpg" alt="fas8" height={"150px"} />
+            </div>
             <div className="movie-info">
               <p>2020.10.01</p>
               <p>映画名</p>
@@ -95,7 +109,9 @@ export const Top = () => {
             </div>
           </div>
           <div className="movie-card">
-            <div className="movie-image"></div>
+            <div className="movie-image">
+              <img src="/src/assets/sample01.jpg" alt="fas8" height={"150px"} />
+            </div>
             <div className="movie-info">
               <p>2020.10.01</p>
               <p>映画名</p>
@@ -104,7 +120,9 @@ export const Top = () => {
             </div>
           </div>
           <div className="movie-card">
-            <div className="movie-image"></div>
+            <div className="movie-image">
+              <img src="/src/assets/sample01.jpg" alt="fas8" height={"150px"} />
+            </div>
             <div className="movie-info">
               <p>2020.10.01</p>
               <p>映画名</p>
@@ -126,3 +144,6 @@ export const Top = () => {
     </>
   );
 };
+
+// 映画情報(上映日、映画名、監督名、出演者)
+// ここにcssを設定するように書き直す

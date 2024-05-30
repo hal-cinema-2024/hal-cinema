@@ -14,19 +14,20 @@ function CommonLayout() {
           <nav>
             <ul className="nav-links">
               <li>
+                <Link to="/">TOP</Link>
+              </li>
+              <li>
                 <Link to="/movies">映画一覧</Link>
               </li>
+
               <li>
-                <Link to="">スクリーン一覧</Link>
+                <Link to="/movie">チケット購入</Link>
               </li>
               <li>
-                <Link to="">チケット購入</Link>
+                <Link to="/schedules">上映スケジュール</Link>
               </li>
               <li>
-                <Link to="">上映スケジュール</Link>
-              </li>
-              <li>
-                <Link to="">マイページ</Link>
+                <Link to="/profile">マイページ</Link>
               </li>
             </ul>
           </nav>
@@ -40,19 +41,16 @@ function CommonLayout() {
 
           <ul className="nav">
             <li>
-              <Link to="">TOP</Link>
+              <Link to="/">TOP</Link>
             </li>
             <li>
-              <Link to="">映画一覧</Link>
+              <Link to="/movies">映画一覧</Link>
             </li>
             <li>
-              <Link to="">スクリーン一覧</Link>
+              <Link to="/schedules">スクリーン一覧</Link>
             </li>
             <li>
-              <Link to="">チケット購入</Link>
-            </li>
-            <li>
-              <Link to="">お問い合わせ</Link>
+              <Link to="/movie">チケット購入</Link>
             </li>
           </ul>
           <p className="copyright">©HALCinema.All rights Reserved.</p>
