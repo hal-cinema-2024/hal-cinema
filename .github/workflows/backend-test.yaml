@@ -13,7 +13,7 @@ on:
       - 'backend/**'
       - '.github/workflows/backend-test.yml'
   workflow_dispatch:
-    
+
 defaults:
   run:
     working-directory: ./backend
@@ -47,7 +47,7 @@ jobs:
 
     - name: migrate db
       run: |
-        cd backend && make migrate-up-test
+        make migrate-up-test
 
     - name: Build
       run: go build -v ./...
