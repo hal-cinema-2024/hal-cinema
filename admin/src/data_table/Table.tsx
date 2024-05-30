@@ -1,4 +1,4 @@
-import "./style.css";
+import "./table.css";
 
 import { flexRender } from "@tanstack/react-table";
 import { FC } from "react";
@@ -56,12 +56,12 @@ export const DataTable: FC = () => {
         </div>
         <div style={{ padding: "10px" }}>
           <Input
-            placeholder='検索'
+            placeholder="検索"
             value={(table.getState().globalFilter as string) ?? ""}
             onChange={(e) => table.setGlobalFilter(e.target.value)}
           />
           <Input
-            type='date'
+            type="date"
             value={
               (
                 table.getColumn("createdAt")?.getFilterValue() as {
@@ -82,7 +82,7 @@ export const DataTable: FC = () => {
           />
           〜
           <Input
-            type='date'
+            type="date"
             value={
               (
                 table.getColumn("createdAt")?.getFilterValue() as {
