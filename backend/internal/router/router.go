@@ -29,27 +29,30 @@ func NewRouter() http.Handler {
 	// setup middlware
 	router.echo.Use(otelecho.Middleware(config.Config.Otel.ProjectID))
 	router.echo.Use(echoMiddleware.Recover())
-	router.echo.Use(middleware.SetupCORS())
+
 	// router.echo.Use(echoprometheus.NewMiddleware("hal-cinema"))
 
 	router.health()
 	router.metric()
 
-	{
-		router.GoogleLogin()
+	corsRoute := router.echo.Group("")
 
-		v1Group := echo.Group("/v1")
+	corsRoute.Use(middleware.SetupCORS())
+	{
+		router.GoogleLogin(corsRoute)
+
+		v1Group := corsRoute.Group("/v1")
 		v1.Setup(v1Group)
 	}
 
 	return router.echo
 }
 
-func (r *router) GoogleLogin() {
+func (r *router) GoogleLogin(corsRoute *echo.Group) {
 	googleLogin := container.Invoke[*interactor.GoogleLogin]()
 	coockieSetter := container.Invoke[*cookie.CoockieSetter]()
 
-	r.echo.POST("/login/google", controller.GoogleLogin(googleLogin, coockieSetter))
+	corsRoute.POST("/login/google", controller.GoogleLogin(googleLogin, coockieSetter))
 
 }
 
