@@ -21,6 +21,7 @@ CREATE TABLE "user_roles" (
 
 CREATE TABLE "roles" (
   "role_id" varchar(63) PRIMARY KEY,
+  "permission" varchar(63) NOT NULL,
   "name" varchar(255) NOT NULL
 );
 
@@ -108,8 +109,6 @@ CREATE TABLE "price_types" (
   "price" int NOT NULL
 );
 
-ALTER TABLE  "price_types" ADD CHECK (price >= 0);
-
 CREATE UNIQUE INDEX ON "theaters_seats" ("schedule_id", "seat_name");
 
 COMMENT ON COLUMN "permissions"."effect" IS '許可or不許可';
@@ -140,7 +139,7 @@ ALTER TABLE "movie_images" ADD FOREIGN KEY ("movie_id") REFERENCES "movies" ("mo
 
 ALTER TABLE "user_roles" ADD FOREIGN KEY ("role_id") REFERENCES "roles" ("role_id");
 
-ALTER TABLE "user_roles" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("user_id");
+ALTER TABLE "roles" ADD FOREIGN KEY ("permission") REFERENCES "permissions" ("permission_id");
 
 ALTER TABLE "role_permissions" ADD FOREIGN KEY ("role_id") REFERENCES "roles" ("role_id");
 
