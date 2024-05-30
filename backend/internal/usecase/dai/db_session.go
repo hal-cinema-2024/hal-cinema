@@ -7,5 +7,6 @@ import (
 )
 
 type SessionRepo interface {
+	GetSessionByID(ctx context.Context, session string) (*model.Session, bool, error)
 	SyncSession(ctx context.Context, session *model.Session) (*model.Session, error)
 }

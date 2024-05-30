@@ -4,15 +4,15 @@ import (
 	"net/http"
 
 	"github.com/hal-cinema-2024/backend/cmd/config"
-	"github.com/hal-cinema-2024/backend/internal/adapter/controller/user"
-	"github.com/hal-cinema-2024/backend/internal/adapter/middleware/cors"
+	"github.com/hal-cinema-2024/backend/internal/adapter/controller"
+	"github.com/hal-cinema-2024/backend/internal/adapter/middleware"
 	"github.com/hal-cinema-2024/backend/internal/container"
 	"github.com/hal-cinema-2024/backend/internal/framework/cookie"
 	v1 "github.com/hal-cinema-2024/backend/internal/router/v1"
-	"github.com/hal-cinema-2024/backend/internal/usecase/interactor/google"
+	"github.com/hal-cinema-2024/backend/internal/usecase/interactor"
 	"github.com/labstack/echo-contrib/echoprometheus"
 	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
+	echoMiddleware "github.com/labstack/echo/v4/middleware"
 	"go.opentelemetry.io/contrib/instrumentation/github.com/labstack/echo/otelecho"
 )
 
@@ -28,8 +28,8 @@ func NewRouter() http.Handler {
 
 	// setup middlware
 	router.echo.Use(otelecho.Middleware(config.Config.Otel.ProjectID))
-	router.echo.Use(middleware.Recover())
-	router.echo.Use(cors.SetupCORS())
+	router.echo.Use(echoMiddleware.Recover())
+	router.echo.Use(middleware.SetupCORS())
 	// router.echo.Use(echoprometheus.NewMiddleware("hal-cinema"))
 
 	router.health()
@@ -46,10 +46,10 @@ func NewRouter() http.Handler {
 }
 
 func (r *router) GoogleLogin() {
-	googleLogin := container.Invoke[*google.Login]()
+	googleLogin := container.Invoke[*interactor.GoogleLogin]()
 	coockieSetter := container.Invoke[*cookie.CoockieSetter]()
 
-	r.echo.POST("/login/google", user.GoogleLogin(googleLogin, coockieSetter))
+	r.echo.POST("/login/google", controller.GoogleLogin(googleLogin, coockieSetter))
 
 }
 

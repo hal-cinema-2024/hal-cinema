@@ -1,4 +1,4 @@
-package google
+package interactor
 
 import (
 	"context"
@@ -10,16 +10,18 @@ import (
 	"github.com/hal-cinema-2024/backend/internal/usecase/dai"
 )
 
-type Login struct {
+type GoogleLogin struct {
 	authz        authz.OAuth2
-	Repositories dai.DataAccess
+	repositories dai.DataAccess
 }
 
 func NewGoogleLogin(
 	authz authz.OAuth2,
-) *Login {
-	return &Login{
-		authz: authz,
+	repositories dai.DataAccess,
+) *GoogleLogin {
+	return &GoogleLogin{
+		authz:        authz,
+		repositories: repositories,
 	}
 }
 
@@ -29,7 +31,7 @@ type LoginResult struct {
 	Icon      string
 }
 
-func (gl *Login) Login(ctx context.Context, authorizationCode string) (*LoginResult, error) {
+func (gl *GoogleLogin) Login(ctx context.Context, authorizationCode string) (*LoginResult, error) {
 	token, err := gl.authz.FetchToken(ctx, authorizationCode)
 	if err != nil {
 		return nil, err
@@ -41,7 +43,7 @@ func (gl *Login) Login(ctx context.Context, authorizationCode string) (*LoginRes
 	}
 
 	// userが存在するかチェック
-	found, err := gl.Repositories.ValidUser(ctx, userInfo.UserID)
+	found, err := gl.repositories.ValidUser(ctx, userInfo.UserID)
 	if err != nil {
 		return nil, err
 	}
@@ -51,10 +53,10 @@ func (gl *Login) Login(ctx context.Context, authorizationCode string) (*LoginRes
 		return nil, err
 	}
 
-	if err := gl.Repositories.Transaction(ctx, func(ctx context.Context, da dai.DataAccess) error {
+	if err := gl.repositories.Transaction(ctx, func(ctx context.Context, da dai.DataAccess) error {
 		// 居ないなら作る
 		if !found {
-			_, err := gl.Repositories.CreateUser(ctx, &model.User{
+			_, err := gl.repositories.CreateUser(ctx, &model.User{
 				UserID:    userInfo.UserID,
 				Email:     userInfo.Email,
 				IconPath:  userInfo.Icon,
@@ -69,7 +71,7 @@ func (gl *Login) Login(ctx context.Context, authorizationCode string) (*LoginRes
 		}
 
 		// Tokenを更新
-		_, err = gl.Repositories.SyncSession(ctx, &model.Session{
+		_, err = gl.repositories.SyncSession(ctx, &model.Session{
 			SessionID:      sessionID.String(),
 			UserID:         userInfo.UserID,
 			Token:          token.AccessToken,

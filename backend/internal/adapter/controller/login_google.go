@@ -1,11 +1,11 @@
-package user
+package controller
 
 import (
 	"log"
 	"net/http"
 
 	"github.com/hal-cinema-2024/backend/internal/framework/cookie"
-	"github.com/hal-cinema-2024/backend/internal/usecase/interactor/google"
+	"github.com/hal-cinema-2024/backend/internal/usecase/interactor"
 	"github.com/labstack/echo/v4"
 )
 
@@ -18,7 +18,7 @@ type LoginResponse struct {
 }
 
 func GoogleLogin(
-	googleLogin *google.Login,
+	googleLogin *interactor.GoogleLogin,
 	coockieSetter *cookie.CoockieSetter,
 ) func(ctx echo.Context) error {
 	return func(ctx echo.Context) error {
