@@ -103,8 +103,11 @@ const Container = styled(SimpleGrid)`
   width: 70%;
   padding: 10px;
   gap: 20px;
+  padding-top: 80px;
 `;
 
 const SButton = styled(Button)`
-  margin-top: 15px;
+  position: absolute;
+  bottom: 20px;
+  right: 30px;
 `;
