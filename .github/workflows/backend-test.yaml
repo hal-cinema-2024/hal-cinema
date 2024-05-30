@@ -38,7 +38,7 @@ jobs:
 
 # TODO: テストが追加されたら戻す
     - name: Test
-      run: make test ./... -coverpkg=./... -v -json | go run github.com/mfridman/tparse@v0.13.2
+      run: go test ./... -coverpkg=./... -v -json | go run github.com/mfridman/tparse@v0.13.2
 
     - name: golangci-lint
       uses: golangci/golangci-lint-action@v3
