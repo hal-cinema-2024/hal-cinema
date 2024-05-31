@@ -59,7 +59,6 @@
   background-color: #333;
   color: #fff;
   padding: 20px;
-  margin-top: 20px;
 }
 
 .concept-left {
@@ -102,7 +101,6 @@
   background-color: #222;
   color: #fff;
   padding: 20px;
-  margin-top: 20px;
 }
 
 .movies h2,
@@ -131,10 +129,12 @@
 }
 
 .movie-info {
-  margin-top: 10px;
+  margin-top: 100px;
   color: #ccc;
 }
 
 .movie-info p {
   margin: 5px 0;
 }
+
+/*  */

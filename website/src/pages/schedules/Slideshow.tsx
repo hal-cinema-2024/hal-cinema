@@ -22,7 +22,11 @@ const Slideshow = () => {
           <CarouselSlide
             key={index}
             style={{ cursor: "pointer", position: "relative" }}
-            bg={index === color ? "#049D82" : "#BF06B3"}
+            bg={
+              index === color
+                ? "rgba(4, 157, 130, 0.63)"
+                : "rgba(191, 6, 179, 0.5)"
+            }
             onClick={() => changeColor(index)}
           >
             <SSdiv>
@@ -45,14 +49,13 @@ const SlideContainer = styled.div`
   width: 1000px;
   margin: 0 auto 0 auto;
   padding: 20px;
-  background-color: #f5f5f5;
   border-radius: 10px;
   margin-top: 20px;
 `;
 
 const SCarousel = styled(Carousel)`
   width: 100%;
-  opacity: 0.7;
+  /* background-color: #f5f5f5; */
 `;
 
 const SSdiv = styled.div`
