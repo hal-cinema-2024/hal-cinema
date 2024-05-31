@@ -16,7 +16,7 @@ import { Route as rootRoute } from './routes/__root'
 
 // Create Virtual Routes
 
-const TopLazyImport = createFileRoute('/top')()
+const SchedulesLazyImport = createFileRoute('/schedules')()
 const ProfileLazyImport = createFileRoute('/profile')()
 const MoviesLazyImport = createFileRoute('/movies')()
 const MovieLazyImport = createFileRoute('/movie')()
@@ -24,10 +24,10 @@ const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
 
-const TopLazyRoute = TopLazyImport.update({
-  path: '/top',
+const SchedulesLazyRoute = SchedulesLazyImport.update({
+  path: '/schedules',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/top.lazy').then((d) => d.Route))
+} as any).lazy(() => import('./routes/schedules.lazy').then((d) => d.Route))
 
 const ProfileLazyRoute = ProfileLazyImport.update({
   path: '/profile',
@@ -54,23 +54,38 @@ const IndexLazyRoute = IndexLazyImport.update({
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
       preLoaderRoute: typeof IndexLazyImport
       parentRoute: typeof rootRoute
     }
     '/movie': {
+      id: '/movie'
+      path: '/movie'
+      fullPath: '/movie'
       preLoaderRoute: typeof MovieLazyImport
       parentRoute: typeof rootRoute
     }
     '/movies': {
+      id: '/movies'
+      path: '/movies'
+      fullPath: '/movies'
       preLoaderRoute: typeof MoviesLazyImport
       parentRoute: typeof rootRoute
     }
     '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
       preLoaderRoute: typeof ProfileLazyImport
       parentRoute: typeof rootRoute
     }
-    '/top': {
-      preLoaderRoute: typeof TopLazyImport
+    '/schedules': {
+      id: '/schedules'
+      path: '/schedules'
+      fullPath: '/schedules'
+      preLoaderRoute: typeof SchedulesLazyImport
       parentRoute: typeof rootRoute
     }
   }
@@ -78,12 +93,44 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren([
+export const routeTree = rootRoute.addChildren({
   IndexLazyRoute,
   MovieLazyRoute,
   MoviesLazyRoute,
   ProfileLazyRoute,
-  TopLazyRoute,
-])
+  SchedulesLazyRoute,
+})
 
 /* prettier-ignore-end */
+
+/* ROUTE_MANIFEST_START
+{
+  "routes": {
+    "__root__": {
+      "filePath": "__root.tsx",
+      "children": [
+        "/",
+        "/movie",
+        "/movies",
+        "/profile",
+        "/schedules"
+      ]
+    },
+    "/": {
+      "filePath": "index.lazy.tsx"
+    },
+    "/movie": {
+      "filePath": "movie.lazy.tsx"
+    },
+    "/movies": {
+      "filePath": "movies.lazy.tsx"
+    },
+    "/profile": {
+      "filePath": "profile.lazy.tsx"
+    },
+    "/schedules": {
+      "filePath": "schedules.lazy.tsx"
+    }
+  }
+}
+ROUTE_MANIFEST_END */

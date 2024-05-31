@@ -1,3 +1,4 @@
+
 -- 外部キー制約を削除します
 ALTER TABLE "session" DROP CONSTRAINT IF EXISTS "session_user_id_fkey";
 ALTER TABLE "orders" DROP CONSTRAINT IF EXISTS "orders_user_id_fkey";
@@ -10,6 +11,7 @@ ALTER TABLE "orders_details" DROP CONSTRAINT IF EXISTS "orders_details_price_typ
 ALTER TABLE "orders_details" DROP CONSTRAINT IF EXISTS "orders_details_theaters_seats_id_fkey";
 ALTER TABLE "orders_details" DROP CONSTRAINT IF EXISTS "orders_details_order_id_fkey";
 ALTER TABLE "movie_images" DROP CONSTRAINT IF EXISTS "movie_images_movie_id_fkey";
+
 ALTER TABLE "user_roles" DROP CONSTRAINT IF EXISTS "user_roles_role_id_fkey";
 ALTER TABLE "user_roles" DROP CONSTRAINT IF EXISTS "user_roles_user_id_fkey";
 ALTER TABLE "role_permissions" DROP CONSTRAINT IF EXISTS "role_permissions_role_id_fkey";
