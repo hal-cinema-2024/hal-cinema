@@ -12,8 +12,9 @@ h1 {
 }
 
 table {
+  width: 100%;
   border-collapse: collapse;
-  border: 2px solid black;
+  /* border: 2px solid black; */
   padding: 1px;
 }
 
@@ -27,4 +28,31 @@ th {
 td {
   border: 1px dashed lightgray;
   padding: 4px;
+}
+.DispNumContainer {
+  margin: 0 auto;
+  /* width: 1000px; */
+
+  /* background-color: #ddd; */
+}
+/* .SearchContainer {} */
+.SearchContainer input {
+  width: 300px;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+/* ---ì˙ïtçiÇËçûÇ›--- */
+.NarrowContainer {
+  display: flex;
+  align-items: center;
+
+  /* background-color: pink; */
+}
+.NarrowContainer input {
+  padding: 5px 10px;
+  width: 300px;
+  cursor: pointer;
+  border-radius: 10px;
 }
