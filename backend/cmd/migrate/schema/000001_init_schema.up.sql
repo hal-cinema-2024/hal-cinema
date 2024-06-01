@@ -1,5 +1,6 @@
 CREATE TABLE "users" (
   "user_id" varchar(63) PRIMARY KEY,
+
   "first_name" varchar(31),
   "last_name" varchar(31),
   "first_name_reading" varchar(31),
@@ -93,6 +94,7 @@ CREATE TABLE "theaters_seats" (
 CREATE TABLE "orders" (
   "order_id" varchar(63) PRIMARY KEY,
   "user_id" varchar(63) NOT NULL,
+
   "created_at" timestamptz NOT NULL
 );
 
@@ -136,6 +138,7 @@ ALTER TABLE "orders_details" ADD FOREIGN KEY ("theaters_seats_id") REFERENCES "t
 ALTER TABLE "orders_details" ADD FOREIGN KEY ("order_id") REFERENCES "orders" ("order_id");
 
 ALTER TABLE "movie_images" ADD FOREIGN KEY ("movie_id") REFERENCES "movies" ("movie_id");
+
 
 ALTER TABLE "user_roles" ADD FOREIGN KEY ("role_id") REFERENCES "roles" ("role_id");
 
