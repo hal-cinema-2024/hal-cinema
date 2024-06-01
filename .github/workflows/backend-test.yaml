@@ -7,11 +7,11 @@ on:
       - develop
     paths:
       - 'backend/**'
-      - '.github/workflows/backend-test.yml'
+      - '.github/workflows/backend-test.yaml'
   pull_request:
     paths:
       - 'backend/**'
-      - '.github/workflows/backend-test.yml'
+      - '.github/workflows/backend-test.yaml'
   workflow_dispatch:
 
 defaults:
