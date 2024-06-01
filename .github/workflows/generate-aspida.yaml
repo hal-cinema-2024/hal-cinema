@@ -8,6 +8,11 @@ on:
       - '.github/workflows/gen-aspida.yaml'
   workflow_dispatch:
 
+permissions:
+  actions: write
+  checks: write
+  contents: write
+
 jobs:
   generate-aspida:
     runs-on: ubuntu-latest
