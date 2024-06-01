@@ -6,6 +6,8 @@ export function LoginButton() {
     onError: (error) => console.error(error),
     flow: "auth-code", //auth-code は認可コードフロー
     scope: "email profile",
+    ux_mode: "redirect",
+    redirect_uri: "http://localhost:3000/google/callback",
     onSuccess: (tokenResponse) => console.log(tokenResponse),
   });
 
