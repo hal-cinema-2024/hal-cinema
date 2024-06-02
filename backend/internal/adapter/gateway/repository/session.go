@@ -37,6 +37,5 @@ func (r *SessionRepo) GetSessionByID(ctx context.Context, sessionID string) (*mo
 	if count == 0 {
 		return nil, false, nil
 	}
-
 	return &session, true, nil
 }

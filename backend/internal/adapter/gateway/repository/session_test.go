@@ -134,3 +134,98 @@ func TestSyncSession(t *testing.T) {
 		})
 	}
 }
+
+func TestGetSessionByID(t *testing.T) {
+	if err := test.NewContainer(t); err != nil {
+		t.Fatal(err)
+	}
+
+	db, err := invoke[*gorm.DB]()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	factrues, err := invoke[*factory.Factories]()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	sessionRepo := repository.NewSessionRepo(db)
+
+	user := factrues.User.Create(model.User{
+		UserID:    uuid.NewString(),
+		Email:     "test.hal.cinema.1@example.com",
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+		IsDelete:  false,
+	})
+
+	session := factrues.Session.Create(model.Session{
+		SessionID:      uuid.NewString(),
+		UserID:         user.UserID,
+		Token:          "test-token",
+		ExpirationTime: int32(time.Now().Add(time.Hour * 1).Unix()),
+		RefreshToken:   "test-refresh-token",
+	})
+
+	testCases := []struct {
+		name        string
+		sessionID   string
+		wantSession model.Session
+		found       bool
+		wantErrCode string
+	}{
+		{
+			name:      "success",
+			sessionID: session.SessionID,
+			wantSession: model.Session{
+				SessionID:      session.SessionID,
+				UserID:         session.UserID,
+				Token:          session.Token,
+				ExpirationTime: session.ExpirationTime,
+				RefreshToken:   session.RefreshToken,
+			},
+			found:       true,
+			wantErrCode: "",
+		},
+		{
+			name:        "fail - session not found",
+			sessionID:   uuid.NewString(),
+			wantSession: model.Session{},
+			found:       false,
+			wantErrCode: "",
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			session, found, err := sessionRepo.GetSessionByID(context.Background(), tc.sessionID)
+			if err != nil {
+				var pgErr *pq.Error
+				if errors.As(err, &pgErr) {
+					if string(pgErr.Code) == tc.wantErrCode {
+						t.Log(err)
+						return
+					}
+					t.Errorf("got %v; want %v", err, tc.wantErrCode)
+				}
+			}
+
+			if found != tc.found {
+				t.Errorf("got %v; want %v", found, tc.found)
+			}
+
+			if found {
+				if session.SessionID != tc.wantSession.SessionID {
+					t.Errorf("got %v; want %v", session.SessionID, tc.wantSession.SessionID)
+				}
+				if session.UserID != tc.wantSession.UserID {
+					t.Errorf("got %v; want %v", session.UserID, tc.wantSession.UserID)
+				}
+				if session.Token != tc.wantSession.Token {
+					t.Errorf("got %v; want %v", session.Token, tc.wantSession.Token)
+				}
+			}
+		})
+	}
+}

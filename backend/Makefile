@@ -13,14 +13,19 @@ run: build
 rund: build
 	docker compose up -d
 
-migrate:
-	go run cmd/migrate/main.go -e .env -f cmd/migrate/schema
+migrate-up:
+	go run cmd/migrate/main.go -e .env -f cmd/migrate/schema up
 
-migrate-test:
-	go run cmd/migrate/main.go -e .env.test -f cmd/migrate/schema
+migrate-down:
+	go run cmd/migrate/main.go -e .env -f cmd/migrate/schema down
 
+migrate-up-test:
+	go run cmd/migrate/main.go -e .env.test -f cmd/migrate/schema up
+
+migrate-down-test:
+	go run cmd/migrate/main.go -e .env.test -f cmd/migrate/schema down
 
 dsn=postgres://postgres:postgres@localhost:5432/hal_cinema
 
-gen-model: migrate
+gen-model: migrate-up
 	go run gorm.io/gen/tools/gentool@latest -c ./gen.tool.yaml
