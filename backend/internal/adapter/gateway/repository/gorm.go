@@ -11,6 +11,7 @@ type GormRepo struct {
 	gorm *gorm.DB
 	*UserRepo
 	*SessionRepo
+	*MovieRepo
 }
 
 func NewGormRepo(gorm *gorm.DB) *GormRepo {
@@ -18,6 +19,7 @@ func NewGormRepo(gorm *gorm.DB) *GormRepo {
 		gorm:        gorm,
 		UserRepo:    NewUserRepo(gorm),
 		SessionRepo: NewSessionRepo(gorm),
+		MovieRepo:   NewMovieRepo(gorm),
 	}
 }
 
