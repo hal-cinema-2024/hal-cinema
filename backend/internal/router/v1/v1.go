@@ -21,5 +21,6 @@ func Setup(engine *echo.Group) {
 	v1.engine.Use(middleware.SessionMiddleware(si))
 	{
 		v1.userRoute()
+		v1.movieRoute()
 	}
 }
