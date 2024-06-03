@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/hal-cinema-2024/backend/internal/framework/cookie"
@@ -25,13 +26,17 @@ func SessionMiddleware(ui *interactor.SessionInteractor) echo.MiddlewareFunc {
 				return echo.ErrUnauthorized
 			}
 
-			user, err := ui.GetUserBySessionID(ctx.Request().Context(), sessionID.Value)
-			if err != nil {
+			userAgent, ok := ctx.Get(hcontext.UserAgent.String()).(string)
+			if !ok {
 				return echo.ErrInternalServerError
 			}
 
+			user, err := ui.GetUserBySessionID(ctx.Request().Context(), sessionID.Value, userAgent)
+			if err != nil {
+				return echo.ErrInternalServerError
+			}
+			log.Println("ok", user.UserID)
 			ctx.Set(hcontext.UserID.String(), user.UserID)
-
 			return next(ctx)
 		}
 	}
