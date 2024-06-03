@@ -30,12 +30,13 @@ func NewContainer() error {
 		{constructor: azure.NewAzureCert, opts: []dig.ProvideOption{dig.As(new(azcore.TokenCredential))}},
 		{constructor: azure.NewBlobClient, opts: []dig.ProvideOption{}},
 		{constructor: cookie.DefaultCookieOptions, opts: []dig.ProvideOption{}},
-		{constructor: cookie.NewCoockieSetter, opts: []dig.ProvideOption{}},
+		{constructor: cookie.NewCookieSetter, opts: []dig.ProvideOption{}},
 		{constructor: googleAuth.NewOAuth, opts: []dig.ProvideOption{dig.As(new(authz.OAuth2))}},
 		{constructor: repository.NewGormRepo, opts: []dig.ProvideOption{dig.As(new(dai.DataAccess))}},
 		{constructor: interactor.NewGoogleLogin, opts: []dig.ProvideOption{}},
 		{constructor: interactor.NewSessionInteractor, opts: []dig.ProvideOption{}},
 		{constructor: interactor.NewUserInteractor, opts: []dig.ProvideOption{}},
+		{constructor: interactor.NewMovieInteractor, opts: []dig.ProvideOption{}},
 	}
 
 	for _, arg := range args {

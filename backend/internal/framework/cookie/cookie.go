@@ -29,7 +29,7 @@ type CookieSetter struct {
 	CookieOptions CookieOptions
 }
 
-func NewCoockieSetter(option CookieOptions) *CookieSetter {
+func NewCookieSetter(option CookieOptions) *CookieSetter {
 	return &CookieSetter{
 		CookieOptions: option,
 	}
