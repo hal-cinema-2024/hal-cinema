@@ -4,9 +4,7 @@ TODO: swaggerのAPIドキュメントを生成する
 ```
 
 docs
- ├── lib
- |   └── any_lib ...
- ├── proto
- │   └── any_lib ...
- └── openapi.json
+ ├── api/version(e.g. v1)
+ │   └── api.version.proto
+ └── api.swagger.json
 ```
