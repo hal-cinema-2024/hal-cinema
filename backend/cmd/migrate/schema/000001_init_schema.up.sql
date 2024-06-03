@@ -40,6 +40,7 @@ CREATE TABLE "role_permissions" (
 
 CREATE TABLE "session" (
   "session_id" varchar(63) PRIMARY KEY,
+  "user_agent" text NOT NULL,
   "user_id" varchar(63) NOT NULL,
   "token" text NOT NULL,
   "expiration_time" int NOT NULL,
