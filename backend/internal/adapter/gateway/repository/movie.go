@@ -17,13 +17,13 @@ func NewMovieRepo(gorm *gorm.DB) *MovieRepo {
 	}
 }
 
-func (r *MovieRepo) CreateMovie(ctx context.Context, movie *model.Movie) error {
-	result := r.db.Create(movie)
+func (r *MovieRepo) CreateMovie(ctx context.Context, movie *model.Movie) (string, error) {
+	result := r.db.Create(&movie)
 	if result.Error != nil {
-		return result.Error
+		return "", result.Error
 	}
 
-	return nil
+	return movie.MovieID, nil
 }
 
 func (r *MovieRepo) GetMovieByID(ctx context.Context, movieID string) (*model.Movie, error) {
@@ -44,19 +44,19 @@ func (r *MovieRepo) GetMovies(ctx context.Context) ([]*model.Movie, error) {
 	return movies, nil
 }
 
-func (r *MovieRepo) UpdateMovie(ctx context.Context, movie *model.Movie) error {
+func (r *MovieRepo) UpdateMovie(ctx context.Context, movie *model.Movie) (string, error) {
 	result := r.db.Save(movie)
 	if result.Error != nil {
-		return result.Error
+		return "", result.Error
 	}
-	return nil
+	return "", nil
 }
 
 // logical deletion
-func (r *MovieRepo) DeleteMovie(ctx context.Context, movieID string) error {
+func (r *MovieRepo) DeleteMovie(ctx context.Context, movieID string) (string, error) {
 	result := r.db.Save(&model.Movie{MovieID: movieID, IsDelete: true})
 	if result.Error != nil {
-		return result.Error
+		return "", result.Error
 	}
-	return nil
+	return "", nil
 }
