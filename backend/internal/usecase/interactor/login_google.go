@@ -43,7 +43,7 @@ func (gl *GoogleLogin) Login(ctx context.Context, authorizationCode, userAgent s
 	}
 
 	// userが存在するかチェック
-	found, err := gl.repositories.ValidUser(ctx, userInfo.UserID)
+	_, found, err := gl.repositories.GetUserByID(ctx, userInfo.UserID)
 	if err != nil {
 		return nil, err
 	}

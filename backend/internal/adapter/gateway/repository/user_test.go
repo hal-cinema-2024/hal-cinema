@@ -167,18 +167,13 @@ func TestGetUserByIDAndValidUser(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			found, err := userRepo.ValidUser(context.Background(), tc.userID)
+			user, found, err := userRepo.GetUserByID(context.Background(), tc.userID)
 			if err != nil {
 				t.Fatal(err)
 			}
 
 			if found != tc.isFound {
 				t.Fatalf("got %v; want %v", found, tc.isFound)
-			}
-
-			user, err := userRepo.GetUserByID(context.Background(), tc.userID)
-			if err != nil {
-				t.Fatal(err)
 			}
 
 			if user.UserID != tc.wantUser.UserID {

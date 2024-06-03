@@ -23,9 +23,13 @@ func (ui *SessionInteractor) GetUserBySessionID(ctx context.Context, sessionID, 
 		return nil, err
 	}
 
-	user, err := ui.Repositories.GetUserByID(ctx, session.UserID)
+	user, found, err := ui.Repositories.GetUserByID(ctx, session.UserID)
 	if err != nil {
 		return nil, err
+	}
+
+	if !found {
+		return nil, fmt.Errorf("user not found")
 	}
 
 	return user, nil
