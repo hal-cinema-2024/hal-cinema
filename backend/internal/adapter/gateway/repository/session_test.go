@@ -51,6 +51,7 @@ func TestSyncSession(t *testing.T) {
 
 	session1 := factrues.Session.Create(model.Session{
 		SessionID:      uuid.NewString(),
+		UserAgent:      "test-user-agent",
 		UserID:         user1.UserID,
 		Token:          "test-token",
 		ExpirationTime: int32(time.Now().Add(time.Hour * 1).Unix()),
@@ -66,6 +67,7 @@ func TestSyncSession(t *testing.T) {
 			name: "success - already exist session",
 			session: model.Session{
 				SessionID:      session1.SessionID,
+				UserAgent:      session1.UserAgent,
 				UserID:         session1.UserID,
 				Token:          "new-test-token",
 				ExpirationTime: int32(time.Now().Add(time.Hour * 2).Unix()),
@@ -77,6 +79,7 @@ func TestSyncSession(t *testing.T) {
 			name: "success - newSession  session",
 			session: model.Session{
 				SessionID:      uuid.NewString(),
+				UserAgent:      "test-user-agent",
 				UserID:         user2.UserID,
 				Token:          "test-token",
 				ExpirationTime: int32(time.Now().Add(time.Hour * 24).Unix()),
@@ -88,6 +91,7 @@ func TestSyncSession(t *testing.T) {
 			name: "fail - user not found",
 			session: model.Session{
 				SessionID:      uuid.NewString(),
+				UserAgent:      "test-user-agent",
 				UserID:         user2.UserID,
 				Token:          "test-token",
 				ExpirationTime: int32(time.Now().Add(time.Hour * 24).Unix()),
@@ -162,6 +166,7 @@ func TestGetSessionByID(t *testing.T) {
 
 	session := factrues.Session.Create(model.Session{
 		SessionID:      uuid.NewString(),
+		UserAgent:      "test-user-agent",
 		UserID:         user.UserID,
 		Token:          "test-token",
 		ExpirationTime: int32(time.Now().Add(time.Hour * 1).Unix()),
@@ -180,6 +185,7 @@ func TestGetSessionByID(t *testing.T) {
 			sessionID: session.SessionID,
 			wantSession: model.Session{
 				SessionID:      session.SessionID,
+				UserAgent:      session.UserAgent,
 				UserID:         session.UserID,
 				Token:          session.Token,
 				ExpirationTime: session.ExpirationTime,
@@ -199,7 +205,7 @@ func TestGetSessionByID(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			session, found, err := sessionRepo.GetSessionByID(context.Background(), tc.sessionID)
+			session, found, err := sessionRepo.GetSessionByID(context.Background(), tc.sessionID, session.UserAgent)
 			if err != nil {
 				var pgErr *pq.Error
 				if errors.As(err, &pgErr) {
