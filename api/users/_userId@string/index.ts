@@ -21,6 +21,13 @@ export type Methods = {
     status: 200
     /** A successful response. */
     resBody: Types.V1UpdateUserResponse
-    reqBody: Types.ApiServiceUpdateUserBody
+
+    reqBody: {
+      firstName?: string | undefined
+      lastName?: string | undefined
+      firstNameReading?: string | undefined
+      lastNameReading?: string | undefined
+      gender?: number | undefined
+    }
   }
 }

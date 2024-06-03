@@ -19,7 +19,6 @@ export type Methods = {
     status: 200
     /** A successful response. */
     resBody: Types.V1CreateMovieResponse
-    reqFormat: FormData
     reqBody: Types.V1CreateMovieRequest
   }
 }

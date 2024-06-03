@@ -21,7 +21,17 @@ export type Methods = {
     status: 200
     /** A successful response. */
     resBody: Types.V1UpdateMovieResponse
-    reqFormat: FormData
-    reqBody: Types.ApiServiceUpdateMovieBody
+
+    reqBody: {
+      movieName?: string | undefined
+      director?: string | undefined
+      sammary?: string | undefined
+      thumbnail?: string | undefined
+      link?: string | undefined
+      term?: string | undefined
+      releaseDate?: string | undefined
+      endDate?: string | undefined
+      movieImage?: string[] | undefined
+    }
   }
 }
