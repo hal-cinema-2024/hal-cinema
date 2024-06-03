@@ -25,16 +25,16 @@ func DefaultCookieOptions() CookieOptions {
 	}
 }
 
-type CoockieSetter struct {
+type CookieSetter struct {
 	CookieOptions CookieOptions
 }
 
-func NewCoockieSetter(option CookieOptions) *CoockieSetter {
-	return &CoockieSetter{
+func NewCoockieSetter(option CookieOptions) *CookieSetter {
+	return &CookieSetter{
 		CookieOptions: option,
 	}
 }
-func (f *CoockieSetter) CreateCookieSetter(c echo.Context) *EchoCookieSetter {
+func (f *CookieSetter) CreateCookieSetter(c echo.Context) *EchoCookieSetter {
 	setter := NewEchoCookieSetter(c, f.CookieOptions)
 	return setter
 }
