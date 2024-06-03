@@ -3,7 +3,19 @@ import React from "react";
 import styled from "styled-components";
 import headerImage from "/src/assets/bg.jpg";
 
+type NavLinks = {
+  link: string;
+  name: string;
+};
 function CommonLayout() {
+  const NavLinks = [
+    { link: "/", name: "TOP" },
+    { link: "/movies", name: "映画一覧" },
+    { link: "/movie", name: "チケット購入" },
+    { link: "/schedules", name: "上映スケジュール" },
+    { link: "/profile", name: "マイページ" },
+  ];
+
   return (
     <>
       <div style={{ backgroundImage: `url(${headerImage})` }}>
@@ -11,21 +23,9 @@ function CommonLayout() {
           <Logo1 to="/">LOGO</Logo1>
           <nav>
             <NavLinks className="nav-links">
-              <NavLinkItem>
-                <NavLink to="/">TOP</NavLink>
-              </NavLinkItem>
-              <NavLinkItem>
-                <NavLink to="/movies">映画一覧</NavLink>
-              </NavLinkItem>
-              <NavLinkItem>
-                <NavLink to="/movie">チケット購入</NavLink>
-              </NavLinkItem>
-              <NavLinkItem>
-                <NavLink to="/schedules">上映スケジュール</NavLink>
-              </NavLinkItem>
-              <NavLinkItem>
-                <NavLink to="/profile">マイページ</NavLink>
-              </NavLinkItem>
+              {NavLinks.map((navLink: NavLinks) => (
+                <NavLinkItem>{navLink.name}</NavLinkItem>
+              ))}
             </NavLinks>
           </nav>
         </Header>
@@ -35,16 +35,18 @@ function CommonLayout() {
           <Logo2 to="/">LOGO</Logo2>
           <Nav>
             <NavItem>
-              <FooterNavLink to="/">TOP</FooterNavLink>
+              <FooterNavLink to={routes.HOME}>TOP</FooterNavLink>
             </NavItem>
             <NavItem>
-              <FooterNavLink to="/movies">映画一覧</FooterNavLink>
+              <FooterNavLink to={routes.MOVIES}>映画一覧</FooterNavLink>
             </NavItem>
             <NavItem>
-              <FooterNavLink to="/schedules">スクリーン一覧</FooterNavLink>
+              <FooterNavLink to={routes.TICKET}>チケット購入</FooterNavLink>
             </NavItem>
             <NavItem>
-              <FooterNavLink to="/movie">チケット購入</FooterNavLink>
+              <FooterNavLink to={routes.SCHEDULES}>
+                上映スケジュール
+              </FooterNavLink>
             </NavItem>
           </Nav>
           <Copyright>©HALCinema. All rights Reserved.</Copyright>
