@@ -102,3 +102,35 @@ export const routeTree = rootRoute.addChildren({
 })
 
 /* prettier-ignore-end */
+
+/* ROUTE_MANIFEST_START
+{
+  "routes": {
+    "__root__": {
+      "filePath": "__root.tsx",
+      "children": [
+        "/",
+        "/movie",
+        "/movies",
+        "/profile",
+        "/schedules"
+      ]
+    },
+    "/": {
+      "filePath": "index.lazy.tsx"
+    },
+    "/movie": {
+      "filePath": "movie.lazy.tsx"
+    },
+    "/movies": {
+      "filePath": "movies.lazy.tsx"
+    },
+    "/profile": {
+      "filePath": "profile.lazy.tsx"
+    },
+    "/schedules": {
+      "filePath": "schedules.lazy.tsx"
+    }
+  }
+}
+ROUTE_MANIFEST_END */

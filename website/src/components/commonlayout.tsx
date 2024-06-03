@@ -1,22 +1,19 @@
 import { Outlet, Link } from "@tanstack/react-router";
-import React from "react";
-import styled from "styled-components";
 import styled from "styled-components";
 import headerImage from "/src/assets/bg.jpg";
 
-type NavLinks = {
+type NavLinksType = {
   link: string;
   name: string;
 };
+const NavLinksData: NavLinksType[] = [
+  { link: "/", name: "TOP" },
+  { link: "/movies", name: "映画一覧" },
+  { link: "/movie", name: "チケット購入" },
+  { link: "/schedules", name: "上映スケジュール" },
+  { link: "/profile", name: "マイページ" },
+];
 function CommonLayout() {
-  const NavLinks = [
-    { link: "/", name: "TOP" },
-    { link: "/movies", name: "映画一覧" },
-    { link: "/movie", name: "チケット購入" },
-    { link: "/schedules", name: "上映スケジュール" },
-    { link: "/profile", name: "マイページ" },
-  ];
-
   return (
     <>
       <div style={{ backgroundImage: `url(${headerImage})` }}>
@@ -24,21 +21,11 @@ function CommonLayout() {
           <Logo1 to='/'>LOGO</Logo1>
           <nav>
             <NavLinks className='nav-links'>
-              <NavLinkItem>
-                <NavLink to='/'>TOP</NavLink>
-              </NavLinkItem>
-              <NavLinkItem>
-                <NavLink to='/movies'>映画一覧</NavLink>
-              </NavLinkItem>
-              <NavLinkItem>
-                <NavLink to='/movie'>チケット購入</NavLink>
-              </NavLinkItem>
-              <NavLinkItem>
-                <NavLink to='/schedules'>上映スケジュール</NavLink>
-              </NavLinkItem>
-              <NavLinkItem>
-                <NavLink to='/profile'>マイページ</NavLink>
-              </NavLinkItem>
+              {NavLinksData.map((navLink) => (
+                <NavLinkItem key={navLink.link}>
+                  <NavLink to={navLink.link}>{navLink.name}</NavLink>
+                </NavLinkItem>
+              ))}
             </NavLinks>
           </nav>
         </Header>
