@@ -50,7 +50,7 @@ func NewRouter() http.Handler {
 
 func (r *router) GoogleLogin(corsRoute *echo.Group) {
 	googleLogin := container.Invoke[*interactor.GoogleLogin]()
-	coockieSetter := container.Invoke[*cookie.CoockieSetter]()
+	coockieSetter := container.Invoke[*cookie.CookieSetter]()
 
 	corsRoute.POST("/login/google", controller.GoogleLogin(googleLogin, coockieSetter))
 
