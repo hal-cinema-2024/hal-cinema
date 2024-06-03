@@ -57,7 +57,7 @@ const TimeContainer = styled.div`
   margin: 5px;
   aspect-ratio: 1 / 1;
   position: relative;
-  border: 1px solid #000;
+  background-color: #f5f5f5;
 `;
 
 const Start = styled.p`

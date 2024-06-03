@@ -20,11 +20,11 @@ function Index() {
 
 const SchedulesContainer = styled.div`
   padding: 30px 0 100px;
-  /* background-color: pink; */
 `;
 
 const Title = styled.h1`
   margin: 30px 0;
   text-align: center;
   font-size: 40px;
+  color: #fff;
 `;
