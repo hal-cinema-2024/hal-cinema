@@ -7,7 +7,7 @@ import (
 )
 
 type MovieRepo interface {
-	CreateMovie(ctx context.Context, movie *model.Movie) (string, error)
+	CreateMovie(ctx context.Context, movie *model.Movie, imagePaths []string) (string, error)
 	GetMovieByID(ctx context.Context, movieID string) (*model.Movie, error)
 	GetMovies(ctx context.Context) ([]*model.Movie, error)
 	UpdateMovie(ctx context.Context, movie *model.Movie) (string, error)

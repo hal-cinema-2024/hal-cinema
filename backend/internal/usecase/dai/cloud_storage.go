@@ -2,11 +2,10 @@ package dai
 
 import (
 	"context"
-	"io"
 )
 
 type StorageRepo interface {
-	UploadBlob(ctx context.Context, containerName, blobName string, data io.Reader) (string, error)
+	UploadBlob(ctx context.Context, blobName string, data []byte) (string, error)
 }
 
 type ParallelGetPresignedObjectURLInput struct {

@@ -17,12 +17,21 @@ func NewMovieRepo(gorm *gorm.DB) *MovieRepo {
 	}
 }
 
-func (r *MovieRepo) CreateMovie(ctx context.Context, movie *model.Movie) (string, error) {
+func (r *MovieRepo) CreateMovie(ctx context.Context, movie *model.Movie, imagePaths []string) (string, error) {
 	result := r.db.Create(&movie)
 	if result.Error != nil {
 		return "", result.Error
 	}
-
+	// 追加画像のパスを保存
+	for _, imagePath := range imagePaths {
+		result := r.db.Create(&model.MovieImage{
+			MovieID:  movie.MovieID,
+			FilePath: imagePath,
+		})
+		if result.Error != nil {
+			return "", result.Error
+		}
+	}
 	return movie.MovieID, nil
 }
 

@@ -4,20 +4,20 @@ import (
 	"mime/multipart"
 	"time"
 
-	"github.com/hal-cinema-2024/backend/internal/entities/model"
 	"github.com/hal-cinema-2024/backend/internal/usecase/interactor"
 	"github.com/labstack/echo/v4"
 )
 
 type CreateMovieRequest struct {
-	Name        string    `json:"name"`
-	Director    string    `json:"director"`
-	Summary     string    `json:"summary"`
-	Thumbnail   byte      `json:"thumbnail"`
-	Link        string    `json:"link"`
-	Term        int32     `json:"term"`
-	ReleaseDate time.Time `json:"release_date"`
-	EndDate     time.Time `json:"end_date"`
+	Name        string                `json:"movieName"`
+	Director    string                `json:"director"`
+	Summary     string                `json:"summary"`
+	Thumbnail   *multipart.FileHeader `json:"thumbnail"`
+	Link        string                `json:"link"`
+	Term        int32                 `json:"term"`
+	ReleaseDate time.Time             `json:"releaseDate"`
+	EndDate     time.Time             `json:"endDate"`
+	MovieImage  *multipart.FileHeader `json:"movieImage"`
 }
 
 type CreateMovieResponse struct {
@@ -35,24 +35,27 @@ func CreateMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 		if err != nil {
 			return echo.ErrBadRequest
 		}
-		var image *multipart.FileHeader
+		var thumbnail *multipart.FileHeader
 
-		imageFiles, ok := form.File["image"]
+		imageFiles, ok := form.File["thumbnail"]
 		if !ok {
-			image = nil
+			thumbnail = nil
 		} else {
-			image = imageFiles[0]
+			thumbnail = imageFiles[0]
 		}
 
-		movieID, err := mi.CreateMovie(ctx.Request().Context(), &model.Movie{
-			Name:          req.Name,
-			Director:      req.Director,
-			Summary:       req.Summary,
-			ThumbnailPath: image.Filename, //?
-			Link:          req.Link,
-			Term:          req.Term,
-			ReleaseDate:   req.ReleaseDate,
-			EndDate:       req.EndDate,
+		movieImageFiles, ok := form.File["movieImage"]
+
+		movieID, err := mi.CreateMovie(ctx.Request().Context(), interactor.CreateMovie{
+			Name:        req.Name,
+			Director:    req.Director,
+			Summary:     req.Summary,
+			Thumbnail:   thumbnail,
+			Link:        req.Link,
+			Term:        req.Term,
+			ReleaseDate: req.ReleaseDate,
+			EndDate:     req.EndDate,
+			MovieImage:  movieImageFiles,
 		})
 		if err != nil {
 			return err
