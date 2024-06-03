@@ -13,12 +13,4 @@ export type Methods = {
     /** A successful response. */
     resBody: Types.V1GetUsersResponse
   }
-
-  /** Create user */
-  post: {
-    status: 200
-    /** A successful response. */
-    resBody: Types.V1CreateUserResponse
-    reqBody: Types.V1CreateUserReqest
-  }
 }
