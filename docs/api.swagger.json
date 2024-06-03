@@ -1,12 +1,12 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "projects/hal_cinema.proto",
+    "title": "api/v1/api.proto",
     "version": "version not set"
   },
   "tags": [
     {
-      "name": "ApiService"
+      "name": "APIService"
     }
   ],
   "consumes": [
@@ -16,14 +16,45 @@
     "application/json"
   ],
   "paths": {
+    "/login/google": {
+      "post": {
+        "summary": "Google Login",
+        "description": "Google Login",
+        "operationId": "APIService_GoogleLogin",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GoogleLoginResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1GoogleLoginRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Login"
+        ]
+      }
+    },
     "/movies": {
       "get": {
         "summary": "Get all movies",
         "description": "Get all movies",
-        "operationId": "ApiService_GetMovies",
-        "produces": [
-          "multipart/form-data"
-        ],
+        "operationId": "APIService_GetMovies",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -31,15 +62,10 @@
               "$ref": "#/definitions/v1GetMoviesResponse"
             }
           },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {},
-            "examples": {
-              "application/json": {
-                "status:": 1,
-                "title": "titleExample",
-                "detail": "detailExample"
-              }
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -66,10 +92,7 @@
       "post": {
         "summary": "Create movie",
         "description": "Create movie",
-        "operationId": "ApiService_CreateMovie",
-        "consumes": [
-          "multipart/form-data"
-        ],
+        "operationId": "APIService_CreateMovie",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -77,15 +100,10 @@
               "$ref": "#/definitions/v1CreateMovieResponse"
             }
           },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {},
-            "examples": {
-              "application/json": {
-                "status:": 1,
-                "title": "titleExample",
-                "detail": "detailExample"
-              }
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -108,10 +126,7 @@
       "get": {
         "summary": "Get movie details",
         "description": "Get movie details",
-        "operationId": "ApiService_GetMovie",
-        "produces": [
-          "multipart/form-data"
-        ],
+        "operationId": "APIService_GetMovie",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -119,15 +134,10 @@
               "$ref": "#/definitions/v1GetMovieResponse"
             }
           },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {},
-            "examples": {
-              "application/json": {
-                "status:": 1,
-                "title": "titleExample",
-                "detail": "detailExample"
-              }
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -146,7 +156,7 @@
       "delete": {
         "summary": "Delete movie",
         "description": "Delete movie",
-        "operationId": "ApiService_DeleteMovie",
+        "operationId": "APIService_DeleteMovie",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -154,15 +164,10 @@
               "$ref": "#/definitions/v1DeleteMovieResponse"
             }
           },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {},
-            "examples": {
-              "application/json": {
-                "status:": 1,
-                "title": "titleExample",
-                "detail": "detailExample"
-              }
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -181,10 +186,7 @@
       "put": {
         "summary": "Update movie",
         "description": "Update movie",
-        "operationId": "ApiService_UpdateMovie",
-        "consumes": [
-          "multipart/form-data"
-        ],
+        "operationId": "APIService_UpdateMovie",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -192,15 +194,10 @@
               "$ref": "#/definitions/v1UpdateMovieResponse"
             }
           },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {},
-            "examples": {
-              "application/json": {
-                "status:": 1,
-                "title": "titleExample",
-                "detail": "detailExample"
-              }
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -216,7 +213,42 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ApiServiceUpdateMovieBody"
+              "type": "object",
+              "properties": {
+                "movieName": {
+                  "type": "string"
+                },
+                "director": {
+                  "type": "string"
+                },
+                "sammary": {
+                  "type": "string"
+                },
+                "thumbnail": {
+                  "type": "string",
+                  "format": "byte"
+                },
+                "link": {
+                  "type": "string"
+                },
+                "term": {
+                  "type": "string"
+                },
+                "releaseDate": {
+                  "type": "string"
+                },
+                "endDate": {
+                  "type": "string"
+                },
+                "movieImage": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "byte"
+                  }
+                }
+              },
+              "title": "multipart/form-dataにする"
             }
           }
         ],
@@ -229,7 +261,7 @@
       "get": {
         "summary": "Get all orders",
         "description": "Get all orders",
-        "operationId": "ApiService_GetOrders",
+        "operationId": "APIService_GetOrders",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -237,15 +269,10 @@
               "$ref": "#/definitions/v1GetOrdersResponse"
             }
           },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {},
-            "examples": {
-              "application/json": {
-                "status:": 1,
-                "title": "titleExample",
-                "detail": "detailExample"
-              }
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -264,7 +291,7 @@
       "post": {
         "summary": "Create order",
         "description": "Create order",
-        "operationId": "ApiService_CreateOrder",
+        "operationId": "APIService_CreateOrder",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -272,15 +299,10 @@
               "$ref": "#/definitions/v1CreateOrderResponse"
             }
           },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {},
-            "examples": {
-              "application/json": {
-                "status:": 1,
-                "title": "titleExample",
-                "detail": "detailExample"
-              }
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -303,7 +325,7 @@
       "get": {
         "summary": "Get order",
         "description": "Get order",
-        "operationId": "ApiService_GetOrder",
+        "operationId": "APIService_GetOrder",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -311,15 +333,10 @@
               "$ref": "#/definitions/v1GetOrderResponse"
             }
           },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {},
-            "examples": {
-              "application/json": {
-                "status:": 1,
-                "title": "titleExample",
-                "detail": "detailExample"
-              }
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -338,7 +355,7 @@
       "delete": {
         "summary": "Delete order",
         "description": "Delete order",
-        "operationId": "ApiService_DeleteOrder",
+        "operationId": "APIService_DeleteOrder",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -346,15 +363,10 @@
               "$ref": "#/definitions/v1DeleteOrderResponse"
             }
           },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {},
-            "examples": {
-              "application/json": {
-                "status:": 1,
-                "title": "titleExample",
-                "detail": "detailExample"
-              }
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -375,7 +387,7 @@
       "post": {
         "summary": "Create reservation",
         "description": "Create reservation",
-        "operationId": "ApiService_CreateSeatReservation",
+        "operationId": "APIService_CreateSeatReservation",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -383,15 +395,10 @@
               "$ref": "#/definitions/v1CreateSeatReservationResponse"
             }
           },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {},
-            "examples": {
-              "application/json": {
-                "status:": 1,
-                "title": "titleExample",
-                "detail": "detailExample"
-              }
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -414,7 +421,7 @@
       "delete": {
         "summary": "Delete reservation",
         "description": "Delete reservation",
-        "operationId": "ApiService_DeleteSeatReservation",
+        "operationId": "APIService_DeleteSeatReservation",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -422,15 +429,10 @@
               "$ref": "#/definitions/v1DeleteSeatReservationResponse"
             }
           },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {},
-            "examples": {
-              "application/json": {
-                "status:": 1,
-                "title": "titleExample",
-                "detail": "detailExample"
-              }
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -451,7 +453,7 @@
       "get": {
         "summary": "Get all schedules",
         "description": "Get all schedules",
-        "operationId": "ApiService_GetSchedules",
+        "operationId": "APIService_GetSchedules",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -459,15 +461,10 @@
               "$ref": "#/definitions/v1GetSchedulesResponse"
             }
           },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {},
-            "examples": {
-              "application/json": {
-                "status:": 1,
-                "title": "titleExample",
-                "detail": "detailExample"
-              }
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -500,7 +497,7 @@
       "post": {
         "summary": "Create schedule",
         "description": "Create schedule",
-        "operationId": "ApiService_CreateSchedule",
+        "operationId": "APIService_CreateSchedule",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -508,15 +505,10 @@
               "$ref": "#/definitions/v1CreateScheduleResponse"
             }
           },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {},
-            "examples": {
-              "application/json": {
-                "status:": 1,
-                "title": "titleExample",
-                "detail": "detailExample"
-              }
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -539,7 +531,7 @@
       "delete": {
         "summary": "Delete schedule",
         "description": "Delete schedule",
-        "operationId": "ApiService_DeleteSchedule",
+        "operationId": "APIService_DeleteSchedule",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -547,15 +539,10 @@
               "$ref": "#/definitions/v1DeleteScheduleResponse"
             }
           },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {},
-            "examples": {
-              "application/json": {
-                "status:": 1,
-                "title": "titleExample",
-                "detail": "detailExample"
-              }
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -574,7 +561,7 @@
       "put": {
         "summary": "Update schedule",
         "description": "Update schedule",
-        "operationId": "ApiService_UpdateSchedule",
+        "operationId": "APIService_UpdateSchedule",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -582,15 +569,10 @@
               "$ref": "#/definitions/v1UpdateScheduleResponse"
             }
           },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {},
-            "examples": {
-              "application/json": {
-                "status:": 1,
-                "title": "titleExample",
-                "detail": "detailExample"
-              }
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -606,7 +588,18 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ApiServiceUpdateScheduleBody"
+              "type": "object",
+              "properties": {
+                "movieId": {
+                  "type": "string"
+                },
+                "theaterId": {
+                  "type": "string"
+                },
+                "startTime": {
+                  "type": "string"
+                }
+              }
             }
           }
         ],
@@ -619,7 +612,7 @@
       "get": {
         "summary": "Get user",
         "description": "Get user",
-        "operationId": "ApiService_GetUsers",
+        "operationId": "APIService_GetUsers",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -627,15 +620,10 @@
               "$ref": "#/definitions/v1GetUsersResponse"
             }
           },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {},
-            "examples": {
-              "application/json": {
-                "status:": 1,
-                "title": "titleExample",
-                "detail": "detailExample"
-              }
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -656,50 +644,13 @@
         "tags": [
           "Users"
         ]
-      },
-      "post": {
-        "summary": "Create user",
-        "description": "Create user",
-        "operationId": "ApiService_CreateUser",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1CreateUserResponse"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {},
-            "examples": {
-              "application/json": {
-                "status:": 1,
-                "title": "titleExample",
-                "detail": "detailExample"
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v1CreateUserReqest"
-            }
-          }
-        ],
-        "tags": [
-          "Users"
-        ]
       }
     },
     "/users/{userId}": {
       "get": {
         "summary": "Get user",
         "description": "Get user",
-        "operationId": "ApiService_GetUser",
+        "operationId": "APIService_GetUser",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -707,15 +658,10 @@
               "$ref": "#/definitions/v1GetUserResponse"
             }
           },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {},
-            "examples": {
-              "application/json": {
-                "status:": 1,
-                "title": "titleExample",
-                "detail": "detailExample"
-              }
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -734,7 +680,7 @@
       "delete": {
         "summary": "Delete user",
         "description": "Delete user",
-        "operationId": "ApiService_DeleteUser",
+        "operationId": "APIService_DeleteUser",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -742,15 +688,10 @@
               "$ref": "#/definitions/v1DeleteUserResponse"
             }
           },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {},
-            "examples": {
-              "application/json": {
-                "status:": 1,
-                "title": "titleExample",
-                "detail": "detailExample"
-              }
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -769,7 +710,7 @@
       "put": {
         "summary": "Update user",
         "description": "Update user",
-        "operationId": "ApiService_UpdateUser",
+        "operationId": "APIService_UpdateUser",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -777,15 +718,10 @@
               "$ref": "#/definitions/v1UpdateUserResponse"
             }
           },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {},
-            "examples": {
-              "application/json": {
-                "status:": 1,
-                "title": "titleExample",
-                "detail": "detailExample"
-              }
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -801,7 +737,25 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ApiServiceUpdateUserBody"
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
+                },
+                "firstNameReading": {
+                  "type": "string"
+                },
+                "lastNameReading": {
+                  "type": "string"
+                },
+                "gender": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
             }
           }
         ],
@@ -812,76 +766,31 @@
     }
   },
   "definitions": {
-    "ApiServiceUpdateMovieBody": {
+    "protobufAny": {
       "type": "object",
       "properties": {
-        "movieName": {
+        "@type": {
           "type": "string"
-        },
-        "director": {
-          "type": "string"
-        },
-        "sammary": {
-          "type": "string"
-        },
-        "thumbnail": {
-          "type": "string",
-          "format": "byte"
-        },
-        "link": {
-          "type": "string"
-        },
-        "term": {
-          "type": "string"
-        },
-        "releaseDate": {
-          "type": "string"
-        },
-        "endDate": {
-          "type": "string"
-        },
-        "movieImage": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "format": "byte"
-          }
         }
       },
-      "title": "multipart/form-dataにする"
+      "additionalProperties": {}
     },
-    "ApiServiceUpdateScheduleBody": {
+    "rpcStatus": {
       "type": "object",
       "properties": {
-        "movieId": {
-          "type": "string"
-        },
-        "theaterId": {
-          "type": "string"
-        },
-        "startTime": {
-          "type": "string"
-        }
-      }
-    },
-    "ApiServiceUpdateUserBody": {
-      "type": "object",
-      "properties": {
-        "firstName": {
-          "type": "string"
-        },
-        "lastName": {
-          "type": "string"
-        },
-        "firstNameReading": {
-          "type": "string"
-        },
-        "lastNameReading": {
-          "type": "string"
-        },
-        "gender": {
+        "code": {
           "type": "integer",
           "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
         }
       }
     },
@@ -998,22 +907,6 @@
         }
       }
     },
-    "v1CreateUserReqest": {
-      "type": "object",
-      "properties": {
-        "user": {
-          "$ref": "#/definitions/v1User"
-        }
-      }
-    },
-    "v1CreateUserResponse": {
-      "type": "object",
-      "properties": {
-        "userId": {
-          "type": "string"
-        }
-      }
-    },
     "v1DeleteMovieResponse": {
       "type": "object",
       "properties": {
@@ -1123,6 +1016,25 @@
             "type": "object",
             "$ref": "#/definitions/v1User"
           }
+        }
+      }
+    },
+    "v1GoogleLoginRequest": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "userAgent": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GoogleLoginResponse": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
         }
       }
     },

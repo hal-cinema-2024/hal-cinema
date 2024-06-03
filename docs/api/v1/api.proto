@@ -1,30 +1,14 @@
 syntax = "proto3";
 
-package output.api.v1;
+package api.v1;
 
-// import "google/protobuf/empty.proto";
-import "third_party/google/api/annotations.proto";
-import "third_party/grpc/openapiv2/options/annotations.proto";
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
-option go_package = "proto/api/v1";
+option go_package = "hal-cinema/api/v1";
 
-option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
-  responses: {
-    key: "500";
-    value: {
-      description: "Internal Server Error";
-      examples: {
-        key: "application/json"
-        value: "{\"status:\": 1, \"title\": \"titleExample\", \"detail\": \"detailExample\"}"
-      }
-    }
-    
-  }
-};
-
-service ApiService {
-
-  rpc CreateSchedule(CreateScheduleRequest) returns (CreateScheduleResponse){
+service APIService {
+  rpc CreateSchedule(CreateScheduleRequest) returns (CreateScheduleResponse) {
     option (google.api.http) = {
       post: "/schedules"
       body: "*"
@@ -36,10 +20,8 @@ service ApiService {
     };
   }
 
-  rpc GetSchedules(GetSchedulesRequest) returns (GetSchedulesResponse){
-    option (google.api.http) = {
-      get: "/schedules"
-    };
+  rpc GetSchedules(GetSchedulesRequest) returns (GetSchedulesResponse) {
+    option (google.api.http) = {get: "/schedules"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Schedules"]
       summary: "Get all schedules"
@@ -47,7 +29,7 @@ service ApiService {
     };
   }
 
-  rpc UpdateSchedule(UpdateScheduleRequest) returns (UpdateScheduleResponse){
+  rpc UpdateSchedule(UpdateScheduleRequest) returns (UpdateScheduleResponse) {
     option (google.api.http) = {
       put: "/schedules/{schedule_id}"
       body: "*"
@@ -59,10 +41,8 @@ service ApiService {
     };
   }
 
-  rpc DeleteSchedule(DeleteScheduleRequest) returns (DeleteScheduleResponse){
-    option (google.api.http) = {
-      delete: "/schedules/{schedule_id}"
-    };
+  rpc DeleteSchedule(DeleteScheduleRequest) returns (DeleteScheduleResponse) {
+    option (google.api.http) = {delete: "/schedules/{schedule_id}"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Schedules"]
       summary: "Delete schedule"
@@ -71,7 +51,7 @@ service ApiService {
   }
 
   // multipart/form-dataにする
-  rpc CreateMovie(CreateMovieRequest) returns (CreateMovieResponse){
+  rpc CreateMovie(CreateMovieRequest) returns (CreateMovieResponse) {
     option (google.api.http) = {
       post: "/movies"
       body: "*"
@@ -82,12 +62,10 @@ service ApiService {
       description: "Create movie"
     };
   }
-  
+
   // multipart/form-dataにする
-  rpc GetMovies(GetMoviesRequest) returns (GetMoviesResponse){
-    option (google.api.http) = {
-      get: "/movies"
-    };
+  rpc GetMovies(GetMoviesRequest) returns (GetMoviesResponse) {
+    option (google.api.http) = {get: "/movies"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Movies"]
       summary: "Get all movies"
@@ -96,10 +74,8 @@ service ApiService {
   }
 
   // multipart/form-dataにする
-  rpc GetMovie(GetMovieRequest) returns (GetMovieResponse){
-    option (google.api.http) = {
-      get: "/movies/{movie_id}"
-    };
+  rpc GetMovie(GetMovieRequest) returns (GetMovieResponse) {
+    option (google.api.http) = {get: "/movies/{movie_id}"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Movies"]
       summary: "Get movie details"
@@ -108,7 +84,7 @@ service ApiService {
   }
 
   // multipart/form-dataにする
-  rpc UpdateMovie(UpdateMovieRequest) returns (UpdateMovieResponse){
+  rpc UpdateMovie(UpdateMovieRequest) returns (UpdateMovieResponse) {
     option (google.api.http) = {
       put: "/movies/{movie_id}"
       body: "*"
@@ -120,10 +96,8 @@ service ApiService {
     };
   }
 
-  rpc DeleteMovie(DeleteMovieRequest) returns (DeleteMovieResponse){
-    option (google.api.http) = {
-      delete: "/movies/{movie_id}"
-    };
+  rpc DeleteMovie(DeleteMovieRequest) returns (DeleteMovieResponse) {
+    option (google.api.http) = {delete: "/movies/{movie_id}"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Movies"]
       summary: "Delete movie"
@@ -131,22 +105,20 @@ service ApiService {
     };
   }
 
-  rpc CreateUser(CreateUserReqest) returns (CreateUserResponse){
+  rpc GoogleLogin(GoogleLoginRequest) returns (GoogleLoginResponse) {
     option (google.api.http) = {
-      post: "/users"
+      post: "/login/google"
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: ["Users"]
-      summary: "Create user"
-      description: "Create user"
+      tags: ["Login"]
+      summary: "Google Login"
+      description: "Google Login"
     };
   }
 
-  rpc GetUsers(GetUsersRequest) returns (GetUsersResponse){
-    option (google.api.http) = {
-      get: "/users"
-    };
+  rpc GetUsers(GetUsersRequest) returns (GetUsersResponse) {
+    option (google.api.http) = {get: "/users"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Users"]
       summary: "Get user"
@@ -154,10 +126,8 @@ service ApiService {
     };
   }
 
-  rpc GetUser(GetUserRequest) returns (GetUserResponse){
-    option (google.api.http) = {
-      get: "/users/{user_id}"
-    };
+  rpc GetUser(GetUserRequest) returns (GetUserResponse) {
+    option (google.api.http) = {get: "/users/{user_id}"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Users"]
       summary: "Get user"
@@ -165,7 +135,7 @@ service ApiService {
     };
   }
 
-  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse){
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
     option (google.api.http) = {
       put: "/users/{user_id}"
       body: "*"
@@ -177,10 +147,8 @@ service ApiService {
     };
   }
 
-  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse){
-    option (google.api.http) = {
-      delete: "/users/{user_id}"
-    };
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {
+    option (google.api.http) = {delete: "/users/{user_id}"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Users"]
       summary: "Delete user"
@@ -188,7 +156,7 @@ service ApiService {
     };
   }
 
-  rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse){
+  rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse) {
     option (google.api.http) = {
       post: "/orders"
       body: "*"
@@ -200,10 +168,8 @@ service ApiService {
     };
   }
 
-  rpc GetOrders(GetOrdersRequest) returns (GetOrdersResponse){
-    option (google.api.http) = {
-      get: "/orders"
-    };
+  rpc GetOrders(GetOrdersRequest) returns (GetOrdersResponse) {
+    option (google.api.http) = {get: "/orders"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Orders"]
       summary: "Get all orders"
@@ -211,10 +177,8 @@ service ApiService {
     };
   }
 
-  rpc GetOrder(GetOrderRequest) returns (GetOrderResponse){
-    option (google.api.http) = {
-      get: "/orders/{order_id}"
-    };
+  rpc GetOrder(GetOrderRequest) returns (GetOrderResponse) {
+    option (google.api.http) = {get: "/orders/{order_id}"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Orders"]
       summary: "Get order"
@@ -222,10 +186,8 @@ service ApiService {
     };
   }
 
-  rpc DeleteOrder(DeleteOrderRequest) returns (DeleteOrderResponse){
-    option (google.api.http) = {
-      delete: "/orders/{order_id}"
-    };
+  rpc DeleteOrder(DeleteOrderRequest) returns (DeleteOrderResponse) {
+    option (google.api.http) = {delete: "/orders/{order_id}"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Orders"]
       summary: "Delete order"
@@ -233,7 +195,7 @@ service ApiService {
     };
   }
 
-  rpc CreateSeatReservation(CreateSeatReservationRequest) returns (CreateSeatReservationResponse){
+  rpc CreateSeatReservation(CreateSeatReservationRequest) returns (CreateSeatReservationResponse) {
     option (google.api.http) = {
       post: "/reservations"
       body: "*"
@@ -245,17 +207,14 @@ service ApiService {
     };
   }
 
-  rpc DeleteSeatReservation(DeleteSeatReservationRequest) returns (DeleteSeatReservationResponse){
-    option (google.api.http) = {
-      delete: "/reservations/{theater_seat_id}"
-    };
+  rpc DeleteSeatReservation(DeleteSeatReservationRequest) returns (DeleteSeatReservationResponse) {
+    option (google.api.http) = {delete: "/reservations/{theater_seat_id}"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Reservations"]
       summary: "Delete reservation"
       description: "Delete reservation"
     };
   }
-
 }
 
 message CreateScheduleRequest {
@@ -267,7 +226,6 @@ message CreateScheduleRequest {
 message CreateScheduleResponse {
   string schedule_id = 1;
 }
-
 
 message GetSchedulesRequest {
   int64 page_id = 1;
@@ -298,7 +256,7 @@ message DeleteScheduleResponse {
   string schedule_id = 1;
 }
 
-message CreateMovieRequest{
+message CreateMovieRequest {
   string movie_name = 1;
   string director = 2;
   string sammary = 3;
@@ -310,7 +268,7 @@ message CreateMovieRequest{
   repeated bytes movie_image = 9;
 }
 
-message CreateMovieResponse{
+message CreateMovieResponse {
   string movie_id = 1;
 }
 
@@ -332,7 +290,7 @@ message GetMovieResponse {
 }
 
 // multipart/form-dataにする
-message UpdateMovieRequest{
+message UpdateMovieRequest {
   string movie_id = 1;
   string movie_name = 2;
   string director = 3;
@@ -345,44 +303,45 @@ message UpdateMovieRequest{
   repeated bytes movie_image = 10;
 }
 
-message UpdateMovieResponse{
+message UpdateMovieResponse {
   string movie_id = 1;
 }
 
-message DeleteMovieRequest{
+message DeleteMovieRequest {
   string movie_id = 1;
 }
 
-message DeleteMovieResponse{
+message DeleteMovieResponse {
   string movie_id = 1;
 }
 
-message CreateUserReqest{
-  User user = 1;
+message GoogleLoginRequest {
+  string code = 1;
+  string user_agent = 2;
 }
 
-message CreateUserResponse{
+message GoogleLoginResponse {
   string user_id = 1;
 }
 
-message GetUserRequest{
+message GetUserRequest {
   string user_id = 1;
 }
 
-message GetUserResponse{
+message GetUserResponse {
   User user = 1;
 }
 
-message GetUsersRequest{
+message GetUsersRequest {
   string page_id = 1;
   string page_size = 2;
 }
 
-message GetUsersResponse{
+message GetUsersResponse {
   repeated User user = 1;
 }
 
-message UpdateUserRequest{
+message UpdateUserRequest {
   string user_id = 1;
   string first_name = 2;
   string last_name = 3;
@@ -391,69 +350,69 @@ message UpdateUserRequest{
   int32 gender = 6;
 }
 
-message UpdateUserResponse{
+message UpdateUserResponse {
   string user_id = 1;
 }
 
-message DeleteUserRequest{
+message DeleteUserRequest {
   string user_id = 1;
 }
 
-message DeleteUserResponse{
+message DeleteUserResponse {
   string user_id = 1;
 }
 
-message CreateOrderRequest{
+message CreateOrderRequest {
   repeated Orders order = 1;
 }
 
-message CreateOrderResponse{
+message CreateOrderResponse {
   string order_id = 1;
 }
 
-message GetOrdersRequest{
+message GetOrdersRequest {
   string user_id = 1;
 }
 
-message GetOrdersResponse{
+message GetOrdersResponse {
   repeated Orders order = 2;
 }
 
-message GetOrderRequest{
+message GetOrderRequest {
   string order_id = 1;
 }
 
-message GetOrderResponse{
+message GetOrderResponse {
   Orders order = 1;
 }
 
-message DeleteOrderRequest{
+message DeleteOrderRequest {
   string order_id = 1;
 }
 
-message DeleteOrderResponse{
+message DeleteOrderResponse {
   string order_id = 1;
 }
 
-message CreateSeatReservationRequest{
+message CreateSeatReservationRequest {
   string schedule_id = 1;
   string user_id = 2;
   repeated string seat_id = 3;
 }
 
-message CreateSeatReservationResponse{
+message CreateSeatReservationResponse {
   string theater_seat_id = 1;
 }
 
-message DeleteSeatReservationRequest{
+message DeleteSeatReservationRequest {
   string theater_seat_id = 1;
 }
 
-message DeleteSeatReservationResponse{
+message DeleteSeatReservationResponse {
   string theater_seat_id = 1;
 }
 
-message Orders{
+message Orders {
   string order_id = 1;
   string user_id = 2;
   string movie_name = 3;
@@ -461,7 +420,7 @@ message Orders{
   repeated OrdersDetail order_detail = 5;
 }
 
-message OrdersDetail{
+message OrdersDetail {
   string seat_name = 1;
   string price_type = 2;
   int32 price = 3;
