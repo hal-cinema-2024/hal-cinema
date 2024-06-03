@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/hal-cinema-2024/backend/internal/framework/cookie"
@@ -35,7 +34,6 @@ func SessionMiddleware(ui *interactor.SessionInteractor) echo.MiddlewareFunc {
 			if err != nil {
 				return echo.ErrInternalServerError
 			}
-			log.Println("ok", user.UserID)
 			ctx.Set(hcontext.UserID.String(), user.UserID)
 			return next(ctx)
 		}
