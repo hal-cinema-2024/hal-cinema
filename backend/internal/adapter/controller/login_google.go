@@ -5,12 +5,13 @@ import (
 	"net/http"
 
 	"github.com/hal-cinema-2024/backend/internal/framework/cookie"
+	"github.com/hal-cinema-2024/backend/internal/framework/hcontext"
 	"github.com/hal-cinema-2024/backend/internal/usecase/interactor"
 	"github.com/labstack/echo/v4"
 )
 
 type LoginRequest struct {
-	AuthorizationCode string `json:"authorizationCode"`
+	AuthorizationCode string `json:"code"`
 }
 
 type LoginResponse struct {
@@ -28,7 +29,13 @@ func GoogleLogin(
 			return echo.ErrBadRequest
 		}
 
-		userInfo, err := googleLogin.Login(ctx.Request().Context(), reqBody.AuthorizationCode)
+		userAgent, ok := ctx.Get(hcontext.UserAgent.String()).(string)
+		if !ok {
+			log.Println("[ERROR] user agent not found")
+			return echo.ErrInternalServerError
+		}
+
+		userInfo, err := googleLogin.Login(ctx.Request().Context(), reqBody.AuthorizationCode, userAgent)
 		if err != nil {
 			log.Println("[ERROR] ", err)
 			return echo.ErrInternalServerError
