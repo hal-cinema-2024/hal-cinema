@@ -81,7 +81,7 @@ CREATE TABLE "movies" (
 CREATE TABLE "movie_images" (
   "movie_id" varchar(63),
   "file_path" varchar(255) NOT NULL,
-  "order" int NOT NULL
+  "order" serial NOT NULL
 );
 
 CREATE TABLE "theaters_seats" (
