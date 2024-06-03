@@ -33,15 +33,24 @@ jobs:
       
       - name: generate aspida
         run: |
+          rm -rf api/
           npx openapi2aspida -i docs/api.swagger.json -o=api/
+
+      - name: Count changes
+        id: changes
+        run: |
+          git add -N .
+          echo "::set-output name=count::$(git diff --name-only | wc -l)"
       
       - name: Commit and push changes
+        if: steps.changes.outputs.count > 0 
         run: |
           git add api/**
           git commit -m ":robot: generate aspida docs"
           git push origin bot/generate_aspida_${{github.sha}}
 
       - name: create Pull Request to develop
+        if: steps.changes.outputs.count > 0 
         run: |
           gh pr create \
             --title ":robot: generate from openAPI schema[bot]" \
