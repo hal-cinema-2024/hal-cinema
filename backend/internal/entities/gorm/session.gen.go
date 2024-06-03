@@ -28,6 +28,7 @@ func newSession(db *gorm.DB, opts ...gen.DOOption) session {
 	tableName := _session.sessionDo.TableName()
 	_session.ALL = field.NewAsterisk(tableName)
 	_session.SessionID = field.NewString(tableName, "session_id")
+	_session.UserAgent = field.NewString(tableName, "user_agent")
 	_session.UserID = field.NewString(tableName, "user_id")
 	_session.Token = field.NewString(tableName, "token")
 	_session.ExpirationTime = field.NewInt32(tableName, "expiration_time")
@@ -43,6 +44,7 @@ type session struct {
 
 	ALL            field.Asterisk
 	SessionID      field.String
+	UserAgent      field.String
 	UserID         field.String
 	Token          field.String
 	ExpirationTime field.Int32
@@ -64,6 +66,7 @@ func (s session) As(alias string) *session {
 func (s *session) updateTableName(table string) *session {
 	s.ALL = field.NewAsterisk(table)
 	s.SessionID = field.NewString(table, "session_id")
+	s.UserAgent = field.NewString(table, "user_agent")
 	s.UserID = field.NewString(table, "user_id")
 	s.Token = field.NewString(table, "token")
 	s.ExpirationTime = field.NewInt32(table, "expiration_time")
@@ -92,8 +95,9 @@ func (s *session) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *session) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 5)
+	s.fieldMap = make(map[string]field.Expr, 6)
 	s.fieldMap["session_id"] = s.SessionID
+	s.fieldMap["user_agent"] = s.UserAgent
 	s.fieldMap["user_id"] = s.UserID
 	s.fieldMap["token"] = s.Token
 	s.fieldMap["expiration_time"] = s.ExpirationTime
