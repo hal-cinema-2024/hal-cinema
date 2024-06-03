@@ -1024,9 +1024,6 @@
       "properties": {
         "code": {
           "type": "string"
-        },
-        "userAgent": {
-          "type": "string"
         }
       }
     },

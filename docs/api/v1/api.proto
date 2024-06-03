@@ -317,7 +317,6 @@ message DeleteMovieResponse {
 
 message GoogleLoginRequest {
   string code = 1;
-  string user_agent = 2;
 }
 
 message GoogleLoginResponse {
