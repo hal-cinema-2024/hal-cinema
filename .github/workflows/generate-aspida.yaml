@@ -4,7 +4,7 @@ on:
     branches:
       - master
     paths:
-      - 'docs/apidocs.swagger.json'
+      - 'docs/api.swagger.json'
       - '.github/workflows/gen-aspida.yaml'
   workflow_dispatch:
 
@@ -33,7 +33,7 @@ jobs:
       
       - name: generate aspida
         run: |
-          npx openapi2aspida -i docs/apidocs.swagger.json -o=api/
+          npx openapi2aspida -i docs/api.swagger.json -o=api/
       
       - name: Commit and push changes
         run: |
