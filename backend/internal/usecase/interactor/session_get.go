@@ -2,20 +2,18 @@ package interactor
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"time"
 
 	"github.com/hal-cinema-2024/backend/internal/entities/model"
+	"github.com/hal-cinema-2024/backend/internal/framework/herror"
 )
 
 func (ui *SessionInteractor) GetUserBySessionID(ctx context.Context, sessionID, userAgent string) (*model.User, error) {
-	session, found, err := ui.Repositories.GetSessionByID(ctx, sessionID, userAgent)
+	session, err := ui.Repositories.GetSessionByID(ctx, sessionID, userAgent)
 	if err != nil {
 		return nil, err
-	}
-
-	if !found {
-		return nil, fmt.Errorf("session not found")
 	}
 
 	// check expire time(int)
@@ -23,14 +21,12 @@ func (ui *SessionInteractor) GetUserBySessionID(ctx context.Context, sessionID, 
 		return nil, err
 	}
 
-	user, found, err := ui.Repositories.GetUserByID(ctx, session.UserID)
+	user, err := ui.Repositories.GetUserByID(ctx, session.UserID)
 	if err != nil {
-		return nil, err
-	}
-
-	if !found {
+		if !errors.Is(err, herror.ErrResourceNotFound) {
+			return nil, err
+		}
 		return nil, fmt.Errorf("user not found")
 	}
-
 	return user, nil
 }
