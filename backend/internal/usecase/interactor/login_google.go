@@ -31,7 +31,7 @@ type LoginResult struct {
 	Icon      string
 }
 
-func (gl *GoogleLogin) Login(ctx context.Context, authorizationCode string) (*LoginResult, error) {
+func (gl *GoogleLogin) Login(ctx context.Context, authorizationCode, userAgent string) (*LoginResult, error) {
 	token, err := gl.authz.FetchToken(ctx, authorizationCode)
 	if err != nil {
 		return nil, err
@@ -73,6 +73,7 @@ func (gl *GoogleLogin) Login(ctx context.Context, authorizationCode string) (*Lo
 		// Tokenを更新
 		_, err = gl.repositories.SyncSession(ctx, &model.Session{
 			SessionID:      sessionID.String(),
+			UserAgent:      userAgent,
 			UserID:         userInfo.UserID,
 			Token:          token.AccessToken,
 			ExpirationTime: int32(token.Expiry.Unix()),

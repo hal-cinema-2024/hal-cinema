@@ -8,8 +8,8 @@ import (
 	"github.com/hal-cinema-2024/backend/internal/entities/model"
 )
 
-func (ui *SessionInteractor) GetUserBySessionID(ctx context.Context, sessionID string) (*model.User, error) {
-	session, found, err := ui.Repositories.GetSessionByID(ctx, sessionID)
+func (ui *SessionInteractor) GetUserBySessionID(ctx context.Context, sessionID, userAgent string) (*model.User, error) {
+	session, found, err := ui.Repositories.GetSessionByID(ctx, sessionID, userAgent)
 	if err != nil {
 		return nil, err
 	}
