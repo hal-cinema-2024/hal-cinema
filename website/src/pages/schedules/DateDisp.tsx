@@ -23,4 +23,5 @@ export default DateDisp;
 const DateDisplayContainer = styled.div`
   margin-top: 20px;
   font-size: 40px;
+  color: #fff;
 `;

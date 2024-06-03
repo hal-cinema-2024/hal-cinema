@@ -5,6 +5,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - .docker/data/postgres:/var/lib/postgresql/data
+      - .docker/postgres/init.d:/docker-entrypoint-initdb.d
     ports:
       - 5432:5432
     environment:

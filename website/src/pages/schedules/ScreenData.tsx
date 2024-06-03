@@ -33,4 +33,5 @@ const ScreenContainer = styled.div`
 
 const Number = styled.div`
   font-size: 30px;
+  color: #fff;
 `;

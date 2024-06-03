@@ -2,6 +2,7 @@ import React from "react";
 import { text } from "stream/consumers";
 import styled from "styled-components";
 
+
 export const Top = () => {
   return (
     <>
@@ -52,6 +53,7 @@ export const Top = () => {
           ))}
         </Cards>
       </Main>
+
     </>
   );
 };
