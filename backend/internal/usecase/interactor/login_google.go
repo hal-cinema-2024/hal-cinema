@@ -2,11 +2,13 @@ package interactor
 
 import (
 	"context"
+	"errors"
 	"time"
 
 	"github.com/google/uuid"
 	"github.com/hal-cinema-2024/backend/internal/adapter/gateway/authz"
 	"github.com/hal-cinema-2024/backend/internal/entities/model"
+	"github.com/hal-cinema-2024/backend/internal/framework/herror"
 	"github.com/hal-cinema-2024/backend/internal/usecase/dai"
 )
 
@@ -42,10 +44,14 @@ func (gl *GoogleLogin) Login(ctx context.Context, authorizationCode, userAgent s
 		return nil, err
 	}
 
+	var found bool = true
 	// userが存在するかチェック
-	_, found, err := gl.repositories.GetUserByID(ctx, userInfo.UserID)
+	_, err = gl.repositories.GetUserByID(ctx, userInfo.UserID)
 	if err != nil {
-		return nil, err
+		if !errors.Is(err, herror.ErrResourceNotFound) {
+			return nil, nil
+		}
+		found = false
 	}
 
 	sessionID, err := uuid.NewRandom()

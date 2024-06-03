@@ -2,19 +2,20 @@ package interactor
 
 import (
 	"context"
+	"errors"
+	"fmt"
 
 	"github.com/hal-cinema-2024/backend/internal/entities/model"
+	"github.com/hal-cinema-2024/backend/internal/framework/herror"
 )
 
 func (ui *UserInteractor) GetUser(ctx context.Context, userID string) (*model.User, error) {
-	user, found, err := ui.Repositories.GetUserByID(ctx, userID)
+	user, err := ui.Repositories.GetUserByID(ctx, userID)
 	if err != nil {
-		return nil, err
+		if !errors.Is(err, herror.ErrResourceNotFound) {
+			return nil, err
+		}
+		return nil, fmt.Errorf("user not found")
 	}
-
-	if !found {
-		return nil, nil
-	}
-
 	return user, nil
 }
