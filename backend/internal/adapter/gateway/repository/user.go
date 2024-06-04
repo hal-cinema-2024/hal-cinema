@@ -7,7 +7,6 @@ import (
 	"github.com/hal-cinema-2024/backend/internal/entities/model"
 	"github.com/hal-cinema-2024/backend/internal/framework/herror"
 	"github.com/hal-cinema-2024/backend/internal/usecase/dai"
-	"github.com/hal-cinema-2024/backend/pkg/log"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 )
@@ -50,8 +49,6 @@ func (r *UserRepo) GetUserByID(ctx context.Context, userID string) (*model.User,
 }
 
 func (r *UserRepo) UpdateUser(ctx context.Context, userID string, user *model.User) (*model.User, error) {
-	log.Info(ctx, "UpdateUser", userID, user)
-
 	saveUser := make(map[string]any)
 	var changeCount int64
 

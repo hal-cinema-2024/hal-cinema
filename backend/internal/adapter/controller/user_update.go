@@ -61,7 +61,7 @@ func UpdateUser(
 			case herror.ErrNoChange:
 				log.Info(ctx.Request().Context(), "failed to update user", err)
 				return ctx.JSON(200, UpdateUserResponse{
-					UserID: user.UserID,
+					UserID: req.UserID,
 				})
 			case herror.ErrResourceNotFound:
 				log.Error(ctx.Request().Context(), "failed to update user", err)
@@ -71,6 +71,8 @@ func UpdateUser(
 				return echo.ErrInternalServerError
 			}
 		}
-		return nil
+		return ctx.JSON(200, UpdateUserResponse{
+			UserID: user.UserID,
+		})
 	}
 }
