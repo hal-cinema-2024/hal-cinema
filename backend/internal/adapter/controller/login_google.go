@@ -1,8 +1,9 @@
 package controller
 
 import (
-	"log"
 	"net/http"
+
+	"github.com/hal-cinema-2024/backend/pkg/log"
 
 	"github.com/hal-cinema-2024/backend/internal/framework/cookie"
 	"github.com/hal-cinema-2024/backend/internal/framework/hcontext"
@@ -25,23 +26,22 @@ func GoogleLogin(
 	return func(ctx echo.Context) error {
 		var reqBody LoginRequest
 		if err := ctx.Bind(&reqBody); err != nil {
-			log.Println("[ERROR] bad request")
+			log.Error(ctx.Request().Context(), "[ERROR] bad request", err)
 			return echo.ErrBadRequest
 		}
 
 		userAgent, ok := ctx.Get(hcontext.UserAgent.String()).(string)
 		if !ok {
-			log.Println("[ERROR] user agent not found")
+			log.Error(ctx.Request().Context(), "[ERROR] user agent not found")
 			return echo.ErrInternalServerError
 		}
 
 		userInfo, err := googleLogin.Login(ctx.Request().Context(), reqBody.AuthorizationCode, userAgent)
 		if err != nil {
-			log.Println("[ERROR] ", err)
+			log.Error(ctx.Request().Context(), "[ERROR] ", err)
 			return echo.ErrInternalServerError
 		}
 
-		// TODO: Cookie Sessionを作る
 		coockieSetter.CreateCookieSetter(ctx).SetCookieValue(string(cookie.SessionID), userInfo.SessionID)
 
 		return ctx.JSON(http.StatusOK, &LoginResponse{

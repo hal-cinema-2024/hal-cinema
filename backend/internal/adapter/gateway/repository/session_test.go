@@ -9,6 +9,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/hal-cinema-2024/backend/internal/adapter/gateway/repository"
 	"github.com/hal-cinema-2024/backend/internal/entities/model"
+	"github.com/hal-cinema-2024/backend/internal/framework/herror"
 	"github.com/hal-cinema-2024/backend/internal/test"
 	"github.com/hal-cinema-2024/backend/internal/test/factory"
 	"github.com/jackc/pgerrcode"
@@ -205,7 +206,7 @@ func TestGetSessionByID(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			session, found, err := sessionRepo.GetSessionByID(context.Background(), tc.sessionID, session.UserAgent)
+			session, err := sessionRepo.GetSessionByID(context.Background(), tc.sessionID, session.UserAgent)
 			if err != nil {
 				var pgErr *pq.Error
 				if errors.As(err, &pgErr) {
@@ -217,11 +218,11 @@ func TestGetSessionByID(t *testing.T) {
 				}
 			}
 
-			if found != tc.found {
-				t.Errorf("got %v; want %v", found, tc.found)
+			if errors.Is(err, herror.ErrResourceNotFound) == tc.found {
+				t.Fatalf("got %v; want %v", errors.Is(err, herror.ErrResourceNotFound), tc.found)
 			}
 
-			if found {
+			if !errors.Is(err, herror.ErrResourceNotFound) {
 				if session.SessionID != tc.wantSession.SessionID {
 					t.Errorf("got %v; want %v", session.SessionID, tc.wantSession.SessionID)
 				}
