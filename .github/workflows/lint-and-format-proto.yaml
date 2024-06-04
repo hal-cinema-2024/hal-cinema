@@ -1,0 +1,65 @@
+name: lint and format proto file
+
+on:
+  pull_request:
+    paths:
+      - docs/api/v1/**.proto
+      - '.github/workflows/backend-test.yaml'
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  checks: write
+  contents: write
+    
+defaults:
+  run:
+    working-directory: ./docs
+
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+jobs:
+  lint-and-format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: mkdir -p ~/image-cache
+      - id: image-cache
+        uses: actions/cache@v4
+        with:
+            path: ~/image-cache
+            key: image-cache-${{ runner.os }}
+
+      - if: steps.image-cache.outputs.cache-hit != 'true'
+        run: |
+            docker pull bufbuild/buf
+            docker save -o ~/image-cache/alpine.tar alpine
+
+      - if: steps.image-cache.outputs.cache-hit == 'true'
+        run: docker load -i ~/image-cache/alpine.tar
+          
+      - name: lint proto
+        run: |
+          docker run --volume "$(pwd):/workspace" --workdir /workspace bufbuild/buf lint
+      
+      - name: format proto
+        run: |
+          docker run --volume "$(pwd):/workspace" --workdir /workspace bufbuild/buf format -w 
+      
+      - name: Count changes
+        id: changes
+        run: |
+          git add -N .
+          echo "::set-output name=count::$(git diff --name-only | wc -l)"
+
+      - name: commit & push
+        if: steps.changes.outputs.count > 0 
+        run: |
+          git config --global user.email "${{ secrets.EMAIL_GITHUB }}"
+          git config --global user.name "${{ secrets.USERNAME_GITHUB }}"
+          git add .
+          git commit -m "formated"
+          git push
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }} 
+        

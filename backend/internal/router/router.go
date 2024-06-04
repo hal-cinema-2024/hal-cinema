@@ -29,6 +29,7 @@ func NewRouter() http.Handler {
 	// setup middlware
 	router.echo.Use(otelecho.Middleware(config.Config.Otel.ProjectID))
 	router.echo.Use(echoMiddleware.Recover())
+	router.echo.Use(middleware.GetUserAgent())
 
 	// router.echo.Use(echoprometheus.NewMiddleware("hal-cinema"))
 
