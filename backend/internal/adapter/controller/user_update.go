@@ -10,7 +10,7 @@ import (
 )
 
 type UpdateUserRequest struct {
-	UserID           string `param:"userId"`
+	UserID           string `param:"user_id"`
 	FirstName        string `json:"firstName"`
 	LastName         string `json:"lastName"`
 	FirstNameReading string `json:"firstNameReading"`
