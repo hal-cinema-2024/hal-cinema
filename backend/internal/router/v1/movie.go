@@ -11,6 +11,8 @@ func (v1 *v1Router) movieRoute() {
 
 	mi := container.Invoke[*interactor.MovieInteractor]()
 	userRoute.POST("/", controller.CreateMovie(mi))
-	userRoute.GET("/{movie_id}", controller.GetMovie(mi))
 	userRoute.GET("/", controller.GetMovies(mi))
+	userRoute.GET("/{movie_id}", controller.GetMovie(mi))
+	userRoute.PUT("/{movie_id}", controller.UpdateMovie(mi))
+	userRoute.DELETE("/{movie_id}", controller.DeleteMovie(mi))
 }
