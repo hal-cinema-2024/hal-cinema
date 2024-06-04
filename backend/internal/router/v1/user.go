@@ -11,4 +11,5 @@ func (v1 *v1Router) userRoute() {
 
 	ui := container.Invoke[*interactor.UserInteractor]()
 	userRoute.GET("/:user_id", controller.GetUser(ui))
+	userRoute.PUT("/:user_id", controller.UpdateUser(ui))
 }
