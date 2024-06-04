@@ -2,11 +2,8 @@ package interactor
 
 import (
 	"context"
-	"errors"
-	"fmt"
 
 	"github.com/hal-cinema-2024/backend/internal/entities/model"
-	"github.com/hal-cinema-2024/backend/internal/framework/herror"
 )
 
 type UpdateUserParam struct {
@@ -16,20 +13,20 @@ type UpdateUserParam struct {
 	FirstNameKana string `json:"first_name_kana"`
 	LastNameKana  string `json:"last_name_kana"`
 	Age           int    `json:"age"`
-	Gender        string `json:"gender"`
+	Gender        int    `json:"gender"`
 }
 
-func (ui *UserInteractor) CreateUser(ctx context.Context, userID string) (*model.User, error) {
-	if userID == "" {
-		return nil, fmt.Errorf("user id is empty")
-	}
-
-	user, err := ui.Repositories.GetUserByID(ctx, userID)
+func (ui *UserInteractor) UpdateUser(ctx context.Context, param UpdateUserParam) (*model.User, error) {
+	user, err := ui.Repositories.UpdateUser(ctx, param.UserID, &model.User{
+		FirstName:        param.FirstName,
+		LastName:         param.LastName,
+		FirstNameReading: param.FirstNameKana,
+		LastNameReading:  param.LastNameKana,
+		Age:              int32(param.Age),
+		Gender:           int32(param.Gender),
+	})
 	if err != nil {
-		if !errors.Is(err, herror.ErrResourceNotFound) {
-			return nil, err
-		}
-		return nil, fmt.Errorf("user not found")
+		return nil, err
 	}
 	return user, nil
 }
