@@ -82,9 +82,14 @@ func (r *UserRepo) UpdateUser(ctx context.Context, userID string, user *model.Us
 
 	saveUser["updated_at"] = time.Now()
 
-	result := r.db.Model(&model.User{}).Where("user_id = ?", user.UserID).Updates(saveUser).Find(&user)
+	var count int64
+	result := r.db.Model(&model.User{}).Where("user_id = ?", user.UserID).Updates(saveUser).Find(&user).Count(&count)
 	if result.Error != nil {
 		return nil, result.Error
+	}
+
+	if count == 0 {
+		return nil, herror.ErrResourceNotFound
 	}
 
 	return user, nil

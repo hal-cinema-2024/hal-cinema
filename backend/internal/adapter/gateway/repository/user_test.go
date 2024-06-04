@@ -318,10 +318,10 @@ func TestUpdateUser(t *testing.T) {
 		},
 	)
 	testCases := []struct {
-		name        string
-		changeUser  model.User
-		wantUser    model.User
-		wantErrCode string
+		name       string
+		changeUser model.User
+		wantUser   model.User
+		wantErr    error
 	}{
 		{
 			name: "success - change first name",
@@ -339,7 +339,7 @@ func TestUpdateUser(t *testing.T) {
 				Gender:           user1.Gender,
 				UpdatedAt:        time.Now(),
 			},
-			wantErrCode: "",
+			wantErr: nil,
 		},
 		{
 			name: "success - change last name",
@@ -357,7 +357,7 @@ func TestUpdateUser(t *testing.T) {
 				Gender:           user2.Gender,
 				UpdatedAt:        time.Now(),
 			},
-			wantErrCode: "",
+			wantErr: nil,
 		},
 		{
 			name: "success - change first name reading",
@@ -375,7 +375,7 @@ func TestUpdateUser(t *testing.T) {
 				Gender:           user3.Gender,
 				UpdatedAt:        time.Now(),
 			},
-			wantErrCode: "",
+			wantErr: nil,
 		},
 		{
 			name: "success - change last name reading",
@@ -393,7 +393,7 @@ func TestUpdateUser(t *testing.T) {
 				Gender:           user4.Gender,
 				UpdatedAt:        time.Now(),
 			},
-			wantErrCode: "",
+			wantErr: nil,
 		},
 		{
 			name: "success - change age",
@@ -411,7 +411,7 @@ func TestUpdateUser(t *testing.T) {
 				Gender:           user5.Gender,
 				UpdatedAt:        time.Now(),
 			},
-			wantErrCode: "",
+			wantErr: nil,
 		},
 		{
 			name: "success - change gender",
@@ -429,7 +429,7 @@ func TestUpdateUser(t *testing.T) {
 				Gender:           1,
 				UpdatedAt:        time.Now(),
 			},
-			wantErrCode: "",
+			wantErr: nil,
 		},
 		{
 			name: "success - no change",
@@ -446,7 +446,16 @@ func TestUpdateUser(t *testing.T) {
 				Gender:           user7.Gender,
 				UpdatedAt:        time.Now(),
 			},
-			wantErrCode: "",
+			wantErr: herror.ErrNoChange,
+		},
+		{
+			name: "failed - no found user",
+			changeUser: model.User{
+				UserID:    "not found user",
+				FirstName: user7.FirstName,
+			},
+			wantUser: model.User{},
+			wantErr:  herror.ErrResourceNotFound,
 		},
 	}
 
@@ -454,7 +463,11 @@ func TestUpdateUser(t *testing.T) {
 		t.Run(tc.name, func(t *testing.T) {
 			user, err := userRepo.UpdateUser(context.Background(), tc.changeUser.UserID, &tc.changeUser)
 			if err != nil {
-				if !errors.Is(err, herror.ErrNoChange) {
+				if !errors.Is(err, tc.wantErr) {
+					t.Fatalf("got %v; want %v", err, tc.wantErr)
+				}
+
+				if !errors.Is(err, herror.ErrNoChange) && !errors.Is(err, herror.ErrResourceNotFound) {
 					t.Fatal(err)
 				}
 				return
