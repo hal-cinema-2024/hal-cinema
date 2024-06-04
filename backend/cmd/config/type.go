@@ -48,10 +48,10 @@ type config struct {
 	}
 
 	Azure struct {
-		TenantID             string `env:"AZURE_TENANT_ID"`
-		ClientID             string `env:"AZURE_CLIENT_ID"`
-		ClientSecret         string `env:"AZURE_CLIENT_SECRET"`
-		BlobServiceURL       string `env:"AZURE_BLOB_SERVICE_URL"`
-		BlobServiceImagePath string `env:"AZURE_IMAGE_PATH"`
+		TenantID                 string `env:"AZURE_TENANT_ID"`
+		ClientID                 string `env:"AZURE_CLIENT_ID"`
+		ClientSecret             string `env:"AZURE_CLIENT_SECRET"`
+		BlobServiceURL           string `env:"AZURE_BLOB_SERVICE_URL"`
+		BlobServiceContainerName string `env:"AZURE_BLOB_SERVICE_CONTAINER_NAME"`
 	}
 }
