@@ -1,6 +1,6 @@
 # docs
 
-[SwaggerUI](https://raw.githubusercontent.com/hal-cinema-2024/hal-cinema/master/docs/api.swagger.json)
+[SwaggerUI](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/hal-cinema-2024/hal-cinema/master/docs/api.swagger.json)
 
 ```
 docs
