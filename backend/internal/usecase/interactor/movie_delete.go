@@ -1,10 +1,12 @@
 package interactor
 
-// func (mi *MovieInteractor) DeleteMovie(ctx context.Context, movieID string) error {
-// 	err := mi.Repositories.DeleteMovie(ctx, movieID)
-// 	if err != nil {
-// 		return err
-// 	}
+import "context"
 
-// 	return nil
-// }
+func (mi *MovieInteractor) DeleteMovie(ctx context.Context, movieID string) (string, error) {
+	_, err := mi.Repositories.DeleteMovie(ctx, movieID)
+	if err != nil {
+		return "", err
+	}
+
+	return movieID, nil
+}
