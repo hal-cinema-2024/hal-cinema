@@ -14,12 +14,3 @@ func (mi *MovieInteractor) UpdateMovie(ctx context.Context, movie *model.Movie) 
 
 	return movieID, nil
 }
-
-func (mi *MovieInteractor) DeleteMovie(ctx context.Context, movieID string) (string, error) {
-	_, err := mi.Repositories.DeleteMovie(ctx, movieID)
-	if err != nil {
-		return "", err
-	}
-
-	return movieID, nil
-}
