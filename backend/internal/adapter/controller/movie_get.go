@@ -12,16 +12,17 @@ type GetMovieRequest struct {
 }
 
 type GetMovieResponse struct {
-	MovieID     string    `json:"movie_id"`
-	Name        string    `json:"name"`
+	MovieID     string    `json:"movieId"`
+	MovieName   string    `json:"movieName"`
 	Director    string    `json:"director"`
 	Summary     string    `json:"summary"`
 	Thumbnail   string    `json:"thumbnail"`
 	Link        string    `json:"link"`
 	Term        int32     `json:"term"`
-	ReleaseDate time.Time `json:"release_date"`
-	EndDate     time.Time `json:"end_date"`
-	IsDelete    bool      `json:"is_delete"`
+	ReleaseDate time.Time `json:"releaseDate"`
+	EndDate     time.Time `json:"endDate"`
+	IsDelete    bool      `json:"isDelete"`
+	MovieImage  []string  `json:"movieImage"`
 }
 
 func GetMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
@@ -31,14 +32,14 @@ func GetMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 			return err
 		}
 
-		movie, err := mi.GetMovie(ctx.Request().Context(), req.MovieID)
+		movie, imagePaths, err := mi.GetMovie(ctx.Request().Context(), req.MovieID)
 		if err != nil {
 			return err
 		}
 
 		return ctx.JSON(200, GetMovieResponse{
 			MovieID:     movie.MovieID,
-			Name:        movie.Name,
+			MovieName:   movie.Name,
 			Director:    movie.Director,
 			Summary:     movie.Summary,
 			Thumbnail:   movie.ThumbnailPath,
@@ -47,6 +48,7 @@ func GetMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 			ReleaseDate: movie.ReleaseDate,
 			EndDate:     movie.EndDate,
 			IsDelete:    movie.IsDelete,
+			MovieImage:  imagePaths,
 		})
 	}
 }
@@ -62,7 +64,7 @@ func GetMovies(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 		for _, movie := range movies {
 			res = append(res, GetMovieResponse{
 				MovieID:     movie.MovieID,
-				Name:        movie.Name,
+				MovieName:   movie.Name,
 				Director:    movie.Director,
 				Summary:     movie.Summary,
 				Thumbnail:   movie.ThumbnailPath,
