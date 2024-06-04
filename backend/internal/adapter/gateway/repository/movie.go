@@ -35,13 +35,22 @@ func (r *MovieRepo) CreateMovie(ctx context.Context, movie *model.Movie, imagePa
 	return movie.MovieID, nil
 }
 
-func (r *MovieRepo) GetMovieByID(ctx context.Context, movieID string) (*model.Movie, error) {
+func (r *MovieRepo) GetMovieByID(ctx context.Context, movieID string) (*model.Movie, []string, error) {
 	var movie model.Movie
+	var movieImages []model.MovieImage
 	result := r.db.Model(&movie).Where("movie_id = ?", movieID).Find(&movie)
 	if result.Error != nil {
-		return nil, result.Error
+		return nil, nil, result.Error
 	}
-	return &movie, nil
+	result = r.db.Model(&model.MovieImage{}).Where("movie_id = ?", movieID).Find(&movieImages)
+	if result.Error != nil {
+		return nil, nil, result.Error
+	}
+	var imagePaths []string
+	for _, movieImage := range movieImages {
+		imagePaths = append(imagePaths, movieImage.FilePath)
+	}
+	return &movie, imagePaths, nil
 }
 
 func (r *MovieRepo) GetMovies(ctx context.Context) ([]*model.Movie, error) {

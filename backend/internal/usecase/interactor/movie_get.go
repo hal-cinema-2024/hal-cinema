@@ -6,13 +6,13 @@ import (
 	"github.com/hal-cinema-2024/backend/internal/entities/model"
 )
 
-func (mi *MovieInteractor) GetMovie(ctx context.Context, movieID string) (*model.Movie, error) {
-	movie, err := mi.Repositories.GetMovieByID(ctx, movieID)
+func (mi *MovieInteractor) GetMovie(ctx context.Context, movieID string) (*model.Movie, []string, error) {
+	movie, moviePaths, err := mi.Repositories.GetMovieByID(ctx, movieID)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
-	return movie, nil
+	return movie, moviePaths, nil
 }
 
 func (mi *MovieInteractor) GetMovies(ctx context.Context) ([]*model.Movie, error) {
