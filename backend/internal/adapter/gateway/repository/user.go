@@ -7,7 +7,9 @@ import (
 	"github.com/hal-cinema-2024/backend/internal/entities/model"
 	"github.com/hal-cinema-2024/backend/internal/framework/herror"
 	"github.com/hal-cinema-2024/backend/internal/usecase/dai"
+	"github.com/hal-cinema-2024/backend/pkg/log"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 type UserRepo struct {
@@ -48,6 +50,8 @@ func (r *UserRepo) GetUserByID(ctx context.Context, userID string) (*model.User,
 }
 
 func (r *UserRepo) UpdateUser(ctx context.Context, userID string, user *model.User) (*model.User, error) {
+	log.Info(ctx, "UpdateUser", userID, user)
+
 	saveUser := make(map[string]any)
 	var changeCount int64
 
@@ -82,17 +86,18 @@ func (r *UserRepo) UpdateUser(ctx context.Context, userID string, user *model.Us
 
 	saveUser["updated_at"] = time.Now()
 
-	var count int64
-	result := r.db.Model(&model.User{}).Where("user_id = ?", user.UserID).Updates(saveUser).Find(&user).Count(&count)
+	r.db.Logger = r.db.Logger.LogMode(logger.Info)
+
+	result := r.db.Model(&model.User{}).Where("user_id = ?", userID).Updates(saveUser)
 	if result.Error != nil {
 		return nil, result.Error
 	}
 
-	if count == 0 {
+	if result.RowsAffected == 0 {
 		return nil, herror.ErrResourceNotFound
 	}
 
-	return user, nil
+	return r.GetUserByID(ctx, userID)
 }
 
 var _ dai.UserRepo = (*UserRepo)(nil)
