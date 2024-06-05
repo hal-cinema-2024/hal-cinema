@@ -97,4 +97,19 @@ func (r *UserRepo) UpdateUser(ctx context.Context, userID string, user *model.Us
 	return r.GetUserByID(ctx, userID)
 }
 
+func (r *UserRepo) DeleteUser(ctx context.Context, userID string) error {
+	result := r.db.Model(&model.User{}).Where("user_id = ?", userID).Updates(map[string]any{
+		"is_delete": true,
+	})
+	if result.Error != nil {
+		return result.Error
+	}
+
+	if result.RowsAffected == 0 {
+		return herror.ErrResourceNotFound
+	}
+
+	return nil
+}
+
 var _ dai.UserRepo = (*UserRepo)(nil)
