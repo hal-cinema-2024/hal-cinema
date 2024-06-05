@@ -1,9 +1,11 @@
 package container
 
 import (
+	"github.com/Azure/azure-sdk-for-go/sdk/azcore"
 	"github.com/hal-cinema-2024/backend/internal/adapter/gateway/authz"
 	googleAuth "github.com/hal-cinema-2024/backend/internal/adapter/gateway/authz/google"
 	"github.com/hal-cinema-2024/backend/internal/adapter/gateway/repository"
+	"github.com/hal-cinema-2024/backend/internal/driver/azure"
 	"github.com/hal-cinema-2024/backend/internal/driver/db"
 	"github.com/hal-cinema-2024/backend/internal/framework/cookie"
 	"github.com/hal-cinema-2024/backend/internal/usecase/dai"
@@ -25,6 +27,8 @@ func NewContainer() error {
 		{constructor: googleAuth.DefaultOAuth2Config, opts: []dig.ProvideOption{}},
 		{constructor: db.Connect, opts: []dig.ProvideOption{}},
 		{constructor: db.NewGORM, opts: []dig.ProvideOption{}},
+		{constructor: azure.NewAzureCert, opts: []dig.ProvideOption{dig.As(new(azcore.TokenCredential))}},
+		{constructor: azure.NewBlobClient, opts: []dig.ProvideOption{}},
 		{constructor: cookie.DefaultCookieOptions, opts: []dig.ProvideOption{}},
 		{constructor: cookie.NewCoockieSetter, opts: []dig.ProvideOption{}},
 		{constructor: googleAuth.NewOAuth, opts: []dig.ProvideOption{dig.As(new(authz.OAuth2))}},
