@@ -42,3 +42,59 @@ func GetUser(ui *interactor.UserInteractor) func(ctx echo.Context) error {
 		})
 	}
 }
+
+type GetUsersRequest struct {
+	PageSize int `query:"pageSize"`
+	PageID   int `query:"pageId"`
+}
+
+func (r GetUsersRequest) Validate() error {
+	if r.PageSize <= 0 {
+		return echo.ErrBadRequest
+	}
+
+	if r.PageID < 0 {
+		return echo.ErrBadRequest
+	}
+
+	return nil
+}
+
+type GetUsersResponse struct {
+	Users []GetUserResponse `json:"users"`
+}
+
+func GetUsers(ui *interactor.UserInteractor) AdminHandler {
+	return func(ctx echo.Context) error {
+		var req GetUsersRequest
+		if err := ctx.Bind(&req); err != nil {
+			return err
+		}
+
+		if err := req.Validate(); err != nil {
+			return err
+		}
+
+		users, err := ui.GetUsers(ctx.Request().Context(), req.PageSize, (req.PageID-1)*req.PageSize)
+		if err != nil {
+			return err
+		}
+
+		var usersResponse []GetUserResponse
+		for _, user := range users {
+			usersResponse = append(usersResponse, GetUserResponse{
+				UserID:           user.UserID,
+				Icon:             user.IconPath,
+				FirstName:        user.FirstName,
+				LastName:         user.LastName,
+				FirstNameReading: user.FirstNameReading,
+				LastNameReading:  user.LastNameReading,
+				Gender:           int(user.Gender),
+			})
+		}
+
+		return ctx.JSON(200, GetUsersResponse{
+			Users: usersResponse,
+		})
+	}
+}

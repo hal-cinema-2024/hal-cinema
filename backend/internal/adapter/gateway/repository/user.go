@@ -45,7 +45,22 @@ func (r *UserRepo) GetUserByID(ctx context.Context, userID string) (*model.User,
 		return nil, herror.ErrResourceNotFound
 	}
 
+	if user.IsDelete {
+		return nil, herror.ErrResourceDeleted
+	}
+
 	return &user, nil
+}
+
+func (r *UserRepo) GetUsers(ctx context.Context, limit, offset int) ([]model.User, error) {
+	var users []model.User
+	result := r.db.Model(model.User{}).Where("is_delete = ?", false).Limit(limit).Offset(offset).Find(&users)
+
+	if result.Error != nil {
+		return nil, result.Error
+	}
+
+	return users, nil
 }
 
 func (r *UserRepo) UpdateUser(ctx context.Context, userID string, user *model.User) (*model.User, error) {
