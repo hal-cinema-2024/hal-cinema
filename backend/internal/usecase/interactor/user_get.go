@@ -19,3 +19,11 @@ func (ui *UserInteractor) GetUser(ctx context.Context, userID string) (*model.Us
 	}
 	return user, nil
 }
+
+func (ui *UserInteractor) GetUsers(ctx context.Context, limit, offset int) ([]model.User, error) {
+	users, err := ui.Repositories.GetUsers(ctx, limit, offset)
+	if err != nil {
+		return nil, err
+	}
+	return users, nil
+}
