@@ -5,6 +5,7 @@ import (
 
 	"github.com/hal-cinema-2024/backend/internal/entities/model"
 	"github.com/hal-cinema-2024/backend/internal/framework/herror"
+	"github.com/hal-cinema-2024/backend/internal/usecase/dai"
 	"gorm.io/gorm"
 )
 
@@ -17,6 +18,8 @@ func NewSessionRepo(gorm *gorm.DB) *SessionRepo {
 		db: gorm,
 	}
 }
+
+var _ dai.SessionRepo = (*SessionRepo)(nil)
 
 func (s *SessionRepo) SyncSession(ctx context.Context, session *model.Session) (*model.Session, error) {
 	if err := s.db.WithContext(ctx).Save(session).Error; err != nil {

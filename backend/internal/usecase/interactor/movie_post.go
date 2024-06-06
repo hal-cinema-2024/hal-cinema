@@ -33,7 +33,7 @@ func (mi *MovieInteractor) CreateMovie(ctx context.Context, movie CreateMovie) (
 	if err != nil {
 		return "", err
 	}
-	thumbnailPath, err := mi.Repositories.UploadBlob(ctx, movie.Thumbnail.Filename, data)
+	thumbnailPath, err := mi.cloudStorage.UploadBlob(ctx, movie.Thumbnail.Filename, data)
 	if err != nil {
 		return "", err
 	}
@@ -48,7 +48,7 @@ func (mi *MovieInteractor) CreateMovie(ctx context.Context, movie CreateMovie) (
 		if err != nil {
 			return "", err
 		}
-		imagePath, err := mi.Repositories.UploadBlob(ctx, movie.Thumbnail.Filename, data)
+		imagePath, err := mi.cloudStorage.UploadBlob(ctx, movie.Thumbnail.Filename, data)
 		if err != nil {
 			return "", err
 		}

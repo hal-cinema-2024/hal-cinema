@@ -4,6 +4,7 @@ import (
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore"
 	"github.com/hal-cinema-2024/backend/internal/adapter/gateway/authz"
 	googleAuth "github.com/hal-cinema-2024/backend/internal/adapter/gateway/authz/google"
+	azRepo "github.com/hal-cinema-2024/backend/internal/adapter/gateway/cloudstorage/azure"
 	"github.com/hal-cinema-2024/backend/internal/adapter/gateway/repository"
 	"github.com/hal-cinema-2024/backend/internal/driver/azure"
 	"github.com/hal-cinema-2024/backend/internal/driver/db"
@@ -34,10 +35,10 @@ func NewContainer() error {
 		{constructor: googleAuth.NewOAuth, opts: []dig.ProvideOption{dig.As(new(authz.OAuth2))}},
 		{constructor: repository.NewGormRepo, opts: []dig.ProvideOption{dig.As(new(dai.DataAccess))}},
 		{constructor: interactor.NewGoogleLogin, opts: []dig.ProvideOption{}},
+		{constructor: azRepo.NewAzureCloudStorage, opts: []dig.ProvideOption{dig.As(new(dai.CloudStorage))}},
 		{constructor: interactor.NewSessionInteractor, opts: []dig.ProvideOption{}},
 		{constructor: interactor.NewUserInteractor, opts: []dig.ProvideOption{}},
 		{constructor: interactor.NewMovieInteractor, opts: []dig.ProvideOption{}},
-		{constructor: repository.NewAzureBlobRepo, opts: []dig.ProvideOption{}},
 	}
 
 	for _, arg := range args {

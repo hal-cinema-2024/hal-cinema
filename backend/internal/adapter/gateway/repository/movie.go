@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/hal-cinema-2024/backend/internal/entities/model"
+	"github.com/hal-cinema-2024/backend/internal/usecase/dai"
 	"gorm.io/gorm"
 )
 
@@ -16,6 +17,8 @@ func NewMovieRepo(gorm *gorm.DB) *MovieRepo {
 		db: gorm,
 	}
 }
+
+var _ dai.MovieRepo = (*MovieRepo)(nil)
 
 func (r *MovieRepo) CreateMovie(ctx context.Context, movie *model.Movie, imagePaths []string) (string, error) {
 	result := r.db.Create(&movie)

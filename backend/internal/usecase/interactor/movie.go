@@ -6,10 +6,12 @@ import (
 
 type MovieInteractor struct {
 	Repositories dai.DataAccess
+	cloudStorage dai.CloudStorage
 }
 
-func NewMovieInteractor(repositories dai.DataAccess) *MovieInteractor {
+func NewMovieInteractor(repositories dai.DataAccess, cloudStorage dai.CloudStorage) *MovieInteractor {
 	return &MovieInteractor{
 		Repositories: repositories,
+		cloudStorage: cloudStorage,
 	}
 }

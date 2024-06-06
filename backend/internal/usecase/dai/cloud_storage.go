@@ -1,14 +1,7 @@
 package dai
 
-import (
-	"context"
-)
+import "context"
 
-type StorageRepo interface {
-	UploadBlob(ctx context.Context, blobName string, data []byte) (string, error)
-}
-
-type ParallelGetPresignedObjectURLInput struct {
-	MovieID string
-	Key     string
+type CloudStorage interface {
+	UploadBlob(ctx context.Context, fileNmae string, fileData []byte) (string, error)
 }
