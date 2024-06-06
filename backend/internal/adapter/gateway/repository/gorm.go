@@ -12,7 +12,7 @@ type GormRepo struct {
 	*UserRepo
 	*SessionRepo
 	*MovieRepo
-	*AzureBlob
+	*AzureBlobRepo
 }
 
 func NewGormRepo(gorm *gorm.DB) *GormRepo {
