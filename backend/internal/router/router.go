@@ -26,7 +26,7 @@ func NewRouter() http.Handler {
 		echo: echo,
 	}
 
-	// setup middlware
+	// setup middleware
 	router.echo.Use(otelecho.Middleware(config.Config.Otel.ProjectID))
 	router.echo.Use(echoMiddleware.Recover())
 	router.echo.Use(middleware.GetUserAgent())
@@ -51,9 +51,9 @@ func NewRouter() http.Handler {
 
 func (r *router) GoogleLogin(corsRoute *echo.Group) {
 	googleLogin := container.Invoke[*interactor.GoogleLogin]()
-	coockieSetter := container.Invoke[*cookie.CookieSetter]()
+	cookieSetter := container.Invoke[*cookie.CookieSetter]()
 
-	corsRoute.POST("/login/google", controller.GoogleLogin(googleLogin, coockieSetter))
+	corsRoute.POST("/login/google", controller.GoogleLogin(googleLogin, cookieSetter))
 
 }
 
