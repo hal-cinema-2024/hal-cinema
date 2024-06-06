@@ -1,7 +1,6 @@
 package v1
 
 import (
-	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob"
 	"github.com/hal-cinema-2024/backend/internal/adapter/controller"
 	"github.com/hal-cinema-2024/backend/internal/container"
 	"github.com/hal-cinema-2024/backend/internal/usecase/interactor"
@@ -11,7 +10,6 @@ func (v1 *v1Router) movieRoute() {
 	userRoute := v1.engine.Group("/movies")
 
 	mi := container.Invoke[*interactor.MovieInteractor]()
-	mi.AzClient = container.Invoke[*azblob.Client]()
 	// az := container.Invoke[*azblob.Client]()
 	userRoute.POST("", controller.CreateMovie(mi))
 	userRoute.GET("", controller.GetMovies(mi))
