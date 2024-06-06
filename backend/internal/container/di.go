@@ -37,7 +37,7 @@ func NewContainer() error {
 		{constructor: interactor.NewSessionInteractor, opts: []dig.ProvideOption{}},
 		{constructor: interactor.NewUserInteractor, opts: []dig.ProvideOption{}},
 		{constructor: interactor.NewMovieInteractor, opts: []dig.ProvideOption{}},
-		{constructor: repository.NewAzureBlob, opts: []dig.ProvideOption{}},
+		{constructor: repository.NewAzureBlobRepo, opts: []dig.ProvideOption{}},
 	}
 
 	for _, arg := range args {
