@@ -30,7 +30,7 @@ func newPermission(db *gorm.DB, opts ...gen.DOOption) permission {
 	_permission.PermissionID = field.NewString(tableName, "permission_id")
 	_permission.URI = field.NewString(tableName, "uri")
 	_permission.ReqMethod = field.NewString(tableName, "req_method")
-	_permission.Effect = field.NewBool(tableName, "effect")
+	_permission.Effect = field.NewString(tableName, "effect")
 
 	_permission.fillFieldMap()
 
@@ -44,7 +44,7 @@ type permission struct {
 	PermissionID field.String
 	URI          field.String
 	ReqMethod    field.String
-	Effect       field.Bool // 許可or不許可
+	Effect       field.String
 
 	fieldMap map[string]field.Expr
 }
@@ -64,7 +64,7 @@ func (p *permission) updateTableName(table string) *permission {
 	p.PermissionID = field.NewString(table, "permission_id")
 	p.URI = field.NewString(table, "uri")
 	p.ReqMethod = field.NewString(table, "req_method")
-	p.Effect = field.NewBool(table, "effect")
+	p.Effect = field.NewString(table, "effect")
 
 	p.fillFieldMap()
 

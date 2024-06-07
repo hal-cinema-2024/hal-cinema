@@ -28,7 +28,6 @@ func newRole(db *gorm.DB, opts ...gen.DOOption) role {
 	tableName := _role.roleDo.TableName()
 	_role.ALL = field.NewAsterisk(tableName)
 	_role.RoleID = field.NewString(tableName, "role_id")
-	_role.Permission = field.NewString(tableName, "permission")
 	_role.Name = field.NewString(tableName, "name")
 
 	_role.fillFieldMap()
@@ -39,10 +38,9 @@ func newRole(db *gorm.DB, opts ...gen.DOOption) role {
 type role struct {
 	roleDo roleDo
 
-	ALL        field.Asterisk
-	RoleID     field.String
-	Permission field.String
-	Name       field.String
+	ALL    field.Asterisk
+	RoleID field.String
+	Name   field.String
 
 	fieldMap map[string]field.Expr
 }
@@ -60,7 +58,6 @@ func (r role) As(alias string) *role {
 func (r *role) updateTableName(table string) *role {
 	r.ALL = field.NewAsterisk(table)
 	r.RoleID = field.NewString(table, "role_id")
-	r.Permission = field.NewString(table, "permission")
 	r.Name = field.NewString(table, "name")
 
 	r.fillFieldMap()
@@ -86,9 +83,8 @@ func (r *role) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (r *role) fillFieldMap() {
-	r.fieldMap = make(map[string]field.Expr, 3)
+	r.fieldMap = make(map[string]field.Expr, 2)
 	r.fieldMap["role_id"] = r.RoleID
-	r.fieldMap["permission"] = r.Permission
 	r.fieldMap["name"] = r.Name
 }
 
