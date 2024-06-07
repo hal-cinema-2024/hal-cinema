@@ -9,16 +9,16 @@ import (
 )
 
 type UpdateMovieRequest struct {
-	MovieID     string    `json:"movie_id"`
-	Name        string    `json:"name"`
-	Director    string    `json:"director"`
-	Summary     string    `json:"summary"`
-	Thumbnail   string    `json:"thumbnail"`
-	Link        string    `json:"link"`
-	Term        int32     `json:"term"`
-	ReleaseDate time.Time `json:"release_date"`
-	EndDate     time.Time `json:"end_date"`
-	IsDelete    bool      `json:"is_delete"`
+	MovieID     string    `form:"movie_id"`
+	Name        string    `form:"name"`
+	Director    string    `form:"director"`
+	Summary     string    `form:"summary"`
+	Thumbnail   string    `form:"thumbnail"`
+	Link        string    `form:"link"`
+	Term        int32     `form:"term"`
+	ReleaseDate time.Time `form:"release_date"`
+	EndDate     time.Time `form:"end_date"`
+	IsDelete    bool      `form:"is_delete"`
 }
 
 type UpdateMovieResponse struct {

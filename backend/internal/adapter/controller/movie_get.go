@@ -8,7 +8,7 @@ import (
 )
 
 type GetMovieRequest struct {
-	MovieID string `json:"movie_id"`
+	MovieID string `json:"movie_id" param:"movie_id"`
 }
 
 type GetMovieResponse struct {
@@ -71,6 +71,7 @@ func GetMovies(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 				Link:        movie.Link,
 				Term:        movie.Term,
 				ReleaseDate: movie.ReleaseDate,
+				EndDate:     movie.EndDate,
 				IsDelete:    movie.IsDelete,
 			})
 		}
