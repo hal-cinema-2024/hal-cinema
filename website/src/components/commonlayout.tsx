@@ -18,9 +18,9 @@ function CommonLayout() {
     <>
       <div style={{ backgroundImage: `url(${headerImage})` }}>
         <Header>
-          <Logo1 to='/'>LOGO</Logo1>
+          <Logo1 to="/">LOGO</Logo1>
           <nav>
-            <NavLinks className='nav-links'>
+            <NavLinks className="nav-links">
               {NavLinksData.map((navLink) => (
                 <NavLinkItem key={navLink.link}>
                   <NavLink to={navLink.link}>{navLink.name}</NavLink>
@@ -32,19 +32,19 @@ function CommonLayout() {
         <Outlet />
 
         <Footer>
-          <Logo2 to='/'>LOGO</Logo2>
+          <Logo2 to="/">LOGO</Logo2>
           <Nav>
             <NavItem>
-              <FooterNavLink to='/'>TOP</FooterNavLink>
+              <FooterNavLink to="/">TOP</FooterNavLink>
             </NavItem>
             <NavItem>
-              <FooterNavLink to='/movies'>映画一覧</FooterNavLink>
+              <FooterNavLink to="/movies">映画一覧</FooterNavLink>
             </NavItem>
             <NavItem>
-              <FooterNavLink to='/schedules'>スクリーン一覧</FooterNavLink>
+              <FooterNavLink to="/schedules">スクリーン一覧</FooterNavLink>
             </NavItem>
             <NavItem>
-              <FooterNavLink to='/movie'>チケット購入</FooterNavLink>
+              <FooterNavLink to="/movie">チケット購入</FooterNavLink>
             </NavItem>
           </Nav>
           <Copyright>©HALCinema. All rights Reserved.</Copyright>
@@ -96,13 +96,14 @@ const Footer = styled.footer`
   background-color: #f1f1f1;
   text-align: center;
   padding: 10px;
+  background: linear-gradient(to bottom right, #a6038b, #093f59);
 `;
 
 const Logo2 = styled(Link)`
   font-size: 24px;
   font-weight: bold;
   text-decoration: none;
-  color: #000;
+  color: white;
 `;
 
 const Nav = styled.ul`
@@ -118,7 +119,7 @@ const NavItem = styled.li`
 
 const FooterNavLink = styled(Link)`
   text-decoration: none;
-  color: #000;
+  color: white;
   transition: color 0.3s ease;
 
   &:hover {
@@ -129,5 +130,5 @@ const FooterNavLink = styled(Link)`
 const Copyright = styled.p`
   margin-top: 1rem;
   font-size: 0.875rem;
-  color: #777;
+  color: white;
 `;

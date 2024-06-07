@@ -7,7 +7,7 @@ export const Top = () => {
         <MainText>
           <p>Hal Cinema</p>
         </MainText>
-        <MainImage className='main-image'></MainImage>
+        <MainImage className="main-image"></MainImage>
       </MainSection>
 
       <Inner>
@@ -23,7 +23,7 @@ export const Top = () => {
             </BoxText>
           </BoxBody>
           <BoxImage>
-            <img src='/src/assets/cinema.jpeg' alt='コンセプト画像' />
+            <img src="/src/assets/cinema.jpeg" alt="コンセプト画像" />
           </BoxImage>
         </Box>
       </Inner>
@@ -43,7 +43,6 @@ export const Top = () => {
                   <CardTitle>{card.title}</CardTitle>
                   <CardText>監督名：{card.text1}</CardText>
                   <CardText>出演者：{card.text2}</CardText>
-                  <Button>詳細を見る</Button>
                 </CardContent>
               </Card>
             </CardItem>
@@ -142,6 +141,7 @@ const Main = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
+  padding-bottom: 70px; /* フッターの高さ分のパディングを追加 */
 `;
 
 const Title = styled.h1`
@@ -165,7 +165,7 @@ const CardItem = styled.li<{ index: number }>`
   display: flex;
   padding: 1rem;
   position: relative;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
   transform: translateY(${(props) => props.index * 20}px);
 
   @media (min-width: 40rem) {
@@ -216,20 +216,4 @@ const CardText = styled.p`
   font-weight: 400;
 `;
 
-const Button = styled.button`
-  color: #ffffff;
-  padding: 0.8rem;
-  font-size: 14px;
-  text-transform: uppercase;
-  border-radius: 4px;
-  font-weight: 400;
-  display: block;
-  width: 100%;
-  cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: transparent;
-
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.12);
-  }
-`;
+export default Top;
