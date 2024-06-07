@@ -1,16 +1,17 @@
 package repository_test
 
 import (
-	"log"
+	"context"
 	"os"
 	"testing"
 
 	"github.com/hal-cinema-2024/backend/internal/test"
+	"github.com/hal-cinema-2024/backend/pkg/log"
 )
 
 func TestMain(m *testing.M) {
 	if err := test.LoadEnv(); err != nil {
-		log.Println(err)
+		log.Error(context.Background(), err.Error())
 		os.Exit(1)
 	}
 

@@ -1,7 +1,10 @@
 package test
 
 import (
-	"log"
+	"context"
+
+	"github.com/hal-cinema-2024/backend/pkg/log"
+
 	"path/filepath"
 	"runtime"
 
@@ -14,7 +17,7 @@ func LoadEnv() error {
 	envPath := filepath.Join(dir, "..", "..", ".env.test")
 
 	if err := config.LoadEnv(envPath); err != nil {
-		log.Fatal("Error loading .env file for test")
+		log.Fatal(context.Background(), "Error loading .env file for test")
 		return err
 	}
 

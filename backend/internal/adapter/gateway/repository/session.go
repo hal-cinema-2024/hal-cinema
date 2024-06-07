@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/hal-cinema-2024/backend/internal/entities/model"
+	"github.com/hal-cinema-2024/backend/internal/framework/herror"
 	"gorm.io/gorm"
 )
 
@@ -24,18 +25,18 @@ func (s *SessionRepo) SyncSession(ctx context.Context, session *model.Session) (
 	return session, nil
 }
 
-func (r *SessionRepo) GetSessionByID(ctx context.Context, sessionID string) (*model.Session, bool, error) {
+func (r *SessionRepo) GetSessionByID(ctx context.Context, sessionID, userAgent string) (*model.Session, error) {
 	var (
 		session model.Session
 		count   int64
 	)
-	result := r.db.Model(&session).Where("session_id = ?", sessionID).Find(&session).Count(&count)
+	result := r.db.Model(&session).Where("session_id = ?", sessionID).Where("user_agent = ?", userAgent).Find(&session).Count(&count)
 	if result.Error != nil {
-		return nil, false, result.Error
+		return nil, result.Error
 	}
 
 	if count == 0 {
-		return nil, false, nil
+		return nil, herror.ErrResourceNotFound
 	}
-	return &session, true, nil
+	return &session, nil
 }
