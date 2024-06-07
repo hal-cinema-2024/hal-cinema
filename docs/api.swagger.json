@@ -50,7 +50,7 @@
         ]
       }
     },
-    "/movies": {
+    "/v1/movies": {
       "get": {
         "summary": "Get all movies",
         "description": "Get all movies",
@@ -122,7 +122,7 @@
         ]
       }
     },
-    "/movies/{movieId}": {
+    "/v1/movies/{movieId}": {
       "get": {
         "summary": "Get movie details",
         "description": "Get movie details",
@@ -257,7 +257,7 @@
         ]
       }
     },
-    "/orders": {
+    "/v1/orders": {
       "get": {
         "summary": "Get all orders",
         "description": "Get all orders",
@@ -321,7 +321,7 @@
         ]
       }
     },
-    "/orders/{orderId}": {
+    "/v1/orders/{orderId}": {
       "get": {
         "summary": "Get order",
         "description": "Get order",
@@ -383,7 +383,7 @@
         ]
       }
     },
-    "/reservations": {
+    "/v1/reservations": {
       "post": {
         "summary": "Create reservation",
         "description": "Create reservation",
@@ -417,7 +417,7 @@
         ]
       }
     },
-    "/reservations/{theaterSeatId}": {
+    "/v1/reservations/{theaterSeatId}": {
       "delete": {
         "summary": "Delete reservation",
         "description": "Delete reservation",
@@ -449,7 +449,7 @@
         ]
       }
     },
-    "/schedules": {
+    "/v1/schedules": {
       "get": {
         "summary": "Get all schedules",
         "description": "Get all schedules",
@@ -527,7 +527,7 @@
         ]
       }
     },
-    "/schedules/{scheduleId}": {
+    "/v1/schedules/{scheduleId}": {
       "delete": {
         "summary": "Delete schedule",
         "description": "Delete schedule",
@@ -608,7 +608,7 @@
         ]
       }
     },
-    "/users": {
+    "/v1/users": {
       "get": {
         "summary": "Get user",
         "description": "Get user",
@@ -646,7 +646,7 @@
         ]
       }
     },
-    "/users/{userId}": {
+    "/v1/users/{userId}": {
       "get": {
         "summary": "Get user",
         "description": "Get user",
