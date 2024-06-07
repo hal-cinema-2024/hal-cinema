@@ -297,7 +297,7 @@ message UpdateMovieRequest {
   string sammary = 4;
   bytes thumbnail = 5;
   string link = 6;
-  string term = 7;
+  int32 term = 7;
   string release_date = 8;
   string end_date = 9;
   repeated bytes movie_image = 10;
