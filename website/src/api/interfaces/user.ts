@@ -12,9 +12,9 @@ import {
 export type {
   V1User as UserInterface,
   V1CreateUserResponse as CreateUserResponseInterface,
-  V1CreateUserReqest as CreateUserRequestBodyInterface,
+  V1CreateUserReqest as CreateUserRequestInterface,
   V1GetUsersResponse as GetUsersResponseInterface,
-  V1GetUserResponse as GetUserByIDResponseInterface,
+  V1GetUserResponse as GetUserResponseInterface,
   V1UpdateUserResponse as UpdateUserResponseInterface,
   V1DeleteUserResponse as DeleteUserResponseInterface,
   ApiServiceUpdateUserBody as UpdateUserRequestBodyInterface,
