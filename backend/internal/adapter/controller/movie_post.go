@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"log"
 	"mime/multipart"
 	"time"
 
@@ -9,15 +10,15 @@ import (
 )
 
 type CreateMovieRequest struct {
-	Name        string                `json:"movieName"`
-	Director    string                `json:"director"`
-	Summary     string                `json:"summary"`
-	Thumbnail   *multipart.FileHeader `json:"thumbnail"`
-	Link        string                `json:"link"`
-	Term        int32                 `json:"term"`
-	ReleaseDate time.Time             `json:"releaseDate"`
-	EndDate     time.Time             `json:"endDate"`
-	MovieImage  *multipart.FileHeader `json:"movieImage"`
+	Name        string                  `form:"movieName" validate:"required"`
+	Director    string                  `form:"director" validate:"required"`
+	Summary     string                  `form:"summary" validate:"required"`
+	Thumbnail   *multipart.FileHeader   `form:"thumbnail"`
+	Link        string                  `form:"link" validate:"required"`
+	Term        int32                   `form:"term" validate:"required"`
+	ReleaseDate string                  `form:"releaseDate" validate:"required"`
+	EndDate     string                  `form:"endDate" validate:"required"`
+	MovieImage  []*multipart.FileHeader `form:"movieImage"`
 }
 
 type CreateMovieResponse struct {
@@ -30,7 +31,6 @@ func CreateMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 		if err := ctx.Bind(&req); err != nil {
 			return err
 		}
-
 		form, err := ctx.MultipartForm()
 		if err != nil {
 			return echo.ErrBadRequest
@@ -44,7 +44,15 @@ func CreateMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 			thumbnail = imageFiles[0]
 		}
 
+		releaseDate := str2time(req.ReleaseDate)
+		endDate := str2time(req.EndDate)
 		movieImageFiles, ok := form.File["movieImage"]
+		if !ok {
+			log.Println("movieImage is not found")
+		}
+		for _, movieImageFile := range movieImageFiles {
+			log.Println("movieImageFile: ", movieImageFile.Filename)
+		}
 
 		movieID, err := mi.CreateMovie(ctx.Request().Context(), interactor.CreateMovie{
 			Name:        req.Name,
@@ -53,8 +61,8 @@ func CreateMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 			Thumbnail:   thumbnail,
 			Link:        req.Link,
 			Term:        req.Term,
-			ReleaseDate: req.ReleaseDate,
-			EndDate:     req.EndDate,
+			ReleaseDate: releaseDate,
+			EndDate:     endDate,
 			MovieImage:  movieImageFiles,
 		})
 		if err != nil {
@@ -65,4 +73,10 @@ func CreateMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 			MovieID: movieID,
 		})
 	}
+}
+
+func str2time(t string) time.Time {
+	// YYYY-MM-DDTHH:MM:SSZZZZの形式で渡される文字列tをtime.Time型に変換して返す
+	parsedTime, _ := time.Parse("2006-01-02", t)
+	return parsedTime
 }

@@ -10,7 +10,6 @@ func (v1 *v1Router) movieRoute() {
 	userRoute := v1.engine.Group("/movies")
 
 	mi := container.Invoke[*interactor.MovieInteractor]()
-	// az := container.Invoke[*azblob.Client]()
 	userRoute.POST("", controller.CreateMovie(mi))
 	userRoute.GET("", controller.GetMovies(mi))
 	userRoute.GET("/:movie_id", controller.GetMovie(mi))
