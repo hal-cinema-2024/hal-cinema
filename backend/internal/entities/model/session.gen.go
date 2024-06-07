@@ -13,7 +13,6 @@ type Session struct {
 	UserID         string `gorm:"column:user_id;not null" json:"user_id"`
 	Token          string `gorm:"column:token;not null" json:"token"`
 	ExpirationTime int32  `gorm:"column:expiration_time;not null" json:"expiration_time"`
-	RefreshToken   string `gorm:"column:refresh_token;not null" json:"refresh_token"`
 }
 
 // TableName Session's table name
