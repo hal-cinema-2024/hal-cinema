@@ -1,5 +1,5 @@
 /* eslint-disable */
-import type * as Types from '../../@types'
+import type * as Types from '../../../@types'
 
 export type Methods = {
   /** Delete schedule */
@@ -14,6 +14,11 @@ export type Methods = {
     status: 200
     /** A successful response. */
     resBody: Types.V1UpdateScheduleResponse
-    reqBody: Types.ApiServiceUpdateScheduleBody
+
+    reqBody: {
+      movieId?: string | undefined
+      theaterId?: string | undefined
+      startTime?: string | undefined
+    }
   }
 }
