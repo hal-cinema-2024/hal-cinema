@@ -58,7 +58,7 @@ func (r *MovieRepo) GetMovieByID(ctx context.Context, movieID string) (*model.Mo
 
 func (r *MovieRepo) GetMovies(ctx context.Context) ([]*model.Movie, error) {
 	var movies []*model.Movie
-	result := r.db.Find(&movies)
+	result := r.db.Find(&movies).Where("is_delete = ?", false)
 	if result.Error != nil {
 		return nil, result.Error
 	}
@@ -66,7 +66,8 @@ func (r *MovieRepo) GetMovies(ctx context.Context) ([]*model.Movie, error) {
 }
 
 func (r *MovieRepo) UpdateMovie(ctx context.Context, movie *model.Movie) (string, error) {
-	result := r.db.Save(movie)
+	model := model.Movie{}
+	result := r.db.Model(&model).Where("movie_id = ?", movie.MovieID).Updates(&movie)
 	if result.Error != nil {
 		return "", result.Error
 	}
@@ -75,7 +76,8 @@ func (r *MovieRepo) UpdateMovie(ctx context.Context, movie *model.Movie) (string
 
 // logical deletion
 func (r *MovieRepo) DeleteMovie(ctx context.Context, movieID string) (string, error) {
-	result := r.db.Save(&model.Movie{MovieID: movieID, IsDelete: true})
+	var movie model.Movie
+	result := r.db.Model(&movie).Where("movie_id = ?", movieID).Update("is_delete", true)
 	if result.Error != nil {
 		return "", result.Error
 	}
