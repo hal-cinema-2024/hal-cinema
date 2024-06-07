@@ -4,6 +4,7 @@ import (
 	"strings"
 
 	"github.com/hal-cinema-2024/backend/cmd/config"
+	"github.com/hal-cinema-2024/backend/pkg/log"
 	"github.com/labstack/echo/v4"
 )
 
@@ -26,6 +27,7 @@ func AllowAllOrigins() echo.MiddlewareFunc {
 			requestAddr := c.Request().Header.Get("Origin")
 			// no origin ignore
 			if requestAddr == "" {
+				log.Error(c.Request().Context(), "origin is empty")
 				return echo.ErrUnauthorized
 			}
 			// ignore /healthz
@@ -62,6 +64,7 @@ func AllowrRstrictiveOrigins() echo.MiddlewareFunc {
 			_, ok := originWhiteList[requestAddr]
 
 			if !ok || requestAddr == "" || c.Path() == "/healthz" {
+				log.Error(c.Request().Context(), "origin is not allowed")
 				return echo.ErrUnauthorized
 			}
 
