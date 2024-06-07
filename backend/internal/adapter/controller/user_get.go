@@ -1,12 +1,23 @@
 package controller
 
 import (
+	"fmt"
+
 	"github.com/hal-cinema-2024/backend/internal/usecase/interactor"
+	"github.com/hal-cinema-2024/backend/pkg/log"
 	"github.com/labstack/echo/v4"
 )
 
 type GetUserRequest struct {
 	UserID string `param:"user_id"`
+}
+
+func (r GetUserRequest) Validate() error {
+	if r.UserID == "" {
+		return fmt.Errorf("user id is required")
+	}
+
+	return nil
 }
 
 type GetUserResponse struct {
@@ -23,11 +34,18 @@ func GetUser(ui *interactor.UserInteractor) func(ctx echo.Context) error {
 	return func(ctx echo.Context) error {
 		var req GetUserRequest
 		if err := ctx.Bind(&req); err != nil {
+			log.Error(ctx.Request().Context(), fmt.Sprintf("failed to bind request :%v", err))
+			return err
+		}
+
+		if err := req.Validate(); err != nil {
+			log.Error(ctx.Request().Context(), fmt.Sprintf("failed to validate request :%v", err))
 			return err
 		}
 
 		user, err := ui.GetUser(ctx.Request().Context(), req.UserID)
 		if err != nil {
+			log.Error(ctx.Request().Context(), fmt.Sprintf("failed to get user :%v", err))
 			return err
 		}
 
@@ -50,11 +68,11 @@ type GetUsersRequest struct {
 
 func (r GetUsersRequest) Validate() error {
 	if r.PageSize <= 0 {
-		return echo.ErrBadRequest
+		return fmt.Errorf("page size must be greater than 0 :%d", r.PageSize)
 	}
 
 	if r.PageID < 0 {
-		return echo.ErrBadRequest
+		return fmt.Errorf("page id must be greater than 0 :%d", r.PageID)
 	}
 
 	return nil
@@ -68,15 +86,18 @@ func GetUsers(ui *interactor.UserInteractor) AdminHandler {
 	return func(ctx echo.Context) error {
 		var req GetUsersRequest
 		if err := ctx.Bind(&req); err != nil {
+			log.Error(ctx.Request().Context(), fmt.Sprintf("failed to bind request :%v", err))
 			return err
 		}
 
 		if err := req.Validate(); err != nil {
+			log.Error(ctx.Request().Context(), fmt.Sprintf("failed to validate request :%v", err))
 			return err
 		}
 
 		users, err := ui.GetUsers(ctx.Request().Context(), req.PageSize, (req.PageID-1)*req.PageSize)
 		if err != nil {
+			log.Error(ctx.Request().Context(), fmt.Sprintf("failed to get users :%v", err))
 			return err
 		}
 
