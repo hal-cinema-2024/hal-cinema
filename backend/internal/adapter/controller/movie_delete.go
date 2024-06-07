@@ -6,7 +6,7 @@ import (
 )
 
 type DeleteMovieRequest struct {
-	MovieID string `json:"movie_id"`
+	MovieID string `form:"movie_id" param:"movie_id" validate:"required"`
 }
 
 type DeleteMovieResponse struct {

@@ -58,7 +58,7 @@ func (r *MovieRepo) GetMovieByID(ctx context.Context, movieID string) (*model.Mo
 
 func (r *MovieRepo) GetMovies(ctx context.Context) ([]*model.Movie, error) {
 	var movies []*model.Movie
-	result := r.db.Find(&movies).Where("is_delete = ?", false)
+	result := r.db.Where("is_delete = ?", false).Find(&movies)
 	if result.Error != nil {
 		return nil, result.Error
 	}
