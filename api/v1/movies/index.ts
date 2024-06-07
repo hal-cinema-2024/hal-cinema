@@ -1,8 +1,8 @@
 /* eslint-disable */
-import type * as Types from '../@types'
+import type * as Types from '../../@types'
 
 export type Methods = {
-  /** Get user */
+  /** Get all movies */
   get: {
     query?: {
       pageId?: string | undefined
@@ -11,14 +11,14 @@ export type Methods = {
 
     status: 200
     /** A successful response. */
-    resBody: Types.V1GetUsersResponse
+    resBody: Types.V1GetMoviesResponse
   }
 
-  /** Create user */
+  /** Create movie */
   post: {
     status: 200
     /** A successful response. */
-    resBody: Types.V1CreateUserResponse
-    reqBody: Types.V1CreateUserReqest
+    resBody: Types.V1CreateMovieResponse
+    reqBody: Types.V1CreateMovieRequest
   }
 }
