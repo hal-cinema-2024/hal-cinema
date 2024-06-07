@@ -1,28 +1,12 @@
 /* eslint-disable */
-export type ApiServiceUpdateMovieBody = {
-  movieName?: string | undefined
-  director?: string | undefined
-  sammary?: string | undefined
-  thumbnail?: string | undefined
-  link?: string | undefined
-  term?: string | undefined
-  releaseDate?: string | undefined
-  endDate?: string | undefined
-  movieImage?: string[] | undefined
+export type ProtobufAny = {
+  '@type'?: string | undefined
 }
 
-export type ApiServiceUpdateScheduleBody = {
-  movieId?: string | undefined
-  theaterId?: string | undefined
-  startTime?: string | undefined
-}
-
-export type ApiServiceUpdateUserBody = {
-  firstName?: string | undefined
-  lastName?: string | undefined
-  firstNameReading?: string | undefined
-  lastNameReading?: string | undefined
-  gender?: number | undefined
+export type RpcStatus = {
+  code?: number | undefined
+  message?: string | undefined
+  details?: ProtobufAny[] | undefined
 }
 
 export type V1CreateMovieRequest = {
@@ -67,14 +51,6 @@ export type V1CreateSeatReservationRequest = {
 
 export type V1CreateSeatReservationResponse = {
   theaterSeatId?: string | undefined
-}
-
-export type V1CreateUserReqest = {
-  user?: V1User | undefined
-}
-
-export type V1CreateUserResponse = {
-  userId?: string | undefined
 }
 
 export type V1DeleteMovieResponse = {
@@ -123,6 +99,14 @@ export type V1GetUserResponse = {
 
 export type V1GetUsersResponse = {
   user?: V1User[] | undefined
+}
+
+export type V1GoogleLoginRequest = {
+  code?: string | undefined
+}
+
+export type V1GoogleLoginResponse = {
+  userId?: string | undefined
 }
 
 export type V1Movie = {
