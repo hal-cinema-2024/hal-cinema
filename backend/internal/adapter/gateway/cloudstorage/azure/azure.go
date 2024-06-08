@@ -23,3 +23,13 @@ func (cs *AzureCloudStorage) UploadBlob(ctx context.Context, fileName string, fi
 	}
 	return fmt.Sprintf("%s%s/%s", config.Config.Azure.BlobServiceURL, config.Config.Azure.BlobServiceContainerName, fileName), nil
 }
+
+// delete blob from blob storage
+func (cs *AzureCloudStorage) DeleteBlob(ctx context.Context, blobName string) error {
+	var containerName string = config.Config.Azure.BlobServiceContainerName
+	_, err := cs.bclient.DeleteBlob(ctx, containerName, blobName, &azblob.DeleteBlobOptions{})
+	if err != nil {
+		return err
+	}
+	return nil
+}
