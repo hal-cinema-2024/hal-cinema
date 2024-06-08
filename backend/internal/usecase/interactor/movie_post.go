@@ -3,7 +3,6 @@ package interactor
 import (
 	"context"
 	"io"
-	"log"
 	"mime/multipart"
 	"time"
 
@@ -56,15 +55,12 @@ func (mi *MovieInteractor) CreateMovie(ctx context.Context, movie CreateMovie) (
 		if err != nil {
 			return "", err
 		}
-		log.Println("movieImageFile: ", image.Filename)
 		imagePath, err := mi.cloudStorage.UploadBlob(ctx, image.Filename, data)
 		if err != nil {
 			return "", err
 		}
 		imagePaths = append(imagePaths, imagePath)
 	}
-	log.Println(imagePaths)
-	log.Println(movie.EndDate)
 
 	movieID, err := mi.Repositories.CreateMovie(ctx, &model.Movie{
 		MovieID:       uid.String(),
