@@ -44,7 +44,7 @@ jobs:
 
     - name: write env
       run: |
-        ${{ secrets.TEST_ENV }} > .env.test
+        echo "${{ secrets.TEST_ENV }}" > .env.test
     
     - name: Install dependencies
       run: go mod download
