@@ -1,7 +1,8 @@
 package controller
 
 import (
-	"time"
+	"log"
+	"mime/multipart"
 
 	"github.com/hal-cinema-2024/backend/internal/entities/model"
 	"github.com/hal-cinema-2024/backend/internal/usecase/interactor"
@@ -9,16 +10,17 @@ import (
 )
 
 type UpdateMovieRequest struct {
-	MovieID     string    `form:"movie_id"`
-	Name        string    `form:"name"`
-	Director    string    `form:"director"`
-	Summary     string    `form:"summary"`
-	Thumbnail   string    `form:"thumbnail"`
-	Link        string    `form:"link"`
-	Term        int32     `form:"term"`
-	ReleaseDate time.Time `form:"release_date"`
-	EndDate     time.Time `form:"end_date"`
-	IsDelete    bool      `form:"is_delete"`
+	MovieID     string                  `form:"movie_id"`
+	Name        string                  `form:"movieName" validate:"required"`
+	Director    string                  `form:"director" validate:"required"`
+	Summary     string                  `form:"summary" validate:"required"`
+	Thumbnail   *multipart.FileHeader   `form:"thumbnail" validate:"required"`
+	Link        string                  `form:"link" validate:"required"`
+	Term        int32                   `form:"term" validate:"required"`
+	ReleaseDate string                  `form:"releaseDate" validate:"required"`
+	EndDate     string                  `form:"endDate" validate:"required"`
+	MovieImage  []*multipart.FileHeader `form:"movieImage"`
+	IsDelete    bool                    `form:"isDelete"`
 }
 
 type UpdateMovieResponse struct {
@@ -31,17 +33,36 @@ func UpdateMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 		if err := ctx.Bind(&req); err != nil {
 			return err
 		}
+		form, err := ctx.MultipartForm()
+		if err != nil {
+			return echo.ErrBadRequest
+		}
+		var thumbnail *multipart.FileHeader
+
+		imageFiles, ok := form.File["thumbnail"]
+		if !ok {
+			thumbnail = nil
+		} else {
+			thumbnail = imageFiles[0]
+		}
+
+		releaseDate := str2time(req.ReleaseDate)
+		endDate := str2time(req.EndDate)
+		movieImageFiles, ok := form.File["movieImage"]
+		if !ok {
+			log.Println("movieImage is not found")
+		}
 
 		movie_id, err := mi.UpdateMovie(ctx.Request().Context(), &model.Movie{
 			MovieID:       req.MovieID,
 			Name:          req.Name,
 			Director:      req.Director,
 			Summary:       req.Summary,
-			ThumbnailPath: req.Thumbnail,
+			ThumbnailPath: thumbnail,
 			Link:          req.Link,
 			Term:          req.Term,
-			ReleaseDate:   req.ReleaseDate,
-			EndDate:       req.EndDate,
+			ReleaseDate:   releaseDate,
+			EndDate:       endDate,
 			IsDelete:      req.IsDelete,
 		})
 		if err != nil {
