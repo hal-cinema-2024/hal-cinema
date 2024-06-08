@@ -56,7 +56,6 @@ func TestSyncSession(t *testing.T) {
 		UserID:         user1.UserID,
 		Token:          "test-token",
 		ExpirationTime: int32(time.Now().Add(time.Hour * 1).Unix()),
-		RefreshToken:   "test-refresh-token",
 	})
 
 	testCases := []struct {
@@ -72,7 +71,6 @@ func TestSyncSession(t *testing.T) {
 				UserID:         session1.UserID,
 				Token:          "new-test-token",
 				ExpirationTime: int32(time.Now().Add(time.Hour * 2).Unix()),
-				RefreshToken:   "new-test-refresh-token",
 			},
 			wantErrCode: "",
 		},
@@ -84,7 +82,6 @@ func TestSyncSession(t *testing.T) {
 				UserID:         user2.UserID,
 				Token:          "test-token",
 				ExpirationTime: int32(time.Now().Add(time.Hour * 24).Unix()),
-				RefreshToken:   "test-refresh-token",
 			},
 			wantErrCode: "",
 		},
@@ -96,7 +93,6 @@ func TestSyncSession(t *testing.T) {
 				UserID:         user2.UserID,
 				Token:          "test-token",
 				ExpirationTime: int32(time.Now().Add(time.Hour * 24).Unix()),
-				RefreshToken:   "test-refresh-token",
 			},
 			wantErrCode: pgerrcode.ForeignKeyViolation,
 		},
@@ -130,10 +126,6 @@ func TestSyncSession(t *testing.T) {
 
 			if session.ExpirationTime == 0 {
 				t.Errorf("got %v; want %v", session.ExpirationTime, tc.session.ExpirationTime)
-			}
-
-			if session.RefreshToken != tc.session.RefreshToken {
-				t.Errorf("got %v; want %v", session.RefreshToken, tc.session.RefreshToken)
 			}
 
 		})
@@ -171,7 +163,6 @@ func TestGetSessionByID(t *testing.T) {
 		UserID:         user.UserID,
 		Token:          "test-token",
 		ExpirationTime: int32(time.Now().Add(time.Hour * 1).Unix()),
-		RefreshToken:   "test-refresh-token",
 	})
 
 	testCases := []struct {
@@ -190,7 +181,6 @@ func TestGetSessionByID(t *testing.T) {
 				UserID:         session.UserID,
 				Token:          session.Token,
 				ExpirationTime: session.ExpirationTime,
-				RefreshToken:   session.RefreshToken,
 			},
 			found:       true,
 			wantErrCode: "",

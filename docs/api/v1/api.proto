@@ -10,7 +10,7 @@ option go_package = "hal-cinema/api/v1";
 service APIService {
   rpc CreateSchedule(CreateScheduleRequest) returns (CreateScheduleResponse) {
     option (google.api.http) = {
-      post: "/schedules"
+      post: "/v1/schedules"
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -21,7 +21,7 @@ service APIService {
   }
 
   rpc GetSchedules(GetSchedulesRequest) returns (GetSchedulesResponse) {
-    option (google.api.http) = {get: "/schedules"};
+    option (google.api.http) = {get: "/v1/schedules"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Schedules"]
       summary: "Get all schedules"
@@ -31,7 +31,7 @@ service APIService {
 
   rpc UpdateSchedule(UpdateScheduleRequest) returns (UpdateScheduleResponse) {
     option (google.api.http) = {
-      put: "/schedules/{schedule_id}"
+      put: "/v1/schedules/{schedule_id}"
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -42,7 +42,7 @@ service APIService {
   }
 
   rpc DeleteSchedule(DeleteScheduleRequest) returns (DeleteScheduleResponse) {
-    option (google.api.http) = {delete: "/schedules/{schedule_id}"};
+    option (google.api.http) = {delete: "/v1/schedules/{schedule_id}"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Schedules"]
       summary: "Delete schedule"
@@ -53,7 +53,7 @@ service APIService {
   // multipart/form-dataにする
   rpc CreateMovie(CreateMovieRequest) returns (CreateMovieResponse) {
     option (google.api.http) = {
-      post: "/movies"
+      post: "/v1/movies"
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -65,7 +65,7 @@ service APIService {
 
   // multipart/form-dataにする
   rpc GetMovies(GetMoviesRequest) returns (GetMoviesResponse) {
-    option (google.api.http) = {get: "/movies"};
+    option (google.api.http) = {get: "/v1/movies"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Movies"]
       summary: "Get all movies"
@@ -75,7 +75,7 @@ service APIService {
 
   // multipart/form-dataにする
   rpc GetMovie(GetMovieRequest) returns (GetMovieResponse) {
-    option (google.api.http) = {get: "/movies/{movie_id}"};
+    option (google.api.http) = {get: "/v1/movies/{movie_id}"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Movies"]
       summary: "Get movie details"
@@ -86,7 +86,7 @@ service APIService {
   // multipart/form-dataにする
   rpc UpdateMovie(UpdateMovieRequest) returns (UpdateMovieResponse) {
     option (google.api.http) = {
-      put: "/movies/{movie_id}"
+      put: "/v1/movies/{movie_id}"
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -97,7 +97,7 @@ service APIService {
   }
 
   rpc DeleteMovie(DeleteMovieRequest) returns (DeleteMovieResponse) {
-    option (google.api.http) = {delete: "/movies/{movie_id}"};
+    option (google.api.http) = {delete: "/v1/movies/{movie_id}"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Movies"]
       summary: "Delete movie"
@@ -118,7 +118,7 @@ service APIService {
   }
 
   rpc GetUsers(GetUsersRequest) returns (GetUsersResponse) {
-    option (google.api.http) = {get: "/users"};
+    option (google.api.http) = {get: "/v1/users"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Users"]
       summary: "Get user"
@@ -127,7 +127,7 @@ service APIService {
   }
 
   rpc GetUser(GetUserRequest) returns (GetUserResponse) {
-    option (google.api.http) = {get: "/users/{user_id}"};
+    option (google.api.http) = {get: "/v1/users/{user_id}"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Users"]
       summary: "Get user"
@@ -137,7 +137,7 @@ service APIService {
 
   rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
     option (google.api.http) = {
-      put: "/users/{user_id}"
+      put: "/v1/users/{user_id}"
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -148,7 +148,7 @@ service APIService {
   }
 
   rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {
-    option (google.api.http) = {delete: "/users/{user_id}"};
+    option (google.api.http) = {delete: "/v1/users/{user_id}"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Users"]
       summary: "Delete user"
@@ -158,7 +158,7 @@ service APIService {
 
   rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse) {
     option (google.api.http) = {
-      post: "/orders"
+      post: "/v1/orders"
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -169,7 +169,7 @@ service APIService {
   }
 
   rpc GetOrders(GetOrdersRequest) returns (GetOrdersResponse) {
-    option (google.api.http) = {get: "/orders"};
+    option (google.api.http) = {get: "/v1/orders"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Orders"]
       summary: "Get all orders"
@@ -178,7 +178,7 @@ service APIService {
   }
 
   rpc GetOrder(GetOrderRequest) returns (GetOrderResponse) {
-    option (google.api.http) = {get: "/orders/{order_id}"};
+    option (google.api.http) = {get: "/v1/orders/{order_id}"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Orders"]
       summary: "Get order"
@@ -187,7 +187,7 @@ service APIService {
   }
 
   rpc DeleteOrder(DeleteOrderRequest) returns (DeleteOrderResponse) {
-    option (google.api.http) = {delete: "/orders/{order_id}"};
+    option (google.api.http) = {delete: "/v1/orders/{order_id}"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Orders"]
       summary: "Delete order"
@@ -197,7 +197,7 @@ service APIService {
 
   rpc CreateSeatReservation(CreateSeatReservationRequest) returns (CreateSeatReservationResponse) {
     option (google.api.http) = {
-      post: "/reservations"
+      post: "/v1/reservations"
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -208,7 +208,7 @@ service APIService {
   }
 
   rpc DeleteSeatReservation(DeleteSeatReservationRequest) returns (DeleteSeatReservationResponse) {
-    option (google.api.http) = {delete: "/reservations/{theater_seat_id}"};
+    option (google.api.http) = {delete: "/v1/reservations/{theater_seat_id}"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Reservations"]
       summary: "Delete reservation"
@@ -297,7 +297,7 @@ message UpdateMovieRequest {
   string sammary = 4;
   bytes thumbnail = 5;
   string link = 6;
-  string term = 7;
+  int32 term = 7;
   string release_date = 8;
   string end_date = 9;
   repeated bytes movie_image = 10;

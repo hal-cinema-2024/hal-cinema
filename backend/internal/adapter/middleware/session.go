@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/hal-cinema-2024/backend/internal/framework/cookie"
@@ -16,27 +17,28 @@ func SessionMiddleware(ui *interactor.SessionInteractor) echo.MiddlewareFunc {
 		return func(ctx echo.Context) error {
 			sessionID, err := ctx.Cookie(string(cookie.SessionID))
 			if err != nil {
-				log.Info(ctx.Request().Context(), err.Error())
 				if err == http.ErrNoCookie {
+					log.Info(ctx.Request().Context(), "session cookie not found")
 					return echo.ErrUnauthorized
 				}
-
+				log.Error(ctx.Request().Context(), fmt.Sprintf("failed to get session cookie: %v", err))
 				return echo.ErrInternalServerError
 			}
 
 			if sessionID.Value == "" {
+				log.Info(ctx.Request().Context(), "session cookie value is empty")
 				return echo.ErrUnauthorized
 			}
 
 			userAgent, ok := ctx.Get(hcontext.UserAgent.String()).(string)
 			if !ok {
 				log.Info(ctx.Request().Context(), "user agent not found")
-				return echo.ErrInternalServerError
+				return echo.ErrBadRequest
 			}
 			user, err := ui.GetUserBySessionID(ctx.Request().Context(), sessionID.Value, userAgent)
 
 			if err != nil {
-				log.Info(ctx.Request().Context(), err.Error())
+				log.Info(ctx.Request().Context(), fmt.Sprintf("failed to get user by session id: %v", err))
 				switch err {
 				case herror.ErrSessionExpired:
 					return echo.ErrUnauthorized

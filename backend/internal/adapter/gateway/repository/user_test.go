@@ -119,6 +119,77 @@ func TestCreateUser(t *testing.T) {
 	}
 }
 
+func TestGetUsers(t *testing.T) {
+	if err := test.NewContainer(t); err != nil {
+		t.Fatal(err)
+	}
+
+	db, err := invoke[*gorm.DB]()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	factrues, err := invoke[*factory.Factories]()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	userRepo := repository.NewUserRepo(db)
+	user1 := factrues.User.Create(
+		model.User{
+			UserID:           uuid.NewString(),
+			Email:            "test.hal.cinema.1@example.com",
+			FirstName:        "first name",
+			LastName:         "last name",
+			FirstNameReading: "first name reading",
+			LastNameReading:  "last name reading",
+			Age:              10,
+			Gender:           0,
+			CreatedAt:        time.Now(),
+			UpdatedAt:        time.Now(),
+			IsDelete:         false,
+		},
+	)
+	user2 := factrues.User.Create(
+		model.User{
+			UserID:           uuid.NewString(),
+			Email:            "test.hal.cinema.2@example.com",
+			FirstName:        "first name",
+			LastName:         "last name",
+			FirstNameReading: "first name reading",
+			LastNameReading:  "last name reading",
+			Age:              10,
+			Gender:           0,
+			CreatedAt:        time.Now(),
+			UpdatedAt:        time.Now(),
+			IsDelete:         false,
+		},
+	)
+
+	testCases := []struct {
+		name      string
+		wantUsers []model.User
+	}{
+		{
+			name: "success",
+			wantUsers: []model.User{
+				*user1,
+				*user2,
+			},
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			_, err := userRepo.GetUsers(context.Background(), 0, 10)
+			if err != nil {
+				t.Fatal(err)
+			}
+		})
+	}
+
+}
+
 func TestGetUserByIDAndValidUser(t *testing.T) {
 	if err := test.NewContainer(t); err != nil {
 		t.Fatal(err)
@@ -496,6 +567,74 @@ func TestUpdateUser(t *testing.T) {
 			}
 			if user.UpdatedAt.IsZero() {
 				t.Fatalf("got %v; want %v", user.UpdatedAt, tc.wantUser.UpdatedAt)
+			}
+		})
+	}
+}
+
+func TestDeleteUser(t *testing.T) {
+	if err := test.NewContainer(t); err != nil {
+		t.Fatal(err)
+	}
+
+	db, err := invoke[*gorm.DB]()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	factrues, err := invoke[*factory.Factories]()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	userRepo := repository.NewUserRepo(db)
+	user := factrues.User.Create(
+		model.User{
+			UserID:    uuid.NewString(),
+			Email:     "test.hal.cinema.1@example.com",
+			CreatedAt: time.Now(),
+			UpdatedAt: time.Now(),
+			IsDelete:  false,
+		},
+	)
+
+	testCases := []struct {
+		name    string
+		userID  string
+		wantErr error
+	}{
+		{
+			name:    "success - delete user",
+			userID:  user.UserID,
+			wantErr: nil,
+		},
+		{
+			name:    "failed - no found user",
+			userID:  "not found user",
+			wantErr: herror.ErrResourceNotFound,
+		},
+		{
+			name:    "failed - user is delete",
+			userID:  user.UserID,
+			wantErr: herror.ErrResourceNotFound,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			err := userRepo.DeleteUser(context.Background(), tc.userID)
+			if err != nil {
+				if !errors.Is(err, tc.wantErr) {
+					t.Error(err)
+				}
+			} else {
+				_, err := userRepo.GetUserByID(context.Background(), tc.userID)
+				if err != nil {
+					if !errors.Is(err, herror.ErrResourceDeleted) {
+						t.Error(err)
+					}
+					return
+				}
 			}
 		})
 	}

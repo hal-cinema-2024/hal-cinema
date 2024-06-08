@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/hal-cinema-2024/backend/pkg/log"
@@ -15,6 +16,13 @@ type LoginRequest struct {
 	AuthorizationCode string `json:"code"`
 }
 
+func (r LoginRequest) Validate() error {
+	if r.AuthorizationCode == "" {
+		return fmt.Errorf("authorization code is required")
+	}
+	return nil
+}
+
 type LoginResponse struct {
 	UserID string `json:"userId"`
 }
@@ -26,19 +34,24 @@ func GoogleLogin(
 	return func(ctx echo.Context) error {
 		var reqBody LoginRequest
 		if err := ctx.Bind(&reqBody); err != nil {
-			log.Error(ctx.Request().Context(), "[ERROR] bad request", err)
+			log.Error(ctx.Request().Context(), "bad request", err)
+			return echo.ErrBadRequest
+		}
+
+		if err := reqBody.Validate(); err != nil {
+			log.Error(ctx.Request().Context(), "bad request", err)
 			return echo.ErrBadRequest
 		}
 
 		userAgent, ok := ctx.Get(hcontext.UserAgent.String()).(string)
 		if !ok {
-			log.Error(ctx.Request().Context(), "[ERROR] user agent not found")
+			log.Error(ctx.Request().Context(), "user agent not found")
 			return echo.ErrInternalServerError
 		}
 
 		userInfo, err := googleLogin.Login(ctx.Request().Context(), reqBody.AuthorizationCode, userAgent)
 		if err != nil {
-			log.Error(ctx.Request().Context(), "[ERROR] ", err)
+			log.Error(ctx.Request().Context(), "failed to google login", err)
 			return echo.ErrInternalServerError
 		}
 

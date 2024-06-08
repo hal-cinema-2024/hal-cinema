@@ -83,7 +83,6 @@ func (gl *GoogleLogin) Login(ctx context.Context, authorizationCode, userAgent s
 			UserID:         userInfo.UserID,
 			Token:          token.AccessToken,
 			ExpirationTime: int32(token.Expiry.Unix()),
-			RefreshToken:   token.RefreshToken,
 		})
 
 		if err != nil {

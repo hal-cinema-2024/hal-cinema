@@ -57,17 +57,15 @@ func UpdateUser(
 		})
 
 		if err != nil {
+			log.Error(ctx.Request().Context(), "failed to update user", err)
 			switch err {
 			case herror.ErrNoChange:
-				log.Info(ctx.Request().Context(), "failed to update user", err)
 				return ctx.JSON(200, UpdateUserResponse{
 					UserID: req.UserID,
 				})
 			case herror.ErrResourceNotFound:
-				log.Error(ctx.Request().Context(), "failed to update user", err)
 				return echo.ErrBadRequest
 			default:
-				log.Error(ctx.Request().Context(), "failed to update user", err)
 				return echo.ErrInternalServerError
 			}
 		}
