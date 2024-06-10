@@ -32,6 +32,14 @@ func LoadEnv(envfile ...string) error {
 		return err
 	}
 
+	if err := env.Parse(&config.Google); err != nil {
+		return err
+	}
+
+	if err := env.Parse(&config.Azure); err != nil {
+		return err
+	}
+
 	Config = &config
 
 	return nil

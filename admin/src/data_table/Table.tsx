@@ -1,23 +1,24 @@
 import "./table.css";
-
 import { flexRender } from "@tanstack/react-table";
 import { FC } from "react";
-
-import { Button, Input } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import { useTable } from "./hooks/useReactTable";
+import { User } from "./column";
 
-export const DataTable: FC = () => {
-  const { table } = useTable();
+interface DataTableProps {
+  data: User[];
+  setData: React.Dispatch<React.SetStateAction<User[]>>;
+}
+
+export const DataTable: FC<DataTableProps> = ({ data, setData }) => {
+  const { table } = useTable(data, setData);
+
   return (
     <div>
       <main>
-        <div
-          style={{
-            margin: "5px",
-          }}
-        >
+        {/* ----------表示件数絞り込み---------- */}
+        <div className="DispNumContainer">
           <select
-            style={{ margin: "5px" }}
             value={table.getState().pagination.pageSize}
             onChange={(e) => {
               table.setPageSize(Number(e.target.value));
@@ -30,78 +31,94 @@ export const DataTable: FC = () => {
             ))}
           </select>
 
-          <Button
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            {"<"}
-          </Button>
-          {table.getPageOptions().map((page) => {
-            return (
-              <button
-                key={page}
-                onClick={() => table.setPageIndex(page)}
-                disabled={table.getState().pagination.pageIndex === page}
-              >
-                {page + 1}
-              </button>
-            );
-          })}
-          <Button
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            {">"}
-          </Button>
+          <div>
+            <Button
+              onClick={() => table.previousPage()}
+              disabled={!table.getCanPreviousPage()}
+            >
+              {"<"}
+            </Button>
+            {table.getPageOptions().map((page) => {
+              return (
+                <button
+                  key={page}
+                  onClick={() => table.setPageIndex(page)}
+                  disabled={table.getState().pagination.pageIndex === page}
+                >
+                  {page + 1}
+                </button>
+              );
+            })}
+            <Button
+              onClick={() => table.nextPage()}
+              disabled={!table.getCanNextPage()}
+            >
+              {">"}
+            </Button>
+          </div>
         </div>
-        <div style={{ padding: "10px" }}>
-          <Input
-            placeholder="検索"
-            value={(table.getState().globalFilter as string) ?? ""}
-            onChange={(e) => table.setGlobalFilter(e.target.value)}
-          />
-          <Input
-            type="date"
-            value={
-              (
-                table.getColumn("createdAt")?.getFilterValue() as {
-                  from?: string;
+        {/* ----------表示件数絞り込み 終わり---------- */}
+
+        {/* ----------検索・日付絞り込み---------- */}
+        <div>
+          <div className="HeaderWrap">
+            <div className="SearchContainer">
+              <input
+                placeholder="検索"
+                value={(table.getState().globalFilter as string) ?? ""}
+                onChange={(e) => table.setGlobalFilter(e.target.value)}
+              />
+            </div>
+            <div className="NarrowContainer">
+              <input
+                style={{ marginRight: "5px" }}
+                type="date"
+                value={
+                  (
+                    table.getColumn("createdAt")?.getFilterValue() as {
+                      from?: string;
+                    }
+                  )?.from ?? ""
                 }
-              )?.from ?? ""
-            }
-            onChange={(e) =>
-              table
-                .getColumn("createdAt")
-                ?.setFilterValue((old: { from?: string; to?: string }) => {
-                  return {
-                    ...old,
-                    from: e.target.value,
-                  };
-                })
-            }
-          />
-          〜
-          <Input
-            type="date"
-            value={
-              (
-                table.getColumn("createdAt")?.getFilterValue() as {
-                  to?: string;
+                onChange={(e) =>
+                  table
+                    .getColumn("createdAt")
+                    ?.setFilterValue((old: { from?: string; to?: string }) => {
+                      return {
+                        ...old,
+                        from: e.target.value,
+                      };
+                    })
                 }
-              )?.to ?? ""
-            }
-            onChange={(e) =>
-              table
-                .getColumn("createdAt")
-                ?.setFilterValue((old: { from?: string; to?: string }) => {
-                  return {
-                    ...old,
-                    to: e.target.value,
-                  };
-                })
-            }
-          />
+              />
+              〜
+              <input
+                style={{ marginLeft: "5px" }}
+                type="date"
+                value={
+                  (
+                    table.getColumn("createdAt")?.getFilterValue() as {
+                      to?: string;
+                    }
+                  )?.to ?? ""
+                }
+                onChange={(e) =>
+                  table
+                    .getColumn("createdAt")
+                    ?.setFilterValue((old: { from?: string; to?: string }) => {
+                      return {
+                        ...old,
+                        to: e.target.value,
+                      };
+                    })
+                }
+              />
+            </div>
+          </div>
         </div>
+        {/* ----------検索・日付絞り込み 終わり---------- */}
+
+        {/* ----------テーブル---------- */}
         <table>
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -120,22 +137,28 @@ export const DataTable: FC = () => {
             ))}
           </thead>
           <tbody>
-            {table.getRowModel().rows.map((row) => {
-              return (
+            {table.getRowModel().rows.length === 0 ? (
+              <tr>
+                <td colSpan={table.getAllColumns().length} className="noData">
+                  データが見つかりません
+                </td>
+              </tr>
+            ) : (
+              table.getRowModel().rows.map((row) => (
                 <tr key={row.id}>
-                  {row.getVisibleCells().map((cell) => {
-                    return (
-                      <td key={cell.id}>
+                  {row.getVisibleCells().map((cell) => (
+                    <td key={cell.id}>
+                      <p>
                         {flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext()
                         )}
-                      </td>
-                    );
-                  })}
+                      </p>
+                    </td>
+                  ))}
                 </tr>
-              );
-            })}
+              ))
+            )}
           </tbody>
         </table>
         <div style={{ padding: "10px" }} />

@@ -1,6 +1,5 @@
 CREATE TABLE "users" (
   "user_id" varchar(63) PRIMARY KEY,
-
   "first_name" varchar(31),
   "last_name" varchar(31),
   "first_name_reading" varchar(31),
@@ -29,7 +28,7 @@ CREATE TABLE "permissions" (
   "permission_id" varchar(63) PRIMARY KEY,
   "uri" text NOT NULL,
   "req_method" varchar(63) NOT NULL,
-  "effect" boolean NOT NULL
+  "effect" varchar(10) NOT NULL
 );
 
 CREATE TABLE "role_permissions" (
@@ -39,10 +38,10 @@ CREATE TABLE "role_permissions" (
 
 CREATE TABLE "session" (
   "session_id" varchar(63) PRIMARY KEY,
+  "user_agent" text NOT NULL,
   "user_id" varchar(63) NOT NULL,
   "token" text NOT NULL,
-  "expiration_time" int NOT NULL,
-  "refresh_token" text NOT NULL
+  "expiration_time" int NOT NULL
 );
 
 CREATE TABLE "schedules" (
@@ -93,7 +92,6 @@ CREATE TABLE "theaters_seats" (
 CREATE TABLE "orders" (
   "order_id" varchar(63) PRIMARY KEY,
   "user_id" varchar(63) NOT NULL,
-
   "created_at" timestamptz NOT NULL
 );
 
@@ -110,11 +108,7 @@ CREATE TABLE "price_types" (
   "price" int NOT NULL
 );
 
-ALTER TABLE  "price_types" ADD CHECK (price >= 0);
-
 CREATE UNIQUE INDEX ON "theaters_seats" ("schedule_id", "seat_name");
-
-COMMENT ON COLUMN "permissions"."effect" IS '許可or不許可';
 
 COMMENT ON COLUMN "movies"."term" IS '上映時間';
 
@@ -139,7 +133,6 @@ ALTER TABLE "orders_details" ADD FOREIGN KEY ("theaters_seats_id") REFERENCES "t
 ALTER TABLE "orders_details" ADD FOREIGN KEY ("order_id") REFERENCES "orders" ("order_id");
 
 ALTER TABLE "movie_images" ADD FOREIGN KEY ("movie_id") REFERENCES "movies" ("movie_id");
-
 
 ALTER TABLE "user_roles" ADD FOREIGN KEY ("role_id") REFERENCES "roles" ("role_id");
 

@@ -1,11 +1,13 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
-	"log"
 	"os"
 	"strings"
+
+	"github.com/hal-cinema-2024/backend/pkg/log"
 
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/hal-cinema-2024/backend/cmd/config"
@@ -33,15 +35,13 @@ func init() {
 	flag.Parse()
 
 	if err := config.LoadEnv(envFile...); err != nil {
-		log.Fatal("Error loading .env file")
+		log.Fatal(context.Background(), "lod Env Error", "error", err)
 	}
-	log.Println(config.Config.App.Env)
 }
 
 func main() {
 	if err := run(); err != nil {
-		log.Fatalln(err)
-		os.Exit(1)
+		log.Fatal(context.Background(), "failed to run", "error", err)
 	}
 }
 
@@ -52,17 +52,37 @@ func run() error {
 	// migrate
 	m, err := migration.Migrate(db, "file://"+migratefile, nil)
 	if err != nil {
+		log.Error(context.Background(), "migrate new error", "error", err)
 		return fmt.Errorf("migrate new error: %w", err)
 	}
 
-	// migrate up
-	if err := m.Up(); err != nil {
-		// 変更がない場合は無視
-		if err != migrate.ErrNoChange {
-			return fmt.Errorf("'migrate up' error: %w", err)
-		}
+	if len(os.Args) != 6 {
+		log.Error(context.Background(), "invalid command")
+		return fmt.Errorf("invalid command: %s", os.Args)
 	}
 
-	log.Println("'migrate up' successful")
+	command := os.Args[5]
+
+	switch command {
+	case "up":
+		// migrate up
+		if err := m.Up(); err != nil {
+			// 変更がない場合は無視
+			if err != migrate.ErrNoChange {
+				log.Error(context.Background(), "migrate up error", "error", err)
+				return fmt.Errorf("'migrate up error: %w", err)
+			}
+		}
+	case "down":
+		// migrate down
+		if err := m.Down(); err != nil {
+			log.Error(context.Background(), "migrate down error", "error", err)
+			return fmt.Errorf("'migrate down error: %w", err)
+		}
+	default:
+		log.Error(context.Background(), "unknown command", "command", command)
+		return fmt.Errorf("unknown command: %s", command)
+	}
+	log.Info(context.Background(), "migrate ' successful")
 	return nil
 }

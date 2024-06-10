@@ -1,0 +1,63 @@
+name: generate aspida from api docs
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'docs/api.swagger.json'
+      - '.github/workflows/gen-aspida.yaml'
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  checks: write
+  contents: write
+
+jobs:
+  generate-aspida:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: setup branches
+        run: |
+          git config --global user.email "${{ secrets.EMAIL_GITHUB }}"
+          git config --global user.name "${{ secrets.USERNAME_GITHUB }}"
+
+          git switch -c bot/generate_aspida_${{github.sha}}
+      
+      - name: generate aspida
+        run: |
+          rm -rf api/
+          npx openapi2aspida -i docs/api.swagger.json -o=api/
+
+      - name: Count changes
+        id: changes
+        run: |
+          git add -N .
+          echo "::set-output name=count::$(git diff --name-only | wc -l)"
+      
+      - name: Commit and push changes
+        if: steps.changes.outputs.count > 0 
+        run: |
+          git add api/**
+          git commit -m ":robot: generate aspida docs"
+          git push origin bot/generate_aspida_${{github.sha}}
+
+      - name: create Pull Request to develop
+        if: steps.changes.outputs.count > 0 
+        run: |
+          gh pr create \
+            --title ":robot: generate from openAPI schema[bot]" \
+            --body ":robot: generate from openAPI schema[bot]" \
+            --repo ${{github.repository}} \
+            --base develop \
+            --head bot/generate_aspida_${{github.sha}} \
+            --reviewer "${{ github.event.head_commit.committer.username || github.triggering_actor }}"
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }} 

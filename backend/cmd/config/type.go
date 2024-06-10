@@ -40,4 +40,17 @@ type config struct {
 		BucketName      string `env:"CLOUDFLARE_BUCKET_NAME"`
 		Region          string `env:"CLOUDFLARE_REGION"`
 	}
+
+	Google struct {
+		ClientID     string `env:"GOOGLE_CLIENT_ID"`
+		ClientSecret string `env:"GOOGLE_CLIENT_SECRET"`
+		RedirectURI  string `env:"GOOGLE_REDIRECT_URI"`
+	}
+
+	Azure struct {
+		TenantID       string `env:"AZURE_TENANT_ID"`
+		ClientID       string `env:"AZURE_CLIENT_ID"`
+		ClientSecret   string `env:"AZURE_CLIENT_SECRET"`
+		BlobServiceURL string `env:"AZURE_BLOB_SERVICE_URL"`
+	}
 }

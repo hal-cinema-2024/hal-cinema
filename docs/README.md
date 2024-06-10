@@ -1,12 +1,10 @@
 # docs
 
-TODO: swaggerのAPIドキュメントを生成する
-```
+[SwaggerUI](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/hal-cinema-2024/hal-cinema/master/docs/api.swagger.json)
 
+```
 docs
- ├── lib
- |   └── any_lib ...
- ├── proto
- │   └── any_lib ...
- └── openapi.json
+ ├── api/version(e.g. v1)
+ │   └── api.version.proto
+ └── api.swagger.json
 ```
