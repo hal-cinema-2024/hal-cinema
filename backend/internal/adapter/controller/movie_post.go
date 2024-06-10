@@ -1,11 +1,11 @@
 package controller
 
 import (
-	"log"
 	"mime/multipart"
 	"time"
 
 	"github.com/hal-cinema-2024/backend/internal/usecase/interactor"
+	"github.com/hal-cinema-2024/backend/pkg/log"
 	"github.com/labstack/echo/v4"
 )
 
@@ -22,7 +22,7 @@ type CreateMovieRequest struct {
 }
 
 type CreateMovieResponse struct {
-	MovieID string `json:"movie_id"`
+	MovieID string `json:"movieId"`
 }
 
 func CreateMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
@@ -39,7 +39,7 @@ func CreateMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 
 		imageFiles, ok := form.File["thumbnail"]
 		if !ok {
-			thumbnail = nil
+			return echo.ErrBadRequest
 		} else {
 			thumbnail = imageFiles[0]
 		}
@@ -48,10 +48,7 @@ func CreateMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 		endDate := str2time(req.EndDate)
 		movieImageFiles, ok := form.File["movieImage"]
 		if !ok {
-			log.Println("movieImage is not found")
-		}
-		for _, movieImageFile := range movieImageFiles {
-			log.Println("movieImageFile: ", movieImageFile.Filename)
+			log.Info(ctx.Request().Context(), "movieImageFiles is nil")
 		}
 
 		movieID, err := mi.CreateMovie(ctx.Request().Context(), interactor.CreateMovie{

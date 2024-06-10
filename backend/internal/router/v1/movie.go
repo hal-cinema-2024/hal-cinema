@@ -7,8 +7,8 @@ import (
 )
 
 func (v1 *v1Router) movieRoute() {
-	userRoute := v1.engine.Group("/movies")
+	movieRoute := v1.engine.Group("/movies")
 
 	mi := container.Invoke[*interactor.MovieInteractor]()
-	userRoute.POST("", controller.CreateMovie(mi))
+	movieRoute.POST("", controller.CreateMovie(mi))
 }

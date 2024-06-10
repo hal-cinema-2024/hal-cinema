@@ -21,20 +21,24 @@ func NewMovieRepo(gorm *gorm.DB) *MovieRepo {
 var _ dai.MovieRepo = (*MovieRepo)(nil)
 
 func (r *MovieRepo) CreateMovie(ctx context.Context, movie *model.Movie, imagePaths []string) (string, error) {
+	movieImage := []*model.MovieImage{}
 	result := r.db.Create(&movie)
 	if result.Error != nil {
 		return "", result.Error
 	}
+
 	// 追加画像のパスを保存
 	for _, imagePath := range imagePaths {
-		result := r.db.Create(&model.MovieImage{
+		movieImage = append(movieImage, &model.MovieImage{
 			MovieID:  movie.MovieID,
 			FilePath: imagePath,
 		})
-		if result.Error != nil {
-			return "", result.Error
-		}
 	}
+	result = r.db.Create(movieImage)
+	if result.Error != nil {
+		return "", result.Error
+	}
+
 	return movie.MovieID, nil
 }
 
@@ -58,28 +62,28 @@ func (r *MovieRepo) GetMovieByID(ctx context.Context, movieID string) (*model.Mo
 
 func (r *MovieRepo) GetMovies(ctx context.Context) ([]*model.Movie, error) {
 	var movies []*model.Movie
-	result := r.db.Where("is_delete = ?", false).Find(&movies)
+	result := r.db.Where("is_delete = ?", false).Find(&movies).Limit(-1).Offset(-1)
 	if result.Error != nil {
 		return nil, result.Error
 	}
 	return movies, nil
 }
 
-func (r *MovieRepo) UpdateMovie(ctx context.Context, movie *model.Movie) (string, error) {
+func (r *MovieRepo) UpdateMovie(ctx context.Context, movie *model.Movie) error {
 	model := model.Movie{}
 	result := r.db.Model(&model).Where("movie_id = ?", movie.MovieID).Updates(&movie)
 	if result.Error != nil {
-		return "", result.Error
+		return result.Error
 	}
-	return "", nil
+	return nil
 }
 
 // logical deletion
-func (r *MovieRepo) DeleteMovie(ctx context.Context, movieID string) (string, error) {
+func (r *MovieRepo) DeleteMovie(ctx context.Context, movieID string) error {
 	var movie model.Movie
 	result := r.db.Model(&movie).Where("movie_id = ?", movieID).Update("is_delete", true)
 	if result.Error != nil {
-		return "", result.Error
+		return result.Error
 	}
-	return "", nil
+	return nil
 }
