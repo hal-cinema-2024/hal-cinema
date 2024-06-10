@@ -4,27 +4,35 @@ import (
 	"context"
 	"reflect"
 	"testing"
+	"time"
 
 	"github.com/hal-cinema-2024/backend/internal/adapter/gateway/repository"
 	"github.com/hal-cinema-2024/backend/internal/entities/model"
+	"github.com/hal-cinema-2024/backend/internal/test"
 	"gorm.io/gorm"
 )
 
 func TestCreateMovie(t *testing.T) {
 	ctx := context.Background()
+	if err := test.NewContainer(t); err != nil {
+		t.Fatal(err)
+	}
 	db, err := invoke[*gorm.DB]()
 	if err != nil {
 		t.Fatal(err)
 	}
-
 	movieRepo := repository.NewMovieRepo(db)
 
 	movie := &model.Movie{
-		Name:     "test",
-		Director: "testDirector",
-		Summary:  "testSummary",
-		Link:     "testLink",
-		Term:     120,
+		MovieID:       "testMovieID",
+		Name:          "test",
+		Director:      "testDirector",
+		Summary:       "testSummary",
+		ThumbnailPath: "testThumbnailPath",
+		Link:          "testLink",
+		Term:          120,
+		ReleaseDate:   time.Now(),
+		EndDate:       time.Now(),
 	}
 
 	imagePaths := []string{
