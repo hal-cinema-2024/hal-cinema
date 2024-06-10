@@ -14,7 +14,7 @@ export const Top = () => {
         <Box>
           <BoxBody>
             <BoxTitle>
-              <b>Night Cinema</b>
+              <b>CONCEPT</b>
             </BoxTitle>
             <BoxText>
               HALCinemaへようこそ。
@@ -43,6 +43,7 @@ export const Top = () => {
                   <CardTitle>{card.title}</CardTitle>
                   <CardText>監督名：{card.text1}</CardText>
                   <CardText>出演者：{card.text2}</CardText>
+                  <Button>詳細を見る</Button>
                 </CardContent>
               </Card>
             </CardItem>
@@ -59,7 +60,7 @@ const MainText = styled.section``;
 
 const MainSection = styled.section`
   height: 400px;
-  background: url("src/assets/bg.jpg") no-repeat center center;
+  background: url("src/assets/top02.jpg") no-repeat center center;
   background-size: cover;
 `;
 
@@ -103,10 +104,11 @@ const BoxTitle = styled.h2`
   font-size: 40px;
   text-transform: uppercase;
   color: white;
+  font-family: "Kaisei Tokumin", serif;
 `;
 
 const BoxText = styled.p`
-  font-size: 15px;
+  font-size: 17px;
   margin-top: 20px;
   color: white;
 `;
@@ -145,10 +147,11 @@ const Main = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 24px;
+  font-size: 25px;
   font-weight: 400;
   text-align: center;
   color: white;
+  font-family: "Kaisei Tokumin", serif;
 `;
 
 const Cards = styled.ul`
@@ -165,7 +168,7 @@ const CardItem = styled.li<{ index: number }>`
   display: flex;
   padding: 1rem;
   position: relative;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
   transform: translateY(${(props) => props.index * 20}px);
 
   @media (min-width: 40rem) {
@@ -184,6 +187,11 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  }
 `;
 
 const CardImage = styled.div`
@@ -206,14 +214,33 @@ const CardTitle = styled.h2`
   letter-spacing: 1px;
   text-transform: capitalize;
   margin: 0px;
+  //  font-family: "Kaisei Tokumin", serif;
 `;
 
 const CardText = styled.p`
   color: #ffffff;
   font-size: 0.875rem;
   line-height: 1.5;
-  margin-bottom: 1.25rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   font-weight: 400;
 `;
 
+const Button = styled.button`
+  color: #ffffff;
+  padding: 0.8rem;
+  font-size: 14px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  font-weight: 400;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+  }
+`;
 export default Top;

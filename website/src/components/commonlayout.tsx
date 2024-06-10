@@ -19,7 +19,7 @@ function CommonLayout() {
       <div style={{ backgroundImage: `url(${headerImage})` }}>
         <Header>
           <Logo1 to="/">LOGO</Logo1>
-          <nav>
+          <Nv>
             <NavLinks className="nav-links">
               {NavLinksData.map((navLink) => (
                 <NavLinkItem key={navLink.link}>
@@ -27,7 +27,7 @@ function CommonLayout() {
                 </NavLinkItem>
               ))}
             </NavLinks>
-          </nav>
+          </Nv>
         </Header>
         <Outlet />
 
@@ -59,11 +59,12 @@ export default CommonLayout;
 const Header = styled.header`
   background: linear-gradient(to bottom right, #a6038b, #093f59);
   color: #fff;
-  padding: 1rem;
+  padding: 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  // font-weight: bold;
 `;
 
 const Logo1 = styled(Link)`
@@ -73,12 +74,20 @@ const Logo1 = styled(Link)`
   color: #fff;
 `;
 
+const Nv = styled.ul`
+  flex-grow: 1;
+  display: flex;
+  justify-content: right; /* 中央揃え */
+  font-size: 16px;
+`;
+
 const NavLinks = styled.ul`
+  justify-content: right; /* 中央揃え */
   display: flex;
 `;
 
 const NavLinkItem = styled.li`
-  margin-left: 1.5rem;
+  margin-left: 2rem;
   list-style: none;
 `;
 
@@ -86,6 +95,7 @@ const NavLink = styled(Link)`
   text-decoration: none;
   color: #fff;
   transition: color 0.3s ease;
+  margin: 0.3rem; /* 文章間のスペースを広げる */
 
   &:hover {
     color: #ffca28;
