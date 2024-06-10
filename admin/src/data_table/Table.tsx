@@ -1,14 +1,18 @@
 import "./table.css";
-
 import { flexRender } from "@tanstack/react-table";
 import { FC } from "react";
-
-// import { Button, Input } from "@nextui-org/react";
 import { Button } from "@nextui-org/react";
 import { useTable } from "./hooks/useReactTable";
+import { User } from "./column";
 
-export const DataTable: FC = () => {
-  const { table } = useTable();
+interface DataTableProps {
+  data: User[];
+  setData: React.Dispatch<React.SetStateAction<User[]>>;
+}
+
+export const DataTable: FC<DataTableProps> = ({ data, setData }) => {
+  const { table } = useTable(data, setData);
+
   return (
     <div>
       <main>
