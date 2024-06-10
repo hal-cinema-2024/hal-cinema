@@ -4,7 +4,7 @@ on:
     branches:
       - master
     paths:
-      - 'docs/apidocs.swagger.json'
+      - 'docs/api.swagger.json'
       - '.github/workflows/gen-aspida.yaml'
   workflow_dispatch:
 
@@ -33,15 +33,24 @@ jobs:
       
       - name: generate aspida
         run: |
-          npx openapi2aspida -i docs/apidocs.swagger.json -o=api/
+          rm -rf api/
+          npx openapi2aspida -i docs/api.swagger.json -o=api/
+
+      - name: Count changes
+        id: changes
+        run: |
+          git add -N .
+          echo "::set-output name=count::$(git diff --name-only | wc -l)"
       
       - name: Commit and push changes
+        if: steps.changes.outputs.count > 0 
         run: |
           git add api/**
           git commit -m ":robot: generate aspida docs"
           git push origin bot/generate_aspida_${{github.sha}}
 
       - name: create Pull Request to develop
+        if: steps.changes.outputs.count > 0 
         run: |
           gh pr create \
             --title ":robot: generate from openAPI schema[bot]" \
