@@ -60,9 +60,9 @@ func (r *MovieRepo) GetMovieByID(ctx context.Context, movieID string) (*model.Mo
 	return &movie, imagePaths, nil
 }
 
-func (r *MovieRepo) GetMovies(ctx context.Context) ([]*model.Movie, error) {
+func (r *MovieRepo) GetMovies(ctx context.Context, pageSize int, pageID int) ([]*model.Movie, error) {
 	var movies []*model.Movie
-	result := r.db.Where("is_delete = ?", false).Find(&movies).Limit(-1).Offset(-1)
+	result := r.db.Where("is_delete = ?", false).Find(&movies).Limit(pageSize).Offset(pageSize * pageID)
 	if result.Error != nil {
 		return nil, result.Error
 	}
