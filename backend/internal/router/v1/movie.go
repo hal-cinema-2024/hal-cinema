@@ -11,4 +11,6 @@ func (v1 *v1Router) movieRoute() {
 
 	mi := container.Invoke[*interactor.MovieInteractor]()
 	movieRoute.POST("", controller.CreateMovie(mi))
+	movieRoute.GET("", controller.GetMovies(mi))
+	movieRoute.GET("/:movie_id", controller.GetMovie(mi))
 }
