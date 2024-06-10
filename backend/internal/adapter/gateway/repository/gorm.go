@@ -11,6 +11,7 @@ type GormRepo struct {
 	gorm *gorm.DB
 	*UserRepo
 	*SessionRepo
+	*MovieRepo
 }
 
 func NewGormRepo(gorm *gorm.DB) *GormRepo {
@@ -18,8 +19,11 @@ func NewGormRepo(gorm *gorm.DB) *GormRepo {
 		gorm:        gorm,
 		UserRepo:    NewUserRepo(gorm),
 		SessionRepo: NewSessionRepo(gorm),
+		MovieRepo:   NewMovieRepo(gorm),
 	}
 }
+
+var _ dai.DataAccess = (*GormRepo)(nil)
 
 func (r *GormRepo) Transaction(ctx context.Context, fn func(context.Context, dai.DataAccess) error) error {
 	err := r.gorm.WithContext(ctx).Transaction(func(tx *gorm.DB) error {
