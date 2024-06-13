@@ -34,9 +34,11 @@ func (r *MovieRepo) CreateMovie(ctx context.Context, movie *model.Movie, imagePa
 			FilePath: imagePath,
 		})
 	}
-	result = r.db.Create(movieImage)
-	if result.Error != nil {
-		return "", result.Error
+	if len(movieImage) > 0 {
+		result = r.db.Create(movieImage)
+		if result.Error != nil {
+			return "", result.Error
+		}
 	}
 
 	return movie.MovieID, nil
