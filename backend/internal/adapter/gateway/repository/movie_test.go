@@ -146,3 +146,81 @@ func TestGetMovieByID(t *testing.T) {
 		t.Errorf("Expected image paths %v, but got %v", imagePaths, retrievedImagePaths)
 	}
 }
+
+func TestGetMovies(t *testing.T) {
+	ctx := context.Background()
+	if err := test.NewContainer(t); err != nil {
+		t.Fatal(err)
+	}
+	db, err := invoke[*gorm.DB]()
+	if err != nil {
+		t.Fatal(err)
+	}
+	movieRepo := repository.NewMovieRepo(db)
+
+	// Create test movies
+	movies := []*model.Movie{
+		{
+			MovieID:       uuid.NewString(),
+			Name:          "test1",
+			Director:      "testDirector1",
+			Summary:       "testSummary1",
+			ThumbnailPath: "testThumbnailPath1",
+			Link:          "testLink1",
+			Term:          120,
+			ReleaseDate:   time.Now(),
+			EndDate:       time.Now(),
+		},
+		{
+			MovieID:       uuid.NewString(),
+			Name:          "test2",
+			Director:      "testDirector2",
+			Summary:       "testSummary2",
+			ThumbnailPath: "testThumbnailPath2",
+			Link:          "testLink2",
+			Term:          120,
+			ReleaseDate:   time.Now(),
+			EndDate:       time.Now(),
+		},
+	}
+
+	for _, movie := range movies {
+		_, err := movieRepo.CreateMovie(ctx, movie, []string{})
+		if err != nil {
+			t.Fatal(err)
+		}
+	}
+
+	// Retrieve movies
+	retrievedMovies, err := movieRepo.GetMovies(ctx, len(movies), 1)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Assert movies are retrieved correctly
+	if len(retrievedMovies) != len(movies) {
+		t.Errorf("Expected %d movies, but got %d", len(movies), len(retrievedMovies))
+	}
+
+	for i, retrievedMovie := range retrievedMovies {
+		if retrievedMovie.Name != movies[i].Name {
+			t.Errorf("Expected movie name %s, but got %s", movies[i].Name, retrievedMovie.Name)
+		}
+
+		if retrievedMovie.Director != movies[i].Director {
+			t.Errorf("Expected movie director %s, but got %s", movies[i].Director, retrievedMovie.Director)
+		}
+
+		if retrievedMovie.Summary != movies[i].Summary {
+			t.Errorf("Expected movie summary %s, but got %s", movies[i].Summary, retrievedMovie.Summary)
+		}
+
+		if retrievedMovie.Link != movies[i].Link {
+			t.Errorf("Expected movie link %s, but got %s", movies[i].Link, retrievedMovie.Link)
+		}
+
+		if retrievedMovie.Term != movies[i].Term {
+			t.Errorf("Expected movie term %d, but got %d", movies[i].Term, retrievedMovie.Term)
+		}
+	}
+}
