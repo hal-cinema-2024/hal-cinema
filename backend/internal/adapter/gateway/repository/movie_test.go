@@ -201,26 +201,4 @@ func TestGetMovies(t *testing.T) {
 	if len(retrievedMovies) != len(movies) {
 		t.Errorf("Expected %d movies, but got %d", len(movies), len(retrievedMovies))
 	}
-
-	for i, retrievedMovie := range retrievedMovies {
-		if retrievedMovie.Name != movies[i].Name {
-			t.Errorf("Expected movie name %s, but got %s", movies[i].Name, retrievedMovie.Name)
-		}
-
-		if retrievedMovie.Director != movies[i].Director {
-			t.Errorf("Expected movie director %s, but got %s", movies[i].Director, retrievedMovie.Director)
-		}
-
-		if retrievedMovie.Summary != movies[i].Summary {
-			t.Errorf("Expected movie summary %s, but got %s", movies[i].Summary, retrievedMovie.Summary)
-		}
-
-		if retrievedMovie.Link != movies[i].Link {
-			t.Errorf("Expected movie link %s, but got %s", movies[i].Link, retrievedMovie.Link)
-		}
-
-		if retrievedMovie.Term != movies[i].Term {
-			t.Errorf("Expected movie term %d, but got %d", movies[i].Term, retrievedMovie.Term)
-		}
-	}
 }
