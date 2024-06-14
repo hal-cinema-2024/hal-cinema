@@ -4,7 +4,7 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
 } from "@tanstack/react-table";
-import { User, columns } from "../column";
+import { User, columns } from "../component/UserColumn";
 import { useReactTable } from "@tanstack/react-table";
 
 export const useTable = (

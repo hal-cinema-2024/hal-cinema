@@ -3,7 +3,7 @@ import { flexRender } from "@tanstack/react-table";
 import { FC } from "react";
 import { Button } from "@nextui-org/react";
 import { useTable } from "./hooks/useReactTable";
-import { User } from "./column";
+import { User } from "./component/UserColumn";
 
 interface DataTableProps {
   data: User[];

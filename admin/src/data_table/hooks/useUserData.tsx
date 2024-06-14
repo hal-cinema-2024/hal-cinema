@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getData } from "../data";
-import { User } from "../column";
+import { User } from "../component/UserColumn";
 
 const useUserData = () => {
   const [data, setData] = useState<User[]>([]);
