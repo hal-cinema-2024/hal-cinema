@@ -100,24 +100,30 @@ td {
   outline: none;
 }
 
+th:nth-child(1),
+td:nth-child(1) {
+  width: 10%;
+  background-color: #ddd;
+}
+
 th:nth-child(2),
 td:nth-child(2) {
-  width: 15%;
+  width: 10%;
 }
 
 th:nth-child(3),
 td:nth-child(3) {
-  width: 15%;
+  /* width: 15%; */
 }
 
 th:nth-child(4),
 td:nth-child(4) {
-  width: 15%;
+  /* width: 15%; */
 }
 
 th:nth-child(5),
 td:nth-child(5) {
-  width: 25.5%;
+  /* width: 25.5%; */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -125,5 +131,5 @@ td:nth-child(5) {
 
 th:nth-child(6),
 td:nth-child(6) {
-  width: 25.5%;
+  /* width: 25.5%; */
 }
