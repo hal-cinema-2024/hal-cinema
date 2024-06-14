@@ -362,49 +362,146 @@ func TestUpdateMovie(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	// Update the movie
-	movie.Name = "updatedName"
-	movie.Director = "updatedDirector"
-	movie.Summary = "updatedSummary"
-	movie.ThumbnailPath = "updatedThumbnailPath"
-	movie.Link = "updatedLink"
-	movie.Term = 180
-	err = movieRepo.UpdateMovie(ctx, &movie)
-	if err != nil {
-		t.Fatal(err)
+	testCases := []struct {
+		name        string
+		changeMovie model.Movie
+		wantMovie   model.Movie
+		wantErrCode string
+	}{
+		{
+			name: "success - update movie",
+			changeMovie: model.Movie{
+				MovieID: movie.MovieID,
+				Name:    "updatedName",
+			},
+			wantMovie: model.Movie{
+				MovieID:       movie.MovieID,
+				Name:          "updatedName",
+				Director:      movie.Director,
+				Summary:       movie.Summary,
+				ThumbnailPath: movie.ThumbnailPath,
+				Link:          movie.Link,
+				Term:          movie.Term,
+				ReleaseDate:   movie.ReleaseDate,
+				EndDate:       movie.EndDate,
+			},
+			wantErrCode: "",
+		},
+		{
+			name: "success - update all fields",
+			changeMovie: model.Movie{
+				MovieID:       movie.MovieID,
+				Name:          "updatedName",
+				Director:      "updatedDirector",
+				Summary:       "updatedSummary",
+				ThumbnailPath: "updatedThumbnailPath",
+				Link:          "updatedLink",
+				Term:          180,
+				ReleaseDate:   time.Now(),
+				EndDate:       time.Now(),
+			},
+			wantMovie: model.Movie{
+				MovieID:       movie.MovieID,
+				Name:          "updatedName",
+				Director:      "updatedDirector",
+				Summary:       "updatedSummary",
+				ThumbnailPath: "updatedThumbnailPath",
+				Link:          "updatedLink",
+				Term:          180,
+				ReleaseDate:   time.Now(),
+				EndDate:       time.Now(),
+			},
+			wantErrCode: "",
+		},
+		{
+			name: "fail - invalid term",
+			changeMovie: model.Movie{
+				MovieID:       movie.MovieID,
+				Name:          "updatedName",
+				Director:      "updatedDirector",
+				Summary:       "updatedSummary",
+				ThumbnailPath: "updatedThumbnailPath",
+				Link:          "updatedLink",
+				Term:          -1,
+				ReleaseDate:   time.Now(),
+				EndDate:       time.Now(),
+			},
+			wantMovie: model.Movie{
+				MovieID:       movie.MovieID,
+				Name:          "updatedName",
+				Director:      "updatedDirector",
+				Summary:       "updatedSummary",
+				ThumbnailPath: "updatedThumbnailPath",
+				Link:          "updatedLink",
+				Term:          -1,
+				ReleaseDate:   time.Now(),
+				EndDate:       time.Now(),
+			},
+			wantErrCode: pgerrcode.CheckViolation,
+		},
 	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			err := movieRepo.UpdateMovie(ctx, &tc.changeMovie)
+			if err != nil {
+				var pgErr *pq.Error
+				if errors.As(err, &pgErr) {
+					if string(pgErr.Code) == tc.wantErrCode {
+						t.Log(err)
+						return
+					}
+					t.Errorf("got %v; want %v", err, tc.wantErrCode)
+				}
+			}
+
+			updatedMovie, _, err := movieRepo.GetMovieByID(ctx, movie.MovieID)
+			if err != nil {
+				t.Fatal(err)
+			}
+
+			// Assert movie is updated correctly
+			if updatedMovie.Name != tc.wantMovie.Name {
+				t.Errorf("Expected movie name %s, but got %s", tc.wantMovie.Name, updatedMovie.Name)
+			}
+
+			if updatedMovie.Director != tc.wantMovie.Director {
+				t.Errorf("Expected movie director %s, but got %s", tc.wantMovie.Director, updatedMovie.Director)
+			}
+
+			if updatedMovie.Summary != tc.wantMovie.Summary {
+				t.Errorf("Expected movie summary %s, but got %s", tc.wantMovie.Summary, updatedMovie.Summary)
+			}
+
+			if updatedMovie.ThumbnailPath != tc.wantMovie.ThumbnailPath {
+				t.Errorf("Expected movie thumbnail path %s, but got %s", tc.wantMovie.ThumbnailPath, updatedMovie.ThumbnailPath)
+			}
+
+			if updatedMovie.Link != tc.wantMovie.Link {
+				t.Errorf("Expected movie link %s, but got %s", tc.wantMovie.Link, updatedMovie.Link)
+			}
+
+			if updatedMovie.Term != tc.wantMovie.Term {
+				t.Errorf("Expected movie term %d, but got %d", tc.wantMovie.Term, updatedMovie.Term)
+			}
+		})
+	}
+	// Update the movie
+	// movie.Name = "updatedName"
+	// movie.Director = "updatedDirector"
+	// movie.Summary = "updatedSummary"
+	// movie.ThumbnailPath = "updatedThumbnailPath"
+	// movie.Link = "updatedLink"
+	// movie.Term = 180
+	// err = movieRepo.UpdateMovie(ctx, &movie)
+	// if err != nil {
+	// 	t.Fatal(err)
+	// }
 
 	// Retrieve the updated movie
-	updatedMovie, _, err := movieRepo.GetMovieByID(ctx, movie.MovieID)
-	if err != nil {
-		t.Fatal(err)
-	}
 
-	// Assert movie is updated correctly
-	if updatedMovie.Name != movie.Name {
-		t.Errorf("Expected movie name %s, but got %s", movie.Name, updatedMovie.Name)
-	}
-
-	if updatedMovie.Director != movie.Director {
-		t.Errorf("Expected movie director %s, but got %s", movie.Director, updatedMovie.Director)
-	}
-
-	if updatedMovie.Summary != movie.Summary {
-		t.Errorf("Expected movie summary %s, but got %s", movie.Summary, updatedMovie.Summary)
-	}
-
-	if updatedMovie.ThumbnailPath != movie.ThumbnailPath {
-		t.Errorf("Expected movie thumbnail path %s, but got %s", movie.ThumbnailPath, updatedMovie.ThumbnailPath)
-	}
-
-	if updatedMovie.Link != movie.Link {
-		t.Errorf("Expected movie link %s, but got %s", movie.Link, updatedMovie.Link)
-	}
-
-	if updatedMovie.Term != movie.Term {
-		t.Errorf("Expected movie term %d, but got %d", movie.Term, updatedMovie.Term)
-	}
 }
+
 func TestDeleteMovie(t *testing.T) {
 	ctx := context.Background()
 	if err := test.NewContainer(t); err != nil {
