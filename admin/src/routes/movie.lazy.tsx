@@ -6,5 +6,10 @@ export const Route = createLazyFileRoute("/movie")({
 });
 
 function Index() {
-  return <div>{/* <DataTable /> */}</div>;
+  return (
+    <div>
+      aaaa
+      {/* <DataTable /> */}
+    </div>
+  );
 }
