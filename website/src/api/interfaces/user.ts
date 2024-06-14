@@ -6,7 +6,13 @@ import {
   V1GetUsersResponse,
 } from "../../../../api/@types/index";
 
-type UpdateUserRequestInterface = Omit<V1User, "userId">;
+type UpdateUserRequestInterface = {
+  firstName?: string | undefined;
+  lastName?: string | undefined;
+  firstNameReading?: string | undefined;
+  lastNameReading?: string | undefined;
+  gender?: number | undefined;
+};
 export type {
   V1User as UserInterface,
   V1GetUsersResponse as GetUsersResponseInterface,
