@@ -10,6 +10,6 @@ type MovieRepo interface {
 	CreateMovie(ctx context.Context, movie *model.Movie, imagePaths []string) (string, error)
 	GetMovieByID(ctx context.Context, movieID string) (*model.Movie, []string, error)
 	GetMovies(ctx context.Context, pageSize int, pageID int) ([]*model.Movie, error)
-	UpdateMovie(ctx context.Context, movie *model.Movie) error
+	UpdateMovie(ctx context.Context, movie *model.Movie, imagePaths []string) error
 	DeleteMovie(ctx context.Context, movieID string) error
 }

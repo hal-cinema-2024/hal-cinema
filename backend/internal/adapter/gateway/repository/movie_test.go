@@ -444,7 +444,7 @@ func TestUpdateMovie(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			err := movieRepo.UpdateMovie(ctx, &tc.changeMovie)
+			err := movieRepo.UpdateMovie(ctx, &tc.changeMovie, []string{})
 			if err != nil {
 				var pgErr *pq.Error
 				if errors.As(err, &pgErr) {

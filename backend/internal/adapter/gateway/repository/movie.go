@@ -71,7 +71,7 @@ func (r *MovieRepo) GetMovies(ctx context.Context, limit int, offset int) ([]*mo
 	return movies, nil
 }
 
-func (r *MovieRepo) UpdateMovie(ctx context.Context, movie *model.Movie) error {
+func (r *MovieRepo) UpdateMovie(ctx context.Context, movie *model.Movie, imagePaths []string) error {
 	model := model.Movie{}
 	result := r.db.Model(&model).Where("movie_id = ?", movie.MovieID).Updates(&movie)
 	if result.Error != nil {
