@@ -9,7 +9,7 @@ function Index() {
   return (
     <div>
       aaaa
-      {/* <DataTable /> */}
+      {/* <DataTable data={data} setData={setData} /> */}
     </div>
   );
 }

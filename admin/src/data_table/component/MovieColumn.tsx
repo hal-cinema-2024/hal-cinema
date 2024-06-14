@@ -1,6 +1,6 @@
 import { Column, ColumnDef, SortDirection } from "@tanstack/react-table";
-import { format, parse } from "date-fns";
-import { ja } from "date-fns/locale/ja";
+// import { format, parse } from "date-fns";
+// import { ja } from "date-fns/locale/ja";
 import { JSX } from "react";
 import {
   TiArrowSortedDown,
@@ -9,12 +9,12 @@ import {
   TiEdit,
 } from "react-icons/ti";
 
-export type User = {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  createdAt: number; // UNIX timestamp（ミリ秒）
+export type Movie = {
+  id: string;
+  movieName: string;
+  releaseDate: string;
+  endDate: string;
+  //createdAt: number; // UNIX timestamp（ミリ秒）
 };
 
 const getSortIcon = (sortDirection: false | SortDirection): JSX.Element => {
@@ -30,7 +30,7 @@ const getSortIcon = (sortDirection: false | SortDirection): JSX.Element => {
 
 const sortableHeader =
   (headerName: string) =>
-  ({ column }: { column: Column<User, unknown> }): JSX.Element => {
+  ({ column }: { column: Column<Movie, unknown> }): JSX.Element => {
     return (
       <div
         style={{ flex: "auto", alignItems: "center", cursor: "pointer" }}
@@ -42,7 +42,7 @@ const sortableHeader =
     );
   };
 
-export const columns: ColumnDef<User>[] = [
+export const columns: ColumnDef<Movie>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
@@ -51,7 +51,9 @@ export const columns: ColumnDef<User>[] = [
         <div
           style={{ cursor: "pointer" }}
           onClick={() =>
-            alert(`${user.id}:${user.email}の編集ボタンがクリックされました。`)
+            alert(
+              `${user.id}:${user.movieName}の編集ボタンがクリックされました。`
+            )
           }
         >
           <TiEdit />
@@ -61,39 +63,39 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     accessorKey: "id",
-    header: sortableHeader("ID"),
+    header: sortableHeader("MovieID"),
   },
   {
     accessorKey: "lastName",
-    header: "名字",
+    header: "映画タイトル",
   },
   {
     accessorKey: "firstName",
-    header: "名前",
+    header: "上映開始日",
   },
   {
     accessorKey: "email",
-    header: "E-mail",
+    header: "上映終了日",
   },
-  {
-    accessorKey: "createdAt",
-    header: sortableHeader("登録日時(UNIX)"),
-    cell: ({ row }) => {
-      const user = row.original;
-      return format(new Date(user.createdAt), "yyyy/MM/dd HH:mm", {
-        locale: ja,
-      });
-    },
-    filterFn: (row, _, filterValue) => {
-      const { from, to } = filterValue as { from?: string; to?: string };
-      const createdAt = row?.original?.createdAt;
+  // {
+  //   accessorKey: "createdAt",
+  //   header: sortableHeader("登録日時(UNIX)"),
+  //   cell: ({ row }) => {
+  //     const user = row.original;
+  //     return format(new Date(user.createdAt), "yyyy/MM/dd HH:mm", {
+  //       locale: ja,
+  //     });
+  //   },
+  //   filterFn: (row, _, filterValue) => {
+  //     const { from, to } = filterValue as { from?: string; to?: string };
+  //     const createdAt = row?.original?.createdAt;
 
-      return (
-        (!from ||
-          parse(from, "yyyy-MM-dd", new Date()).getTime() <= createdAt) &&
-        (!to || createdAt <= parse(to, "yyyy-MM-dd", new Date()).getTime())
-      );
-    },
-    enableGlobalFilter: false,
-  },
+  //     return (
+  //       (!from ||
+  //         parse(from, "yyyy-MM-dd", new Date()).getTime() <= createdAt) &&
+  //       (!to || createdAt <= parse(to, "yyyy-MM-dd", new Date()).getTime())
+  //     );
+  //   },
+  //   enableGlobalFilter: false,
+  // },
 ];
