@@ -66,36 +66,15 @@ export const columns: ColumnDef<Movie>[] = [
     header: sortableHeader("MovieID"),
   },
   {
-    accessorKey: "lastName",
+    accessorKey: "movieName",
     header: "映画タイトル",
   },
   {
-    accessorKey: "firstName",
+    accessorKey: "releaseDate",
     header: "上映開始日",
   },
   {
-    accessorKey: "email",
+    accessorKey: "endDate",
     header: "上映終了日",
   },
-  // {
-  //   accessorKey: "createdAt",
-  //   header: sortableHeader("登録日時(UNIX)"),
-  //   cell: ({ row }) => {
-  //     const user = row.original;
-  //     return format(new Date(user.createdAt), "yyyy/MM/dd HH:mm", {
-  //       locale: ja,
-  //     });
-  //   },
-  //   filterFn: (row, _, filterValue) => {
-  //     const { from, to } = filterValue as { from?: string; to?: string };
-  //     const createdAt = row?.original?.createdAt;
-
-  //     return (
-  //       (!from ||
-  //         parse(from, "yyyy-MM-dd", new Date()).getTime() <= createdAt) &&
-  //       (!to || createdAt <= parse(to, "yyyy-MM-dd", new Date()).getTime())
-  //     );
-  //   },
-  //   enableGlobalFilter: false,
-  // },
 ];
