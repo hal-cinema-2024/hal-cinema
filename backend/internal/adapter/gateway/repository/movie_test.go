@@ -106,6 +106,36 @@ func TestCreateMovie(t *testing.T) {
 			imagePaths:  []string{},
 			wantErrCode: pgerrcode.CheckViolation,
 		},
+		{
+			name: "fail - invalid release date",
+			movie: model.Movie{
+				MovieID:       uuid.NewString(),
+				Name:          "test",
+				Director:      "testDirector",
+				Summary:       "testSummary",
+				ThumbnailPath: "testThumbnailPath",
+				Link:          "testLink",
+				Term:          120,
+				ReleaseDate:   time.Now().AddDate(0, 0, 1),
+				EndDate:       time.Now(),
+			},
+		},
+		{
+			name: "fail - duplicate movie_id",
+			movie: model.Movie{
+				MovieID:       movie.MovieID,
+				Name:          "test",
+				Director:      "testDirector",
+				Summary:       "testSummary",
+				ThumbnailPath: "testThumbnailPath",
+				Link:          "testLink",
+				Term:          120,
+				ReleaseDate:   time.Now(),
+				EndDate:       time.Now(),
+			},
+			imagePaths:  []string{},
+			wantErrCode: pgerrcode.UniqueViolation,
+		},
 	}
 
 	for _, tc := range testCases {
@@ -161,32 +191,42 @@ func TestGetMovieByID(t *testing.T) {
 	testCases := []struct {
 		name        string
 		movie       model.Movie
-		imagePaths  []string
 		wantErrCode string
 	}{
 		{
 			name:        "success - get movie by ID",
 			movie:       movie,
-			imagePaths:  imagePaths,
 			wantErrCode: "",
 		},
 		{
-			name:        "success - get movie by ID no images",
-			movie:       movie,
-			imagePaths:  []string{},
-			wantErrCode: "",
+			name: "fail - invalid movie_id",
+			movie: model.Movie{
+				MovieID:       "invalid",
+				Name:          "test",
+				Director:      "testDirector",
+				Summary:       "testSummary",
+				ThumbnailPath: "testThumbnailPath",
+				Link:          "testLink",
+				Term:          120,
+				ReleaseDate:   time.Now(),
+				EndDate:       time.Now(),
+			},
+			wantErrCode: pgerrcode.InvalidTextRepresentation,
 		},
 		{
-			name:        "fail - record not found",
-			movie:       model.Movie{},
-			imagePaths:  []string{},
-			wantErrCode: "record not found",
-		},
-		{
-			name:        "fail - invalid UUID",
-			movie:       model.Movie{MovieID: "invalid-uuid2"},
-			imagePaths:  []string{},
-			wantErrCode: "22P02",
+			name: "fail - movie_id not found",
+			movie: model.Movie{
+				MovieID:       uuid.NewString(),
+				Name:          "test",
+				Director:      "testDirector",
+				Summary:       "testSummary",
+				ThumbnailPath: "testThumbnailPath",
+				Link:          "testLink",
+				Term:          120,
+				ReleaseDate:   time.Now(),
+				EndDate:       time.Now(),
+			},
+			wantErrCode: pgerrcode.NoDataFound,
 		},
 	}
 	for _, tc := range testCases {
@@ -287,5 +327,137 @@ func TestGetMovies(t *testing.T) {
 	// Assert movies are retrieved correctly
 	if len(retrievedMovies) != len(movies) {
 		t.Errorf("Expected %d movies, but got %d", len(movies), len(retrievedMovies))
+	}
+}
+func TestUpdateMovie(t *testing.T) {
+	ctx := context.Background()
+	if err := test.NewContainer(t); err != nil {
+		t.Fatal(err)
+	}
+	db, err := invoke[*gorm.DB]()
+	if err != nil {
+		t.Fatal(err)
+	}
+	movieRepo := repository.NewMovieRepo(db)
+
+	// Create a test movie
+	movie := model.Movie{
+		MovieID:       uuid.NewString(),
+		Name:          "test",
+		Director:      "testDirector",
+		Summary:       "testSummary",
+		ThumbnailPath: "testThumbnailPath",
+		Link:          "testLink",
+		Term:          120,
+		ReleaseDate:   time.Now(),
+		EndDate:       time.Now(),
+	}
+	imagePaths := []string{
+		"test1",
+		"test2",
+		"test3",
+	}
+	_, err = movieRepo.CreateMovie(ctx, &movie, imagePaths)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Update the movie
+	movie.Name = "updatedName"
+	movie.Director = "updatedDirector"
+	movie.Summary = "updatedSummary"
+	movie.ThumbnailPath = "updatedThumbnailPath"
+	movie.Link = "updatedLink"
+	movie.Term = 180
+	err = movieRepo.UpdateMovie(ctx, &movie)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Retrieve the updated movie
+	updatedMovie, _, err := movieRepo.GetMovieByID(ctx, movie.MovieID)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Assert movie is updated correctly
+	if updatedMovie.Name != movie.Name {
+		t.Errorf("Expected movie name %s, but got %s", movie.Name, updatedMovie.Name)
+	}
+
+	if updatedMovie.Director != movie.Director {
+		t.Errorf("Expected movie director %s, but got %s", movie.Director, updatedMovie.Director)
+	}
+
+	if updatedMovie.Summary != movie.Summary {
+		t.Errorf("Expected movie summary %s, but got %s", movie.Summary, updatedMovie.Summary)
+	}
+
+	if updatedMovie.ThumbnailPath != movie.ThumbnailPath {
+		t.Errorf("Expected movie thumbnail path %s, but got %s", movie.ThumbnailPath, updatedMovie.ThumbnailPath)
+	}
+
+	if updatedMovie.Link != movie.Link {
+		t.Errorf("Expected movie link %s, but got %s", movie.Link, updatedMovie.Link)
+	}
+
+	if updatedMovie.Term != movie.Term {
+		t.Errorf("Expected movie term %d, but got %d", movie.Term, updatedMovie.Term)
+	}
+}
+func TestDeleteMovie(t *testing.T) {
+	ctx := context.Background()
+	if err := test.NewContainer(t); err != nil {
+		t.Fatal(err)
+	}
+	db, err := invoke[*gorm.DB]()
+	if err != nil {
+		t.Fatal(err)
+	}
+	movieRepo := repository.NewMovieRepo(db)
+
+	// Create a test movie
+	movie := model.Movie{
+		MovieID:       uuid.NewString(),
+		Name:          "test",
+		Director:      "testDirector",
+		Summary:       "testSummary",
+		ThumbnailPath: "testThumbnailPath",
+		Link:          "testLink",
+		Term:          120,
+		ReleaseDate:   time.Now(),
+		EndDate:       time.Now(),
+	}
+	imagePaths := []string{
+		"test1",
+		"test2",
+		"test3",
+	}
+	_, err = movieRepo.CreateMovie(ctx, &movie, imagePaths)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Delete the movie
+	err = movieRepo.DeleteMovie(ctx, movie.MovieID)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Retrieve the deleted movie
+	deletedMovie, _, err := movieRepo.GetMovieByID(ctx, movie.MovieID)
+	if err != nil {
+		var pgErr *pq.Error
+		if !errors.As(err, &pgErr) {
+			t.Fatal(err)
+		}
+		if pgErr.Code != pgerrcode.NoDataFound {
+			t.Fatal(err)
+		}
+	}
+
+	// Assert movie is deleted correctly
+	if deletedMovie.IsDelete != true {
+		t.Errorf("Expected movie to be deleted, but got %+v", deletedMovie)
 	}
 }
