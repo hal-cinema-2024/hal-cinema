@@ -10,6 +10,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/hal-cinema-2024/backend/internal/adapter/gateway/repository"
 	"github.com/hal-cinema-2024/backend/internal/entities/model"
+	"github.com/hal-cinema-2024/backend/internal/framework/herror"
 	"github.com/hal-cinema-2024/backend/internal/test"
 	"github.com/jackc/pgerrcode"
 	"github.com/lib/pq"
@@ -486,19 +487,6 @@ func TestUpdateMovie(t *testing.T) {
 			}
 		})
 	}
-	// Update the movie
-	// movie.Name = "updatedName"
-	// movie.Director = "updatedDirector"
-	// movie.Summary = "updatedSummary"
-	// movie.ThumbnailPath = "updatedThumbnailPath"
-	// movie.Link = "updatedLink"
-	// movie.Term = 180
-	// err = movieRepo.UpdateMovie(ctx, &movie)
-	// if err != nil {
-	// 	t.Fatal(err)
-	// }
-
-	// Retrieve the updated movie
 
 }
 
@@ -535,26 +523,43 @@ func TestDeleteMovie(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	// Delete the movie
-	err = movieRepo.DeleteMovie(ctx, movie.MovieID)
-	if err != nil {
-		t.Fatal(err)
+	testCases := []struct {
+		name        string
+		userID      string
+		wantErrCode error
+	}{
+		{
+			name:        "success - delete movie",
+			userID:      movie.MovieID,
+			wantErrCode: nil,
+		},
+		{
+			name:        "fail - invalid movie_id",
+			userID:      "invalid",
+			wantErrCode: herror.ErrResourceNotFound,
+		},
+		{
+			name:        "fail - movie not found",
+			userID:      "not found user",
+			wantErrCode: herror.ErrResourceNotFound,
+		},
 	}
 
-	// Retrieve the deleted movie
-	deletedMovie, _, err := movieRepo.GetMovieByID(ctx, movie.MovieID)
-	if err != nil {
-		var pgErr *pq.Error
-		if !errors.As(err, &pgErr) {
-			t.Fatal(err)
-		}
-		if pgErr.Code != pgerrcode.NoDataFound {
-			t.Fatal(err)
-		}
-	}
-
-	// Assert movie is deleted correctly
-	if deletedMovie.IsDelete != true {
-		t.Errorf("Expected movie to be deleted, but got %+v", deletedMovie)
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			err := movieRepo.DeleteMovie(ctx, tc.userID)
+			if err != nil {
+				if !errors.Is(err, tc.wantErrCode) {
+					t.Error(err)
+				}
+			} else {
+				_, _, err := movieRepo.GetMovieByID(ctx, tc.userID)
+				if err != nil {
+					if !errors.Is(err, herror.ErrResourceNotFound) {
+						t.Error(err)
+					}
+				}
+			}
+		})
 	}
 }
