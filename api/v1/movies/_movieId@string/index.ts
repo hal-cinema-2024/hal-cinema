@@ -28,7 +28,7 @@ export type Methods = {
       sammary?: string | undefined
       thumbnail?: string | undefined
       link?: string | undefined
-      term?: string | undefined
+      term?: number | undefined
       releaseDate?: string | undefined
       endDate?: string | undefined
       movieImage?: string[] | undefined
