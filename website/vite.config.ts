@@ -3,6 +3,9 @@ import { TanStackRouterVite } from "@tanstack/router-vite-plugin";
 import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react(), TanStackRouterVite(), injectScript()],
+  server: {
+    port: 3000,
+  },
 });
 
 import { Plugin } from "vite";
