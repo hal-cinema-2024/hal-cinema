@@ -8,7 +8,7 @@ import { UIProvider } from "@yamada-ui/react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const queryClient = new QueryClient();
-const CLIENT_ID: string = import.meta.env.VITE_CLIENT_ID;
+const CLIENT_ID: string = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <UIProvider>

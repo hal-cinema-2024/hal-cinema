@@ -13,7 +13,7 @@ func SetupCORS() echo.MiddlewareFunc {
 	// Productionのみ限定的なスコープでのCORS
 	case config.EnvProduction:
 		InitWhiteList()
-		return AllowrRstrictiveOrigins()
+		return AllowRestrictiveOrigins()
 	case config.EnvDevelopment:
 		return AllowAllOrigins()
 	default:
@@ -56,7 +56,7 @@ func InitWhiteList() {
 	}
 }
 
-func AllowrRstrictiveOrigins() echo.MiddlewareFunc {
+func AllowRestrictiveOrigins() echo.MiddlewareFunc {
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
 			requestAddr := c.Request().Header.Get("Origin")

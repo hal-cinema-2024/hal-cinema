@@ -29,7 +29,7 @@ type LoginResponse struct {
 
 func GoogleLogin(
 	googleLogin *interactor.GoogleLogin,
-	coockieSetter *cookie.CoockieSetter,
+	cookieSetter *cookie.CookieSetter,
 ) func(ctx echo.Context) error {
 	return func(ctx echo.Context) error {
 		var reqBody LoginRequest
@@ -55,7 +55,7 @@ func GoogleLogin(
 			return echo.ErrInternalServerError
 		}
 
-		coockieSetter.CreateCookieSetter(ctx).SetCookieValue(string(cookie.SessionID), userInfo.SessionID)
+		cookieSetter.CreateCookieSetter(ctx).SetCookieValue(string(cookie.SessionID), userInfo.SessionID)
 
 		return ctx.JSON(http.StatusOK, &LoginResponse{
 			UserID: userInfo.UserID,
