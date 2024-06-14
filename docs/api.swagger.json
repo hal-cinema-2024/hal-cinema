@@ -221,7 +221,7 @@
                 "director": {
                   "type": "string"
                 },
-                "sammary": {
+                "summary": {
                   "type": "string"
                 },
                 "thumbnail": {
@@ -804,7 +804,7 @@
         "director": {
           "type": "string"
         },
-        "sammary": {
+        "summary": {
           "type": "string"
         },
         "thumbnail": {
@@ -1052,7 +1052,7 @@
           "type": "string",
           "format": "byte"
         },
-        "sammary": {
+        "summary": {
           "type": "string"
         },
         "link": {
