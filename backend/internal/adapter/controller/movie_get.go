@@ -26,7 +26,6 @@ type GetMoviesResponse struct {
 	Term        int32     `json:"term"`
 	ReleaseDate time.Time `json:"releaseDate"`
 	EndDate     time.Time `json:"endDate"`
-	IsDelete    bool      `json:"isDelete"`
 }
 
 type GetMovieResponse struct {
@@ -39,7 +38,6 @@ type GetMovieResponse struct {
 	Term        int32     `json:"term"`
 	ReleaseDate time.Time `json:"releaseDate"`
 	EndDate     time.Time `json:"endDate"`
-	IsDelete    bool      `json:"isDelete"`
 	MovieImage  []string  `json:"movieImage"`
 }
 
@@ -65,7 +63,6 @@ func GetMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 			Term:        movie.Term,
 			ReleaseDate: movie.ReleaseDate,
 			EndDate:     movie.EndDate,
-			IsDelete:    movie.IsDelete,
 			MovieImage:  imagePaths,
 		})
 	}
@@ -94,7 +91,6 @@ func GetMovies(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 				Term:        movie.Term,
 				ReleaseDate: movie.ReleaseDate,
 				EndDate:     movie.EndDate,
-				IsDelete:    movie.IsDelete,
 			})
 		}
 

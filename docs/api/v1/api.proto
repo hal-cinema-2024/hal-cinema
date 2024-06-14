@@ -445,7 +445,6 @@ message Movie {
   string release_date = 8;
   string end_date = 9;
   repeated bytes movie_image = 10;
-  string is_delete = 11;
 }
 
 message Schedule {

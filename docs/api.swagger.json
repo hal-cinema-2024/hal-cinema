@@ -1074,9 +1074,6 @@
             "type": "string",
             "format": "byte"
           }
-        },
-        "isDelete": {
-          "type": "string"
         }
       }
     },
