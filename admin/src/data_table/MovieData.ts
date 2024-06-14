@@ -3,31 +3,31 @@ import { Movie } from "./component/MovieColumn";
 const data: Movie[] = [
   {
     id: "1",
-    movieName: "クラメソ",
-    releaseDate: "太郎",
+    movieName: "鬼滅の刃",
+    releaseDate: "2025/02/22",
     endDate: "kurameso.taro@example.com",
   },
   {
     id: "2",
-    movieName: "クラメソ",
+    movieName: "鬼滅の刃",
     releaseDate: "花子",
     endDate: "kurameso.hanako@example.com",
   },
   {
     id: "3",
-    movieName: "くら",
+    movieName: "鬼滅の刃",
     releaseDate: "にゃん",
     endDate: "kura.nyan@example.com",
   },
   {
     id: "4",
-    movieName: "クラメソ",
+    movieName: "鬼滅の刃",
     releaseDate: "二郎",
     endDate: "kurameso.jiro@example.com",
   },
   {
     id: "5",
-    movieName: "クラメソ",
+    movieName: "鬼滅の刃",
     releaseDate: "三郎",
     endDate: "kurameso.saburo@example.com",
   },

@@ -2,14 +2,12 @@ import "./table.css";
 import { flexRender } from "@tanstack/react-table";
 import { FC } from "react";
 import { Button } from "@nextui-org/react";
-import { useTable } from "./hooks/useReactTable";
-import { User } from "./component/UserColumn";
+import { useTable } from "./hooks/movieReactTable";
+import { Movie } from "./component/MovieColumn";
 
 interface DataTableProps {
-  data: User[];
-  setData: React.Dispatch<React.SetStateAction<User[]>>;
-  // MovieData: Movie[];
-  // setMovieData: React.Dispatch<React.SetStateAction<Movie[]>>;
+  data: Movie[];
+  setData: React.Dispatch<React.SetStateAction<Movie[]>>;
 }
 
 export const DataTable: FC<DataTableProps> = ({ data, setData }) => {

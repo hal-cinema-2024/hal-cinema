@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { getData } from "../UserData";
-import { User } from "../component/UserColumn";
+import { getData } from "../MovieData";
+import { Movie } from "../component/MovieColumn";
 
-const useUserData = () => {
-  const [data, setData] = useState<User[]>([]);
+const useMovieData = () => {
+  const [data, setData] = useState<Movie[]>([]);
   useEffect(() => {
     const fetchData = async () => {
       setData(await getData());
@@ -14,4 +14,4 @@ const useUserData = () => {
   return { data, setData };
 };
 
-export default useUserData;
+export default useMovieData;
