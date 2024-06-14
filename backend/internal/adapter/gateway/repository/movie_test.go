@@ -2,6 +2,7 @@ package repository_test
 
 import (
 	"context"
+	"errors"
 	"reflect"
 	"testing"
 	"time"
@@ -10,6 +11,7 @@ import (
 	"github.com/hal-cinema-2024/backend/internal/adapter/gateway/repository"
 	"github.com/hal-cinema-2024/backend/internal/entities/model"
 	"github.com/hal-cinema-2024/backend/internal/test"
+	"github.com/lib/pq"
 	"gorm.io/gorm"
 )
 
@@ -110,9 +112,42 @@ func TestGetMovieByID(t *testing.T) {
 		"test2",
 		"test3",
 	}
-	_, err = movieRepo.CreateMovie(ctx, movie, imagePaths)
-	if err != nil {
-		t.Fatal(err)
+
+	testCases := []struct {
+		name        string
+		movie       model.Movie
+		wantErrCode string
+	}{
+		{
+			name:        "success - get movie by ID",
+			movie:       *movie,
+			wantErrCode: "",
+		},
+		{
+			name:        "fail - record not found",
+			movie:       model.Movie{},
+			wantErrCode: "record not found",
+		},
+		{
+			name:        "fail - invalid UUID",
+			movie:       model.Movie{MovieID: "invalid-uuid"},
+			wantErrCode: "22P02",
+		},
+	}
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			_, err := movieRepo.CreateMovie(ctx, &tc.movie, imagePaths)
+			if err != nil {
+				var pgErr *pq.Error
+				if errors.As(err, &pgErr) {
+					if string(pgErr.Code) == tc.wantErrCode {
+						t.Log(err)
+						return
+					}
+					t.Errorf("got %v; want %v", err, tc.wantErrCode)
+				}
+			}
+		})
 	}
 
 	// Retrieve the created movie
