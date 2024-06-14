@@ -232,7 +232,8 @@
                   "type": "string"
                 },
                 "term": {
-                  "type": "string"
+                  "type": "integer",
+                  "format": "int32"
                 },
                 "releaseDate": {
                   "type": "string"
