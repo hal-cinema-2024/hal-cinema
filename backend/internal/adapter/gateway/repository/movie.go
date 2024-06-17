@@ -72,10 +72,23 @@ func (r *MovieRepo) GetMovies(ctx context.Context, limit int, offset int) ([]*mo
 }
 
 func (r *MovieRepo) UpdateMovie(ctx context.Context, movie *model.Movie, imagePaths []string) error {
-	model := model.Movie{}
-	result := r.db.Model(&model).Where("movie_id = ?", movie.MovieID).Updates(&movie)
+	movieData := model.Movie{}
+	movieImages := []model.MovieImage{}
+	result := r.db.Model(&movieData).Where("movie_id = ?", movie.MovieID).Updates(&movie)
 	if result.Error != nil {
 		return result.Error
+	}
+
+	// 画像の更新
+	result = r.db.Model(&movieImages).Where("movie_id = ?", movie.MovieID).Find(&movieImages)
+	if result.Error != nil {
+		return result.Error
+	}
+	for _, imagePath := range imagePaths {
+		movieImages = append(movieImages, model.MovieImage{
+			MovieID:  movie.MovieID,
+			FilePath: imagePath,
+		})
 	}
 	return nil
 }
