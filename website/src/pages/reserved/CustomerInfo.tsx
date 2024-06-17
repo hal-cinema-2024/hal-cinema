@@ -25,12 +25,27 @@ const CustomerInfo = () => {
 export default CustomerInfo;
 
 // ----style----
-const TitleP = styled.p``;
+const TitleP = styled.p`
+  font-size: 20px;
+`;
 
-const TableCustom = styled.table``;
+const TableCustom = styled.table`
+  border: 1px solid #fff;
+  width: 100%;
+`;
 
-const TrCustom = styled.tr``;
+const TrCustom = styled.tr`
+  color: #000000;
+`;
 
-const ThCustom = styled.th``;
+const ThCustom = styled.th`
+  width: 30%;
+  text-align: center;
+  background-color: #b7b7b7;
+`;
 
-const TdCustom = styled.td``;
+const TdCustom = styled.td`
+  width: 70%;
+  text-align: center;
+  background-color: #ffffff;
+`;

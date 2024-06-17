@@ -23,7 +23,7 @@ function Index() {
 }
 
 const ReservedContainer = styled.div`
-  width: 1000px;
+  width: 800px;
   margin: 50px auto;
   color: #ffffff;
 `;
