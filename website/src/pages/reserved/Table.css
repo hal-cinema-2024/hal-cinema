@@ -1,0 +1,38 @@
+.TitleContainer {
+  margin: 0 0 15px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.TitleContainer p {
+  font-size: 20px;
+}
+.TitleContainer button {
+  padding: 3px 30px;
+  font-size: 14px;
+  background-color: #fff;
+  color: #000;
+  border-radius: 5px;
+}
+
+table {
+  width: 100%;
+}
+tr {
+  color: #000000;
+  border-bottom: 1px solid #333;
+}
+th {
+  width: 30%;
+  padding: 20px 0;
+  text-align: center;
+  border-right: 1px solid #333;
+  background-color: #b7b7b7;
+}
+td {
+  width: 70%;
+  padding: 20px 0;
+  text-align: center;
+  background-color: #ffffff;
+}
