@@ -15,9 +15,9 @@ export function LoginFormProvider() {
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit((data) => console.log(data))}>
-        <InputField fieldName='username' />
-        <InputField fieldName='password' />
-        <Button type='submit'>Submit</Button>
+        <InputField fieldName="username" />
+        <InputField fieldName="password" />
+        <Button type="submit">Submit</Button>
       </form>
     </FormProvider>
   );

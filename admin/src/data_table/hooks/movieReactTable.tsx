@@ -4,17 +4,18 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
 } from "@tanstack/react-table";
-import { User, columns } from "../component/UserColumn";
+// import { User, columns } from "../component/UserColumn";
 import { useReactTable } from "@tanstack/react-table";
+import { Movie, columns } from "../component/MovieColumn";
 
 export const useTable = (
-  data: User[],
-  setData: React.Dispatch<React.SetStateAction<User[]>>
+  data: Movie[],
+  setData: React.Dispatch<React.SetStateAction<Movie[]>>
 ) => {
   const initialPageIndex = 0;
   const initialPageSize = 10;
 
-  const table = useReactTable<User>({
+  const table = useReactTable<Movie>({
     columns,
     data,
     initialState: {

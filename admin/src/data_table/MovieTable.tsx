@@ -2,12 +2,12 @@ import "./table.css";
 import { flexRender } from "@tanstack/react-table";
 import { FC } from "react";
 import { Button } from "@nextui-org/react";
-import { useTable } from "./hooks/useReactTable";
-import { User } from "./component/UserColumn";
+import { useTable } from "./hooks/movieReactTable";
+import { Movie } from "./component/MovieColumn";
 
 interface DataTableProps {
-  data: User[];
-  setData: React.Dispatch<React.SetStateAction<User[]>>;
+  data: Movie[];
+  setData: React.Dispatch<React.SetStateAction<Movie[]>>;
 }
 
 export const DataTable: FC<DataTableProps> = ({ data, setData }) => {
@@ -16,7 +16,7 @@ export const DataTable: FC<DataTableProps> = ({ data, setData }) => {
   return (
     <div>
       <main>
-        {/* ----------表示件数絞り込み---------- */}
+        {/* ----------陦ｨ遉ｺ莉ｶ謨ｰ邨槭ｊ霎ｼ縺ｿ---------- */}
         <div className="DispNumContainer">
           <select
             value={table.getState().pagination.pageSize}
@@ -26,7 +26,7 @@ export const DataTable: FC<DataTableProps> = ({ data, setData }) => {
           >
             {[10, 20, 30].map((pageSize) => (
               <option key={pageSize} value={pageSize}>
-                表示数 {pageSize}
+                陦ｨ遉ｺ謨ｰ {pageSize}
               </option>
             ))}
           </select>
@@ -57,14 +57,14 @@ export const DataTable: FC<DataTableProps> = ({ data, setData }) => {
             </Button>
           </div>
         </div>
-        {/* ----------表示件数絞り込み 終わり---------- */}
+        {/* ----------陦ｨ遉ｺ莉ｶ謨ｰ邨槭ｊ霎ｼ縺ｿ 邨ゅｏ繧�---------- */}
 
-        {/* ----------検索・日付絞り込み---------- */}
+        {/* ----------讀懃ｴ｢繝ｻ譌･莉倡ｵ槭ｊ霎ｼ縺ｿ---------- */}
         <div>
           <div className="HeaderWrap">
             <div className="SearchContainer">
               <input
-                placeholder="検索"
+                placeholder="讀懃ｴ｢"
                 value={(table.getState().globalFilter as string) ?? ""}
                 onChange={(e) => table.setGlobalFilter(e.target.value)}
               />
@@ -75,14 +75,14 @@ export const DataTable: FC<DataTableProps> = ({ data, setData }) => {
                 type="date"
                 value={
                   (
-                    table.getColumn("createdAt")?.getFilterValue() as {
+                    table.getColumn("releaseDate")?.getFilterValue() as {
                       from?: string;
                     }
                   )?.from ?? ""
                 }
                 onChange={(e) =>
                   table
-                    .getColumn("createdAt")
+                    .getColumn("releaseDate")
                     ?.setFilterValue((old: { from?: string; to?: string }) => {
                       return {
                         ...old,
@@ -91,20 +91,20 @@ export const DataTable: FC<DataTableProps> = ({ data, setData }) => {
                     })
                 }
               />
-              〜
+              縲�
               <input
                 style={{ marginLeft: "5px" }}
                 type="date"
                 value={
                   (
-                    table.getColumn("createdAt")?.getFilterValue() as {
+                    table.getColumn("endDate")?.getFilterValue() as {
                       to?: string;
                     }
                   )?.to ?? ""
                 }
                 onChange={(e) =>
                   table
-                    .getColumn("createdAt")
+                    .getColumn("endDate")
                     ?.setFilterValue((old: { from?: string; to?: string }) => {
                       return {
                         ...old,
@@ -116,9 +116,9 @@ export const DataTable: FC<DataTableProps> = ({ data, setData }) => {
             </div>
           </div>
         </div>
-        {/* ----------検索・日付絞り込み 終わり---------- */}
+        {/* ----------讀懃ｴ｢繝ｻ譌･莉倡ｵ槭ｊ霎ｼ縺ｿ 邨ゅｏ繧�---------- */}
 
-        {/* ----------テーブル---------- */}
+        {/* ----------繝�繝ｼ繝悶Ν---------- */}
         <table>
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -140,7 +140,7 @@ export const DataTable: FC<DataTableProps> = ({ data, setData }) => {
             {table.getRowModel().rows.length === 0 ? (
               <tr>
                 <td colSpan={table.getAllColumns().length} className="noData">
-                  データが見つかりません
+                  繝�繝ｼ繧ｿ縺瑚ｦ九▽縺九ｊ縺ｾ縺帙ｓ
                 </td>
               </tr>
             ) : (

@@ -1,0 +1,135 @@
+body {
+  margin: 0;
+  padding: 1rem;
+  height: 100vh;
+  font-family: system-ui, sans-serif;
+  color: black;
+  background-color: white;
+  position: relative;
+}
+
+main {
+  width: 1200px;
+  height: 100vh;
+  padding-top: 40px;
+}
+
+h1 {
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+table {
+  width: 100%;
+  margin: 30px 0 0 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+thead tr th {
+  padding: 20px 0;
+}
+
+thead tr th div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+th {
+  padding: 10px;
+  border-bottom: 1.2px solid #000;
+  border-right: none !important;
+  border-left: none !important;
+}
+
+td {
+  padding: 12px;
+  border-bottom: 1px solid lightgray;
+  border-right: none !important;
+  border-left: none !important;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* ---------- 表示件数絞り込み ---------- */
+.DispNumContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.DispNumContainer select {
+  cursor: pointer;
+  padding: 5px 10px;
+  border-bottom: 1px solid #000;
+  outline: none;
+}
+.DispNumContainer div {
+  margin-left: 30px;
+}
+.DispNumContainer div button {
+  cursor: pointer;
+}
+
+/* ---------- 検索・日付絞り込み ---------- */
+.HeaderWrap {
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-around;
+}
+.SearchContainer input {
+  width: 300px;
+  padding: 7px 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #333;
+  outline: none;
+}
+
+.NarrowContainer {
+  display: flex;
+  align-items: center;
+}
+.NarrowContainer input {
+  padding: 7px 10px;
+  width: 300px;
+  cursor: pointer;
+  border-bottom: 1px solid #333;
+  outline: none;
+}
+
+th:nth-child(1),
+td:nth-child(1) {
+  width: 10%;
+  background-color: #ddd;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  width: 10%;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  /* width: 15%; */
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+  /* width: 15%; */
+}
+
+th:nth-child(5),
+td:nth-child(5) {
+  /* width: 25.5%; */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+th:nth-child(6),
+td:nth-child(6) {
+  /* width: 25.5%; */
+}

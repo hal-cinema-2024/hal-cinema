@@ -1,5 +1,6 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { LoginFormProvider } from "../form/login_form/LoginFormProvider";
+
 export const Route = createLazyFileRoute("/")({
   component: Index,
 });
@@ -7,6 +8,7 @@ export const Route = createLazyFileRoute("/")({
 function Index() {
   return (
     <div>
+      <h1>admin</h1>
       <LoginFormProvider />
     </div>
   );
