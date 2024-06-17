@@ -1,15 +1,17 @@
 package controller
 
 import (
-	"log"
+	"fmt"
+
 	"mime/multipart"
 
 	"github.com/hal-cinema-2024/backend/internal/usecase/interactor"
+	"github.com/hal-cinema-2024/backend/pkg/log"
 	"github.com/labstack/echo/v4"
 )
 
 type UpdateMovieRequest struct {
-	MovieID     string                  `form:"movie_id"`
+	MovieID     string                  `param:"movie_id" validate:"required"`
 	Name        string                  `form:"movieName" validate:"required"`
 	Director    string                  `form:"director" validate:"required"`
 	Summary     string                  `form:"summary" validate:"required"`
@@ -23,7 +25,15 @@ type UpdateMovieRequest struct {
 }
 
 type UpdateMovieResponse struct {
-	MovieID string `json:"movie_id"`
+	MovieID string `json:"movieId"`
+}
+
+func (r *UpdateMovieRequest) Validate() error {
+	if r.MovieID == "" {
+		return fmt.Errorf("movieId is required")
+	}
+
+	return nil
 }
 
 func UpdateMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
@@ -31,6 +41,10 @@ func UpdateMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 		var req UpdateMovieRequest
 		if err := ctx.Bind(&req); err != nil {
 			return err
+		}
+
+		if err := req.Validate(); err != nil {
+			log.Error(ctx.Request().Context(), "movieId is required")
 		}
 		form, err := ctx.MultipartForm()
 		if err != nil {
@@ -49,7 +63,7 @@ func UpdateMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 		endDate := str2time(req.EndDate)
 		movieImageFiles, ok := form.File["movieImage"]
 		if !ok {
-			log.Println("movieImage is not found")
+			log.Info(ctx.Request().Context(), "movieImage is not found")
 		}
 
 		err = mi.UpdateMovie(ctx.Request().Context(), interactor.UpdateMovie{

@@ -1,19 +1,29 @@
 package controller
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/hal-cinema-2024/backend/internal/usecase/interactor"
+	"github.com/hal-cinema-2024/backend/pkg/log"
 	"github.com/labstack/echo/v4"
 )
 
 type GetMoviesRequest struct {
-	PageSize int `json:"page_size" form:"pageSize"`
-	PageID   int `json:"page_id" form:"pageId"`
+	PageSize int `query:"pageSize" validate:"required"`
+	PageID   int `query:"pageId" validate:"required"`
 }
 
 type GetMovieRequest struct {
-	MovieID string `json:"movie_id" param:"movieId" validate:"required"`
+	MovieID string `param:"movie_id" validate:"required"`
+}
+
+func (r GetMovieRequest) Validate() error {
+	if r.MovieID == "" {
+		return fmt.Errorf("movie_id is required")
+	}
+
+	return nil
 }
 
 type GetMoviesResponse struct {
@@ -46,6 +56,10 @@ func GetMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 		var req GetMovieRequest
 		if err := ctx.Bind(&req); err != nil {
 			return err
+		}
+
+		if err := req.Validate(); err != nil {
+			log.Error(ctx.Request().Context(), fmt.Sprintf("failed to validate request :%v", err))
 		}
 
 		movie, imagePaths, err := mi.GetMovie(ctx.Request().Context(), req.MovieID)
