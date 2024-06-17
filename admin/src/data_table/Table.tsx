@@ -8,8 +8,6 @@ import { User } from "./component/UserColumn";
 interface DataTableProps {
   data: User[];
   setData: React.Dispatch<React.SetStateAction<User[]>>;
-  // MovieData: Movie[];
-  // setMovieData: React.Dispatch<React.SetStateAction<Movie[]>>;
 }
 
 export const DataTable: FC<DataTableProps> = ({ data, setData }) => {

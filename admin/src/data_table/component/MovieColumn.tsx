@@ -1,6 +1,6 @@
 import { Column, ColumnDef, SortDirection } from "@tanstack/react-table";
-// import { format, parse } from "date-fns";
-// import { ja } from "date-fns/locale/ja";
+import { format, parse } from "date-fns";
+import { ja } from "date-fns/locale/ja";
 import { JSX } from "react";
 import {
   TiArrowSortedDown,
@@ -12,7 +12,8 @@ import {
 export type Movie = {
   id: string;
   movieName: string;
-  releaseDate: string;
+  // releaseDate: string;
+  releaseDate: number;
   endDate: string;
   //createdAt: number; // UNIX timestamp（ミリ秒）
 };
@@ -71,8 +72,29 @@ export const columns: ColumnDef<Movie>[] = [
   },
   {
     accessorKey: "releaseDate",
-    header: "上映開始日",
+    header: sortableHeader("上映開始日"),
+    cell: ({ row }) => {
+      const movie = row.original;
+      return format(new Date(movie.releaseDate), "yyyy/MM/dd", {
+        locale: ja,
+      });
+    },
+    filterFn: (row, _, filterValue) => {
+      const { from, to } = filterValue as { from?: string; to?: string };
+      const releaseDate = row?.original?.releaseDate;
+
+      return (
+        (!from ||
+          parse(from, "yyyy-MM-dd", new Date()).getTime() <= releaseDate) &&
+        (!to || releaseDate <= parse(to, "yyyy-MM-dd", new Date()).getTime())
+      );
+    },
+    enableGlobalFilter: false,
   },
+  // {
+  //   accessorKey: "releaseDate",
+  //   header: "上映開始日",
+  // },
   {
     accessorKey: "endDate",
     header: "上映終了日",
