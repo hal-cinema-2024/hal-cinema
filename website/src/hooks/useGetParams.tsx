@@ -6,10 +6,13 @@ export const useGetParams = () => {
   const [url, setURL] = useState<string>();
 
   useEffect(() => {
-    const code = new URLSearchParams(window.location.search).get("code");
-    setURL(code!);
+    const reqlogin = async () => {
+      const code = new URLSearchParams(window.location.search).get("code");
+      await setURL(code!);
 
-    login(code as V1GoogleLoginRequest);
+      await login(code as V1GoogleLoginRequest);
+    };
+    reqlogin();
   }, []);
 
   return {
