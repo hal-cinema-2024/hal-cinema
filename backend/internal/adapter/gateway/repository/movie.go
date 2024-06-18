@@ -72,9 +72,37 @@ func (r *MovieRepo) GetMovies(ctx context.Context, limit int, offset int) ([]*mo
 }
 
 func (r *MovieRepo) UpdateMovie(ctx context.Context, movie *model.Movie, imagePaths []string) error {
-	movieData := model.Movie{}
 	movieImages := []model.MovieImage{}
-	result := r.db.Model(&movieData).Where("movie_id = ?", movie.MovieID).Updates(&movie)
+	pastData, _, err := r.GetMovieByID(ctx, movie.MovieID)
+	if err != nil {
+		return err
+	}
+	if movie.Name != "" {
+		pastData.Name = movie.Name
+	}
+	if movie.Director != "" {
+		pastData.Director = movie.Director
+	}
+	if movie.Summary != "" {
+		pastData.Summary = movie.Summary
+	}
+	if movie.ThumbnailPath != "" {
+		pastData.ThumbnailPath = movie.ThumbnailPath
+	}
+	if movie.Link != "" {
+		pastData.Link = movie.Link
+	}
+	if movie.Term != 0 {
+		pastData.Term = movie.Term
+	}
+	if !movie.ReleaseDate.IsZero() {
+		pastData.ReleaseDate = movie.ReleaseDate
+	}
+	if !movie.EndDate.IsZero() {
+		pastData.EndDate = movie.EndDate
+	}
+
+	result := r.db.Model(&movie).Where("movie_id = ?", movie.MovieID).Updates(&pastData)
 	if result.Error != nil {
 		return result.Error
 	}
