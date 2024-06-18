@@ -108,16 +108,19 @@ func (r *MovieRepo) UpdateMovie(ctx context.Context, movie *model.Movie, imagePa
 	}
 
 	// 画像の更新
-	result = r.db.Model(&movieImages).Where("movie_id = ?", movie.MovieID).Find(&movieImages)
-	if result.Error != nil {
-		return result.Error
-	}
 	for _, imagePath := range imagePaths {
 		movieImages = append(movieImages, model.MovieImage{
 			MovieID:  movie.MovieID,
 			FilePath: imagePath,
 		})
 	}
+	if len(movieImages) > 0 {
+		result = r.db.Model(&movieImages).Where("movie_id = ?", movie.MovieID).Find(&movieImages)
+		if result.Error != nil {
+			return result.Error
+		}
+	}
+
 	return nil
 }
 
