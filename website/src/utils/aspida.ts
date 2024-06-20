@@ -4,7 +4,7 @@ import aspida from "@aspida/axios";
 import api from "../../../api/$api";
 export const client = api(
   aspida(axios, {
-    baseURL: "http://localhost:8080",
+    baseURL: import.meta.env.VITE_API_URL,
     paramsSerializer: (params) => qs.stringify(params),
     headers: {
       Origin: "http://localhost:3000",
