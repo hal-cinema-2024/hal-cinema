@@ -9,9 +9,9 @@ import {
 } from "../interfaces/schedule";
 
 export const getSchedules = async (
-  pageId: string,
-  pageSize: string,
-  date: string
+  pageId?: string,
+  pageSize?: string,
+  date?: string
 ) => {
   try {
     const res: GetSchedulesResponseInterface = await client.v1.schedules.$get({
