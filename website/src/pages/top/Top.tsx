@@ -7,14 +7,14 @@ export const Top = () => {
         <MainText>
           <p>Hal Cinema</p>
         </MainText>
-        <MainImage className='main-image'></MainImage>
+        <MainImage className="main-image"></MainImage>
       </MainSection>
 
       <Inner>
         <Box>
           <BoxBody>
             <BoxTitle>
-              <b>Night Cinema</b>
+              <b>CONCEPT</b>
             </BoxTitle>
             <BoxText>
               HALCinemaへようこそ。
@@ -23,7 +23,7 @@ export const Top = () => {
             </BoxText>
           </BoxBody>
           <BoxImage>
-            <img src='/src/assets/cinema.jpeg' alt='コンセプト画像' />
+            <img src="/src/assets/cinema.jpeg" alt="コンセプト画像" />
           </BoxImage>
         </Box>
       </Inner>
@@ -60,7 +60,7 @@ const MainText = styled.section``;
 
 const MainSection = styled.section`
   height: 400px;
-  background: url("src/assets/bg.jpg") no-repeat center center;
+  background: url("src/assets/top02.jpg") no-repeat center center;
   background-size: cover;
 `;
 
@@ -104,10 +104,11 @@ const BoxTitle = styled.h2`
   font-size: 40px;
   text-transform: uppercase;
   color: white;
+  font-family: "Kaisei Tokumin", serif;
 `;
 
 const BoxText = styled.p`
-  font-size: 15px;
+  font-size: 17px;
   margin-top: 20px;
   color: white;
 `;
@@ -142,13 +143,15 @@ const Main = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
+  padding-bottom: 70px; /* フッターの高さ分のパディングを追加 */
 `;
 
 const Title = styled.h1`
-  font-size: 24px;
+  font-size: 25px;
   font-weight: 400;
   text-align: center;
   color: white;
+  font-family: "Kaisei Tokumin", serif;
 `;
 
 const Cards = styled.ul`
@@ -184,6 +187,11 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  }
 `;
 
 const CardImage = styled.div`
@@ -206,13 +214,15 @@ const CardTitle = styled.h2`
   letter-spacing: 1px;
   text-transform: capitalize;
   margin: 0px;
+  //  font-family: "Kaisei Tokumin", serif;
 `;
 
 const CardText = styled.p`
   color: #ffffff;
   font-size: 0.875rem;
   line-height: 1.5;
-  margin-bottom: 1.25rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   font-weight: 400;
 `;
 
@@ -233,3 +243,4 @@ const Button = styled.button`
     background-color: rgba(255, 255, 255, 0.12);
   }
 `;
+export default Top;
