@@ -11,11 +11,8 @@ import {
 
 export const getMovies = async () => {
   try {
-    const res = await client.v1.movies.$get();
-    const jsonData: GetMoviesResponseInterface = JSON.parse(
-      JSON.stringify(res)
-    );
-    return jsonData;
+    const res: GetMoviesResponseInterface = await client.v1.movies.$get();
+    return res;
   } catch (err) {
     console.log(err);
   }
@@ -23,9 +20,10 @@ export const getMovies = async () => {
 
 export const getMovie = async (movieId: string) => {
   try {
-    const res = await client.v1.movies._movieId(movieId).$get();
-    const jsonData: GetMovieResponseInterface = JSON.parse(JSON.stringify(res));
-    return jsonData;
+    const res: GetMovieResponseInterface = await client.v1.movies
+      ._movieId(movieId)
+      .$get();
+    return res;
   } catch (err) {
     console.log(err);
   }
@@ -33,13 +31,10 @@ export const getMovie = async (movieId: string) => {
 
 export const createMovie = async (requestBody: CreateMovieRequestInterface) => {
   try {
-    const res = await client.v1.movies.$post({
+    const res: CreateMovieResponseInterface = await client.v1.movies.$post({
       body: requestBody,
     });
-    const jsonData: CreateMovieResponseInterface = JSON.parse(
-      JSON.stringify(res)
-    );
-    return jsonData;
+    return res;
   } catch (err) {
     console.log(err);
   }
@@ -50,13 +45,12 @@ export const updateMovie = async (
   requestBody: UpdateMovieRequestBodyInterface
 ) => {
   try {
-    const res = await client.v1.movies._movieId(movieId).$put({
-      body: requestBody,
-    });
-    const jsonData: UpdateMovieResponseInterface = JSON.parse(
-      JSON.stringify(res)
-    );
-    return jsonData;
+    const res: UpdateMovieResponseInterface = await client.v1.movies
+      ._movieId(movieId)
+      .$put({
+        body: requestBody,
+      });
+    return res;
   } catch (err) {
     console.log(err);
   }
@@ -64,11 +58,11 @@ export const updateMovie = async (
 
 export const deleteMovie = async (movieId: string) => {
   try {
-    const res = await client.v1.movies._movieId(movieId).$delete();
-    const jsonData: DeleteMovieResponseInterface = JSON.parse(
-      JSON.stringify(res)
-    );
-    return jsonData;
+    const res: DeleteMovieResponseInterface = await client.v1.movies
+      ._movieId(movieId)
+      .$delete();
+
+    return res;
   } catch (err) {
     console.log(err);
   }
