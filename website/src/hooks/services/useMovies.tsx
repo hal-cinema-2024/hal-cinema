@@ -1,5 +1,20 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import { GetMoviesResponseInterface } from "../../api/interfaces/movie";
+import { getMovies } from "../../api/repositories/movie";
+export const useMovie = (pageId?: string, pageSize?: string) => {
+  const [movies, setMovies] = useState<GetMoviesResponseInterface>();
 
-export const useMovies = () => {
-  return <div>useMovies</div>;
+  const fetchData = async () => {
+    try {
+      const res = await getMovies(pageId, pageSize);
+      if (res) setMovies(res);
+    } catch (error) {
+      console.error("movie service error: " + error);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  return { movies, setMovies };
 };
