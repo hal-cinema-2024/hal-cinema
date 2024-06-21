@@ -1,0 +1,69 @@
+import { client } from "../../utils/aspida";
+import {
+  CreateMovieRequestInterface,
+  CreateMovieResponseInterface,
+  DeleteMovieResponseInterface,
+  GetMovieResponseInterface,
+  GetMoviesResponseInterface,
+  UpdateMovieRequestBodyInterface,
+  UpdateMovieResponseInterface,
+} from "../interfaces/movie";
+
+export const getMovies = async () => {
+  try {
+    const res: GetMoviesResponseInterface = await client.v1.movies.$get();
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getMovie = async (movieId: string) => {
+  try {
+    const res: GetMovieResponseInterface = await client.v1.movies
+      ._movieId(movieId)
+      .$get();
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const createMovie = async (requestBody: CreateMovieRequestInterface) => {
+  try {
+    const res: CreateMovieResponseInterface = await client.v1.movies.$post({
+      body: requestBody,
+    });
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const updateMovie = async (
+  movieId: string,
+  requestBody: UpdateMovieRequestBodyInterface
+) => {
+  try {
+    const res: UpdateMovieResponseInterface = await client.v1.movies
+      ._movieId(movieId)
+      .$put({
+        body: requestBody,
+      });
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const deleteMovie = async (movieId: string) => {
+  try {
+    const res: DeleteMovieResponseInterface = await client.v1.movies
+      ._movieId(movieId)
+      .$delete();
+
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};

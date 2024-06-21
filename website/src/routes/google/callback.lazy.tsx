@@ -1,27 +1,15 @@
-import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
-import { login } from "../../api/repositories/login";
+import { createLazyFileRoute } from "@tanstack/react-router";
+import { useGetParams } from "../../hooks/useGetParams";
 
 export const Route = createLazyFileRoute("/google/callback")({
-  component: () =>
-    function Page() {
-      const navigate = useNavigate();
+  component: function Page() {
+    const { url } = useGetParams();
+    return (
+      <div>
+        <h1>Google Callback</h1>
 
-      const goToHome = () => {
-        navigate({ to: "/" });
-      };
-
-      const url = new URL(window.location.href);
-      const code = url.searchParams.get("code");
-
-      async function loginFunc(code: string) {
-        const decoded = atob(code as string);
-
-        login({
-          code: decoded,
-        });
-
-        goToHome();
-      }
-      loginFunc(code as string);
-    },
+        {url && <p>Result: {url}</p>}
+      </div>
+    );
+  },
 });
