@@ -2,7 +2,7 @@ import "./Table.css";
 
 const BuyContent = () => {
   return (
-    <>
+    <div className="BuyContentDiv">
       <div className="TitleContainer">
         <p>購入内容</p>
       </div>
@@ -28,8 +28,10 @@ const BuyContent = () => {
           <td>nagg@hal.ac.jp</td>
         </tr>
       </table>
-    </>
+    </div>
   );
 };
 
 export default BuyContent;
+
+

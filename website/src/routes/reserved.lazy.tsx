@@ -1,7 +1,9 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import styled from "styled-components";
+import Stepper from "../pages/reserved/Stepper";
 import BuyContent from "../pages/reserved/BuyContent";
 import CustomerInfo from "../pages/reserved/CustomerInfo";
+import PaymentInfo from "../pages/reserved/PaymentInfo";
 
 export const Route = createLazyFileRoute("/reserved")({
   component: Index,
@@ -10,14 +12,19 @@ export const Route = createLazyFileRoute("/reserved")({
 function Index() {
   return (
     <ReservedContainer>
+      <Stepper />
       <Title>
         <h1>予約内容確認</h1>
         <p>
           以下の内容を確認の上、「決済する」ボタンを押して決済を完了してください。
         </p>
       </Title>
+
       <BuyContent />
+
       <CustomerInfo />
+
+      <PaymentInfo />
     </ReservedContainer>
   );
 }

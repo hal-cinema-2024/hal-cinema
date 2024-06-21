@@ -1,3 +1,7 @@
+.BuyContentDiv {
+  margin: 30px 0 50px 0;
+}
+
 .TitleContainer {
   margin: 0 0 15px 0;
   display: flex;
@@ -35,4 +39,8 @@ td {
   padding: 20px 0;
   text-align: center;
   background-color: #ffffff;
+}
+
+.PaymentInfoDiv {
+  margin: 50px 0 0 0;
 }
