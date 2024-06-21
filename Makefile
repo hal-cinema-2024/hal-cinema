@@ -13,4 +13,4 @@ setup:
 	cd backend && cp .env.example .env
 
 goMigrate:
-migrate create -ext sql -dir backend/cmd/migrate/schema -seq ${name}
+	migrate create -ext sql -dir backend/cmd/migrate/schema -seq ${name}

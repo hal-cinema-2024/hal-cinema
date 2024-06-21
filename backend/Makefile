@@ -29,3 +29,6 @@ dsn=postgres://postgres:postgres@localhost:5432/hal_cinema
 
 gen-model: migrate-up
 	go run gorm.io/gen/tools/gentool@latest -c ./gen.tool.yaml
+
+seeder:
+	go run cmd/seeder/main.go -e .env -f cmd/seeder/seeder.json

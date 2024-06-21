@@ -34,13 +34,17 @@ jobs:
           - 5432:5432
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Set up Go
       uses: actions/setup-go@v4
       with:
         go-version-file: 'backend/go.mod'
         cache: true
+
+    - name: write env
+      run: |
+        echo "${{ secrets.TEST_ENV }}" > .env.test
     
     - name: Install dependencies
       run: go mod download
@@ -52,7 +56,6 @@ jobs:
     - name: Build
       run: go build -v ./...
 
-# TODO: テストが追加されたら戻す
     - name: Test
       run: go test ./... -coverpkg=./... -v -json | go run github.com/mfridman/tparse@v0.13.2
 

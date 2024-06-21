@@ -10,5 +10,10 @@ func (v1 *v1Router) userRoute() {
 	userRoute := v1.engine.Group("/users")
 
 	ui := container.Invoke[*interactor.UserInteractor]()
-	userRoute.GET("/{user_id}", controller.GetUser(ui))
+	{
+		userRoute.GET("", controller.GetUsers(ui).AsAdmin())
+		userRoute.GET("/:user_id", controller.GetUser(ui))
+		userRoute.PUT("/:user_id", controller.UpdateUser(ui))
+		userRoute.DELETE("/:user_id", controller.DeleteUser(ui))
+	}
 }

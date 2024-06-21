@@ -34,20 +34,13 @@ function CommonLayout() {
         <Footer>
           <Logo2 to="/">LOGO</Logo2>
           <Nav>
-            <NavItem>
-              <FooterNavLink to="/">TOP</FooterNavLink>
-            </NavItem>
-            <NavItem>
-              <FooterNavLink to="/movies">映画一覧</FooterNavLink>
-            </NavItem>
-            <NavItem>
-              <FooterNavLink to="/schedules">スクリーン一覧</FooterNavLink>
-            </NavItem>
-            <NavItem>
-              <FooterNavLink to="/movie">チケット購入</FooterNavLink>
-            </NavItem>
+
+            {NavLinksData.map((navLink) => (
+              <NavItem key={navLink.link}>
+                <FooterNavLink to={navLink.link}>{navLink.name}</FooterNavLink>
+              </NavItem>
+            ))}
           </Nav>
-          <Copyright>©HALCinema. All rights Reserved.</Copyright>
         </Footer>
       </div>
     </>

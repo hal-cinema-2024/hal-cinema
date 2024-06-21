@@ -1,0 +1,1192 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "api/v1/api.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "APIService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/login/google": {
+      "post": {
+        "summary": "Google Login",
+        "description": "Google Login",
+        "operationId": "APIService_GoogleLogin",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GoogleLoginResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1GoogleLoginRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Login"
+        ]
+      }
+    },
+    "/v1/movies": {
+      "get": {
+        "summary": "Get all movies",
+        "description": "Get all movies",
+        "operationId": "APIService_GetMovies",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetMoviesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Movies"
+        ]
+      },
+      "post": {
+        "summary": "Create movie",
+        "description": "Create movie",
+        "operationId": "APIService_CreateMovie",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateMovieResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateMovieRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Movies"
+        ]
+      }
+    },
+    "/v1/movies/{movieId}": {
+      "get": {
+        "summary": "Get movie details",
+        "description": "Get movie details",
+        "operationId": "APIService_GetMovie",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetMovieResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "movieId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Movies"
+        ]
+      },
+      "delete": {
+        "summary": "Delete movie",
+        "description": "Delete movie",
+        "operationId": "APIService_DeleteMovie",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteMovieResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "movieId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Movies"
+        ]
+      },
+      "put": {
+        "summary": "Update movie",
+        "description": "Update movie",
+        "operationId": "APIService_UpdateMovie",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateMovieResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "movieId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "movieName": {
+                  "type": "string"
+                },
+                "director": {
+                  "type": "string"
+                },
+                "summary": {
+                  "type": "string"
+                },
+                "thumbnail": {
+                  "type": "string",
+                  "format": "byte"
+                },
+                "link": {
+                  "type": "string"
+                },
+                "term": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "releaseDate": {
+                  "type": "string"
+                },
+                "endDate": {
+                  "type": "string"
+                },
+                "movieImage": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "byte"
+                  }
+                }
+              },
+              "title": "multipart/form-dataにする"
+            }
+          }
+        ],
+        "tags": [
+          "Movies"
+        ]
+      }
+    },
+    "/v1/orders": {
+      "get": {
+        "summary": "Get all orders",
+        "description": "Get all orders",
+        "operationId": "APIService_GetOrders",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetOrdersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Orders"
+        ]
+      },
+      "post": {
+        "summary": "Create order",
+        "description": "Create order",
+        "operationId": "APIService_CreateOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/v1/orders/{orderId}": {
+      "get": {
+        "summary": "Get order",
+        "description": "Get order",
+        "operationId": "APIService_GetOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Orders"
+        ]
+      },
+      "delete": {
+        "summary": "Delete order",
+        "description": "Delete order",
+        "operationId": "APIService_DeleteOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/v1/reservations": {
+      "post": {
+        "summary": "Create reservation",
+        "description": "Create reservation",
+        "operationId": "APIService_CreateSeatReservation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateSeatReservationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateSeatReservationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Reservations"
+        ]
+      }
+    },
+    "/v1/reservations/{theaterSeatId}": {
+      "delete": {
+        "summary": "Delete reservation",
+        "description": "Delete reservation",
+        "operationId": "APIService_DeleteSeatReservation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteSeatReservationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "theaterSeatId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Reservations"
+        ]
+      }
+    },
+    "/v1/schedules": {
+      "get": {
+        "summary": "Get all schedules",
+        "description": "Get all schedules",
+        "operationId": "APIService_GetSchedules",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetSchedulesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Schedules"
+        ]
+      },
+      "post": {
+        "summary": "Create schedule",
+        "description": "Create schedule",
+        "operationId": "APIService_CreateSchedule",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateScheduleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateScheduleRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Schedules"
+        ]
+      }
+    },
+    "/v1/schedules/{scheduleId}": {
+      "delete": {
+        "summary": "Delete schedule",
+        "description": "Delete schedule",
+        "operationId": "APIService_DeleteSchedule",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteScheduleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Schedules"
+        ]
+      },
+      "put": {
+        "summary": "Update schedule",
+        "description": "Update schedule",
+        "operationId": "APIService_UpdateSchedule",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateScheduleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "movieId": {
+                  "type": "string"
+                },
+                "theaterId": {
+                  "type": "string"
+                },
+                "startTime": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Schedules"
+        ]
+      }
+    },
+    "/v1/users": {
+      "get": {
+        "summary": "Get user",
+        "description": "Get user",
+        "operationId": "APIService_GetUsers",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetUsersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/v1/users/{userId}": {
+      "get": {
+        "summary": "Get user",
+        "description": "Get user",
+        "operationId": "APIService_GetUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Users"
+        ]
+      },
+      "delete": {
+        "summary": "Delete user",
+        "description": "Delete user",
+        "operationId": "APIService_DeleteUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Users"
+        ]
+      },
+      "put": {
+        "summary": "Update user",
+        "description": "Update user",
+        "operationId": "APIService_UpdateUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
+                },
+                "firstNameReading": {
+                  "type": "string"
+                },
+                "lastNameReading": {
+                  "type": "string"
+                },
+                "gender": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Users"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1CreateMovieRequest": {
+      "type": "object",
+      "properties": {
+        "movieName": {
+          "type": "string"
+        },
+        "director": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string",
+          "format": "byte"
+        },
+        "link": {
+          "type": "string"
+        },
+        "term": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "releaseDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        },
+        "movieImage": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        }
+      }
+    },
+    "v1CreateMovieResponse": {
+      "type": "object",
+      "properties": {
+        "movieId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CreateOrderRequest": {
+      "type": "object",
+      "properties": {
+        "order": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Orders"
+          }
+        }
+      }
+    },
+    "v1CreateOrderResponse": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CreateScheduleRequest": {
+      "type": "object",
+      "properties": {
+        "movieId": {
+          "type": "string"
+        },
+        "theaterId": {
+          "type": "string"
+        },
+        "startTime": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CreateScheduleResponse": {
+      "type": "object",
+      "properties": {
+        "scheduleId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CreateSeatReservationRequest": {
+      "type": "object",
+      "properties": {
+        "scheduleId": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "seatId": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v1CreateSeatReservationResponse": {
+      "type": "object",
+      "properties": {
+        "theaterSeatId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1DeleteMovieResponse": {
+      "type": "object",
+      "properties": {
+        "movieId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1DeleteOrderResponse": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1DeleteScheduleResponse": {
+      "type": "object",
+      "properties": {
+        "scheduleId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1DeleteSeatReservationResponse": {
+      "type": "object",
+      "properties": {
+        "theaterSeatId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1DeleteUserResponse": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GetMovieResponse": {
+      "type": "object",
+      "properties": {
+        "movie": {
+          "$ref": "#/definitions/v1Movie"
+        }
+      }
+    },
+    "v1GetMoviesResponse": {
+      "type": "object",
+      "properties": {
+        "movie": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Movie"
+          }
+        }
+      }
+    },
+    "v1GetOrderResponse": {
+      "type": "object",
+      "properties": {
+        "order": {
+          "$ref": "#/definitions/v1Orders"
+        }
+      }
+    },
+    "v1GetOrdersResponse": {
+      "type": "object",
+      "properties": {
+        "order": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Orders"
+          }
+        }
+      }
+    },
+    "v1GetSchedulesResponse": {
+      "type": "object",
+      "properties": {
+        "schedule": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Schedule"
+          }
+        }
+      }
+    },
+    "v1GetUserResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/v1User"
+        }
+      }
+    },
+    "v1GetUsersResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1User"
+          }
+        }
+      }
+    },
+    "v1GoogleLoginRequest": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GoogleLoginResponse": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1Movie": {
+      "type": "object",
+      "properties": {
+        "movieId": {
+          "type": "string"
+        },
+        "movieName": {
+          "type": "string"
+        },
+        "director": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string",
+          "format": "byte"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "link": {
+          "type": "string"
+        },
+        "term": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "releaseDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        },
+        "movieImage": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        }
+      }
+    },
+    "v1Orders": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "movieName": {
+          "type": "string"
+        },
+        "screen": {
+          "type": "string"
+        },
+        "orderDetail": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1OrdersDetail"
+          }
+        }
+      }
+    },
+    "v1OrdersDetail": {
+      "type": "object",
+      "properties": {
+        "seatName": {
+          "type": "string"
+        },
+        "priceType": {
+          "type": "string"
+        },
+        "price": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1Schedule": {
+      "type": "object",
+      "properties": {
+        "scheduleId": {
+          "type": "string"
+        },
+        "movieName": {
+          "type": "string"
+        },
+        "theaterId": {
+          "type": "string"
+        },
+        "startTime": {
+          "type": "string"
+        },
+        "term": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "isFull": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1UpdateMovieResponse": {
+      "type": "object",
+      "properties": {
+        "movieId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1UpdateScheduleResponse": {
+      "type": "object",
+      "properties": {
+        "scheduleId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1UpdateUserResponse": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1User": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "firstNameReading": {
+          "type": "string"
+        },
+        "lastNameReading": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    }
+  }
+}
