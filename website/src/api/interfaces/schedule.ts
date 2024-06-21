@@ -7,13 +7,13 @@ import {
   V1UpdateScheduleResponse,
 } from "../../../../api/@types/index.ts";
 
-type UpdateScheduleRequestInterface = V1CreateScheduleRequest;
+type UpdateScheduleRequestBodyInterface = V1CreateScheduleRequest;
 export type {
   V1Schedule as ScheduleInterface,
   V1GetSchedulesResponse as GetSchedulesResponseInterface,
   V1CreateScheduleResponse as CreateScheduleResponseInterface,
-  V1CreateScheduleRequest as CreateScheduleRequestInterface,
+  V1CreateScheduleRequest as CreateScheduleRequestBodyInterface,
   V1UpdateScheduleResponse as UpdateScheduleResponseInterface,
-  UpdateScheduleRequestInterface,
+  UpdateScheduleRequestBodyInterface,
   V1DeleteScheduleResponse as DeleteScheduleResponseInterface,
 };
