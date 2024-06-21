@@ -9,9 +9,14 @@ import {
   UpdateMovieResponseInterface,
 } from "../interfaces/movie";
 
-export const getMovies = async () => {
+export const getMovies = async (pageId?: string, pageSize?: string) => {
   try {
-    const res: GetMoviesResponseInterface = await client.v1.movies.$get();
+    const res: GetMoviesResponseInterface = await client.v1.movies.$get({
+      query: {
+        pageId: pageId,
+        pageSize: pageSize,
+      },
+    });
     return res;
   } catch (err) {
     console.log(err);
