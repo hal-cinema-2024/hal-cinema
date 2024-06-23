@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 import { createLazyFileRoute } from "@tanstack/react-router";
-import Movies from "../pages/movies/Movies";
-import { Pagenation } from "../pages/movies/Pagenation";
+import Movies from "../../pages/movies/Movies";
+import { Pagenation } from "../../pages/movies/Pagenation";
 
 export const Route = createLazyFileRoute("/movies")({
   component: Index,

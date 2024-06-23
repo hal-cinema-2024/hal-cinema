@@ -13,94 +13,98 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as MoviesMovieIdRouteImport } from './routes/movies/$movieId/route'
 
 // Create Virtual Routes
 
-const SchedulesLazyImport = createFileRoute('/schedules')()
-const ProfileLazyImport = createFileRoute('/profile')()
-const MoviesLazyImport = createFileRoute('/movies')()
-const MovieLazyImport = createFileRoute('/movie')()
-const IndexLazyImport = createFileRoute('/')()
-const GoogleCallbackLazyImport = createFileRoute('/google/callback')()
+const SchedulesRouteLazyImport = createFileRoute('/schedules')()
+const ProfileRouteLazyImport = createFileRoute('/profile')()
+const MoviesRouteLazyImport = createFileRoute('/movies')()
+const HomeIndexLazyImport = createFileRoute('/_home/')()
+const GoogleCallbackRouteLazyImport = createFileRoute('/google/callback')()
 
 // Create/Update Routes
 
-const SchedulesLazyRoute = SchedulesLazyImport.update({
+const SchedulesRouteLazyRoute = SchedulesRouteLazyImport.update({
   path: '/schedules',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/schedules.lazy').then((d) => d.Route))
+} as any).lazy(() =>
+  import('./routes/schedules/route.lazy').then((d) => d.Route),
+)
 
-const ProfileLazyRoute = ProfileLazyImport.update({
+const ProfileRouteLazyRoute = ProfileRouteLazyImport.update({
   path: '/profile',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/profile.lazy').then((d) => d.Route))
+} as any).lazy(() => import('./routes/profile/route.lazy').then((d) => d.Route))
 
-const MoviesLazyRoute = MoviesLazyImport.update({
+const MoviesRouteLazyRoute = MoviesRouteLazyImport.update({
   path: '/movies',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/movies.lazy').then((d) => d.Route))
+} as any).lazy(() => import('./routes/movies/route.lazy').then((d) => d.Route))
 
-const MovieLazyRoute = MovieLazyImport.update({
-  path: '/movie',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/movie.lazy').then((d) => d.Route))
-
-const IndexLazyRoute = IndexLazyImport.update({
+const HomeIndexLazyRoute = HomeIndexLazyImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+} as any).lazy(() => import('./routes/_home/index.lazy').then((d) => d.Route))
 
-const GoogleCallbackLazyRoute = GoogleCallbackLazyImport.update({
+const GoogleCallbackRouteLazyRoute = GoogleCallbackRouteLazyImport.update({
   path: '/google/callback',
   getParentRoute: () => rootRoute,
 } as any).lazy(() =>
-  import('./routes/google/callback.lazy').then((d) => d.Route),
+  import('./routes/google/callback/route.lazy').then((d) => d.Route),
+)
+
+const MoviesMovieIdRouteRoute = MoviesMovieIdRouteImport.update({
+  path: '/$movieId',
+  getParentRoute: () => MoviesRouteLazyRoute,
+} as any).lazy(() =>
+  import('./routes/movies/$movieId/route.lazy').then((d) => d.Route),
 )
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/movie': {
-      id: '/movie'
-      path: '/movie'
-      fullPath: '/movie'
-      preLoaderRoute: typeof MovieLazyImport
-      parentRoute: typeof rootRoute
-    }
     '/movies': {
       id: '/movies'
       path: '/movies'
       fullPath: '/movies'
-      preLoaderRoute: typeof MoviesLazyImport
+      preLoaderRoute: typeof MoviesRouteLazyImport
       parentRoute: typeof rootRoute
     }
     '/profile': {
       id: '/profile'
       path: '/profile'
       fullPath: '/profile'
-      preLoaderRoute: typeof ProfileLazyImport
+      preLoaderRoute: typeof ProfileRouteLazyImport
       parentRoute: typeof rootRoute
     }
     '/schedules': {
       id: '/schedules'
       path: '/schedules'
       fullPath: '/schedules'
-      preLoaderRoute: typeof SchedulesLazyImport
+      preLoaderRoute: typeof SchedulesRouteLazyImport
       parentRoute: typeof rootRoute
+    }
+    '/movies/$movieId': {
+      id: '/movies/$movieId'
+      path: '/$movieId'
+      fullPath: '/movies/$movieId'
+      preLoaderRoute: typeof MoviesMovieIdRouteImport
+      parentRoute: typeof MoviesRouteLazyImport
     }
     '/google/callback': {
       id: '/google/callback'
       path: '/google/callback'
       fullPath: '/google/callback'
-      preLoaderRoute: typeof GoogleCallbackLazyImport
+      preLoaderRoute: typeof GoogleCallbackRouteLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/_home/': {
+      id: '/_home/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof HomeIndexLazyImport
       parentRoute: typeof rootRoute
     }
   }
@@ -109,12 +113,13 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren({
-  IndexLazyRoute,
-  MovieLazyRoute,
-  MoviesLazyRoute,
-  ProfileLazyRoute,
-  SchedulesLazyRoute,
-  GoogleCallbackLazyRoute,
+  MoviesRouteLazyRoute: MoviesRouteLazyRoute.addChildren({
+    MoviesMovieIdRouteRoute,
+  }),
+  ProfileRouteLazyRoute,
+  SchedulesRouteLazyRoute,
+  GoogleCallbackRouteLazyRoute,
+  HomeIndexLazyRoute,
 })
 
 /* prettier-ignore-end */
@@ -125,31 +130,34 @@ export const routeTree = rootRoute.addChildren({
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
-        "/movie",
         "/movies",
         "/profile",
         "/schedules",
-        "/google/callback"
+        "/google/callback",
+        "/_home/"
       ]
     },
-    "/": {
-      "filePath": "index.lazy.tsx"
-    },
-    "/movie": {
-      "filePath": "movie.lazy.tsx"
-    },
     "/movies": {
-      "filePath": "movies.lazy.tsx"
+      "filePath": "movies/route.lazy.tsx",
+      "children": [
+        "/movies/$movieId"
+      ]
     },
     "/profile": {
-      "filePath": "profile.lazy.tsx"
+      "filePath": "profile/route.lazy.tsx"
     },
     "/schedules": {
-      "filePath": "schedules.lazy.tsx"
+      "filePath": "schedules/route.lazy.tsx"
+    },
+    "/movies/$movieId": {
+      "filePath": "movies/$movieId/route.tsx",
+      "parent": "/movies"
     },
     "/google/callback": {
-      "filePath": "google/callback.lazy.tsx"
+      "filePath": "google/callback/route.lazy.tsx"
+    },
+    "/_home/": {
+      "filePath": "_home/index.lazy.tsx"
     }
   }
 }
