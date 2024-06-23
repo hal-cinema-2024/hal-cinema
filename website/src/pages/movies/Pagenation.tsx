@@ -1,4 +1,4 @@
-import { Pagination } from "@nextui-org/pagination";
+import { Pagination } from "@yamada-ui/react";
 import styled from "styled-components";
 
 export function Pagenation() {
