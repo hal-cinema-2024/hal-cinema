@@ -17,6 +17,7 @@ export const getMovies = async (pageId?: string, pageSize?: string) => {
         pageSize: pageSize,
       },
     });
+    console.log(res);
     return res;
   } catch (err) {
     console.log(err);

@@ -1,10 +1,21 @@
-import { createLazyFileRoute } from "@tanstack/react-router";
-import Movie from "../../../pages/movie/movie";
+import { SearchSchemaInput, createFileRoute } from "@tanstack/react-router";
+import { z } from "zod";
+import { getMovie } from "../../../api/repositories/movie";
 
-export const Route = createLazyFileRoute("/movies/$movieId")({
-  component: Index,
+export const Route = createFileRoute("/movies/$movieId")({
+  validateSearch: (
+    input: {
+      movieId: string;
+    } & SearchSchemaInput
+  ) =>
+    z
+      .object({
+        movieId: z.string(),
+      })
+      .parse(input),
+  loaderDeps: ({ search: { movieId } }) => ({
+    movieId,
+  }),
+
+  loader: ({ deps: { movieId } }) => getMovie(movieId),
 });
-
-function Index() {
-  return <Movie />;
-}
