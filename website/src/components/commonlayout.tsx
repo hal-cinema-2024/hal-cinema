@@ -1,5 +1,6 @@
 import { Outlet, Link } from "@tanstack/react-router";
 import styled from "styled-components";
+import headerImage from "/src/assets/bg.jpg";
 
 type NavLinksType = {
   link: string;
@@ -15,7 +16,8 @@ const NavLinksData: NavLinksType[] = [
 function CommonLayout() {
   return (
     <>
-      <div>
+      <div style={{ backgroundImage: `url(${headerImage})` }}>
+        {" "}
         <Header>
           <Logo1 to='/'>
             <img
@@ -36,7 +38,6 @@ function CommonLayout() {
           </Nv>
         </Header>
         <Outlet />
-
         <Footer>
           <Logo2 to='/'>
             <img
