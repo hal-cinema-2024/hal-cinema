@@ -18,7 +18,15 @@ function CommonLayout() {
     <>
       <div style={{ backgroundImage: `url(${headerImage})` }}>
         <Header>
-          <Logo1 to="/">LOGO</Logo1>
+
+          <Logo1 to="/">
+            <img
+              src="src/assets/48.png"
+              alt="ロゴ画像"
+              height={"120px"}
+              width={"120px"}
+            />
+          </Logo1>
           <Nv>
             <NavLinks className="nav-links">
               {NavLinksData.map((navLink) => (
@@ -32,14 +40,29 @@ function CommonLayout() {
         <Outlet />
 
         <Footer>
-          <Logo2 to="/">LOGO</Logo2>
-          <Nav>
 
-            {NavLinksData.map((navLink) => (
-              <NavItem key={navLink.link}>
-                <FooterNavLink to={navLink.link}>{navLink.name}</FooterNavLink>
-              </NavItem>
-            ))}
+          <Logo2 to="/">
+            <img
+              src="src/assets/logo1.png"
+              alt="ロゴ画像"
+              height={"140px"}
+              width={"140px"}
+            />
+          </Logo2>
+          <Nav>
+            <NavItem>
+              <FooterNavLink to="/">TOP</FooterNavLink>
+            </NavItem>
+            <NavItem>
+              <FooterNavLink to="/movies">映画一覧</FooterNavLink>
+            </NavItem>
+            <NavItem>
+              <FooterNavLink to="/schedules">スクリーン一覧</FooterNavLink>
+            </NavItem>
+            <NavItem>
+              <FooterNavLink to="/movie">チケット購入</FooterNavLink>
+            </NavItem>
+
           </Nav>
         </Footer>
       </div>
@@ -107,6 +130,8 @@ const Logo2 = styled(Link)`
   font-weight: bold;
   text-decoration: none;
   color: white;
+
+  text-align: center;
 `;
 
 const Nav = styled.ul`

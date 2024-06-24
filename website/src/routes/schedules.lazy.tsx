@@ -23,8 +23,10 @@ const SchedulesContainer = styled.div`
 `;
 
 const Title = styled.h1`
-  margin: 30px 0;
+  position: relative;
   text-align: center;
-  font-size: 40px;
-  color: #fff;
+  padding-top: 4vh;
+  margin-bottom: -2.5vh;
+  font-size: 2rem;
+  color: white;
 `;

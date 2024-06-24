@@ -4,9 +4,6 @@ export const Top = () => {
   return (
     <>
       <MainSection>
-        <MainText>
-          <p>Hal Cinema</p>
-        </MainText>
         <MainImage className="main-image"></MainImage>
       </MainSection>
 

@@ -15,10 +15,10 @@ const Movie: React.FC = () => {
                 fallback="/public/not-found.png"
                 fallbackStrategy="onError"
                 style={{
-                  maxWidth: "508.5px",
-                  maxHeight: "720px",
-                  minWidth: "508.5px",
-                  minHeight: "720px",
+                  maxWidth: "348.5px",
+                  maxHeight: "460px",
+                  minWidth: "348.5px",
+                  minHeight: "460px",
                 }}
               />
             </div>
@@ -35,7 +35,9 @@ const Movie: React.FC = () => {
             </div>
           </div>
           <div>
-            <h2 id="work-name">聲の形</h2>
+            <h2 id="work-name">
+              <b>聲の形</b>
+            </h2>
             <Box
               id="release-date"
               p="md"

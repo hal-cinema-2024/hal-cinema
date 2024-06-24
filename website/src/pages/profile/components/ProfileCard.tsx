@@ -4,7 +4,7 @@ import { Text, Button, Avatar } from "@yamada-ui/react";
 export const ProfileCard = () => {
   return (
     <ProfileContainer>
-      <SAvatar src='/path/to/avatar.jpg' alt='Avatar' />
+      <SAvatar src="/path/to/avatar.jpg" alt="Avatar" />
       <EditButton>
         <SText>編集</SText>
       </EditButton>
