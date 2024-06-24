@@ -18,6 +18,7 @@ import { Route as rootRoute } from './routes/__root'
 
 const SchedulesLazyImport = createFileRoute('/schedules')()
 const ProfileLazyImport = createFileRoute('/profile')()
+const NotfoundLazyImport = createFileRoute('/notfound')()
 const MoviesLazyImport = createFileRoute('/movies')()
 const MovieLazyImport = createFileRoute('/movie')()
 const IndexLazyImport = createFileRoute('/')()
@@ -33,6 +34,11 @@ const ProfileLazyRoute = ProfileLazyImport.update({
   path: '/profile',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/profile.lazy').then((d) => d.Route))
+
+const NotfoundLazyRoute = NotfoundLazyImport.update({
+  path: '/notfound',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/notfound.lazy').then((d) => d.Route))
 
 const MoviesLazyRoute = MoviesLazyImport.update({
   path: '/movies',
@@ -74,6 +80,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MoviesLazyImport
       parentRoute: typeof rootRoute
     }
+    '/notfound': {
+      id: '/notfound'
+      path: '/notfound'
+      fullPath: '/notfound'
+      preLoaderRoute: typeof NotfoundLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/profile': {
       id: '/profile'
       path: '/profile'
@@ -97,40 +110,9 @@ export const routeTree = rootRoute.addChildren({
   IndexLazyRoute,
   MovieLazyRoute,
   MoviesLazyRoute,
+  NotfoundLazyRoute,
   ProfileLazyRoute,
   SchedulesLazyRoute,
 })
 
 /* prettier-ignore-end */
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/movie",
-        "/movies",
-        "/profile",
-        "/schedules"
-      ]
-    },
-    "/": {
-      "filePath": "index.lazy.tsx"
-    },
-    "/movie": {
-      "filePath": "movie.lazy.tsx"
-    },
-    "/movies": {
-      "filePath": "movies.lazy.tsx"
-    },
-    "/profile": {
-      "filePath": "profile.lazy.tsx"
-    },
-    "/schedules": {
-      "filePath": "schedules.lazy.tsx"
-    }
-  }
-}
-ROUTE_MANIFEST_END */

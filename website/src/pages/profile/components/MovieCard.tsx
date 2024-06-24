@@ -42,7 +42,9 @@ export const MovieCard = () => {
               <div>
                 <TextContainer>
                   <Text>映画</Text>
-                  <Text>{movie.movieName}</Text>
+                  <Text>
+                    <b>{movie.movieName}</b>
+                  </Text>
                 </TextContainer>
                 <TextContainer>
                   <Text>日付</Text>
