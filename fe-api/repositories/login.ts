@@ -1,4 +1,5 @@
-import { client } from "../../utils/aspida";
+import { client } from "../utils/aspida";
+
 import { GoogleLoginRequestInterface } from "../interfaces/login";
 
 export const login = async (data: GoogleLoginRequestInterface) => {

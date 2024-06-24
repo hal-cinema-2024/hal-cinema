@@ -1,4 +1,5 @@
-import { client } from "../../utils/aspida";
+import { client } from "../utils/aspida";
+
 import {
   CreateOrderRequestBodyInterface,
   GetOrderResponseInterface,

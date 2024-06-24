@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 import { createLazyFileRoute } from "@tanstack/react-router";
 import Movies from "./-component/Movies";
 import { Pagenation } from "./-component/Pagenation";

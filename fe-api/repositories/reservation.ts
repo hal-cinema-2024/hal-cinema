@@ -1,4 +1,4 @@
-import { client } from "../../utils/aspida";
+import { client } from "../utils/aspida";
 
 import type {
   CreateSeatReservationResponseInterface,
