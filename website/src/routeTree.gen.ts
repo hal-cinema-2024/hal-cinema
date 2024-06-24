@@ -13,26 +13,6 @@ import { createFileRoute } from "@tanstack/react-router";
 // Import Routes
 
 import { Route as rootRoute } from "./routes/__root";
-import { Route as SchedulesComponentsDaliyImport } from "./routes/schedules/ components/daliy";
-import { Route as SchedulesComponentsTimeDataImport } from "./routes/schedules/ components/TimeData";
-import { Route as SchedulesComponentsSlideshowImport } from "./routes/schedules/ components/Slideshow";
-import { Route as SchedulesComponentsScreenTimeImport } from "./routes/schedules/ components/ScreenTime";
-import { Route as SchedulesComponentsScreenDataImport } from "./routes/schedules/ components/ScreenData";
-import { Route as SchedulesComponentsMovieBoxImport } from "./routes/schedules/ components/MovieBox";
-import { Route as SchedulesComponentsDateDispImport } from "./routes/schedules/ components/DateDisp";
-import { Route as ReservedComponentsStepperImport } from "./routes/reserved/components/Stepper";
-import { Route as ReservedComponentsPaymentInfoImport } from "./routes/reserved/components/PaymentInfo";
-import { Route as ReservedComponentsCustomerInfoImport } from "./routes/reserved/components/CustomerInfo";
-import { Route as ReservedComponentsBuyContentImport } from "./routes/reserved/components/BuyContent";
-import { Route as ProfileComponentsProfileCardImport } from "./routes/profile/components/ProfileCard";
-import { Route as ProfileComponentsMovieCardImport } from "./routes/profile/components/MovieCard";
-import { Route as MoviesComponentPagenationImport } from "./routes/movies/component/Pagenation";
-import { Route as MoviesComponentMoviesDateImport } from "./routes/movies/component/MoviesDate";
-import { Route as MoviesComponentMoviesImport } from "./routes/movies/component/Movies";
-import { Route as HomeComponentsTopImport } from "./routes/_home/_components/Top";
-import { Route as MoviesMovieIdComponentMovieImport } from "./routes/movies/$movieId/component/movie";
-import { Route as GoogleCallbackStoreUserDataContextImport } from "./routes/google/callback/_store/UserDataContext";
-import { Route as GoogleCallbackComponentsLoginButtonImport } from "./routes/google/callback/_components/LoginButton";
 
 // Create Virtual Routes
 
@@ -91,121 +71,6 @@ const GoogleCallbackRouteLazyRoute = GoogleCallbackRouteLazyImport.update({
   import("./routes/google/callback/route.lazy").then((d) => d.Route)
 );
 
-const SchedulesComponentsDaliyRoute = SchedulesComponentsDaliyImport.update({
-  path: "/daliy",
-  getParentRoute: () => SchedulesRouteLazyRoute,
-} as any);
-
-const SchedulesComponentsTimeDataRoute =
-  SchedulesComponentsTimeDataImport.update({
-    path: "/TimeData",
-    getParentRoute: () => SchedulesRouteLazyRoute,
-  } as any);
-
-const SchedulesComponentsSlideshowRoute =
-  SchedulesComponentsSlideshowImport.update({
-    path: "/Slideshow",
-    getParentRoute: () => SchedulesRouteLazyRoute,
-  } as any);
-
-const SchedulesComponentsScreenTimeRoute =
-  SchedulesComponentsScreenTimeImport.update({
-    path: "/ScreenTime",
-    getParentRoute: () => SchedulesRouteLazyRoute,
-  } as any);
-
-const SchedulesComponentsScreenDataRoute =
-  SchedulesComponentsScreenDataImport.update({
-    path: "/ScreenData",
-    getParentRoute: () => SchedulesRouteLazyRoute,
-  } as any);
-
-const SchedulesComponentsMovieBoxRoute =
-  SchedulesComponentsMovieBoxImport.update({
-    path: "/MovieBox",
-    getParentRoute: () => SchedulesRouteLazyRoute,
-  } as any);
-
-const SchedulesComponentsDateDispRoute =
-  SchedulesComponentsDateDispImport.update({
-    path: "/DateDisp",
-    getParentRoute: () => SchedulesRouteLazyRoute,
-  } as any);
-
-const ReservedComponentsStepperRoute = ReservedComponentsStepperImport.update({
-  path: "/components/Stepper",
-  getParentRoute: () => ReservedRouteLazyRoute,
-} as any);
-
-const ReservedComponentsPaymentInfoRoute =
-  ReservedComponentsPaymentInfoImport.update({
-    path: "/components/PaymentInfo",
-    getParentRoute: () => ReservedRouteLazyRoute,
-  } as any);
-
-const ReservedComponentsCustomerInfoRoute =
-  ReservedComponentsCustomerInfoImport.update({
-    path: "/components/CustomerInfo",
-    getParentRoute: () => ReservedRouteLazyRoute,
-  } as any);
-
-const ReservedComponentsBuyContentRoute =
-  ReservedComponentsBuyContentImport.update({
-    path: "/components/BuyContent",
-    getParentRoute: () => ReservedRouteLazyRoute,
-  } as any);
-
-const ProfileComponentsProfileCardRoute =
-  ProfileComponentsProfileCardImport.update({
-    path: "/ProfileCard",
-    getParentRoute: () => ProfileRouteLazyRoute,
-  } as any);
-
-const ProfileComponentsMovieCardRoute = ProfileComponentsMovieCardImport.update(
-  {
-    path: "/MovieCard",
-    getParentRoute: () => ProfileRouteLazyRoute,
-  } as any
-);
-
-const MoviesComponentPagenationRoute = MoviesComponentPagenationImport.update({
-  path: "/Pagenation",
-  getParentRoute: () => MoviesRouteLazyRoute,
-} as any);
-
-const MoviesComponentMoviesDateRoute = MoviesComponentMoviesDateImport.update({
-  path: "/MoviesDate",
-  getParentRoute: () => MoviesRouteLazyRoute,
-} as any);
-
-const MoviesComponentMoviesRoute = MoviesComponentMoviesImport.update({
-  path: "/Movies",
-  getParentRoute: () => MoviesRouteLazyRoute,
-} as any);
-
-const HomeComponentsTopRoute = HomeComponentsTopImport.update({
-  path: "/Top",
-  getParentRoute: () => HomeRouteLazyRoute,
-} as any);
-
-const MoviesMovieIdComponentMovieRoute =
-  MoviesMovieIdComponentMovieImport.update({
-    path: "/movie",
-    getParentRoute: () => MoviesMovieIdRouteLazyRoute,
-  } as any);
-
-const GoogleCallbackStoreUserDataContextRoute =
-  GoogleCallbackStoreUserDataContextImport.update({
-    path: "/UserDataContext",
-    getParentRoute: () => GoogleCallbackRouteLazyRoute,
-  } as any);
-
-const GoogleCallbackComponentsLoginButtonRoute =
-  GoogleCallbackComponentsLoginButtonImport.update({
-    path: "/LoginButton",
-    getParentRoute: () => GoogleCallbackRouteLazyRoute,
-  } as any);
-
 // Populate the FileRoutesByPath interface
 
 declare module "@tanstack/react-router" {
@@ -259,186 +124,20 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof MoviesMovieIdRouteLazyImport;
       parentRoute: typeof MoviesRouteLazyImport;
     };
-    "/_home/_components/Top": {
-      id: "/_home/_components/Top";
-      path: "/Top";
-      fullPath: "/Top";
-      preLoaderRoute: typeof HomeComponentsTopImport;
-      parentRoute: typeof HomeRouteLazyImport;
-    };
-    "/movies/_component/Movies": {
-      id: "/movies/_component/Movies";
-      path: "/Movies";
-      fullPath: "/movies/Movies";
-      preLoaderRoute: typeof MoviesComponentMoviesImport;
-      parentRoute: typeof MoviesRouteLazyImport;
-    };
-    "/movies/_component/MoviesDate": {
-      id: "/movies/_component/MoviesDate";
-      path: "/MoviesDate";
-      fullPath: "/movies/MoviesDate";
-      preLoaderRoute: typeof MoviesComponentMoviesDateImport;
-      parentRoute: typeof MoviesRouteLazyImport;
-    };
-    "/movies/_component/Pagenation": {
-      id: "/movies/_component/Pagenation";
-      path: "/Pagenation";
-      fullPath: "/movies/Pagenation";
-      preLoaderRoute: typeof MoviesComponentPagenationImport;
-      parentRoute: typeof MoviesRouteLazyImport;
-    };
-    "/profile/_components/MovieCard": {
-      id: "/profile/_components/MovieCard";
-      path: "/MovieCard";
-      fullPath: "/profile/MovieCard";
-      preLoaderRoute: typeof ProfileComponentsMovieCardImport;
-      parentRoute: typeof ProfileRouteLazyImport;
-    };
-    "/profile/_components/ProfileCard": {
-      id: "/profile/_components/ProfileCard";
-      path: "/ProfileCard";
-      fullPath: "/profile/ProfileCard";
-      preLoaderRoute: typeof ProfileComponentsProfileCardImport;
-      parentRoute: typeof ProfileRouteLazyImport;
-    };
-    "/reserved/components/BuyContent": {
-      id: "/reserved/components/BuyContent";
-      path: "/components/BuyContent";
-      fullPath: "/reserved/components/BuyContent";
-      preLoaderRoute: typeof ReservedComponentsBuyContentImport;
-      parentRoute: typeof ReservedRouteLazyImport;
-    };
-    "/reserved/components/CustomerInfo": {
-      id: "/reserved/components/CustomerInfo";
-      path: "/components/CustomerInfo";
-      fullPath: "/reserved/components/CustomerInfo";
-      preLoaderRoute: typeof ReservedComponentsCustomerInfoImport;
-      parentRoute: typeof ReservedRouteLazyImport;
-    };
-    "/reserved/components/PaymentInfo": {
-      id: "/reserved/components/PaymentInfo";
-      path: "/components/PaymentInfo";
-      fullPath: "/reserved/components/PaymentInfo";
-      preLoaderRoute: typeof ReservedComponentsPaymentInfoImport;
-      parentRoute: typeof ReservedRouteLazyImport;
-    };
-    "/reserved/components/Stepper": {
-      id: "/reserved/components/Stepper";
-      path: "/components/Stepper";
-      fullPath: "/reserved/components/Stepper";
-      preLoaderRoute: typeof ReservedComponentsStepperImport;
-      parentRoute: typeof ReservedRouteLazyImport;
-    };
-    "/schedules/_components/DateDisp": {
-      id: "/schedules/_components/DateDisp";
-      path: "/DateDisp";
-      fullPath: "/schedules/DateDisp";
-      preLoaderRoute: typeof SchedulesComponentsDateDispImport;
-      parentRoute: typeof SchedulesRouteLazyImport;
-    };
-    "/schedules/_components/MovieBox": {
-      id: "/schedules/_components/MovieBox";
-      path: "/MovieBox";
-      fullPath: "/schedules/MovieBox";
-      preLoaderRoute: typeof SchedulesComponentsMovieBoxImport;
-      parentRoute: typeof SchedulesRouteLazyImport;
-    };
-    "/schedules/_components/ScreenData": {
-      id: "/schedules/_components/ScreenData";
-      path: "/ScreenData";
-      fullPath: "/schedules/ScreenData";
-      preLoaderRoute: typeof SchedulesComponentsScreenDataImport;
-      parentRoute: typeof SchedulesRouteLazyImport;
-    };
-    "/schedules/_components/ScreenTime": {
-      id: "/schedules/_components/ScreenTime";
-      path: "/ScreenTime";
-      fullPath: "/schedules/ScreenTime";
-      preLoaderRoute: typeof SchedulesComponentsScreenTimeImport;
-      parentRoute: typeof SchedulesRouteLazyImport;
-    };
-    "/schedules/_components/Slideshow": {
-      id: "/schedules/_components/Slideshow";
-      path: "/Slideshow";
-      fullPath: "/schedules/Slideshow";
-      preLoaderRoute: typeof SchedulesComponentsSlideshowImport;
-      parentRoute: typeof SchedulesRouteLazyImport;
-    };
-    "/schedules/_components/TimeData": {
-      id: "/schedules/_components/TimeData";
-      path: "/TimeData";
-      fullPath: "/schedules/TimeData";
-      preLoaderRoute: typeof SchedulesComponentsTimeDataImport;
-      parentRoute: typeof SchedulesRouteLazyImport;
-    };
-    "/schedules/_components/daliy": {
-      id: "/schedules/_components/daliy";
-      path: "/daliy";
-      fullPath: "/schedules/daliy";
-      preLoaderRoute: typeof SchedulesComponentsDaliyImport;
-      parentRoute: typeof SchedulesRouteLazyImport;
-    };
-    "/google/callback/_components/LoginButton": {
-      id: "/google/callback/_components/LoginButton";
-      path: "/LoginButton";
-      fullPath: "/google/callback/LoginButton";
-      preLoaderRoute: typeof GoogleCallbackComponentsLoginButtonImport;
-      parentRoute: typeof GoogleCallbackRouteLazyImport;
-    };
-    "/google/callback/_store/UserDataContext": {
-      id: "/google/callback/_store/UserDataContext";
-      path: "/UserDataContext";
-      fullPath: "/google/callback/UserDataContext";
-      preLoaderRoute: typeof GoogleCallbackStoreUserDataContextImport;
-      parentRoute: typeof GoogleCallbackRouteLazyImport;
-    };
-    "/movies/$movieId/_component/movie": {
-      id: "/movies/$movieId/_component/movie";
-      path: "/movie";
-      fullPath: "/movies/$movieId/movie";
-      preLoaderRoute: typeof MoviesMovieIdComponentMovieImport;
-      parentRoute: typeof MoviesMovieIdRouteLazyImport;
-    };
   }
 }
 
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren({
-  HomeRouteLazyRoute: HomeRouteLazyRoute.addChildren({
-    HomeComponentsTopRoute,
-  }),
+  HomeRouteLazyRoute,
   MoviesRouteLazyRoute: MoviesRouteLazyRoute.addChildren({
-    MoviesMovieIdRouteLazyRoute: MoviesMovieIdRouteLazyRoute.addChildren({
-      MoviesMovieIdComponentMovieRoute,
-    }),
-    MoviesComponentMoviesRoute,
-    MoviesComponentMoviesDateRoute,
-    MoviesComponentPagenationRoute,
+    MoviesMovieIdRouteLazyRoute,
   }),
-  ProfileRouteLazyRoute: ProfileRouteLazyRoute.addChildren({
-    ProfileComponentsMovieCardRoute,
-    ProfileComponentsProfileCardRoute,
-  }),
-  ReservedRouteLazyRoute: ReservedRouteLazyRoute.addChildren({
-    ReservedComponentsBuyContentRoute,
-    ReservedComponentsCustomerInfoRoute,
-    ReservedComponentsPaymentInfoRoute,
-    ReservedComponentsStepperRoute,
-  }),
-  SchedulesRouteLazyRoute: SchedulesRouteLazyRoute.addChildren({
-    SchedulesComponentsDateDispRoute,
-    SchedulesComponentsMovieBoxRoute,
-    SchedulesComponentsScreenDataRoute,
-    SchedulesComponentsScreenTimeRoute,
-    SchedulesComponentsSlideshowRoute,
-    SchedulesComponentsTimeDataRoute,
-    SchedulesComponentsDaliyRoute,
-  }),
-  GoogleCallbackRouteLazyRoute: GoogleCallbackRouteLazyRoute.addChildren({
-    GoogleCallbackComponentsLoginButtonRoute,
-    GoogleCallbackStoreUserDataContextRoute,
-  }),
+  ProfileRouteLazyRoute,
+  ReservedRouteLazyRoute,
+  SchedulesRouteLazyRoute,
+  GoogleCallbackRouteLazyRoute,
 });
 
 /* prettier-ignore-end */
@@ -458,141 +157,29 @@ export const routeTree = rootRoute.addChildren({
       ]
     },
     "/_home": {
-      "filePath": "_home/route.lazy.tsx",
-      "children": [
-        "/_home/_components/Top"
-      ]
+      "filePath": "_home/route.lazy.tsx"
     },
     "/movies": {
       "filePath": "movies/route.lazy.tsx",
       "children": [
-        "/movies/$movieId",
-        "/movies/_component/Movies",
-        "/movies/_component/MoviesDate",
-        "/movies/_component/Pagenation"
+        "/movies/$movieId"
       ]
     },
     "/profile": {
-      "filePath": "profile/route.lazy.tsx",
-      "children": [
-        "/profile/_components/MovieCard",
-        "/profile/_components/ProfileCard"
-      ]
+      "filePath": "profile/route.lazy.tsx"
     },
     "/reserved": {
-      "filePath": "reserved/route.lazy.tsx",
-      "children": [
-        "/reserved/components/BuyContent",
-        "/reserved/components/CustomerInfo",
-        "/reserved/components/PaymentInfo",
-        "/reserved/components/Stepper"
-      ]
+      "filePath": "reserved/route.lazy.tsx"
     },
     "/schedules": {
-      "filePath": "schedules/route.lazy.tsx",
-      "children": [
-        "/schedules/_components/DateDisp",
-        "/schedules/_components/MovieBox",
-        "/schedules/_components/ScreenData",
-        "/schedules/_components/ScreenTime",
-        "/schedules/_components/Slideshow",
-        "/schedules/_components/TimeData",
-        "/schedules/_components/daliy"
-      ]
+      "filePath": "schedules/route.lazy.tsx"
     },
     "/google/callback": {
-      "filePath": "google/callback/route.lazy.tsx",
-      "children": [
-        "/google/callback/_components/LoginButton",
-        "/google/callback/_store/UserDataContext"
-      ]
+      "filePath": "google/callback/route.lazy.tsx"
     },
     "/movies/$movieId": {
       "filePath": "movies/$movieId/route.lazy.tsx",
-      "parent": "/movies",
-      "children": [
-        "/movies/$movieId/_component/movie"
-      ]
-    },
-    "/_home/_components/Top": {
-      "filePath": "_home/_components/Top.tsx",
-      "parent": "/_home"
-    },
-    "/movies/_component/Movies": {
-      "filePath": "movies/_component/Movies.tsx",
       "parent": "/movies"
-    },
-    "/movies/_component/MoviesDate": {
-      "filePath": "movies/_component/MoviesDate.ts",
-      "parent": "/movies"
-    },
-    "/movies/_component/Pagenation": {
-      "filePath": "movies/_component/Pagenation.tsx",
-      "parent": "/movies"
-    },
-    "/profile/_components/MovieCard": {
-      "filePath": "profile/_components/MovieCard.tsx",
-      "parent": "/profile"
-    },
-    "/profile/_components/ProfileCard": {
-      "filePath": "profile/_components/ProfileCard.tsx",
-      "parent": "/profile"
-    },
-    "/reserved/components/BuyContent": {
-      "filePath": "reserved/components/BuyContent.tsx",
-      "parent": "/reserved"
-    },
-    "/reserved/components/CustomerInfo": {
-      "filePath": "reserved/components/CustomerInfo.tsx",
-      "parent": "/reserved"
-    },
-    "/reserved/components/PaymentInfo": {
-      "filePath": "reserved/components/PaymentInfo.tsx",
-      "parent": "/reserved"
-    },
-    "/reserved/components/Stepper": {
-      "filePath": "reserved/components/Stepper.tsx",
-      "parent": "/reserved"
-    },
-    "/schedules/_components/DateDisp": {
-      "filePath": "schedules/_components/DateDisp.tsx",
-      "parent": "/schedules"
-    },
-    "/schedules/_components/MovieBox": {
-      "filePath": "schedules/_components/MovieBox.tsx",
-      "parent": "/schedules"
-    },
-    "/schedules/_components/ScreenData": {
-      "filePath": "schedules/_components/ScreenData.tsx",
-      "parent": "/schedules"
-    },
-    "/schedules/_components/ScreenTime": {
-      "filePath": "schedules/_components/ScreenTime.tsx",
-      "parent": "/schedules"
-    },
-    "/schedules/_components/Slideshow": {
-      "filePath": "schedules/_components/Slideshow.tsx",
-      "parent": "/schedules"
-    },
-    "/schedules/_components/TimeData": {
-      "filePath": "schedules/_components/TimeData.ts",
-      "parent": "/schedules"
-    },
-    "/schedules/_components/daliy": {
-      "filePath": "schedules/_components/daliy.ts",
-      "parent": "/schedules"
-    },
-    "/google/callback/_components/LoginButton": {
-      "filePath": "google/callback/_components/LoginButton.tsx",
-      "parent": "/google/callback"
-    },
-    "/google/callback/_store/UserDataContext": {
-      "filePath": "google/callback/_store/UserDataContext.tsx",
-      "parent": "/google/callback"
-    },
-    "/movies/$movieId/_component/movie": {
-      "filePath": "movies/$movieId/_component/movie.tsx",
-      "parent": "/movies/$movieId"
     }
   }
 }

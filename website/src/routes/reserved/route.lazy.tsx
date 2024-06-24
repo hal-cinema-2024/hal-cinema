@@ -1,9 +1,9 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import styled from "styled-components";
-import Stepper from "./components/Stepper";
-import BuyContent from "./components/BuyContent";
-import CustomerInfo from "./components/CustomerInfo";
-import PaymentInfo from "./components/PaymentInfo";
+import Stepper from "./-components/Stepper";
+import BuyContent from "./-components/BuyContent";
+import CustomerInfo from "./-components/CustomerInfo";
+import PaymentInfo from "./-components/PaymentInfo";
 
 export const Route = createLazyFileRoute("/reserved")({
   component: Index,

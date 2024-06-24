@@ -1,4 +1,4 @@
-import { Button } from "@nextui-org/react";
+import { Button } from "@yamada-ui/react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { profileFormSchema } from "./profileSchema";

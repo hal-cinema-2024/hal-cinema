@@ -1,6 +1,6 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { MovieCard } from "./components/MovieCard";
-import { ProfileCard } from "./components/ProfileCard";
+import { MovieCard } from "./-components/MovieCard";
+import { ProfileCard } from "./-components/ProfileCard";
 import styled from "styled-components";
 
 export const Route = createLazyFileRoute("/profile")({
