@@ -4,7 +4,6 @@ export const Top = () => {
   return (
     <>
       <MainSection>
-        <MainText></MainText>
         <MainImage className="main-image"></MainImage>
       </MainSection>
 

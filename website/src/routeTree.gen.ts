@@ -17,6 +17,7 @@ import { Route as rootRoute } from './routes/__root'
 // Create Virtual Routes
 
 const SchedulesLazyImport = createFileRoute('/schedules')()
+const ReservedLazyImport = createFileRoute('/reserved')()
 const ProfileLazyImport = createFileRoute('/profile')()
 const NotfoundLazyImport = createFileRoute('/notfound')()
 const MoviesLazyImport = createFileRoute('/movies')()
@@ -30,6 +31,11 @@ const SchedulesLazyRoute = SchedulesLazyImport.update({
   path: '/schedules',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/schedules.lazy').then((d) => d.Route))
+
+const ReservedLazyRoute = ReservedLazyImport.update({
+  path: '/reserved',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/reserved.lazy').then((d) => d.Route))
 
 const ProfileLazyRoute = ProfileLazyImport.update({
   path: '/profile',
@@ -102,6 +108,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileLazyImport
       parentRoute: typeof rootRoute
     }
+    '/reserved': {
+      id: '/reserved'
+      path: '/reserved'
+      fullPath: '/reserved'
+      preLoaderRoute: typeof ReservedLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/schedules': {
       id: '/schedules'
       path: '/schedules'
@@ -127,6 +140,7 @@ export const routeTree = rootRoute.addChildren({
   MoviesLazyRoute,
   NotfoundLazyRoute,
   ProfileLazyRoute,
+  ReservedLazyRoute,
   SchedulesLazyRoute,
   GoogleCallbackLazyRoute,
 })
@@ -144,6 +158,7 @@ export const routeTree = rootRoute.addChildren({
         "/movie",
         "/movies",
         "/profile",
+        "/reserved",
         "/schedules",
         "/google/callback"
       ]
@@ -159,6 +174,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/profile": {
       "filePath": "profile.lazy.tsx"
+    },
+    "/reserved": {
+      "filePath": "reserved.lazy.tsx"
     },
     "/schedules": {
       "filePath": "schedules.lazy.tsx"

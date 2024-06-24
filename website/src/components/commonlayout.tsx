@@ -18,6 +18,7 @@ function CommonLayout() {
     <>
       <div style={{ backgroundImage: `url(${headerImage})` }}>
         <Header>
+
           <Logo1 to="/">
             <img
               src="src/assets/48.png"
@@ -39,6 +40,7 @@ function CommonLayout() {
         <Outlet />
 
         <Footer>
+
           <Logo2 to="/">
             <img
               src="src/assets/logo1.png"
@@ -128,6 +130,7 @@ const Logo2 = styled(Link)`
   font-weight: bold;
   text-decoration: none;
   color: white;
+
   text-align: center;
 `;
 
