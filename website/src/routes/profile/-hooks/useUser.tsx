@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getUser } from "../../../../fe-api/repositories/user";
-import { GetUserResponseInterface } from "../../../../fe-api/interfaces/user";
+import { getUser } from "../../../../../fe-api/repositories/user";
+import { GetUserResponseInterface } from "../../../../../fe-api/interfaces/user";
 
 export const useUser = (userId: string) => {
   const [user, setUser] = useState<GetUserResponseInterface>();

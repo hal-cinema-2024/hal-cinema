@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { GetSchedulesResponseInterface } from "../../../../fe-api/interfaces/schedule";
-import { getSchedules } from "../../../../fe-api/repositories/schedule";
+import { GetSchedulesResponseInterface } from "../../../../../fe-api/interfaces/schedule";
+import { getSchedules } from "../../../../../fe-api/repositories/schedule";
 
 export const useSchedules = (
   pageId?: string,
