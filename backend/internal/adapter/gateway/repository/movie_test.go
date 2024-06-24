@@ -407,6 +407,7 @@ func TestUpdateMovie(t *testing.T) {
 				"test2",
 				"test3",
 				"test4",
+				"test5",
 			},
 			wantMovie: model.Movie{
 				MovieID:       movie.MovieID,
