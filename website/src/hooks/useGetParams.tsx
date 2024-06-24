@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { login } from "../api/repositories/login";
+import { login } from "../../../fe-api/repositories/login";
 import { V1GoogleLoginRequest } from "../../../api/@types";
 
 export const useGetParams = () => {
