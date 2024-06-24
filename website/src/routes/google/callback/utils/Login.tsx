@@ -1,15 +1,7 @@
 import { useGoogleLogin } from "@react-oauth/google";
-import { Button } from "@yamada-ui/react";
-import { login } from "../../../api/repositories/login";
-import { useNavigate } from "@tanstack/react-router";
+import { login } from "../../../../api/repositories/login";
 
-export function LoginButton() {
-  const navigate = useNavigate();
-
-  const goToHome = () => {
-    navigate({ to: "/" });
-  };
-
+export const useLogin = () => {
   const googleLogin = useGoogleLogin({
     onError: (error) => console.error(error),
 
@@ -25,17 +17,8 @@ export function LoginButton() {
       login({
         code: decoded,
       });
-      goToHome;
     },
   });
 
-  return (
-    <Button
-      onClick={() => {
-        googleLogin();
-      }}
-    >
-      ログイン
-    </Button>
-  );
-}
+  return { googleLogin };
+};

@@ -1,8 +1,8 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import styled from "styled-components";
-import Slideshow from "../../pages/schedules/Slideshow";
-import MovieBox from "../../pages/schedules/MovieBox";
-import { InfoList } from "../../pages/schedules/TimeData";
+import Slideshow from "./components/Slideshow";
+import MovieBox from "./components/MovieBox";
+import { InfoList } from "./components/TimeData";
 
 export const Route = createLazyFileRoute("/schedules")({
   component: Index,

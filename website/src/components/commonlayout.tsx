@@ -118,8 +118,8 @@ const FooterNavLink = styled(Link)`
   }
 `;
 
-const Copyright = styled.p`
-  margin-top: 1rem;
-  font-size: 0.875rem;
-  color: #777;
-`;
+// const Copyright = styled.p`
+//   margin-top: 1rem;
+//   font-size: 0.875rem;
+//   color: #777;
+// `;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Card } from "@nextui-org/card";
+import { Card } from "@yamada-ui/react";
 import { SimpleGrid, GridItem, Image, Text, Button } from "@yamada-ui/react";
 
 type MovieType = {
