@@ -1,6 +1,6 @@
 import { useGoogleLogin } from "@react-oauth/google";
 import { Button } from "@yamada-ui/react";
-import { login } from "../../../api/repositories/login";
+import { login } from "../../../../api/repositories/login";
 import { useNavigate } from "@tanstack/react-router";
 
 export function LoginButton() {

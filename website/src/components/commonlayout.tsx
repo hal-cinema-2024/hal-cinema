@@ -1,7 +1,7 @@
 import { Outlet, Link } from "@tanstack/react-router";
 import styled from "styled-components";
-import headerImage from "/src/assets/bg.jpg";
 
+import headerImage from "../assets/header.jpg";
 type NavLinksType = {
   link: string;
   name: string;
@@ -18,17 +18,16 @@ function CommonLayout() {
     <>
       <div style={{ backgroundImage: `url(${headerImage})` }}>
         <Header>
-
-          <Logo1 to="/">
+          <Logo1 to='/'>
             <img
-              src="src/assets/48.png"
-              alt="ロゴ画像"
+              src='src/assets/48.png'
+              alt='ロゴ画像'
               height={"120px"}
               width={"120px"}
             />
           </Logo1>
           <Nv>
-            <NavLinks className="nav-links">
+            <NavLinks className='nav-links'>
               {NavLinksData.map((navLink) => (
                 <NavLinkItem key={navLink.link}>
                   <NavLink to={navLink.link}>{navLink.name}</NavLink>
@@ -40,29 +39,27 @@ function CommonLayout() {
         <Outlet />
 
         <Footer>
-
-          <Logo2 to="/">
+          <Logo2 to='/'>
             <img
-              src="src/assets/logo1.png"
-              alt="ロゴ画像"
+              src='src/assets/logo1.png'
+              alt='ロゴ画像'
               height={"140px"}
               width={"140px"}
             />
           </Logo2>
           <Nav>
             <NavItem>
-              <FooterNavLink to="/">TOP</FooterNavLink>
+              <FooterNavLink to='/'>TOP</FooterNavLink>
             </NavItem>
             <NavItem>
-              <FooterNavLink to="/movies">映画一覧</FooterNavLink>
+              <FooterNavLink to='/movies'>映画一覧</FooterNavLink>
             </NavItem>
             <NavItem>
-              <FooterNavLink to="/schedules">スクリーン一覧</FooterNavLink>
+              <FooterNavLink to='/schedules'>スクリーン一覧</FooterNavLink>
             </NavItem>
             <NavItem>
-              <FooterNavLink to="/movie">チケット購入</FooterNavLink>
+              <FooterNavLink to='/movie'>チケット購入</FooterNavLink>
             </NavItem>
-
           </Nav>
         </Footer>
       </div>

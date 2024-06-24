@@ -4,7 +4,7 @@ export const Top = () => {
   return (
     <>
       <MainSection>
-        <MainImage className="main-image"></MainImage>
+        <MainImage className='main-image'></MainImage>
       </MainSection>
 
       <Inner>
@@ -20,7 +20,7 @@ export const Top = () => {
             </BoxText>
           </BoxBody>
           <BoxImage>
-            <img src="/src/assets/cinema.jpeg" alt="コンセプト画像" />
+            <img src='/src/assets/cinema.jpeg' alt='コンセプト画像' />
           </BoxImage>
         </Box>
       </Inner>
@@ -53,7 +53,7 @@ export const Top = () => {
 
 // 映画情報(上映日、映画名、監督名、出演者)
 // ここにcssを設定するように書き直す
-const MainText = styled.section``;
+// const MainText = styled.section``;
 
 const MainSection = styled.section`
   height: 400px;

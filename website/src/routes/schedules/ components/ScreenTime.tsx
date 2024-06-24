@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { ScreenType } from "./TimeData";
 import x from "/src/assets/x.svg";
-import circle from "/src/assets/circle.svg";
+import circle from "../../src/assets/circle.svg";
 
 type ScreenTimeProps = {
   screenData: ScreenType[];
@@ -27,11 +27,11 @@ const ScreenTime = (props: ScreenTimeProps) => {
       <ScreenContainer>
         {screenData.map((item: ScreenType, index) => (
           <TimeContainer key={index}>
-            <a href="#">
+            <a href='#'>
               <Start>{item.startTime}</Start>
               <End>{item.endTime}</End>
               <BuyContainer buy={item.buy}>
-                <img src={getImg(item.buy)} alt="" />
+                <img src={getImg(item.buy)} alt='' />
                 <AvailContainer>
                   <p>{item.buy}</p>
                 </AvailContainer>
