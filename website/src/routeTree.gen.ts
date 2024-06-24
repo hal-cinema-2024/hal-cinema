@@ -22,6 +22,7 @@ const NotfoundLazyImport = createFileRoute('/notfound')()
 const MoviesLazyImport = createFileRoute('/movies')()
 const MovieLazyImport = createFileRoute('/movie')()
 const IndexLazyImport = createFileRoute('/')()
+const GoogleCallbackLazyImport = createFileRoute('/google/callback')()
 
 // Create/Update Routes
 
@@ -54,6 +55,13 @@ const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+
+const GoogleCallbackLazyRoute = GoogleCallbackLazyImport.update({
+  path: '/google/callback',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/google/callback.lazy').then((d) => d.Route),
+)
 
 // Populate the FileRoutesByPath interface
 
@@ -101,6 +109,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SchedulesLazyImport
       parentRoute: typeof rootRoute
     }
+    '/google/callback': {
+      id: '/google/callback'
+      path: '/google/callback'
+      fullPath: '/google/callback'
+      preLoaderRoute: typeof GoogleCallbackLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -113,6 +128,44 @@ export const routeTree = rootRoute.addChildren({
   NotfoundLazyRoute,
   ProfileLazyRoute,
   SchedulesLazyRoute,
+  GoogleCallbackLazyRoute,
 })
 
 /* prettier-ignore-end */
+
+
+/* ROUTE_MANIFEST_START
+{
+  "routes": {
+    "__root__": {
+      "filePath": "__root.tsx",
+      "children": [
+        "/",
+        "/movie",
+        "/movies",
+        "/profile",
+        "/schedules",
+        "/google/callback"
+      ]
+    },
+    "/": {
+      "filePath": "index.lazy.tsx"
+    },
+    "/movie": {
+      "filePath": "movie.lazy.tsx"
+    },
+    "/movies": {
+      "filePath": "movies.lazy.tsx"
+    },
+    "/profile": {
+      "filePath": "profile.lazy.tsx"
+    },
+    "/schedules": {
+      "filePath": "schedules.lazy.tsx"
+    },
+    "/google/callback": {
+      "filePath": "google/callback.lazy.tsx"
+    }
+  }
+}
+ROUTE_MANIFEST_END */

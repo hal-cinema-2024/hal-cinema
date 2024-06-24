@@ -128,5 +128,86 @@
       "role_id":"2",
       "permission_id":"11"
     }
+  ],
+  "theaters_sizes":[
+    {
+      "theater_size_id": "1",
+      "name": "small",
+      "capacity": 70
+    },
+    {
+      "theater_size_id": "2",
+      "name": "medium",
+      "capacity": 120
+    },
+    {
+      "theater_size_id": "3",
+      "name": "large",
+      "capacity": 200
+    }
+  ],
+  "theaters": [
+    {
+      "theater_id":"1",
+      "name":"small-1",
+      "theater_size_id":"1"
+    },
+    {
+      "theater_id":"2",
+      "name":"small-2",
+      "theater_size_id":"1"
+    },
+    {
+      "theater_id":"3",
+      "name":"small-3",
+      "theater_size_id":"1"
+    },
+    {
+      "theater_id":"4",
+      "name":"medium-1",
+      "theater_size_id":"2"
+    },
+    {
+      "theater_id":"5",
+      "name":"medium-2",
+      "theater_size_id":"2"
+    },
+    {
+      "theater_id":"6",
+      "name":"large-1",
+      "theater_size_id":"3"
+    },
+    {
+      "theater_id":"7",
+      "name":"large-2",
+      "theater_size_id":"3"
+    },
+    {
+      "theater_id":"8",
+      "name":"large-3",
+      "theater_size_id":"3"
+    }
+  ],
+  "price_types": [
+    {
+      "price_type_id": "1",
+      "name": "Adult",
+      "price": 1800
+    },
+    {
+      "price_type_id": "2",
+      "name": "College Student",
+      "price": 1600
+    },
+    {
+      "price_type_id": "3",
+      "name": "Junior High/High School Student",
+      "price": 1400
+    },
+    {
+      "price_type_id": "4",
+      "name": "Elementary School Student/Child",
+      "price": 1000
+    }
   ]
 }

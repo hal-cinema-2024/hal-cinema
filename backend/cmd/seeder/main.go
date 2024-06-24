@@ -48,6 +48,9 @@ type Seeder struct {
 	Permissions     []model.Permission     `json:"permissions"`
 	Roles           []model.Role           `json:"roles"`
 	RolePermissions []model.RolePermission `json:"role_permissions"`
+	Theaters        []model.Theater        `json:"theaters"`
+	TheaterSizes    []model.TheatersSize   `json:"theaters_sizes"`
+	PriceTypes      []model.PriceType      `json:"price_types"`
 }
 
 func run() error {
@@ -75,6 +78,18 @@ func run() error {
 	}
 
 	if err := gormDB.Create(&seeder.RolePermissions).Error; err != nil {
+		return err
+	}
+
+	if err := gormDB.Create(&seeder.TheaterSizes).Error; err != nil {
+		return err
+	}
+
+	if err := gormDB.Create(&seeder.Theaters).Error; err != nil {
+		return err
+	}
+
+	if err := gormDB.Create(&seeder.PriceTypes).Error; err != nil {
 		return err
 	}
 

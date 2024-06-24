@@ -60,8 +60,8 @@ function CommonLayout() {
             <NavItem>
               <FooterNavLink to="/movie">チケット購入</FooterNavLink>
             </NavItem>
+
           </Nav>
-          <Copyright>©HALCinema. All rights Reserved.</Copyright>
         </Footer>
       </div>
     </>

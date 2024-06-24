@@ -3,6 +3,8 @@ package test
 import (
 	"testing"
 
+	"github.com/Azure/azure-sdk-for-go/sdk/azcore"
+	"github.com/hal-cinema-2024/backend/internal/driver/azure"
 	"github.com/hal-cinema-2024/backend/internal/driver/db"
 	"github.com/hal-cinema-2024/backend/internal/test/factory"
 	"go.uber.org/dig"
@@ -22,6 +24,8 @@ func NewContainer(t *testing.T) error {
 		{constructor: db.Connect, opts: []dig.ProvideOption{}},
 		{constructor: db.NewGORM, opts: []dig.ProvideOption{}},
 		{constructor: factory.NewFactories(t), opts: []dig.ProvideOption{}},
+		{constructor: azure.NewAzureCert, opts: []dig.ProvideOption{dig.As(new(azcore.TokenCredential))}},
+		{constructor: azure.NewBlobClient, opts: []dig.ProvideOption{}},
 	}
 
 	for _, arg := range args {
