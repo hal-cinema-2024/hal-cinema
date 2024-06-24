@@ -56,3 +56,27 @@ func TestUpload(t *testing.T) {
 
 	t.Log("dataPath", dataPath)
 }
+func TestDeleteBlob(t *testing.T) {
+	if err := test.LoadEnv(); err != nil {
+		t.Fatal("failed to load env", err)
+	}
+
+	if err := test.NewContainer(t); err != nil {
+		t.Fatal("failed to create container", err)
+	}
+
+	bclient, err := invoke[*azblob.Client]()
+	if err != nil {
+		t.Fatal("failed to invoke *azblob.client", err)
+	}
+
+	azRepo := azure.NewAzureCloudStorage(bclient)
+
+	blobName := "test.jpg"
+	err = azRepo.DeleteBlob(context.Background(), blobName)
+	if err != nil {
+		t.Fatal("failed to delete blob", err)
+	}
+
+	t.Log("blob deleted successfully")
+}
