@@ -72,7 +72,6 @@ func (r *MovieRepo) GetMovies(ctx context.Context, limit int, offset int) ([]*mo
 }
 
 func (r *MovieRepo) UpdateMovie(ctx context.Context, movie *model.Movie, imagePaths []string) error {
-	// pastMovieImages := []model.MovieImage{}
 	movieImages := []model.MovieImage{}
 	pastData, _, err := r.GetMovieByID(ctx, movie.MovieID)
 	if err != nil {
