@@ -1,5 +1,5 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { useGetParams } from "../../hooks/useGetParams";
+import { useGetParams } from "../../../hooks/useGetParams";
 
 export const Route = createLazyFileRoute("/google/callback")({
   component: function Page() {
