@@ -3,6 +3,7 @@ package azure
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob"
 	"github.com/hal-cinema-2024/backend/cmd/config"
@@ -27,7 +28,9 @@ func (cs *AzureCloudStorage) UploadBlob(ctx context.Context, fileName string, fi
 // delete blob from blob storage
 func (cs *AzureCloudStorage) DeleteBlob(ctx context.Context, blobName string) error {
 	var containerName string = config.Config.Azure.BlobServiceContainerName
-	_, err := cs.bclient.DeleteBlob(ctx, containerName, blobName, &azblob.DeleteBlobOptions{})
+	target := config.Config.Azure.BlobServiceURL + containerName + "/"
+	fileName := strings.Replace(blobName, target, "", -1)
+	_, err := cs.bclient.DeleteBlob(ctx, containerName, fileName, &azblob.DeleteBlobOptions{})
 	if err != nil {
 		return err
 	}
