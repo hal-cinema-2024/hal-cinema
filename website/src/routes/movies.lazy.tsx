@@ -32,9 +32,12 @@ const Moviesboxdiv = styled.div`
 `;
 
 const Pagetitle = styled.h1`
-  margin: 0 0 50px 0;
+  position: relative;
   text-align: center;
-  color: #fff;
+  padding-top: 4vh;
+  margin-bottom: -2.5vh;
+  font-size: 2rem;
+  color: white;
 `;
 
 const Moviesdiv = styled.div`
