@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { ScreenType } from "./TimeData";
-import x from "/src/assets/x.svg";
-import circle from "../../src/assets/circle.svg";
+import { X } from "@yamada-ui/lucide";
+import { Circle } from "@yamada-ui/lucide";
 
 type ScreenTimeProps = {
   screenData: ScreenType[];
@@ -14,9 +14,9 @@ const ScreenTime = (props: ScreenTimeProps) => {
     switch (buy) {
       case "販売終了":
       case "満席":
-        return x;
+        return <X />;
       case "購入":
-        return circle;
+        return <Circle />;
       default:
         return "";
     }
@@ -31,10 +31,8 @@ const ScreenTime = (props: ScreenTimeProps) => {
               <Start>{item.startTime}</Start>
               <End>{item.endTime}</End>
               <BuyContainer buy={item.buy}>
-                <img src={getImg(item.buy)} alt='' />
-                <AvailContainer>
-                  <p>{item.buy}</p>
-                </AvailContainer>
+                <AvailContainer></AvailContainer>
+                <AvailContainer>{getImg(item.buy)}</AvailContainer>
               </BuyContainer>
             </a>
           </TimeContainer>

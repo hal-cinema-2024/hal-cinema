@@ -1,4 +1,4 @@
-import { Input } from "@nextui-org/react";
+import { Input } from "@yamada-ui/react";
 import { useFormContext } from "react-hook-form";
 
 type InputFieldProps = {

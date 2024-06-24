@@ -1,7 +1,6 @@
 import { Outlet, Link } from "@tanstack/react-router";
 import styled from "styled-components";
 
-import headerImage from "../assets/header.jpg";
 type NavLinksType = {
   link: string;
   name: string;
@@ -16,7 +15,7 @@ const NavLinksData: NavLinksType[] = [
 function CommonLayout() {
   return (
     <>
-      <div style={{ backgroundImage: `url(${headerImage})` }}>
+      <div>
         <Header>
           <Logo1 to='/'>
             <img
@@ -152,8 +151,8 @@ const FooterNavLink = styled(Link)`
   }
 `;
 
-const Copyright = styled.p`
-  margin-top: 1rem;
-  font-size: 0.875rem;
-  color: white;
-`;
+// const Copyright = styled.p`
+//   margin-top: 1rem;
+//   font-size: 0.875rem;
+//   color: white;
+// `;

@@ -1,4 +1,4 @@
-import { Select, SelectItem } from "@nextui-org/react";
+import { NativeSelect } from "@yamada-ui/react";
 import { useFormContext } from "react-hook-form";
 type InputFieldProps = {
   fieldName: string;
@@ -18,13 +18,13 @@ export const SelectField = (props: InputFieldProps) => {
   return (
     <>
       <label htmlFor={fieldName}>{label}</label>
-      <Select {...register(fieldName)}>
+      <NativeSelect {...register(fieldName)}>
         {option.map((item) => (
-          <SelectItem key={item.value} value={item.value}>
+          <option key={item.value} value={item.value}>
             {item.label}: {item.mony!}
-          </SelectItem>
+          </option>
         ))}
-      </Select>
+      </NativeSelect>
       {formState.errors[fieldName] && (
         <span>{formState.errors[fieldName]!.message as string}</span>
       )}

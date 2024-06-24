@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Card } from "@nextui-org/card";
+import { Card } from "@yamada-ui/react";
 // import sam01 from "/src/assets/sample01.jpg";
 // import sam02 from "/src/assets/sample02.jpg";
 // import sam03 from "/src/assets/sample03.jpg";
@@ -15,7 +15,7 @@ const Movies = () => {
           <SSdev>
             <MovieName>
               <MovieImage>
-                <img src={item.img} alt="fas8" />
+                <img src={item.img} alt='fas8' />
               </MovieImage>
               <MovieTextDiv>
                 <MovieFlexdiv>
