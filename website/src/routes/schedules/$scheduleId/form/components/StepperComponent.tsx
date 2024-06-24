@@ -10,7 +10,11 @@ const steps: Steps[] = [
   { title: "購入完了" },
 ];
 
-export const StepperComponent = () => {
+type StepperComponentProps = {
+  children: React.ReactNode;
+};
+export const StepperComponent = (props: StepperComponentProps) => {
+  const { children } = props;
   const { activeStep, onStepNext, onStepPrev } = useSteps({
     index: 1,
     count: steps.length,
@@ -20,6 +24,7 @@ export const StepperComponent = () => {
     <VStack>
       <Stepper index={activeStep} steps={steps} />
 
+      {children}
       <HStack>
         <Button onClick={onStepPrev}>Prev</Button>
         <Button onClick={onStepNext}>Next</Button>
