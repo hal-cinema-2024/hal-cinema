@@ -20,7 +20,7 @@ const SchedulesRouteLazyImport = createFileRoute("/schedules")();
 const ReservedRouteLazyImport = createFileRoute("/reserved")();
 const ProfileRouteLazyImport = createFileRoute("/profile")();
 const MoviesRouteLazyImport = createFileRoute("/movies")();
-const HomeRouteLazyImport = createFileRoute("/_home")();
+const RouteLazyImport = createFileRoute("/")();
 const MoviesMovieIdRouteLazyImport = createFileRoute("/movies/$movieId")();
 const GoogleCallbackRouteLazyImport = createFileRoute("/google/callback")();
 
@@ -52,10 +52,10 @@ const MoviesRouteLazyRoute = MoviesRouteLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import("./routes/movies/route.lazy").then((d) => d.Route));
 
-const HomeRouteLazyRoute = HomeRouteLazyImport.update({
-  id: "/_home",
+const RouteLazyRoute = RouteLazyImport.update({
+  path: "/",
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import("./routes/_home/route.lazy").then((d) => d.Route));
+} as any).lazy(() => import("./routes/route.lazy").then((d) => d.Route));
 
 const MoviesMovieIdRouteLazyRoute = MoviesMovieIdRouteLazyImport.update({
   path: "/$movieId",
@@ -75,11 +75,11 @@ const GoogleCallbackRouteLazyRoute = GoogleCallbackRouteLazyImport.update({
 
 declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    "/_home": {
-      id: "/_home";
-      path: "";
-      fullPath: "";
-      preLoaderRoute: typeof HomeRouteLazyImport;
+    "/": {
+      id: "/";
+      path: "/";
+      fullPath: "/";
+      preLoaderRoute: typeof RouteLazyImport;
       parentRoute: typeof rootRoute;
     };
     "/movies": {
@@ -130,7 +130,7 @@ declare module "@tanstack/react-router" {
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren({
-  HomeRouteLazyRoute,
+  RouteLazyRoute,
   MoviesRouteLazyRoute: MoviesRouteLazyRoute.addChildren({
     MoviesMovieIdRouteLazyRoute,
   }),
@@ -148,7 +148,7 @@ export const routeTree = rootRoute.addChildren({
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/_home",
+        "/",
         "/movies",
         "/profile",
         "/reserved",
@@ -156,8 +156,8 @@ export const routeTree = rootRoute.addChildren({
         "/google/callback"
       ]
     },
-    "/_home": {
-      "filePath": "_home/route.lazy.tsx"
+    "/": {
+      "filePath": "route.lazy.tsx"
     },
     "/movies": {
       "filePath": "movies/route.lazy.tsx",
