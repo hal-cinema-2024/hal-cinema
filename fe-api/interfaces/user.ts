@@ -4,7 +4,7 @@ import {
   V1UpdateUserResponse,
   V1DeleteUserResponse,
   V1GetUsersResponse,
-} from "../../../../api/@types/index";
+} from "../../api/@types/index.ts";
 
 type UpdateUserRequestInterface = {
   firstName?: string | undefined;

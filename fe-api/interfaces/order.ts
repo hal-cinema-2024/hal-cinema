@@ -5,8 +5,7 @@ import {
   V1CreateOrderResponse,
   V1GetOrderResponse,
   V1DeleteOrderResponse,
-} from "../../../../api/@types/index.ts";
-
+} from "../../api/@types/index.ts";
 export type {
   V1Orders as OrdersInterface,
   V1GetOrdersResponse as GetOrdersResponseInterface,
