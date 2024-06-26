@@ -2,10 +2,10 @@ import { Button } from "@yamada-ui/react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { profileFormSchema } from "./profileSchema";
-import { InputField } from "../../../schedules/$scheduleId/form/components/InputField";
+import { InputField } from "../../../schedules/$scheduleId/form/-components/InputField";
 
 import { option } from "./genderOption";
-import { SelectField } from "../../../schedules/$scheduleId/form/components/SelectField";
+import { SelectField } from "../../../schedules/$scheduleId/form/-components/SelectField";
 export function ProfileFormProvider() {
   const methods = useForm({
     resolver: zodResolver(profileFormSchema),

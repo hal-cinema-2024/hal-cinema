@@ -17,13 +17,18 @@ import { Route as rootRoute } from './routes/__root'
 // Create Virtual Routes
 
 const SchedulesRouteLazyImport = createFileRoute('/schedules')()
-const ReservedRouteLazyImport = createFileRoute('/reserved')()
 const ProfileRouteLazyImport = createFileRoute('/profile')()
 const MoviesRouteLazyImport = createFileRoute('/movies')()
 const RouteLazyImport = createFileRoute('/')()
 const ProfileEditRouteLazyImport = createFileRoute('/profile/edit')()
 const MoviesMovieIdRouteLazyImport = createFileRoute('/movies/$movieId')()
 const GoogleCallbackRouteLazyImport = createFileRoute('/google/callback')()
+const SchedulesScheduleIdReservedRouteLazyImport = createFileRoute(
+  '/schedules/$scheduleId/reserved',
+)()
+const SchedulesScheduleIdFormRouteLazyImport = createFileRoute(
+  '/schedules/$scheduleId/form',
+)()
 
 // Create/Update Routes
 
@@ -32,13 +37,6 @@ const SchedulesRouteLazyRoute = SchedulesRouteLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() =>
   import('./routes/schedules/route.lazy').then((d) => d.Route),
-)
-
-const ReservedRouteLazyRoute = ReservedRouteLazyImport.update({
-  path: '/reserved',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() =>
-  import('./routes/reserved/route.lazy').then((d) => d.Route),
 )
 
 const ProfileRouteLazyRoute = ProfileRouteLazyImport.update({
@@ -77,6 +75,26 @@ const GoogleCallbackRouteLazyRoute = GoogleCallbackRouteLazyImport.update({
   import('./routes/google/callback/route.lazy').then((d) => d.Route),
 )
 
+const SchedulesScheduleIdReservedRouteLazyRoute =
+  SchedulesScheduleIdReservedRouteLazyImport.update({
+    path: '/$scheduleId/reserved',
+    getParentRoute: () => SchedulesRouteLazyRoute,
+  } as any).lazy(() =>
+    import('./routes/schedules/$scheduleId/reserved/route.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
+const SchedulesScheduleIdFormRouteLazyRoute =
+  SchedulesScheduleIdFormRouteLazyImport.update({
+    path: '/$scheduleId/form',
+    getParentRoute: () => SchedulesRouteLazyRoute,
+  } as any).lazy(() =>
+    import('./routes/schedules/$scheduleId/form/route.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -100,13 +118,6 @@ declare module '@tanstack/react-router' {
       path: '/profile'
       fullPath: '/profile'
       preLoaderRoute: typeof ProfileRouteLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/reserved': {
-      id: '/reserved'
-      path: '/reserved'
-      fullPath: '/reserved'
-      preLoaderRoute: typeof ReservedRouteLazyImport
       parentRoute: typeof rootRoute
     }
     '/schedules': {
@@ -137,6 +148,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileEditRouteLazyImport
       parentRoute: typeof ProfileRouteLazyImport
     }
+    '/schedules/$scheduleId/form': {
+      id: '/schedules/$scheduleId/form'
+      path: '/$scheduleId/form'
+      fullPath: '/schedules/$scheduleId/form'
+      preLoaderRoute: typeof SchedulesScheduleIdFormRouteLazyImport
+      parentRoute: typeof SchedulesRouteLazyImport
+    }
+    '/schedules/$scheduleId/reserved': {
+      id: '/schedules/$scheduleId/reserved'
+      path: '/$scheduleId/reserved'
+      fullPath: '/schedules/$scheduleId/reserved'
+      preLoaderRoute: typeof SchedulesScheduleIdReservedRouteLazyImport
+      parentRoute: typeof SchedulesRouteLazyImport
+    }
   }
 }
 
@@ -150,8 +175,10 @@ export const routeTree = rootRoute.addChildren({
   ProfileRouteLazyRoute: ProfileRouteLazyRoute.addChildren({
     ProfileEditRouteLazyRoute,
   }),
-  ReservedRouteLazyRoute,
-  SchedulesRouteLazyRoute,
+  SchedulesRouteLazyRoute: SchedulesRouteLazyRoute.addChildren({
+    SchedulesScheduleIdFormRouteLazyRoute,
+    SchedulesScheduleIdReservedRouteLazyRoute,
+  }),
   GoogleCallbackRouteLazyRoute,
 })
 
@@ -166,7 +193,6 @@ export const routeTree = rootRoute.addChildren({
         "/",
         "/movies",
         "/profile",
-        "/reserved",
         "/schedules",
         "/google/callback"
       ]
@@ -186,11 +212,12 @@ export const routeTree = rootRoute.addChildren({
         "/profile/edit"
       ]
     },
-    "/reserved": {
-      "filePath": "reserved/route.lazy.tsx"
-    },
     "/schedules": {
-      "filePath": "schedules/route.lazy.tsx"
+      "filePath": "schedules/route.lazy.tsx",
+      "children": [
+        "/schedules/$scheduleId/form",
+        "/schedules/$scheduleId/reserved"
+      ]
     },
     "/google/callback": {
       "filePath": "google/callback/route.lazy.tsx"
@@ -202,6 +229,14 @@ export const routeTree = rootRoute.addChildren({
     "/profile/edit": {
       "filePath": "profile/edit/route.lazy.tsx",
       "parent": "/profile"
+    },
+    "/schedules/$scheduleId/form": {
+      "filePath": "schedules/$scheduleId/form/route.lazy.tsx",
+      "parent": "/schedules"
+    },
+    "/schedules/$scheduleId/reserved": {
+      "filePath": "schedules/$scheduleId/reserved/route.lazy.tsx",
+      "parent": "/schedules"
     }
   }
 }

@@ -6,7 +6,7 @@ import {
   V1GetMovieResponse,
   V1UpdateMovieResponse,
   V1DeleteMovieResponse,
-} from "../../../../api/@types/index.ts";
+} from "../../api/@types/index.ts";
 
 type UpdateMovieRequestBodyInterface = V1CreateMovieRequest;
 export type {

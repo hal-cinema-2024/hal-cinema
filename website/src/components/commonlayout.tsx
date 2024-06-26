@@ -1,6 +1,7 @@
 import { Outlet, Link } from "@tanstack/react-router";
 import styled from "styled-components";
 import headerImage from "/src/assets/bg.jpg";
+import { LoginButton } from "../routes/google/callback/-components/LoginButton";
 
 type NavLinksType = {
   link: string;
@@ -17,7 +18,6 @@ function CommonLayout() {
   return (
     <>
       <div style={{ backgroundImage: `url(${headerImage})` }}>
-        {" "}
         <Header>
           <Logo1 to='/'>
             <img
@@ -36,6 +36,7 @@ function CommonLayout() {
               ))}
             </NavLinks>
           </Nv>
+          <LoginButton />
         </Header>
         <Outlet />
         <Footer>

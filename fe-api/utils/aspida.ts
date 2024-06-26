@@ -1,7 +1,7 @@
 import axios from "axios";
-import qs from "qs";
 import aspida from "@aspida/axios";
-import api from "../../../api/$api";
+import api from "../../api/$api";
+import qs from "qs";
 export const client = api(
   aspida(axios, {
     baseURL: import.meta.env.VITE_API_URL,
