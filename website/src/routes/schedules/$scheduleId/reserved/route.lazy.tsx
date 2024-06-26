@@ -5,7 +5,7 @@ import BuyContent from "./-components/BuyContent";
 import CustomerInfo from "./-components/CustomerInfo";
 import PaymentInfo from "./-components/PaymentInfo";
 
-export const Route = createLazyFileRoute("/reserved")({
+export const Route = createLazyFileRoute("/schedules/$scheduleId/reserved")({
   component: Index,
 });
 

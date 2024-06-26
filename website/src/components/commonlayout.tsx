@@ -17,7 +17,6 @@ function CommonLayout() {
   return (
     <>
       <div style={{ backgroundImage: `url(${headerImage})` }}>
-        {" "}
         <Header>
           <Logo1 to='/'>
             <img

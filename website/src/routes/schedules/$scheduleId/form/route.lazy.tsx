@@ -1,6 +1,6 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { StepperComponent } from "./components/StepperComponent";
-export const Route = createLazyFileRoute("/")({
+export const Route = createLazyFileRoute("/schedules/$scheduleId/form")({
   component: Index,
 });
 

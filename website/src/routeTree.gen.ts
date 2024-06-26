@@ -13,17 +13,30 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as SchedulesScheduleIdFormComponentsStepperComponentImport } from './routes/schedules/$scheduleId/form/components/StepperComponent'
+import { Route as SchedulesScheduleIdFormComponentsSelectFieldImport } from './routes/schedules/$scheduleId/form/components/SelectField'
+import { Route as SchedulesScheduleIdFormComponentsInputFieldImport } from './routes/schedules/$scheduleId/form/components/InputField'
+import { Route as SchedulesScheduleIdFormComponentsSeatselectorSeatSelectionContextImport } from './routes/schedules/$scheduleId/form/components/seat_selector/SeatSelectionContext'
+import { Route as SchedulesScheduleIdFormComponentsSeatselectorCinemaSeatsImport } from './routes/schedules/$scheduleId/form/components/seat_selector/CinemaSeats'
+import { Route as SchedulesScheduleIdFormComponentsMovieformMovieSchemaImport } from './routes/schedules/$scheduleId/form/components/movie_form/movieSchema'
+import { Route as SchedulesScheduleIdFormComponentsMovieformMovieFormProviderImport } from './routes/schedules/$scheduleId/form/components/movie_form/movieFormProvider'
+import { Route as SchedulesScheduleIdFormComponentsMovieformTicketOptionImport } from './routes/schedules/$scheduleId/form/components/movie_form/TicketOption'
 
 // Create Virtual Routes
 
 const SchedulesRouteLazyImport = createFileRoute('/schedules')()
-const ReservedRouteLazyImport = createFileRoute('/reserved')()
 const ProfileRouteLazyImport = createFileRoute('/profile')()
 const MoviesRouteLazyImport = createFileRoute('/movies')()
 const RouteLazyImport = createFileRoute('/')()
 const ProfileEditRouteLazyImport = createFileRoute('/profile/edit')()
 const MoviesMovieIdRouteLazyImport = createFileRoute('/movies/$movieId')()
 const GoogleCallbackRouteLazyImport = createFileRoute('/google/callback')()
+const SchedulesScheduleIdReservedRouteLazyImport = createFileRoute(
+  '/schedules/$scheduleId/reserved',
+)()
+const SchedulesScheduleIdFormRouteLazyImport = createFileRoute(
+  '/schedules/$scheduleId/form',
+)()
 
 // Create/Update Routes
 
@@ -32,13 +45,6 @@ const SchedulesRouteLazyRoute = SchedulesRouteLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() =>
   import('./routes/schedules/route.lazy').then((d) => d.Route),
-)
-
-const ReservedRouteLazyRoute = ReservedRouteLazyImport.update({
-  path: '/reserved',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() =>
-  import('./routes/reserved/route.lazy').then((d) => d.Route),
 )
 
 const ProfileRouteLazyRoute = ProfileRouteLazyImport.update({
@@ -77,6 +83,76 @@ const GoogleCallbackRouteLazyRoute = GoogleCallbackRouteLazyImport.update({
   import('./routes/google/callback/route.lazy').then((d) => d.Route),
 )
 
+const SchedulesScheduleIdReservedRouteLazyRoute =
+  SchedulesScheduleIdReservedRouteLazyImport.update({
+    path: '/$scheduleId/reserved',
+    getParentRoute: () => SchedulesRouteLazyRoute,
+  } as any).lazy(() =>
+    import('./routes/schedules/$scheduleId/reserved/route.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
+const SchedulesScheduleIdFormRouteLazyRoute =
+  SchedulesScheduleIdFormRouteLazyImport.update({
+    path: '/$scheduleId/form',
+    getParentRoute: () => SchedulesRouteLazyRoute,
+  } as any).lazy(() =>
+    import('./routes/schedules/$scheduleId/form/route.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
+const SchedulesScheduleIdFormComponentsStepperComponentRoute =
+  SchedulesScheduleIdFormComponentsStepperComponentImport.update({
+    path: '/components/StepperComponent',
+    getParentRoute: () => SchedulesScheduleIdFormRouteLazyRoute,
+  } as any)
+
+const SchedulesScheduleIdFormComponentsSelectFieldRoute =
+  SchedulesScheduleIdFormComponentsSelectFieldImport.update({
+    path: '/components/SelectField',
+    getParentRoute: () => SchedulesScheduleIdFormRouteLazyRoute,
+  } as any)
+
+const SchedulesScheduleIdFormComponentsInputFieldRoute =
+  SchedulesScheduleIdFormComponentsInputFieldImport.update({
+    path: '/components/InputField',
+    getParentRoute: () => SchedulesScheduleIdFormRouteLazyRoute,
+  } as any)
+
+const SchedulesScheduleIdFormComponentsSeatselectorSeatSelectionContextRoute =
+  SchedulesScheduleIdFormComponentsSeatselectorSeatSelectionContextImport.update(
+    {
+      path: '/components/seat_selector/SeatSelectionContext',
+      getParentRoute: () => SchedulesScheduleIdFormRouteLazyRoute,
+    } as any,
+  )
+
+const SchedulesScheduleIdFormComponentsSeatselectorCinemaSeatsRoute =
+  SchedulesScheduleIdFormComponentsSeatselectorCinemaSeatsImport.update({
+    path: '/components/seat_selector/CinemaSeats',
+    getParentRoute: () => SchedulesScheduleIdFormRouteLazyRoute,
+  } as any)
+
+const SchedulesScheduleIdFormComponentsMovieformMovieSchemaRoute =
+  SchedulesScheduleIdFormComponentsMovieformMovieSchemaImport.update({
+    path: '/components/movie_form/movieSchema',
+    getParentRoute: () => SchedulesScheduleIdFormRouteLazyRoute,
+  } as any)
+
+const SchedulesScheduleIdFormComponentsMovieformMovieFormProviderRoute =
+  SchedulesScheduleIdFormComponentsMovieformMovieFormProviderImport.update({
+    path: '/components/movie_form/movieFormProvider',
+    getParentRoute: () => SchedulesScheduleIdFormRouteLazyRoute,
+  } as any)
+
+const SchedulesScheduleIdFormComponentsMovieformTicketOptionRoute =
+  SchedulesScheduleIdFormComponentsMovieformTicketOptionImport.update({
+    path: '/components/movie_form/TicketOption',
+    getParentRoute: () => SchedulesScheduleIdFormRouteLazyRoute,
+  } as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -100,13 +176,6 @@ declare module '@tanstack/react-router' {
       path: '/profile'
       fullPath: '/profile'
       preLoaderRoute: typeof ProfileRouteLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/reserved': {
-      id: '/reserved'
-      path: '/reserved'
-      fullPath: '/reserved'
-      preLoaderRoute: typeof ReservedRouteLazyImport
       parentRoute: typeof rootRoute
     }
     '/schedules': {
@@ -137,6 +206,76 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileEditRouteLazyImport
       parentRoute: typeof ProfileRouteLazyImport
     }
+    '/schedules/$scheduleId/form': {
+      id: '/schedules/$scheduleId/form'
+      path: '/$scheduleId/form'
+      fullPath: '/schedules/$scheduleId/form'
+      preLoaderRoute: typeof SchedulesScheduleIdFormRouteLazyImport
+      parentRoute: typeof SchedulesRouteLazyImport
+    }
+    '/schedules/$scheduleId/reserved': {
+      id: '/schedules/$scheduleId/reserved'
+      path: '/$scheduleId/reserved'
+      fullPath: '/schedules/$scheduleId/reserved'
+      preLoaderRoute: typeof SchedulesScheduleIdReservedRouteLazyImport
+      parentRoute: typeof SchedulesRouteLazyImport
+    }
+    '/schedules/$scheduleId/form/components/InputField': {
+      id: '/schedules/$scheduleId/form/components/InputField'
+      path: '/components/InputField'
+      fullPath: '/schedules/$scheduleId/form/components/InputField'
+      preLoaderRoute: typeof SchedulesScheduleIdFormComponentsInputFieldImport
+      parentRoute: typeof SchedulesScheduleIdFormRouteLazyImport
+    }
+    '/schedules/$scheduleId/form/components/SelectField': {
+      id: '/schedules/$scheduleId/form/components/SelectField'
+      path: '/components/SelectField'
+      fullPath: '/schedules/$scheduleId/form/components/SelectField'
+      preLoaderRoute: typeof SchedulesScheduleIdFormComponentsSelectFieldImport
+      parentRoute: typeof SchedulesScheduleIdFormRouteLazyImport
+    }
+    '/schedules/$scheduleId/form/components/StepperComponent': {
+      id: '/schedules/$scheduleId/form/components/StepperComponent'
+      path: '/components/StepperComponent'
+      fullPath: '/schedules/$scheduleId/form/components/StepperComponent'
+      preLoaderRoute: typeof SchedulesScheduleIdFormComponentsStepperComponentImport
+      parentRoute: typeof SchedulesScheduleIdFormRouteLazyImport
+    }
+    '/schedules/$scheduleId/form/components/movie_form/TicketOption': {
+      id: '/schedules/$scheduleId/form/components/movie_form/TicketOption'
+      path: '/components/movie_form/TicketOption'
+      fullPath: '/schedules/$scheduleId/form/components/movie_form/TicketOption'
+      preLoaderRoute: typeof SchedulesScheduleIdFormComponentsMovieformTicketOptionImport
+      parentRoute: typeof SchedulesScheduleIdFormRouteLazyImport
+    }
+    '/schedules/$scheduleId/form/components/movie_form/movieFormProvider': {
+      id: '/schedules/$scheduleId/form/components/movie_form/movieFormProvider'
+      path: '/components/movie_form/movieFormProvider'
+      fullPath: '/schedules/$scheduleId/form/components/movie_form/movieFormProvider'
+      preLoaderRoute: typeof SchedulesScheduleIdFormComponentsMovieformMovieFormProviderImport
+      parentRoute: typeof SchedulesScheduleIdFormRouteLazyImport
+    }
+    '/schedules/$scheduleId/form/components/movie_form/movieSchema': {
+      id: '/schedules/$scheduleId/form/components/movie_form/movieSchema'
+      path: '/components/movie_form/movieSchema'
+      fullPath: '/schedules/$scheduleId/form/components/movie_form/movieSchema'
+      preLoaderRoute: typeof SchedulesScheduleIdFormComponentsMovieformMovieSchemaImport
+      parentRoute: typeof SchedulesScheduleIdFormRouteLazyImport
+    }
+    '/schedules/$scheduleId/form/components/seat_selector/CinemaSeats': {
+      id: '/schedules/$scheduleId/form/components/seat_selector/CinemaSeats'
+      path: '/components/seat_selector/CinemaSeats'
+      fullPath: '/schedules/$scheduleId/form/components/seat_selector/CinemaSeats'
+      preLoaderRoute: typeof SchedulesScheduleIdFormComponentsSeatselectorCinemaSeatsImport
+      parentRoute: typeof SchedulesScheduleIdFormRouteLazyImport
+    }
+    '/schedules/$scheduleId/form/components/seat_selector/SeatSelectionContext': {
+      id: '/schedules/$scheduleId/form/components/seat_selector/SeatSelectionContext'
+      path: '/components/seat_selector/SeatSelectionContext'
+      fullPath: '/schedules/$scheduleId/form/components/seat_selector/SeatSelectionContext'
+      preLoaderRoute: typeof SchedulesScheduleIdFormComponentsSeatselectorSeatSelectionContextImport
+      parentRoute: typeof SchedulesScheduleIdFormRouteLazyImport
+    }
   }
 }
 
@@ -150,8 +289,20 @@ export const routeTree = rootRoute.addChildren({
   ProfileRouteLazyRoute: ProfileRouteLazyRoute.addChildren({
     ProfileEditRouteLazyRoute,
   }),
-  ReservedRouteLazyRoute,
-  SchedulesRouteLazyRoute,
+  SchedulesRouteLazyRoute: SchedulesRouteLazyRoute.addChildren({
+    SchedulesScheduleIdFormRouteLazyRoute:
+      SchedulesScheduleIdFormRouteLazyRoute.addChildren({
+        SchedulesScheduleIdFormComponentsInputFieldRoute,
+        SchedulesScheduleIdFormComponentsSelectFieldRoute,
+        SchedulesScheduleIdFormComponentsStepperComponentRoute,
+        SchedulesScheduleIdFormComponentsMovieformTicketOptionRoute,
+        SchedulesScheduleIdFormComponentsMovieformMovieFormProviderRoute,
+        SchedulesScheduleIdFormComponentsMovieformMovieSchemaRoute,
+        SchedulesScheduleIdFormComponentsSeatselectorCinemaSeatsRoute,
+        SchedulesScheduleIdFormComponentsSeatselectorSeatSelectionContextRoute,
+      }),
+    SchedulesScheduleIdReservedRouteLazyRoute,
+  }),
   GoogleCallbackRouteLazyRoute,
 })
 
@@ -166,7 +317,6 @@ export const routeTree = rootRoute.addChildren({
         "/",
         "/movies",
         "/profile",
-        "/reserved",
         "/schedules",
         "/google/callback"
       ]
@@ -186,11 +336,12 @@ export const routeTree = rootRoute.addChildren({
         "/profile/edit"
       ]
     },
-    "/reserved": {
-      "filePath": "reserved/route.lazy.tsx"
-    },
     "/schedules": {
-      "filePath": "schedules/route.lazy.tsx"
+      "filePath": "schedules/route.lazy.tsx",
+      "children": [
+        "/schedules/$scheduleId/form",
+        "/schedules/$scheduleId/reserved"
+      ]
     },
     "/google/callback": {
       "filePath": "google/callback/route.lazy.tsx"
@@ -202,6 +353,56 @@ export const routeTree = rootRoute.addChildren({
     "/profile/edit": {
       "filePath": "profile/edit/route.lazy.tsx",
       "parent": "/profile"
+    },
+    "/schedules/$scheduleId/form": {
+      "filePath": "schedules/$scheduleId/form/route.lazy.tsx",
+      "parent": "/schedules",
+      "children": [
+        "/schedules/$scheduleId/form/components/InputField",
+        "/schedules/$scheduleId/form/components/SelectField",
+        "/schedules/$scheduleId/form/components/StepperComponent",
+        "/schedules/$scheduleId/form/components/movie_form/TicketOption",
+        "/schedules/$scheduleId/form/components/movie_form/movieFormProvider",
+        "/schedules/$scheduleId/form/components/movie_form/movieSchema",
+        "/schedules/$scheduleId/form/components/seat_selector/CinemaSeats",
+        "/schedules/$scheduleId/form/components/seat_selector/SeatSelectionContext"
+      ]
+    },
+    "/schedules/$scheduleId/reserved": {
+      "filePath": "schedules/$scheduleId/reserved/route.lazy.tsx",
+      "parent": "/schedules"
+    },
+    "/schedules/$scheduleId/form/components/InputField": {
+      "filePath": "schedules/$scheduleId/form/components/InputField.tsx",
+      "parent": "/schedules/$scheduleId/form"
+    },
+    "/schedules/$scheduleId/form/components/SelectField": {
+      "filePath": "schedules/$scheduleId/form/components/SelectField.tsx",
+      "parent": "/schedules/$scheduleId/form"
+    },
+    "/schedules/$scheduleId/form/components/StepperComponent": {
+      "filePath": "schedules/$scheduleId/form/components/StepperComponent.tsx",
+      "parent": "/schedules/$scheduleId/form"
+    },
+    "/schedules/$scheduleId/form/components/movie_form/TicketOption": {
+      "filePath": "schedules/$scheduleId/form/components/movie_form/TicketOption.ts",
+      "parent": "/schedules/$scheduleId/form"
+    },
+    "/schedules/$scheduleId/form/components/movie_form/movieFormProvider": {
+      "filePath": "schedules/$scheduleId/form/components/movie_form/movieFormProvider.tsx",
+      "parent": "/schedules/$scheduleId/form"
+    },
+    "/schedules/$scheduleId/form/components/movie_form/movieSchema": {
+      "filePath": "schedules/$scheduleId/form/components/movie_form/movieSchema.ts",
+      "parent": "/schedules/$scheduleId/form"
+    },
+    "/schedules/$scheduleId/form/components/seat_selector/CinemaSeats": {
+      "filePath": "schedules/$scheduleId/form/components/seat_selector/CinemaSeats.tsx",
+      "parent": "/schedules/$scheduleId/form"
+    },
+    "/schedules/$scheduleId/form/components/seat_selector/SeatSelectionContext": {
+      "filePath": "schedules/$scheduleId/form/components/seat_selector/SeatSelectionContext.tsx",
+      "parent": "/schedules/$scheduleId/form"
     }
   }
 }

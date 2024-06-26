@@ -13,7 +13,7 @@ function Index() {
       <Moviesboxdiv>
         <Pagetitle>上映映画一覧</Pagetitle>
         <Moviesdiv>
-          <Movies />
+          <Movies movies={[]} />
         </Moviesdiv>
         <Pagenationdiv>
           <Pagenation />
