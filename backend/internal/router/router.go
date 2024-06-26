@@ -38,7 +38,8 @@ func NewRouter() http.Handler {
 
 	corsRoute := router.echo.Group("")
 
-	corsRoute.Use(middleware.SetupCORS())
+	corsRoute.Use(echoMiddleware.CORSWithConfig(echoMiddleware.DefaultCORSConfig))
+
 	{
 		router.GoogleLogin(corsRoute)
 
