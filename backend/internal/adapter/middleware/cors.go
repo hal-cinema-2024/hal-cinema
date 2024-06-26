@@ -34,7 +34,7 @@ func AllowAllOrigins() echo.MiddlewareFunc {
 			if c.Path() == "/healthz" {
 				return next(c)
 			}
-
+			log.Info(c.Request().Context(), "origin", "origin", requestAddr)
 			c.Response().Header().Set("Access-Control-Allow-Origin", requestAddr)
 			c.Response().Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS")
 			c.Response().Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")

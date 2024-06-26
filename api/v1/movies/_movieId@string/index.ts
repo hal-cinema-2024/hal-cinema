@@ -25,10 +25,10 @@ export type Methods = {
     reqBody: {
       movieName?: string | undefined
       director?: string | undefined
-      sammary?: string | undefined
+      summary?: string | undefined
       thumbnail?: string | undefined
       link?: string | undefined
-      term?: string | undefined
+      term?: number | undefined
       releaseDate?: string | undefined
       endDate?: string | undefined
       movieImage?: string[] | undefined
