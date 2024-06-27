@@ -40,6 +40,13 @@ func (mi *MovieInteractor) UpdateMovie(ctx context.Context, movie UpdateMovie) e
 	if err != nil {
 		return err
 	}
+	// 指定の画像を削除
+	for _, imagePath := range movie.DeleteMovieImage {
+		err := mi.cloudStorage.DeleteBlob(ctx, imagePath)
+		if err != nil {
+			return err
+		}
+	}
 
 	// 非同期処理で画像を保存
 	imagePathsChan := make(chan string, len(movie.MovieImage))
