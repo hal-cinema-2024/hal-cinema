@@ -44,7 +44,7 @@ func (mi *MovieInteractor) UpdateMovie(ctx context.Context, movie UpdateMovie) e
 	// 非同期処理で画像を保存
 	imagePathsChan := make(chan string, len(movie.MovieImage))
 	errChan := make(chan error, len(movie.MovieImage))
-
+	done := make(chan bool)
 	for _, image := range movie.MovieImage {
 		go func(image *multipart.FileHeader) {
 			src, err := image.Open()
@@ -64,6 +64,7 @@ func (mi *MovieInteractor) UpdateMovie(ctx context.Context, movie UpdateMovie) e
 				return
 			}
 			imagePathsChan <- imagePath
+			done <- true
 		}(image)
 	}
 
@@ -75,6 +76,8 @@ func (mi *MovieInteractor) UpdateMovie(ctx context.Context, movie UpdateMovie) e
 			return err
 		}
 	}
+
+	<-done
 
 	err = mi.Repositories.UpdateMovie(ctx, &model.Movie{
 		MovieID:       movie.MovieID,
