@@ -10,17 +10,18 @@ import (
 )
 
 type UpdateMovie struct {
-	MovieID     string
-	Name        string
-	Director    string
-	Summary     string
-	Thumbnail   *multipart.FileHeader
-	Link        string
-	Term        int32
-	ReleaseDate time.Time
-	EndDate     time.Time
-	IsDelete    bool
-	MovieImage  []*multipart.FileHeader
+	MovieID          string
+	Name             string
+	Director         string
+	Summary          string
+	Thumbnail        *multipart.FileHeader
+	Link             string
+	Term             int32
+	ReleaseDate      time.Time
+	EndDate          time.Time
+	IsDelete         bool
+	DeleteMovieImage []string
+	MovieImage       []*multipart.FileHeader
 }
 
 func (mi *MovieInteractor) UpdateMovie(ctx context.Context, movie UpdateMovie) error {

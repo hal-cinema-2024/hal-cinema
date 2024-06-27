@@ -11,17 +11,18 @@ import (
 )
 
 type UpdateMovieRequest struct {
-	MovieID     string                  `param:"movie_id" validate:"required"`
-	Name        string                  `form:"movieName" validate:"required"`
-	Director    string                  `form:"director" validate:"required"`
-	Summary     string                  `form:"summary" validate:"required"`
-	Thumbnail   *multipart.FileHeader   `form:"thumbnail" validate:"required"`
-	Link        string                  `form:"link" validate:"required"`
-	Term        int32                   `form:"term" validate:"required"`
-	ReleaseDate string                  `form:"releaseDate" validate:"required"`
-	EndDate     string                  `form:"endDate" validate:"required"`
-	MovieImage  []*multipart.FileHeader `form:"movieImage"`
-	IsDelete    bool                    `form:"isDelete"`
+	MovieID          string                  `param:"movie_id" validate:"required"`
+	Name             string                  `form:"movieName" validate:"required"`
+	Director         string                  `form:"director" validate:"required"`
+	Summary          string                  `form:"summary" validate:"required"`
+	Thumbnail        *multipart.FileHeader   `form:"thumbnail" validate:"required"`
+	Link             string                  `form:"link" validate:"required"`
+	Term             int32                   `form:"term" validate:"required"`
+	ReleaseDate      string                  `form:"releaseDate" validate:"required"`
+	EndDate          string                  `form:"endDate" validate:"required"`
+	DeleteMovieImage []string                `form:"deleteMovieImage"`
+	MovieImage       []*multipart.FileHeader `form:"movieImage"`
+	IsDelete         bool                    `form:"isDelete"`
 }
 
 type UpdateMovieResponse struct {
