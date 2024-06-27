@@ -4,6 +4,7 @@ import (
 	"context"
 	"io"
 	"mime/multipart"
+	"sync"
 	"time"
 
 	"github.com/hal-cinema-2024/backend/internal/entities/model"
@@ -40,20 +41,31 @@ func (mi *MovieInteractor) UpdateMovie(ctx context.Context, movie UpdateMovie) e
 	if err != nil {
 		return err
 	}
-	// 指定の画像を削除
-	for _, imagePath := range movie.DeleteMovieImage {
-		err := mi.cloudStorage.DeleteBlob(ctx, imagePath)
-		if err != nil {
-			return err
-		}
-	}
 
 	// 非同期処理で画像を保存
+	var wg sync.WaitGroup
+	deleteMovieImage := make(chan string, len(movie.DeleteMovieImage))
 	imagePathsChan := make(chan string, len(movie.MovieImage))
-	errChan := make(chan error, len(movie.MovieImage))
-	done := make(chan bool)
+	errChan := make(chan error, len(movie.MovieImage)+len(movie.DeleteMovieImage))
+
+	// 指定の画像を削除
+	for _, imagePath := range movie.DeleteMovieImage {
+		wg.Add(1)
+		go func(imagePath string) {
+			defer wg.Done()
+			err := mi.cloudStorage.DeleteBlob(ctx, imagePath)
+			if err != nil {
+				errChan <- err
+				return
+			}
+			deleteMovieImage <- imagePath
+		}(imagePath)
+	}
+
 	for _, image := range movie.MovieImage {
+		wg.Add(1)
 		go func(image *multipart.FileHeader) {
+			defer wg.Done()
 			src, err := image.Open()
 			if err != nil {
 				errChan <- err
@@ -71,7 +83,6 @@ func (mi *MovieInteractor) UpdateMovie(ctx context.Context, movie UpdateMovie) e
 				return
 			}
 			imagePathsChan <- imagePath
-			done <- true
 		}(image)
 	}
 
@@ -83,8 +94,7 @@ func (mi *MovieInteractor) UpdateMovie(ctx context.Context, movie UpdateMovie) e
 			return err
 		}
 	}
-
-	<-done
+	wg.Wait()
 
 	err = mi.Repositories.UpdateMovie(ctx, &model.Movie{
 		MovieID:       movie.MovieID,
