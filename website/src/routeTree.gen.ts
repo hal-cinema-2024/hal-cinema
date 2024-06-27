@@ -16,6 +16,7 @@ import { Route as rootRoute } from './routes/__root'
 
 // Create Virtual Routes
 
+const SeatsLazyImport = createFileRoute('/seats')()
 const SchedulesLazyImport = createFileRoute('/schedules')()
 const ProfileLazyImport = createFileRoute('/profile')()
 const MoviesLazyImport = createFileRoute('/movies')()
@@ -24,6 +25,11 @@ const IndexLazyImport = createFileRoute('/')()
 const GoogleCallbackLazyImport = createFileRoute('/google/callback')()
 
 // Create/Update Routes
+
+const SeatsLazyRoute = SeatsLazyImport.update({
+  path: '/seats',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/seats.lazy').then((d) => d.Route))
 
 const SchedulesLazyRoute = SchedulesLazyImport.update({
   path: '/schedules',
@@ -96,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SchedulesLazyImport
       parentRoute: typeof rootRoute
     }
+    '/seats': {
+      id: '/seats'
+      path: '/seats'
+      fullPath: '/seats'
+      preLoaderRoute: typeof SeatsLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/google/callback': {
       id: '/google/callback'
       path: '/google/callback'
@@ -114,6 +127,7 @@ export const routeTree = rootRoute.addChildren({
   MoviesLazyRoute,
   ProfileLazyRoute,
   SchedulesLazyRoute,
+  SeatsLazyRoute,
   GoogleCallbackLazyRoute,
 })
 
@@ -130,6 +144,7 @@ export const routeTree = rootRoute.addChildren({
         "/movies",
         "/profile",
         "/schedules",
+        "/seats",
         "/google/callback"
       ]
     },
@@ -147,6 +162,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/schedules": {
       "filePath": "schedules.lazy.tsx"
+    },
+    "/seats": {
+      "filePath": "seats.lazy.tsx"
     },
     "/google/callback": {
       "filePath": "google/callback.lazy.tsx"
