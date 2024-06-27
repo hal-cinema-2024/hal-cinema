@@ -12,7 +12,6 @@ export function LoginButton() {
 
   const googleLogin = useGoogleLogin({
     onError: (error) => console.error(error),
-
     flow: "auth-code",
     scope:
       "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email",
@@ -22,9 +21,7 @@ export function LoginButton() {
     onSuccess: (codeResponse) => {
       const code = codeResponse.code;
       const decoded = atob(code);
-      login({
-        code: decoded,
-      });
+      login(decoded);
       goToHome;
     },
   });
