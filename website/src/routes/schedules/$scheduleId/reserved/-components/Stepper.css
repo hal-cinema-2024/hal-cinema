@@ -1,0 +1,18 @@
+.StepperContainer {
+  display: flex;
+  flex-direction: column;
+}
+.StepperStatus {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.StepSeparator {
+    flex-grow: 1; /* Make the separator take up remaining space */
+    height: 2px; /* Set the height of the separator */
+    background-color: gray; /* Set the color of the separator */
+    margin-left: 8px; /* Add some space between the status and separator */
+    margin-right: 8px; /* Add some space between the separator and title */
+    width: 100px; /* Fixed width for the separator */
+  }
