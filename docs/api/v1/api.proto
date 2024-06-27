@@ -300,7 +300,8 @@ message UpdateMovieRequest {
   int32 term = 7;
   string release_date = 8;
   string end_date = 9;
-  repeated bytes movie_image = 10;
+  repeated string delete_movie_image = 10;
+  repeated bytes movie_image = 11;
 }
 
 message UpdateMovieResponse {
