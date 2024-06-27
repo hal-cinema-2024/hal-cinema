@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
@@ -10,13 +9,11 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 const queryClient = new QueryClient();
 const CLIENT_ID: string = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <UIProvider>
-      <GoogleOAuthProvider clientId={CLIENT_ID}>
-        <QueryClientProvider client={queryClient}>
-          <App />
-        </QueryClientProvider>
-      </GoogleOAuthProvider>
-    </UIProvider>
-  </React.StrictMode>
+  <UIProvider>
+    <GoogleOAuthProvider clientId={CLIENT_ID}>
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
+    </GoogleOAuthProvider>
+  </UIProvider>
 );
