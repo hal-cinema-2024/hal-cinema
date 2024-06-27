@@ -73,7 +73,13 @@ func TestDeleteBlob(t *testing.T) {
 	azRepo := azure.NewAzureCloudStorage(bclient)
 
 	blobName := "test.jpg"
-	err = azRepo.DeleteBlob(context.Background(), blobName)
+
+	path, err := azRepo.UploadBlob(context.Background(), blobName, []byte("test"))
+	if err != nil {
+		t.Fatal("failed to upload blob", err)
+	}
+
+	err = azRepo.DeleteBlob(context.Background(), path)
 	if err != nil {
 		t.Fatal("failed to delete blob", err)
 	}
