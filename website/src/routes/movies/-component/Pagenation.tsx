@@ -2,9 +2,17 @@ import { Pagination } from "@yamada-ui/react";
 import styled from "styled-components";
 
 export function Pagenation() {
-  return <Pa showControls total={10} initialPage={1} />;
+  return (
+    <Pa
+      showControls
+      total={10}
+      size="lg"
+      initialPage={1}
+      colorScheme="secondary"
+    />
+  );
 }
 
 const Pa = styled(Pagination)`
-  margin: 100px 0 0 0;
+  margin: 10px 0 50px 0;
 `;
