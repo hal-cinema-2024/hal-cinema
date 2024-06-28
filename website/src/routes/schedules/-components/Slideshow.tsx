@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Carousel, CarouselSlide } from "@yamada-ui/carousel";
-import styled from "styled-components";
 import { SlideType, slideData } from "./daliy";
 import DateDisp from "./DateDisp";
+import "../styles/Slideshow.css";
 
 const Slideshow = () => {
   const [color, setColor] = useState<number>(0);
@@ -16,8 +16,13 @@ const Slideshow = () => {
   const selectedDate = slideData[selectedIndex];
 
   return (
-    <SlideContainer>
-      <SCarousel slideSize="25%" slidesToScroll={4} loop={false}>
+    <div className="SlideContainer">
+      <Carousel
+        slideSize="25%"
+        slidesToScroll={4}
+        loop={false}
+        className="Carousel"
+      >
         {slideData.map((item: SlideType, index: number) => (
           <CarouselSlide
             key={index}
@@ -29,50 +34,18 @@ const Slideshow = () => {
             }
             onClick={() => changeColor(index)}
           >
-            <SSdiv>
-              <Spp>
+            <div className="DateContainer">
+              <p className="MonthDay">
                 {item.month}/{item.day}
-              </Spp>
-              <Sp>({item.week})</Sp>
-            </SSdiv>
+              </p>
+              <p className="Week">({item.week})</p>
+            </div>
           </CarouselSlide>
         ))}
-      </SCarousel>
+      </Carousel>
       {selectedDate && <DateDisp date={selectedDate} />}
-    </SlideContainer>
+    </div>
   );
 };
 
 export default Slideshow;
-
-const SlideContainer = styled.div`
-  width: 1000px;
-  margin: 0 auto 0 auto;
-  padding: 20px;
-  border-radius: 10px;
-  margin-top: 20px;
-`;
-
-const SCarousel = styled(Carousel)`
-  width: 100%;
-  /* background-color: #f5f5f5; */
-`;
-
-const SSdiv = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;
-
-const Spp = styled.p`
-  font-size: 65px;
-  color: white;
-  text-align: center;
-`;
-
-const Sp = styled.p`
-  font-size: 35px;
-  color: white;
-  text-align: center;
-`;
