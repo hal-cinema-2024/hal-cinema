@@ -2,7 +2,6 @@ package controller
 
 import (
 	"mime/multipart"
-	"time"
 
 	"github.com/hal-cinema-2024/backend/internal/usecase/interactor"
 	"github.com/hal-cinema-2024/backend/pkg/log"
@@ -44,8 +43,18 @@ func CreateMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 			thumbnail = imageFiles[0]
 		}
 
-		releaseDate := str2time(req.ReleaseDate)
-		endDate := str2time(req.EndDate)
+		releaseDate, err := str2date(req.ReleaseDate)
+		if err != nil {
+			log.Warn(ctx.Request().Context(), "releaseDate is invalid")
+			return echo.ErrBadRequest
+		}
+
+		endDate, err := str2date(req.EndDate)
+		if err != nil {
+			log.Warn(ctx.Request().Context(), "endDate is invalid")
+			return echo.ErrBadRequest
+		}
+
 		movieImageFiles, ok := form.File["movieImage"]
 		if !ok {
 			log.Info(ctx.Request().Context(), "movieImageFiles is nil")
@@ -70,10 +79,4 @@ func CreateMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 			MovieID: movieID,
 		})
 	}
-}
-
-func str2time(t string) time.Time {
-	// YYYY-MM-DDTHH:MM:SSZZZZの形式で渡される文字列tをtime.Time型に変換して返す
-	parsedTime, _ := time.Parse("2006-01-02", t)
-	return parsedTime
 }
