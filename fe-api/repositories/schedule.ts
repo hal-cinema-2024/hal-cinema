@@ -21,7 +21,7 @@ export const getSchedules = async (
         date: date,
       },
     });
-    return res;
+    return res.schedule;
   } catch (err) {
     console.log(err);
   }

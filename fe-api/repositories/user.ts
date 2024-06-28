@@ -16,7 +16,7 @@ export const getUsers = async (page_id?: string, page_size?: string) => {
         pageSize: page_size || undefined,
       },
     });
-    return res;
+    return res.user;
   } catch (err) {
     console.log(err);
   }

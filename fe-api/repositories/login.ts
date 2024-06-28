@@ -27,10 +27,9 @@ export const login = async (data: string) => {
     code: data,
   };
 
-
   try {
     const res = await client.login.google.$post({ body: reqBody });
-    return res;
+    return res.userId;
   } catch (err) {
     console.log(err);
   }
