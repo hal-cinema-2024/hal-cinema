@@ -19,7 +19,7 @@ export function LoginButton() {
       const decoded = atob(code);
       const res = await login(decoded);
       console.log(res);
-      setUserId(res?.userId as string);
+      setUserId(res!);
       console.log(userId);
     },
   });
