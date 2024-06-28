@@ -1,21 +1,24 @@
 import styled from "styled-components";
-import { Card } from "@yamada-ui/react";
+import { Card, Link } from "@yamada-ui/react";
+import { MovieInterface } from "../../../../../fe-api/interfaces/movie";
 // import sam01 from "/src/assets/sample01.jpg";
 // import sam02 from "/src/assets/sample02.jpg";
 // import sam03 from "/src/assets/sample03.jpg";
 
-import type { MovieType } from "./MoviesDate";
-import { MovieList } from "./MoviesDate";
+interface MoviePropsInterface {
+  movies: MovieInterface[];
+}
 
-const Movies = () => {
+export const Movies = (props: MoviePropsInterface) => {
+  const { movies } = props;
   return (
     <>
-      {MovieList.map((item: MovieType, index: number) => (
-        <MoviesContainer key={index}>
+      {movies.map((item: MovieInterface) => (
+        <MoviesContainer key={item.movieId}>
           <SSdev>
             <MovieName>
               <MovieImage>
-                <img src={item.img} alt='fas8' />
+                <img src={item.thumbnail} alt='fas8' />
               </MovieImage>
               <MovieTextDiv>
                 <MovieFlexdiv>
@@ -26,17 +29,15 @@ const Movies = () => {
                 </MovieFlexdiv>
                 <MovieFlexdiv>
                   <MoviesDirector>監督名：</MoviesDirector>
-                  <MoviesDirectorName>{item.directorName}</MoviesDirectorName>
-                </MovieFlexdiv>
-                <MovieFlexdiv>
-                  <MoviePerformer>出演者：</MoviePerformer>
-                  <MoviePerformerName>{item.performerName}</MoviePerformerName>
+                  <MoviesDirectorName>{item.director}</MoviesDirectorName>
                 </MovieFlexdiv>
               </MovieTextDiv>
             </MovieName>
             <DetailsButton>
-              <p>詳細へ </p>
-              <Arrow></Arrow>
+              <Link href={`${item.link}`}>
+                <p>詳細へ </p>
+                <Arrow></Arrow>
+              </Link>
             </DetailsButton>
           </SSdev>
         </MoviesContainer>
@@ -44,8 +45,6 @@ const Movies = () => {
     </>
   );
 };
-
-export default Movies;
 
 //-------------------------style-------------------------
 // 全体
@@ -145,12 +144,12 @@ const MoviesDirectorName = styled.p`
 `;
 
 // 出演者
-const MoviePerformer = styled.p`
-  font-size: 20px;
-  margin: 0; /* デフォルトのマージンを削除 */
-`;
+// const MoviePerformer = styled.p`
+//   font-size: 20px;
+//   margin: 0; /* デフォルトのマージンを削除 */
+// `;
 
-const MoviePerformerName = styled.p`
-  font-size: 20px;
-  margin: 0; /* デフォルトのマージンを削除 */
-`;
+// const MoviePerformerName = styled.p`
+//   font-size: 20px;
+//   margin: 0; /* デフォルトのマージンを削除 */
+// `;
