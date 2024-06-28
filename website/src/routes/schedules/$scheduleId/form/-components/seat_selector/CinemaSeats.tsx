@@ -1,4 +1,4 @@
-import { useSeatSelection } from "./SeatSelectionContext";
+import { useSeatSelection } from "./hooks/useSeatSelection";
 
 const ROWS = "ABCD".slice(0).split("");
 const SEATS_PER_ROW = 10;
