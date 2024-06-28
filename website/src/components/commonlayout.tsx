@@ -14,61 +14,77 @@ const NavLinksData: NavLinksType[] = [
   { link: "/schedules", name: "上映スケジュール" },
   { link: "/profile", name: "マイページ" },
 ];
+
 function CommonLayout() {
   return (
     <>
-      <div style={{ backgroundImage: `url(${headerImage})` }}>
+      <BackgroundDiv>
         <Header>
-          <Logo1 to='/'>
-            <img
-              src='src/assets/48.png'
-              alt='ロゴ画像'
-              height={"120px"}
-              width={"120px"}
-            />
-          </Logo1>
-          <Nv>
-            <NavLinks className='nav-links'>
+          <HeaderContent>
+            <Logo1 to="/">
+              <img
+                src="src/assets/48.png"
+                alt="ロゴ画像"
+                height={"120px"}
+                width={"120px"}
+              />
+            </Logo1>
+            <Nav>
               {NavLinksData.map((navLink) => (
                 <NavLinkItem key={navLink.link}>
                   <NavLink to={navLink.link}>{navLink.name}</NavLink>
                 </NavLinkItem>
               ))}
-            </NavLinks>
-          </Nv>
-          <LoginButton />
+            </Nav>
+            <LoginButtonWrapper>
+              <LoginButton />
+            </LoginButtonWrapper>
+          </HeaderContent>
         </Header>
         <Outlet />
+
         <Footer>
-          <Logo2 to='/'>
+          <Logo2 to="/">
             <img
-              src='src/assets/logo1.png'
-              alt='ロゴ画像'
+              src="src/assets/logo1.png"
+              alt="ロゴ画像"
               height={"140px"}
               width={"140px"}
             />
           </Logo2>
           <Nav>
             <NavItem>
-              <FooterNavLink to='/'>TOP</FooterNavLink>
+              <FooterNavLink to="/">TOP</FooterNavLink>
             </NavItem>
             <NavItem>
-              <FooterNavLink to='/movies'>映画一覧</FooterNavLink>
+              <FooterNavLink to="/movies">映画一覧</FooterNavLink>
             </NavItem>
             <NavItem>
-              <FooterNavLink to='/schedules'>スクリーン一覧</FooterNavLink>
+              <FooterNavLink to="/schedules">スクリーン一覧</FooterNavLink>
             </NavItem>
             <NavItem>
-              <FooterNavLink to='/movie'>チケット購入</FooterNavLink>
+              <FooterNavLink to="/movie">チケット購入</FooterNavLink>
+            </NavItem>
+            <NavItem>
+              <FooterNavLink to="/profile">マイページ</FooterNavLink>
             </NavItem>
           </Nav>
+          <Copyright>©HALCinema. All rights Reserved.</Copyright>
         </Footer>
-      </div>
+      </BackgroundDiv>
     </>
   );
 }
 
 export default CommonLayout;
+
+const BackgroundDiv = styled.div`
+  background-image: url(${headerImage});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh; /* Ensure it covers the full viewport height */
+`;
 
 const Header = styled.header`
   background: linear-gradient(to bottom right, #a6038b, #093f59);
@@ -78,7 +94,14 @@ const Header = styled.header`
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  // font-weight: bold;
+`;
+
+const HeaderContent = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
 `;
 
 const Logo1 = styled(Link)`
@@ -88,32 +111,29 @@ const Logo1 = styled(Link)`
   color: #fff;
 `;
 
-const Nv = styled.ul`
-  flex-grow: 1;
+const Nav = styled.ul`
   display: flex;
-  justify-content: right; /* 中央揃え */
-  font-size: 16px;
-`;
-
-const NavLinks = styled.ul`
-  justify-content: right; /* 中央揃え */
-  display: flex;
+  align-items: center;
+  list-style: none;
 `;
 
 const NavLinkItem = styled.li`
   margin-left: 2rem;
-  list-style: none;
 `;
 
 const NavLink = styled(Link)`
   text-decoration: none;
   color: #fff;
   transition: color 0.3s ease;
-  margin: 0.3rem; /* 文章間のスペースを広げる */
+  margin: 0 0.5rem;
 
   &:hover {
     color: #ffca28;
   }
+`;
+
+const LoginButtonWrapper = styled.div`
+  margin-left: auto;
 `;
 
 const Footer = styled.footer`
@@ -121,6 +141,9 @@ const Footer = styled.footer`
   text-align: center;
   padding: 10px;
   background: linear-gradient(to bottom right, #a6038b, #093f59);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Logo2 = styled(Link)`
@@ -128,19 +151,12 @@ const Logo2 = styled(Link)`
   font-weight: bold;
   text-decoration: none;
   color: white;
-
   text-align: center;
-`;
-
-const Nav = styled.ul`
-  display: flex;
-  justify-content: center;
-  padding: 0;
+  margin-bottom: 10px;
 `;
 
 const NavItem = styled.li`
   margin: 0 1.5rem;
-  list-style: none;
 `;
 
 const FooterNavLink = styled(Link)`
@@ -153,8 +169,8 @@ const FooterNavLink = styled(Link)`
   }
 `;
 
-// const Copyright = styled.p`
-//   margin-top: 1rem;
-//   font-size: 0.875rem;
-//   color: white;
-// `;
+const Copyright = styled.p`
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: white;
+`;
