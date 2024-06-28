@@ -12,6 +12,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aspida": "^1.14.0"
+    "@aspida/axios": "^1.14.0",
+    "aspida": "^1.14.0",
+    "axios": "^1.7.2",
+    "qs": "^6.12.1"
+  },
+  "devDependencies": {
+    "@types/qs": "^6.9.15"
   }
 }

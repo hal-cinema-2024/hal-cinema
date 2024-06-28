@@ -13,7 +13,7 @@ type CreateMovieRequest struct {
 	Name        string                  `form:"movieName" validate:"required"`
 	Director    string                  `form:"director" validate:"required"`
 	Summary     string                  `form:"summary" validate:"required"`
-	Thumbnail   *multipart.FileHeader   `form:"thumbnail"`
+	Thumbnail   *multipart.FileHeader   `form:"thumbnail" validate:"required"`
 	Link        string                  `form:"link" validate:"required"`
 	Term        int32                   `form:"term" validate:"required"`
 	ReleaseDate string                  `form:"releaseDate" validate:"required"`
