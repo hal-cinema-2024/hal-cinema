@@ -8,5 +8,6 @@ import (
 )
 
 type ScheduleRepo interface {
-	GetSchedules(ctx context.Context, startTime time.Time) ([]model.Schedule, error)
+	CreateSchedule(ctx context.Context, schedule *model.Schedule) error
+	GetSchedules(ctx context.Context, startTime time.Time, movieId ...string) ([]model.Schedule, error)
 }

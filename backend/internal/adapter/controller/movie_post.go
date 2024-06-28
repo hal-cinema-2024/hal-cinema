@@ -43,13 +43,13 @@ func CreateMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 			thumbnail = imageFiles[0]
 		}
 
-		releaseDate, err := str2time(req.ReleaseDate)
+		releaseDate, err := str2date(req.ReleaseDate)
 		if err != nil {
 			log.Warn(ctx.Request().Context(), "releaseDate is invalid")
 			return echo.ErrBadRequest
 		}
 
-		endDate, err := str2time(req.EndDate)
+		endDate, err := str2date(req.EndDate)
 		if err != nil {
 			log.Warn(ctx.Request().Context(), "endDate is invalid")
 			return echo.ErrBadRequest

@@ -3,17 +3,20 @@ package controller
 import (
 	"errors"
 	"net/http"
+	"time"
 
+	"github.com/hal-cinema-2024/backend/internal/usecase/interactor"
 	"github.com/hal-cinema-2024/backend/pkg/log"
 	"github.com/labstack/echo/v4"
 )
 
 type GetScheduleRequest struct {
-	StartTime string `form:"startTime"`
+	StartTime string `query:"startTime"`
+	MovieID   string `query:"movieId"`
 }
 
 func (r GetScheduleRequest) Validate() error {
-	_, err := str2time(r.StartTime)
+	_, err := str2date(r.StartTime)
 	if err != nil {
 		return errors.Join(err, errors.New("invalid start time"))
 	}
@@ -21,31 +24,47 @@ func (r GetScheduleRequest) Validate() error {
 	return nil
 }
 
-type Schedule struct {
-	ScreenID    string `json:"screenId"`
-	StartTime   string `json:"startTime"`
-	EndTime     string `json:"endTime"`
-	IsAvailable bool   `json:"isAvailable"`
-}
-
 type GetScheduleResponse struct {
-	Schedule map[string]Schedule `json:"schedule"`
+	SelectedDate   time.Time
+	SelectedMovies string
+	Schedules      []interactor.GetScheduleResult
 }
 
-func GetSchedule() func(ctx echo.Context) error {
+func GetSchedules(i *interactor.ScheduleInteractor) func(ctx echo.Context) error {
 	return func(c echo.Context) error {
 		ctx := c.Request().Context()
-		var ReqQuery GetScheduleRequest
-		if err := c.Bind(&ReqQuery); err != nil {
+		var reqQuery GetScheduleRequest
+		if err := c.Bind(&reqQuery); err != nil {
 			log.Warn(ctx, "failed to bind requst", "error", err)
 			return echo.ErrBadRequest
 		}
 
-		if err := ReqQuery.Validate(); err != nil {
+		if err := reqQuery.Validate(); err != nil {
 			log.Warn(ctx, "failed to validate request", "error", err)
 			return echo.ErrBadRequest
 		}
 
-		return c.JSON(http.StatusOK, nil)
+		startTime, err := str2date(reqQuery.StartTime)
+		if err != nil {
+			log.Warn(ctx, "failed to parse start time", "error", err)
+			return echo.ErrBadRequest
+		}
+
+		var movieIDs []string
+		if reqQuery.MovieID != "" {
+			movieIDs = []string{reqQuery.MovieID}
+		}
+
+		result, err := i.GetSchedules(ctx, startTime, movieIDs...)
+		if err != nil {
+			log.Warn(ctx, "failed to get schedule", "error", err)
+			return echo.ErrInternalServerError
+		}
+
+		return c.JSON(http.StatusOK, GetScheduleResponse{
+			SelectedDate:   startTime,
+			SelectedMovies: reqQuery.MovieID,
+			Schedules:      result,
+		})
 	}
 }
