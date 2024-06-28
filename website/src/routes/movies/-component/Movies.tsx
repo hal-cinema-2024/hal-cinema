@@ -1,18 +1,20 @@
 import styled from "styled-components";
-import { Card } from "@nextui-org/card";
+import { Card, Link } from "@yamada-ui/react";
+import { MovieInterface } from "../../../../../fe-api/interfaces/movie";
+interface MoviePropsInterface {
+  movies: MovieInterface[];
+}
 
-import type { MovieType } from "./MoviesDate";
-import { MovieList } from "./MoviesDate";
-
-const Movies = () => {
+export const Movies = (props: MoviePropsInterface) => {
+  const { movies } = props;
   return (
     <>
       <Section>
-        {MovieList.map((item: MovieType, index: number) => (
-          <MoviesContainer key={index}>
+        {movies.map((item: MovieInterface) => (
+          <MoviesContainer key={item.id}>
             <SSdev>
               <MovieImage>
-                <img src={item.img} alt="Movie Poster" />
+                <img src={item.thumbnail} alt='Movie Poster' />
               </MovieImage>
               <MovieTextDiv>
                 <MovieFlexdiv>
@@ -22,16 +24,15 @@ const Movies = () => {
                 </MovieFlexdiv>
                 <MovieFlexdiv>
                   <MoviesDirector>監督名：</MoviesDirector>
-                  <MoviesDirectorName>{item.directorName}</MoviesDirectorName>
-                </MovieFlexdiv>
-                <MovieFlexdiv>
-                  <MoviePerformer>出演者：</MoviePerformer>
-                  <MoviePerformerName>{item.performerName}</MoviePerformerName>
+                  <MoviesDirectorName>{item.director}</MoviesDirectorName>
                 </MovieFlexdiv>
               </MovieTextDiv>
-              <DetailsButton>
-                <p>詳細へ </p>
-              </DetailsButton>
+
+              <Link href={`${item.link}`}>
+                <DetailsButton>
+                  <p>詳細へ </p>
+                </DetailsButton>
+              </Link>
             </SSdev>
           </MoviesContainer>
         ))}
@@ -39,8 +40,6 @@ const Movies = () => {
     </>
   );
 };
-
-export default Movies;
 
 //-------------------------style-------------------------
 const Section = styled.section`

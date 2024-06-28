@@ -183,3 +183,61 @@ export const routeTree = rootRoute.addChildren({
 })
 
 /* prettier-ignore-end */
+
+/* ROUTE_MANIFEST_START
+{
+  "routes": {
+    "__root__": {
+      "filePath": "__root.tsx",
+      "children": [
+        "/",
+        "/movies",
+        "/profile",
+        "/schedules",
+        "/google/callback"
+      ]
+    },
+    "/": {
+      "filePath": "route.lazy.tsx"
+    },
+    "/movies": {
+      "filePath": "movies/route.lazy.tsx",
+      "children": [
+        "/movies/$movieId"
+      ]
+    },
+    "/profile": {
+      "filePath": "profile/route.lazy.tsx",
+      "children": [
+        "/profile/edit"
+      ]
+    },
+    "/schedules": {
+      "filePath": "schedules/route.lazy.tsx",
+      "children": [
+        "/schedules/$scheduleId/form",
+        "/schedules/$scheduleId/reserved"
+      ]
+    },
+    "/google/callback": {
+      "filePath": "google/callback/route.lazy.tsx"
+    },
+    "/movies/$movieId": {
+      "filePath": "movies/$movieId/route.lazy.tsx",
+      "parent": "/movies"
+    },
+    "/profile/edit": {
+      "filePath": "profile/edit/route.lazy.tsx",
+      "parent": "/profile"
+    },
+    "/schedules/$scheduleId/form": {
+      "filePath": "schedules/$scheduleId/form/route.lazy.tsx",
+      "parent": "/schedules"
+    },
+    "/schedules/$scheduleId/reserved": {
+      "filePath": "schedules/$scheduleId/reserved/route.lazy.tsx",
+      "parent": "/schedules"
+    }
+  }
+}
+ROUTE_MANIFEST_END */

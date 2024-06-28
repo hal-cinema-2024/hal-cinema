@@ -1,19 +1,24 @@
 import styled from "styled-components";
 import { createLazyFileRoute } from "@tanstack/react-router";
-import Movies from "./-component/Movies";
 import { Pagenation } from "./-component/Pagenation";
+import { useMovies } from "./-hooks/useMovies";
+import { Movies } from "./-component/Movies";
+import { Suspense } from "react";
 
 export const Route = createLazyFileRoute("/movies")({
   component: Index,
 });
 
 function Index() {
+  const { movies } = useMovies();
   return (
     <>
       <Moviesboxdiv>
         <Pagetitle>上映映画一覧</Pagetitle>
         <Moviesdiv>
-          <Movies />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Movies movies={movies!} />
+          </Suspense>
         </Moviesdiv>
         <Pagenationdiv>
           <Pagenation />
