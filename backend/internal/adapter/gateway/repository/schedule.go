@@ -30,7 +30,6 @@ func (r *ScheduleRepo) CreateSchedule(ctx context.Context, schedule *model.Sched
 }
 
 func (r *ScheduleRepo) GetSchedules(ctx context.Context, startTime time.Time, movieId ...string) ([]model.Schedule, error) {
-
 	var schedules []model.Schedule
 	query := r.db.Where("start_date BETWEEN ? AND ?", startTime, startTime.Add(24*time.Hour))
 	if len(movieId) > 0 {

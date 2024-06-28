@@ -18,7 +18,7 @@ func NewTheaterSizeRepo(db *gorm.DB) *TheaterSizeRepo {
 
 func (r *TheaterSizeRepo) GetTheaterSizeByID(ctx context.Context, theaterSizeID string) (*model.TheatersSize, error) {
 	var theaterSize model.TheatersSize
-	if err := r.db.First(&theaterSize, "id = ?", theaterSizeID).Error; err != nil {
+	if err := r.db.First(&theaterSize, "theater_size_id = ?", theaterSizeID).Error; err != nil {
 		return nil, err
 	}
 	return &theaterSize, nil
