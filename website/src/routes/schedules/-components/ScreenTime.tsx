@@ -14,9 +14,9 @@ const ScreenTime = (props: ScreenTimeProps) => {
     switch (buy) {
       case "販売終了":
       case "満席":
-        return <X />;
+        return <StyledX />;
       case "購入":
-        return <Circle />;
+        return <StyledCircle />;
       default:
         return "";
     }
@@ -27,12 +27,14 @@ const ScreenTime = (props: ScreenTimeProps) => {
       <ScreenContainer>
         {screenData.map((item: ScreenType, index) => (
           <TimeContainer key={index}>
-            <a href='#'>
+            <a href="#">
               <Start>{item.startTime}</Start>
               <End>{item.endTime}</End>
               <BuyContainer buy={item.buy}>
-                <AvailContainer></AvailContainer>
-                <AvailContainer>{getImg(item.buy)}</AvailContainer>
+                <ImgContainer>{getImg(item.buy)}</ImgContainer>
+                <AvailContainer>
+                  <p>{item.buy}</p>
+                </AvailContainer>
               </BuyContainer>
             </a>
           </TimeContainer>
@@ -93,6 +95,30 @@ const BuyContainer = styled.div<{ buy: string }>`
     background-color: #fff;
   }
 `;
+
+const ImgContainer = styled.div`
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+`;
+
+const StyledX = styled(X)`
+  width: 80%;
+  height: 80%;
+  stroke-width: 1.3px;
+  color: #ADAAAA;
+`;
+
+const StyledCircle = styled(Circle)`
+  width: 80%;
+  height: 80%;
+  stroke-width: 1.3px;
+  color: #ADAAAA;
+`;
+
 
 const AvailContainer = styled.div`
   text-align: center;
