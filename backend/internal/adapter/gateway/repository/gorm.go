@@ -12,14 +12,16 @@ type GormRepo struct {
 	*UserRepo
 	*SessionRepo
 	*MovieRepo
+	*ScheduleRepo
 }
 
 func NewGormRepo(gorm *gorm.DB) *GormRepo {
 	return &GormRepo{
-		gorm:        gorm,
-		UserRepo:    NewUserRepo(gorm),
-		SessionRepo: NewSessionRepo(gorm),
-		MovieRepo:   NewMovieRepo(gorm),
+		gorm:         gorm,
+		UserRepo:     NewUserRepo(gorm),
+		SessionRepo:  NewSessionRepo(gorm),
+		MovieRepo:    NewMovieRepo(gorm),
+		ScheduleRepo: NewScheduleRepo(gorm),
 	}
 }
 
