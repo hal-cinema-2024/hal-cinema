@@ -3,11 +3,10 @@ import { useFormContext } from "react-hook-form";
 
 type InputFieldProps = {
   fieldName: string;
-  type?: string;
 };
 
-export const InputField = (props: InputFieldProps) => {
-  const { fieldName, type } = props;
+export const ImageField = (props: InputFieldProps) => {
+  const { fieldName } = props;
   const { register, formState } = useFormContext();
 
   // 数値フィールドの場合、入力値を数値に変換します。
@@ -15,7 +14,12 @@ export const InputField = (props: InputFieldProps) => {
   return (
     <>
       <label htmlFor={fieldName}>{fieldName}</label>
-      <Input type={type || "text"} {...register(fieldName)} />
+      <Input
+        type='file'
+        accept='.png, .jpg'
+        multiple
+        {...register(fieldName)}
+      />
       {formState.errors[fieldName] && (
         <span>{formState.errors[fieldName]!.message as string}</span>
       )}
