@@ -14,7 +14,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <GoogleOAuthProvider clientId={CLIENT_ID}>
       <QueryClientProvider client={queryClient}>
         <UserIdProvider>
-          <App />
+          <UserIdProvider>
+            <App />
+          </UserIdProvider>
         </UserIdProvider>
       </QueryClientProvider>
     </GoogleOAuthProvider>
