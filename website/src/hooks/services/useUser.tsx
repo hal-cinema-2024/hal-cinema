@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { V1User } from "../../../../api/@types";
 import { getUser } from "../../../../fe-api/repositories/user";
+import { UserInterface } from "../../../../fe-api/interfaces/user";
 
 export const useUser = (user_id: string) => {
-  const [user, setUser] = useState<V1User>();
+  const [user, setUser] = useState<UserInterface>();
 
   const fetchData = async (user_id: string) => {
     try {
