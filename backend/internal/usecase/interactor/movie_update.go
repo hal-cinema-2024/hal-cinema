@@ -26,7 +26,7 @@ type UpdateMovie struct {
 
 func (mi *MovieInteractor) UpdateMovie(ctx context.Context, movie UpdateMovie) error {
 	var imagePaths []string
-	// 画像の保存
+	// サムネイル画像の保存
 	src, err := movie.Thumbnail.Open()
 	if err != nil {
 		return err
@@ -85,14 +85,21 @@ func (mi *MovieInteractor) UpdateMovie(ctx context.Context, movie UpdateMovie) e
 		}(image)
 	}
 
-	for i := 0; i < len(movie.MovieImage); i++ {
-		select {
-		case imagePath := <-imagePathsChan:
-			imagePaths = append(imagePaths, imagePath)
-		case err := <-errChan:
-			return err
-		}
+	go func() {
+		wg.Wait()
+		close(deleteMovieImage)
+		close(imagePathsChan)
+		close(errChan)
+	}()
+
+	for err := range errChan {
+		return err
 	}
+
+	for imagePath := range imagePathsChan {
+		imagePaths = append(imagePaths, imagePath)
+	}
+
 	wg.Wait()
 
 	err = mi.Repositories.UpdateMovie(ctx, &model.Movie{
