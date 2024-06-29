@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { GetSchedulesResponseInterface } from "../../../../../fe-api/interfaces/schedule";
 import { getSchedules } from "../../../../../fe-api/repositories/schedule";
+import { V1Schedule } from "../../../../../api/@types";
 
 export const useSchedules = (
   pageId?: string,
   pageSize?: string,
   date?: string
 ) => {
-  const [schedules, setSchedules] = useState<GetSchedulesResponseInterface>();
+  const [schedules, setSchedules] = useState<V1Schedule[]>();
   const fetchData = async (
     pageId?: string,
     pageSize?: string,
