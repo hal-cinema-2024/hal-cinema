@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { GetOrderResponseInterface } from "../../../../fe-api/interfaces/order";
 import { getOrder } from "../../../../fe-api/repositories/order";
+import { V1Orders } from "../../../../api/@types";
 
 export const useOrder = (orderId: string) => {
-  const [order, setOrder] = useState<GetOrderResponseInterface>();
+  const [order, setOrder] = useState<V1Orders>();
 
   const fetchData = async (orderId: string) => {
     try {
