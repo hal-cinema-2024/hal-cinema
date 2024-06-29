@@ -22,7 +22,6 @@ type UpdateMovieRequest struct {
 	EndDate          string                  `form:"endDate" validate:"required"`
 	DeleteMovieImage []string                `form:"deleteMovieImage"`
 	MovieImage       []*multipart.FileHeader `form:"movieImage"`
-	IsDelete         bool                    `form:"isDelete"`
 }
 
 type UpdateMovieResponse struct {
@@ -77,7 +76,6 @@ func UpdateMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 			Term:        req.Term,
 			ReleaseDate: releaseDate,
 			EndDate:     endDate,
-			IsDelete:    req.IsDelete,
 			MovieImage:  movieImageFiles,
 		})
 		if err != nil {

@@ -20,7 +20,6 @@ type UpdateMovie struct {
 	Term             int32
 	ReleaseDate      time.Time
 	EndDate          time.Time
-	IsDelete         bool
 	DeleteMovieImage []string
 	MovieImage       []*multipart.FileHeader
 }
@@ -106,7 +105,6 @@ func (mi *MovieInteractor) UpdateMovie(ctx context.Context, movie UpdateMovie) e
 		Term:          movie.Term,
 		ReleaseDate:   movie.ReleaseDate,
 		EndDate:       movie.EndDate,
-		IsDelete:      movie.IsDelete,
 	}, imagePaths)
 	if err != nil {
 		return err
