@@ -11,7 +11,7 @@ export const Movies = (props: MoviePropsInterface) => {
     <>
       <Section>
         {movies.map((item: MovieInterface) => (
-          <MoviesContainer key={item.id}>
+          <MoviesContainer key={item.movieId}>
             <SSdev>
               <MovieImage>
                 <img src={item.thumbnail} alt='Movie Poster' />
@@ -175,22 +175,22 @@ const MoviesDirectorName = styled.p`
   }
 `;
 
-const MoviePerformer = styled.p`
-  font-size: 18px;
-  margin: 0;
-  color: #ddd;
+// const MoviePerformer = styled.p`
+//   font-size: 18px;
+//   margin: 0;
+//   color: #ddd;
 
-  @media (max-width: 768px) {
-    font-size: 16px;
-  }
-`;
+//   @media (max-width: 768px) {
+//     font-size: 16px;
+//   }
+// `;
 
-const MoviePerformerName = styled.p`
-  font-size: 18px;
-  margin: 0;
-  color: #fff;
+// const MoviePerformerName = styled.p`
+//   font-size: 18px;
+//   margin: 0;
+//   color: #fff;
 
-  @media (max-width: 768px) {
-    font-size: 16px;
-  }
-`;
+//   @media (max-width: 768px) {
+//     font-size: 16px;
+//   }
+// `;
