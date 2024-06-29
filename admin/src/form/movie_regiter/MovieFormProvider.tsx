@@ -3,6 +3,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InputField } from "../InputField";
 import { movieSchema } from "./movieSchema";
+import { ImageField } from "../ImageField";
 export function MovieFormProvider() {
   const methods = useForm({
     resolver: zodResolver(movieSchema),
@@ -16,12 +17,12 @@ export function MovieFormProvider() {
         <InputField fieldName='movieName' />
         <InputField fieldName='director' />
         <InputField fieldName='summary' />
-        <InputField fieldName='thumbnail' />
+        <ImageField fieldName='thumbnail' />
         <InputField fieldName='link' />
         <InputField fieldName='term' />
         <InputField fieldName='releaseDate' />
         <InputField fieldName='endDate' />
-        <InputField fieldName='movieImage' />
+        <ImageField fieldName='movieImage' />
         <Button type='submit'>Submit</Button>
       </form>
     </FormProvider>
