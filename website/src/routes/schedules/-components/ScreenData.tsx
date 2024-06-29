@@ -1,23 +1,21 @@
 import styled from "styled-components";
 import ScreenTime from "./ScreenTime";
-import { Movie } from "./TimeData";
+import { TheaterSchedule } from "../types/TransFormData";
 
-const ScreenData = (props: Movie) => {
-  const { screenings } = props;
+export const ScreenData = (props: TheaterSchedule) => {
+  const { theaterId } = props;
 
   return (
     <MovieContainer>
-      {screenings.map((screening, screenIndex) => (
-        <ScreenContainer key={screenIndex}>
-          <Number>スクリーン{screening.screenNumber}</Number>
-          <ScreenTime screenData={screening.screenData} />
+      {theaterId.map((data) => (
+        <ScreenContainer key={data.scheduleId}>
+          <Number>スクリーン{theaterId.theaterId}</Number>
+          <ScreenTime screenData={theaterId.string} />
         </ScreenContainer>
       ))}
     </MovieContainer>
   );
 };
-
-export default ScreenData;
 
 const MovieContainer = styled.div`
   width: 100%;

@@ -4,19 +4,20 @@ import { X } from "@yamada-ui/lucide";
 import { Circle } from "@yamada-ui/lucide";
 
 type ScreenTimeProps = {
-  screenData: ScreenType[];
+  startTime: string;
+  term: number;
+  isFull: boolean;
 };
 
 const ScreenTime = (props: ScreenTimeProps) => {
-  const { screenData } = props;
+  const { isFull } = props;
 
-  const getImg = (buy: string) => {
+  const getImg = (isFull: bool) => {
     switch (buy) {
       case "販売終了":
-      case "満席":
-        return <StyledX />;
+      case false:        retfalse<StyledX />;
       case "購入":
-        return <StyledCircle />;
+        rettrue<StyledCircle />;
       default:
         return "";
     }
@@ -25,20 +26,18 @@ const ScreenTime = (props: ScreenTimeProps) => {
   return (
     <>
       <ScreenContainer>
-        {screenData.map((item: ScreenType, index) => (
-          <TimeContainer key={index}>
-            <a href="#">
-              <Start>{item.startTime}</Start>
-              <End>{item.endTime}</End>
-              <BuyContainer buy={item.buy}>
-                <ImgContainer>{getImg(item.buy)}</ImgContainer>
-                <AvailContainer>
-                  <p>{item.buy}</p>
-                </AvailContainer>
-              </BuyContainer>
-            </a>
-          </TimeContainer>
-        ))}
+        <TimeContainer key={index}>
+          <a href="#">
+            <Start>{startTime}</Start>
+            <End>{item.endTime}</End>
+            <BuyCont buy={isFull}>
+              <ImgContainer>{getImg(isFull)}</ImgContainer>
+              <AvailContainer>
+buyisFull                <p>{item.buy}</p>
+              </AvailContainer>
+            </BuyCont>
+          </a>
+        </TimeContainer>
       </ScreenContainer>
     </>
   );
@@ -109,16 +108,15 @@ const StyledX = styled(X)`
   width: 80%;
   height: 80%;
   stroke-width: 1.3px;
-  color: #ADAAAA;
+  color: #adaaaa;
 `;
 
 const StyledCircle = styled(Circle)`
   width: 80%;
   height: 80%;
   stroke-width: 1.3px;
-  color: #ADAAAA;
+  color: #adaaaa;
 `;
-
 
 const AvailContainer = styled.div`
   text-align: center;
