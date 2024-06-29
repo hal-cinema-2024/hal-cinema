@@ -471,21 +471,13 @@
         },
         "parameters": [
           {
-            "name": "pageId",
+            "name": "startDate",
             "in": "query",
             "required": false,
-            "type": "string",
-            "format": "int64"
+            "type": "string"
           },
           {
-            "name": "pageSize",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "int64"
-          },
-          {
-            "name": "date",
+            "name": "movieId",
             "in": "query",
             "required": false,
             "type": "string"
@@ -988,14 +980,46 @@
         }
       }
     },
+    "v1GetScheduleResult": {
+      "type": "object",
+      "properties": {
+        "scheduleId": {
+          "type": "string"
+        },
+        "movieId": {
+          "type": "string"
+        },
+        "movieName": {
+          "type": "string"
+        },
+        "theater": {
+          "type": "string"
+        },
+        "startTime": {
+          "type": "string"
+        },
+        "endTime": {
+          "type": "string"
+        },
+        "isAvailable": {
+          "type": "boolean"
+        }
+      }
+    },
     "v1GetSchedulesResponse": {
       "type": "object",
       "properties": {
+        "selectedDate": {
+          "type": "string"
+        },
+        "selectedMovies": {
+          "type": "string"
+        },
         "schedule": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v1Schedule"
+            "$ref": "#/definitions/v1GetScheduleResult"
           }
         }
       }
@@ -1113,30 +1137,6 @@
         "price": {
           "type": "integer",
           "format": "int32"
-        }
-      }
-    },
-    "v1Schedule": {
-      "type": "object",
-      "properties": {
-        "scheduleId": {
-          "type": "string"
-        },
-        "movieName": {
-          "type": "string"
-        },
-        "theaterId": {
-          "type": "string"
-        },
-        "startTime": {
-          "type": "string"
-        },
-        "term": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "isFull": {
-          "type": "boolean"
         }
       }
     },

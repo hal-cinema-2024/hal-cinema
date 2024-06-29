@@ -25,9 +25,9 @@ func (r GetScheduleRequest) Validate() error {
 }
 
 type GetScheduleResponse struct {
-	SelectedDate   time.Time
-	SelectedMovies string
-	Schedules      []interactor.GetScheduleResult
+	SelectedDate   time.Time                      `json:"selectedDate"`
+	SelectedMovies string                         `json:"selectedMovies"`
+	Schedules      []interactor.GetScheduleResult `json:"schedules"`
 }
 
 func GetSchedules(i *interactor.ScheduleInteractor) func(ctx echo.Context) error {
