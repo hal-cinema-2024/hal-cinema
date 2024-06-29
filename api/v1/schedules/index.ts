@@ -5,9 +5,8 @@ export type Methods = {
   /** Get all schedules */
   get: {
     query?: {
-      pageId?: string | undefined
-      pageSize?: string | undefined
-      date?: string | undefined
+      startDate?: string | undefined
+      movieId?: string | undefined
     } | undefined
 
     status: 200
