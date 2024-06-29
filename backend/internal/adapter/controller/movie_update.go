@@ -54,7 +54,7 @@ func UpdateMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 
 		imageFiles, ok := form.File["thumbnail"]
 		if !ok {
-			thumbnail = nil
+			return echo.ErrBadRequest
 		} else {
 			thumbnail = imageFiles[0]
 		}
