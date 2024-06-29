@@ -1,5 +1,6 @@
 export type TheaterSchedule = {
-  [theaterId: string]: {
+  theaterId: string;
+  schedules: {
     scheduleId: string;
     startTime: string;
     term: number;
@@ -9,5 +10,5 @@ export type TheaterSchedule = {
 
 export type TransformedData = {
   movieName: string;
-  theaterSchedule: TheaterSchedule;
+  theaterSchedule: TheaterSchedule[];
 };

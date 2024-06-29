@@ -1,31 +1,31 @@
 import styled from "styled-components";
 // import ScreenTime from "./ScreenTime";
-import ScreenData from "./ScreenData";
+import { ScreenData } from "./ScreenData";
 import { TransformedData } from "../types/TransFormData";
 
 type MovieBoxProps = {
-schedules: TransformedData[]
-
+  schedules: TransformedData[];
 };
 
-const MovieBox = (props: MovieBoxProps) => {
+export const MovieBox = (props: MovieBoxProps) => {
   const { schedules } = props;
 
   return (
     <>
-      {infoList.map((item, index) => (
-       schedulesntainer key=indexx}>
-          <NameContainer>
-            <p>{item.movieName}</p>
-            <a href="#">作品詳細へ</a>
-          </NameContainer>
-          <ScreenData screenings={item.theaterId} />
-        </ListContainer>
-      ))}
+      <ListContainer>
+        <NameContainer>
+          <p>映画一覧</p>
+        </NameContainer>
+        {schedules.map((data) => (
+          <ScreenData
+            key={data.movieName}
+            theaterSchedule={data.theaterSchedule}
+          />
+        ))}
+      </ListContainer>
     </>
   );
 };
-
 export default MovieBox;
 
 const ListContainer = styled.div`
