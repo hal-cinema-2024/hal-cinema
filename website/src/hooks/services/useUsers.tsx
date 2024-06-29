@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { getUsers } from "../../../../fe-api/repositories/user";
-import { GetUsersResponseInterface } from "../../../../fe-api/interfaces/user";
+import { V1User } from "../../../../api/@types";
 
 export const useUsers = (page_id?: string, page_size?: string) => {
-  const [users, setUsers] = useState<GetUsersResponseInterface>();
+  const [users, setUsers] = useState<V1User[]>();
 
   const fetchData = async (page_id?: string, page_size?: string) => {
     try {
