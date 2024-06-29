@@ -62,6 +62,15 @@ func (r *MovieRepo) GetMovieByID(ctx context.Context, movieID string) (*model.Mo
 	return &movie, imagePaths, nil
 }
 
+func (r *MovieRepo) GetMoviesByID(ctx context.Context, movieIDs []string) ([]*model.Movie, error) {
+	var movies []*model.Movie
+	err := r.db.Where("is_delete = ?", false).Where("movie_id IN (?)", movieIDs).Find(&movies).Error
+	if err != nil {
+		return nil, err
+	}
+	return movies, nil
+}
+
 func (r *MovieRepo) GetMovies(ctx context.Context, limit int, offset int) ([]*model.Movie, error) {
 	var movies []*model.Movie
 	result := r.db.Where("is_delete = ?", false).Limit(limit).Offset(limit * (offset - 1)).Find(&movies)

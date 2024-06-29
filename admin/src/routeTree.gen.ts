@@ -16,28 +16,79 @@ import { Route as rootRoute } from './routes/__root'
 
 // Create Virtual Routes
 
-const IndexLazyImport = createFileRoute('/')()
+const SchedulesRouteLazyImport = createFileRoute('/schedules')()
+const MoviesRouteLazyImport = createFileRoute('/movies')()
+const RouteLazyImport = createFileRoute('/')()
+const MoviesMovieIdRouteLazyImport = createFileRoute('/movies/$movieId')()
+const GoogleCallbackRouteLazyImport = createFileRoute('/google/callback')()
 
 // Create/Update Routes
 
-const IndexLazyRoute = IndexLazyImport.update({
+const SchedulesRouteLazyRoute = SchedulesRouteLazyImport.update({
+  path: '/schedules',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/schedules/route.lazy').then((d) => d.Route),
+)
+
+const MoviesRouteLazyRoute = MoviesRouteLazyImport.update({
+  path: '/movies',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/movies/route.lazy').then((d) => d.Route))
+
+const RouteLazyRoute = RouteLazyImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+} as any).lazy(() => import('./routes/route.lazy').then((d) => d.Route))
+
+const MoviesMovieIdRouteLazyRoute = MoviesMovieIdRouteLazyImport.update({
+  path: '/$movieId',
+  getParentRoute: () => MoviesRouteLazyRoute,
+} as any).lazy(() =>
+  import('./routes/movies/$movieId/route.lazy').then((d) => d.Route),
+)
+
+const GoogleCallbackRouteLazyRoute = GoogleCallbackRouteLazyImport.update({
+  path: '/google/callback',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/google/callback/route.lazy').then((d) => d.Route),
+)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
-      preLoaderRoute: typeof IndexLazyImport
+      preLoaderRoute: typeof RouteLazyImport
       parentRoute: typeof rootRoute
+    }
+    '/movies': {
+      preLoaderRoute: typeof MoviesRouteLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/schedules': {
+      preLoaderRoute: typeof SchedulesRouteLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/google/callback': {
+      preLoaderRoute: typeof GoogleCallbackRouteLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/movies/$movieId': {
+      preLoaderRoute: typeof MoviesMovieIdRouteLazyImport
+      parentRoute: typeof MoviesRouteLazyImport
     }
   }
 }
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren([IndexLazyRoute])
+export const routeTree = rootRoute.addChildren([
+  RouteLazyRoute,
+  MoviesRouteLazyRoute.addChildren([MoviesMovieIdRouteLazyRoute]),
+  SchedulesRouteLazyRoute,
+  GoogleCallbackRouteLazyRoute,
+])
 
 /* prettier-ignore-end */
