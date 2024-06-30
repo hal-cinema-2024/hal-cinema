@@ -59,8 +59,16 @@ func UpdateMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 			thumbnail = imageFiles[0]
 		}
 
-		releaseDate := str2time(req.ReleaseDate)
-		endDate := str2time(req.EndDate)
+		releaseDate, err := str2time(req.ReleaseDate)
+		if err != nil {
+			log.Error(ctx.Request().Context(), "releaseDate is invalid")
+			return echo.ErrBadRequest
+		}
+		endDate, err := str2time(req.EndDate)
+		if err != nil {
+			log.Error(ctx.Request().Context(), "endDate is invalid")
+			return echo.ErrBadRequest
+		}
 		movieImageFiles, ok := form.File["movieImage"]
 		if !ok {
 			log.Info(ctx.Request().Context(), "movieImage is not found")
