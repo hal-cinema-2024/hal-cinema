@@ -28,8 +28,13 @@ func (cs *AzureCloudStorage) UploadBlob(ctx context.Context, fileName string, fi
 // delete blob from blob storage
 func (cs *AzureCloudStorage) DeleteBlob(ctx context.Context, blobName string) error {
 	var containerName string = config.Config.Azure.BlobServiceContainerName
-	target := config.Config.Azure.BlobServiceURL + containerName + "/"
-	fileName := strings.Replace(blobName, target, "", -1)
+	var fileName string
+	if strings.Contains(blobName, config.Config.Azure.BlobServiceURL) {
+		target := config.Config.Azure.BlobServiceURL + containerName + "/"
+		fileName = strings.Replace(blobName, target, "", -1)
+	} else {
+		fileName = blobName
+	}
 	_, err := cs.bclient.DeleteBlob(ctx, containerName, fileName, &azblob.DeleteBlobOptions{})
 	if err != nil {
 		return err
