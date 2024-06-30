@@ -1,6 +1,5 @@
 run:
 	cd backend && make rund
-	cd admin && npm run dev &
 	cd website && npm run dev &
 	
 down:

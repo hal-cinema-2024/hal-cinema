@@ -1,11 +1,4 @@
-import {
-  ReactNode,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  FC,
-} from "react";
+import { ReactNode, createContext, useEffect, useState, FC } from "react";
 
 interface Seat {
   row: string;
@@ -18,19 +11,9 @@ interface SeatSelectionContextType {
   seatCount: number;
 }
 
-const SeatSelectionContext = createContext<
+export const SeatSelectionContext = createContext<
   SeatSelectionContextType | undefined
 >(undefined);
-
-export const useSeatSelection = () => {
-  const context = useContext(SeatSelectionContext);
-  if (!context) {
-    throw new Error(
-      "useSeatSelection must be used within a SeatSelectionProvider"
-    );
-  }
-  return context;
-};
 
 export const SeatSelectionProvider: FC<{ children: ReactNode }> = ({
   children,
