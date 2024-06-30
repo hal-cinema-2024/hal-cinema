@@ -12,7 +12,7 @@ import (
 
 type CreateScheduleParam struct {
 	MovieID   string
-	TheaterID string
+	TheaterID int32
 	StartTime time.Time
 }
 

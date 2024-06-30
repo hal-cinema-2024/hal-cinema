@@ -7,6 +7,6 @@ import (
 )
 
 type TheaterRepo interface {
-	GetTheaterByID(ctx context.Context, theaterID string) (*model.Theater, error)
-	GetTheatersByID(ctx context.Context, theaterID []string) (map[string]*model.Theater, error)
+	GetTheaterByID(ctx context.Context, theaterID int32) (*model.Theater, error)
+	GetTheatersByID(ctx context.Context, theaterID []int32) (map[int32]*model.Theater, error)
 }

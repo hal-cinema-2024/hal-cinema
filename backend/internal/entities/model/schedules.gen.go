@@ -13,7 +13,7 @@ const TableNameSchedule = "schedules"
 // Schedule mapped from table <schedules>
 type Schedule struct {
 	ScheduleID string    `gorm:"column:schedule_id;primaryKey" json:"schedule_id"`
-	TheaterID  string    `gorm:"column:theater_id;not null" json:"theater_id"`
+	TheaterID  int32     `gorm:"column:theater_id;not null" json:"theater_id"`
 	MovieID    string    `gorm:"column:movie_id;not null" json:"movie_id"`
 	StartDate  time.Time `gorm:"column:start_date;not null" json:"start_date"`
 }

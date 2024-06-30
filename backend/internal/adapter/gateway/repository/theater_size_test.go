@@ -23,12 +23,12 @@ func TestGetTheaterSizeByID(t *testing.T) {
 
 	testCases := []struct {
 		name          string
-		theaterSizeID string
+		theaterSizeID int32
 		wantErr       error
 	}{
 		{
 			name:          "success",
-			theaterSizeID: "1",
+			theaterSizeID: 1,
 			wantErr:       nil,
 		},
 	}
@@ -41,7 +41,7 @@ func TestGetTheaterSizeByID(t *testing.T) {
 			}
 
 			if theater.TheaterSizeID != tc.theaterSizeID {
-				t.Errorf("expected theater size id %s, got %s", theater.TheaterSizeID, tc.theaterSizeID)
+				t.Errorf("expected theater size id %d, got %d", theater.TheaterSizeID, tc.theaterSizeID)
 			}
 		})
 	}

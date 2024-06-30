@@ -31,9 +31,9 @@ func (i *ScheduleInteractor) GetSchedules(ctx context.Context, startDate time.Ti
 	var (
 		movieIDs    []string
 		scheduleIds []string
-		theaterIDs  []string
+		theaterIDs  []int32
 	)
-	theaterMaps := make(map[string]struct{})
+	theaterMaps := make(map[int32]struct{})
 
 	for _, schedule := range schedules {
 		movieIDs = append(movieIDs, schedule.MovieID)

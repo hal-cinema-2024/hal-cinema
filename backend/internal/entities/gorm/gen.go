@@ -21,7 +21,6 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 		Movie:           newMovie(db, opts...),
 		MovieImage:      newMovieImage(db, opts...),
 		Order:           newOrder(db, opts...),
-		OrdersDetail:    newOrdersDetail(db, opts...),
 		Permission:      newPermission(db, opts...),
 		PriceType:       newPriceType(db, opts...),
 		Role:            newRole(db, opts...),
@@ -43,7 +42,6 @@ type Query struct {
 	Movie           movie
 	MovieImage      movieImage
 	Order           order
-	OrdersDetail    ordersDetail
 	Permission      permission
 	PriceType       priceType
 	Role            role
@@ -66,7 +64,6 @@ func (q *Query) clone(db *gorm.DB) *Query {
 		Movie:           q.Movie.clone(db),
 		MovieImage:      q.MovieImage.clone(db),
 		Order:           q.Order.clone(db),
-		OrdersDetail:    q.OrdersDetail.clone(db),
 		Permission:      q.Permission.clone(db),
 		PriceType:       q.PriceType.clone(db),
 		Role:            q.Role.clone(db),
@@ -96,7 +93,6 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 		Movie:           q.Movie.replaceDB(db),
 		MovieImage:      q.MovieImage.replaceDB(db),
 		Order:           q.Order.replaceDB(db),
-		OrdersDetail:    q.OrdersDetail.replaceDB(db),
 		Permission:      q.Permission.replaceDB(db),
 		PriceType:       q.PriceType.replaceDB(db),
 		Role:            q.Role.replaceDB(db),
@@ -116,7 +112,6 @@ type queryCtx struct {
 	Movie           *movieDo
 	MovieImage      *movieImageDo
 	Order           *orderDo
-	OrdersDetail    *ordersDetailDo
 	Permission      *permissionDo
 	PriceType       *priceTypeDo
 	Role            *roleDo
@@ -136,7 +131,6 @@ func (q *Query) WithContext(ctx context.Context) *queryCtx {
 		Movie:           q.Movie.WithContext(ctx),
 		MovieImage:      q.MovieImage.WithContext(ctx),
 		Order:           q.Order.WithContext(ctx),
-		OrdersDetail:    q.OrdersDetail.WithContext(ctx),
 		Permission:      q.Permission.WithContext(ctx),
 		PriceType:       q.PriceType.WithContext(ctx),
 		Role:            q.Role.WithContext(ctx),

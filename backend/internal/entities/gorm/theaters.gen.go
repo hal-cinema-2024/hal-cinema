@@ -27,8 +27,8 @@ func newTheater(db *gorm.DB, opts ...gen.DOOption) theater {
 
 	tableName := _theater.theaterDo.TableName()
 	_theater.ALL = field.NewAsterisk(tableName)
-	_theater.TheaterID = field.NewString(tableName, "theater_id")
-	_theater.TheaterSizeID = field.NewString(tableName, "theater_size_id")
+	_theater.TheaterID = field.NewInt32(tableName, "theater_id")
+	_theater.TheaterSizeID = field.NewInt32(tableName, "theater_size_id")
 	_theater.Name = field.NewString(tableName, "name")
 
 	_theater.fillFieldMap()
@@ -40,8 +40,8 @@ type theater struct {
 	theaterDo theaterDo
 
 	ALL           field.Asterisk
-	TheaterID     field.String
-	TheaterSizeID field.String
+	TheaterID     field.Int32
+	TheaterSizeID field.Int32
 	Name          field.String
 
 	fieldMap map[string]field.Expr
@@ -59,8 +59,8 @@ func (t theater) As(alias string) *theater {
 
 func (t *theater) updateTableName(table string) *theater {
 	t.ALL = field.NewAsterisk(table)
-	t.TheaterID = field.NewString(table, "theater_id")
-	t.TheaterSizeID = field.NewString(table, "theater_size_id")
+	t.TheaterID = field.NewInt32(table, "theater_id")
+	t.TheaterSizeID = field.NewInt32(table, "theater_size_id")
 	t.Name = field.NewString(table, "name")
 
 	t.fillFieldMap()

@@ -14,6 +14,7 @@ const TableNameOrder = "orders"
 type Order struct {
 	OrderID   string    `gorm:"column:order_id;primaryKey" json:"order_id"`
 	UserID    string    `gorm:"column:user_id;not null" json:"user_id"`
+	IsPaid    bool      `gorm:"column:is_paid;not null" json:"is_paid"`
 	CreatedAt time.Time `gorm:"column:created_at;not null" json:"created_at"`
 }
 

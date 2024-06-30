@@ -9,9 +9,10 @@ const TableNameTheatersSeat = "theaters_seats"
 // TheatersSeat mapped from table <theaters_seats>
 type TheatersSeat struct {
 	TheaterSeatID string `gorm:"column:theater_seat_id;primaryKey" json:"theater_seat_id"`
-	UserID        string `gorm:"column:user_id;not null" json:"user_id"`
+	OrderID       string `gorm:"column:order_id;not null" json:"order_id"`
 	ScheduleID    string `gorm:"column:schedule_id;not null" json:"schedule_id"`
-	SeatName      string `gorm:"column:seat_name;not null" json:"seat_name"`
+	SeatName      string `gorm:"column:seat_name" json:"seat_name"`
+	PriceType     int32  `gorm:"column:price_type;not null" json:"price_type"`
 }
 
 // TableName TheatersSeat's table name

@@ -1,67 +1,67 @@
 {
   "permissions": [
     {
-      "permission_id":"1",
+      "permission_id":1,
       "uri": "*",
       "req_method": "*",
       "effect":"allow"
     },
     {
-      "permission_id":"2",
+      "permission_id":2,
       "uri": "/login/google",
       "req_method": "POST",
       "effect":"allow"
     },
     {
-      "permission_id":"3",
+      "permission_id":3,
       "uri": "/login/google",
       "req_method": "POST",
       "effect":"allow"
     },
     {
-      "permission_id":"4",
+      "permission_id":4,
       "uri": "/v1/movies",
       "req_method": "GET",
       "effect":"allow"
     },
     {
-      "permission_id":"5",
+      "permission_id":5,
       "uri": "/v1/movies/*",
       "req_method": "GET",
       "effect":"allow"
     },
     {
-      "permission_id":"6",
+      "permission_id":6,
       "uri": "/v1/order",
       "req_method": "*",
       "effect":"allow"
     },
     {
-      "permission_id":"7",
+      "permission_id":7,
       "uri": "/v1/reservations",
       "req_method": "POST",
       "effect":"allow"
     },
     {
-      "permission_id":"8",
+      "permission_id":8,
       "uri": "/v1/reservations/*",
       "req_method": "DELETE",
       "effect":"allow"
     },
     {
-      "permission_id":"9",
+      "permission_id":9,
       "uri": "/v1/schedules",
       "req_method": "GET",
       "effect":"allow"
     },
     {
-      "permission_id":"10",
+      "permission_id":10,
       "uri": "/v1/users",
       "req_method": "GET",
       "effect":"allow"
     },
     {
-      "permission_id":"11",
+      "permission_id":11,
       "uri": "/v1/users/*",
       "req_method": "*",
       "effect":"allow"
@@ -70,142 +70,142 @@
 
   "roles":[
     {
-      "role_id":"1",
+      "role_id":1,
       "name":"admin"
     },
     {
-      "role_id":"2",
+      "role_id":2,
       "name":"operator"
     },
     {
-      "role_id":"3",
+      "role_id":3,
       "name":"guest"
     }
   ],
 
   "role_permissions": [
     {
-      "role_id":"1",
-      "permission_id":"1"
+      "role_id":1,
+      "permission_id":1
     },   
     {
-      "role_id":"2",
-      "permission_id":"2"
+      "role_id":2,
+      "permission_id":2
     },   
     {
-      "role_id":"2",
-      "permission_id":"3"
+      "role_id":2,
+      "permission_id":3
     },   
     {
-      "role_id":"2",
-      "permission_id":"4"
+      "role_id":2,
+      "permission_id":4
     },   
     {
-      "role_id":"2",
-      "permission_id":"5"
+      "role_id":2,
+      "permission_id":5
     },   
     {
-      "role_id":"2",
-      "permission_id":"6"
+      "role_id":2,
+      "permission_id":6
     },   
     {
-      "role_id":"2",
-      "permission_id":"7"
+      "role_id":2,
+      "permission_id":7
     },   
     {
-      "role_id":"2",
-      "permission_id":"8"
+      "role_id":2,
+      "permission_id":8
     },   
     {
-      "role_id":"2",
-      "permission_id":"9"
+      "role_id":2,
+      "permission_id":9
     },   
     {
-      "role_id":"2",
-      "permission_id":"10"
+      "role_id":2,
+      "permission_id":10
     },   
     {
-      "role_id":"2",
-      "permission_id":"11"
+      "role_id":2,
+      "permission_id":11
     }
   ],
   "theaters_sizes":[
     {
-      "theater_size_id": "1",
+      "theater_size_id": 1,
       "name": "small",
       "capacity": 70
     },
     {
-      "theater_size_id": "2",
+      "theater_size_id":2,
       "name": "medium",
       "capacity": 120
     },
     {
-      "theater_size_id": "3",
+      "theater_size_id": 3,
       "name": "large",
       "capacity": 200
     }
   ],
   "theaters": [
     {
-      "theater_id":"1",
+      "theater_id":1,
       "name":"small-1",
-      "theater_size_id":"1"
+      "theater_size_id":2
     },
     {
-      "theater_id":"2",
+      "theater_id":2,
       "name":"small-2",
-      "theater_size_id":"1"
+      "theater_size_id":1
     },
     {
-      "theater_id":"3",
+      "theater_id":3,
       "name":"small-3",
-      "theater_size_id":"1"
+      "theater_size_id":1
     },
     {
-      "theater_id":"4",
+      "theater_id":4,
       "name":"medium-1",
-      "theater_size_id":"2"
+      "theater_size_id":2
     },
     {
-      "theater_id":"5",
+      "theater_id":5,
       "name":"medium-2",
-      "theater_size_id":"2"
+      "theater_size_id":2
     },
     {
-      "theater_id":"6",
+      "theater_id":6,
       "name":"large-1",
-      "theater_size_id":"3"
+      "theater_size_id":3
     },
     {
-      "theater_id":"7",
+      "theater_id":7,
       "name":"large-2",
-      "theater_size_id":"3"
+      "theater_size_id":3
     },
     {
-      "theater_id":"8",
+      "theater_id":8,
       "name":"large-3",
-      "theater_size_id":"3"
+      "theater_size_id":3
     }
   ],
   "price_types": [
     {
-      "price_type_id": "1",
+      "price_type_id": 1,
       "name": "Adult",
       "price": 1800
     },
     {
-      "price_type_id": "2",
+      "price_type_id": 2,
       "name": "College Student",
       "price": 1600
     },
     {
-      "price_type_id": "3",
+      "price_type_id":3,
       "name": "Junior High/High School Student",
       "price": 1400
     },
     {
-      "price_type_id": "4",
+      "price_type_id": 4,
       "name": "Elementary School Student/Child",
       "price": 1000
     }
