@@ -67,16 +67,17 @@ func UpdateMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 		}
 
 		err = mi.UpdateMovie(ctx.Request().Context(), interactor.UpdateMovie{
-			MovieID:     req.MovieID,
-			Name:        req.Name,
-			Director:    req.Director,
-			Summary:     req.Summary,
-			Thumbnail:   thumbnail,
-			Link:        req.Link,
-			Term:        req.Term,
-			ReleaseDate: releaseDate,
-			EndDate:     endDate,
-			MovieImage:  movieImageFiles,
+			MovieID:          req.MovieID,
+			Name:             req.Name,
+			Director:         req.Director,
+			Summary:          req.Summary,
+			Thumbnail:        thumbnail,
+			Link:             req.Link,
+			Term:             req.Term,
+			ReleaseDate:      releaseDate,
+			EndDate:          endDate,
+			DeleteMovieImage: req.DeleteMovieImage,
+			MovieImage:       movieImageFiles,
 		})
 		if err != nil {
 			return err
