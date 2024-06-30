@@ -12,6 +12,7 @@ type DataAccess interface {
 	TheaterRepo
 	TheaterSizeRepo
 	TheatersSeatsRepo
+	OrderRepo
 
 	Transaction(ctx context.Context, fn func(context.Context, DataAccess) error) error
 }

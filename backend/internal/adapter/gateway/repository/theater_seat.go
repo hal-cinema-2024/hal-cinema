@@ -16,6 +16,18 @@ func NewTheaterSeatRepo(db *gorm.DB) *TheaterSeatRepo {
 	return &TheaterSeatRepo{db: db}
 }
 
+func (r *TheaterSeatRepo) CreateTheatersSeats(ctx context.Context, theatersSeats []*model.TheatersSeat) error {
+	if len(theatersSeats) == 0 {
+		return nil
+	}
+
+	err := r.db.WithContext(ctx).Create(&theatersSeats).Error
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func (r *TheaterSeatRepo) GetTheatersSeatsByScheduleID(ctx context.Context, scheduleID string) ([]*model.TheatersSeat, error) {
 	var theatersSeats []*model.TheatersSeat
 	err := r.db.WithContext(ctx).Where("schedule_id = ?", scheduleID).Find(&theatersSeats).Error

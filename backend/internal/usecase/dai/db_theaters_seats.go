@@ -7,6 +7,7 @@ import (
 )
 
 type TheatersSeatsRepo interface {
+	CreateTheatersSeats(ctx context.Context, theatersSeats []*model.TheatersSeat) error
 	GetTheatersSeatsByScheduleID(ctx context.Context, scheduleID string) ([]*model.TheatersSeat, error)
 	GetTheatersSeatsByScheduleIDs(ctx context.Context, scheduleIDs []string) (map[string][]*model.TheatersSeat, error)
 }
