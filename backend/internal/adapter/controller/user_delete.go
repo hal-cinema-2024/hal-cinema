@@ -27,7 +27,7 @@ type DeleteUserResponse struct {
 
 func DeleteUser(
 	ui *interactor.UserInteractor,
-) func(ctx echo.Context) error {
+) MustLogin {
 	return func(ctx echo.Context) error {
 		var req DeleteUserRequest
 		if err := ctx.Bind(&req); err != nil {

@@ -30,7 +30,7 @@ type GetUserResponse struct {
 	Gender           int    `json:"gender"`
 }
 
-func GetUser(ui *interactor.UserInteractor) func(ctx echo.Context) error {
+func GetUser(ui *interactor.UserInteractor) MustLogin {
 	return func(ctx echo.Context) error {
 		var req GetUserRequest
 		if err := ctx.Bind(&req); err != nil {

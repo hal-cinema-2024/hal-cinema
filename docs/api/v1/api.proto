@@ -228,13 +228,24 @@ message CreateScheduleResponse {
 }
 
 message GetSchedulesRequest {
-  int64 page_id = 1;
-  int64 page_size = 2;
-  string date = 3;
+  string start_date = 1;
+  string movie_id = 2;
 }
 
 message GetSchedulesResponse {
-  repeated Schedule schedule = 1;
+  string selected_date = 1;
+  string selected_movies = 2;
+  repeated GetScheduleResult schedule = 3;
+}
+
+message GetScheduleResult {
+  string schedule_id = 1;
+  string movie_id = 2;
+  string movie_name = 3;
+  string theater = 4;
+  string start_time = 5;
+  string end_time = 6;
+  bool is_available = 7;
 }
 
 message UpdateScheduleRequest {

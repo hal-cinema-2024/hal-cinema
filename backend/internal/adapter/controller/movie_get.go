@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"net/http"
 	"time"
 
 	"github.com/hal-cinema-2024/backend/internal/usecase/interactor"
@@ -10,6 +11,16 @@ import (
 type GetMoviesRequest struct {
 	PageSize int `json:"page_size" form:"pageSize"`
 	PageID   int `json:"page_id" form:"pageId"`
+}
+
+func (req *GetMoviesRequest) Validate() error {
+	if req.PageSize == 0 {
+		req.PageSize = 10
+	}
+	if req.PageID == 0 {
+		req.PageID = 1
+	}
+	return nil
 }
 
 type GetMovieRequest struct {
@@ -43,7 +54,7 @@ type GetMovieResponse struct {
 
 func GetMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 	return func(ctx echo.Context) error {
-		var req GetMovieRequest
+		var req *GetMovieRequest
 		if err := ctx.Bind(&req); err != nil {
 			return err
 		}
@@ -52,8 +63,7 @@ func GetMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 		if err != nil {
 			return err
 		}
-
-		return ctx.JSON(200, GetMovieResponse{
+		return ctx.JSON(http.StatusOK, GetMovieResponse{
 			MovieID:     movie.MovieID,
 			MovieName:   movie.Name,
 			Director:    movie.Director,
@@ -70,10 +80,15 @@ func GetMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 
 func GetMovies(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 	return func(ctx echo.Context) error {
-		var req GetMoviesRequest
+		var req *GetMoviesRequest
 		if err := ctx.Bind(&req); err != nil {
 			return err
 		}
+
+		if err := req.Validate(); err != nil {
+			return err
+		}
+
 		movies, err := mi.GetMovies(ctx.Request().Context(), req.PageSize, req.PageID)
 		if err != nil {
 			return err

@@ -27,14 +27,14 @@ func TestCreateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	factrues, err := invoke[*factory.Factories]()
+	factories, err := invoke[*factory.Factories]()
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	userRepo := repository.NewUserRepo(db)
 
-	user := factrues.User.Create(model.User{
+	user := factories.User.Create(model.User{
 		UserID:    uuid.NewString(),
 		Email:     "test.hal.cinema@example.com",
 		CreatedAt: time.Now(),
@@ -129,13 +129,13 @@ func TestGetUsers(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	factrues, err := invoke[*factory.Factories]()
+	factories, err := invoke[*factory.Factories]()
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	userRepo := repository.NewUserRepo(db)
-	user1 := factrues.User.Create(
+	user1 := factories.User.Create(
 		model.User{
 			UserID:           uuid.NewString(),
 			Email:            "test.hal.cinema.1@example.com",
@@ -150,7 +150,7 @@ func TestGetUsers(t *testing.T) {
 			IsDelete:         false,
 		},
 	)
-	user2 := factrues.User.Create(
+	user2 := factories.User.Create(
 		model.User{
 			UserID:           uuid.NewString(),
 			Email:            "test.hal.cinema.2@example.com",
@@ -200,13 +200,13 @@ func TestGetUserByIDAndValidUser(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	factrues, err := invoke[*factory.Factories]()
+	factories, err := invoke[*factory.Factories]()
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	userRepo := repository.NewUserRepo(db)
-	user := factrues.User.Create(
+	user := factories.User.Create(
 		model.User{
 			UserID:    uuid.NewString(),
 			Email:     "test.hal.cinema.1@example.com",
@@ -277,13 +277,13 @@ func TestUpdateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	factrues, err := invoke[*factory.Factories]()
+	factories, err := invoke[*factory.Factories]()
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	userRepo := repository.NewUserRepo(db)
-	user1 := factrues.User.Create(
+	user1 := factories.User.Create(
 		model.User{
 			UserID:           uuid.NewString(),
 			Email:            "test.hal.cinema.1@example.com",
@@ -298,7 +298,7 @@ func TestUpdateUser(t *testing.T) {
 			IsDelete:         false,
 		},
 	)
-	user2 := factrues.User.Create(
+	user2 := factories.User.Create(
 		model.User{
 			UserID:           uuid.NewString(),
 			Email:            "test.hal.cinema.2@example.com",
@@ -313,7 +313,7 @@ func TestUpdateUser(t *testing.T) {
 			IsDelete:         false,
 		},
 	)
-	user3 := factrues.User.Create(
+	user3 := factories.User.Create(
 		model.User{
 			UserID:           uuid.NewString(),
 			Email:            "test.hal.cinema.3@example.com",
@@ -328,7 +328,7 @@ func TestUpdateUser(t *testing.T) {
 			IsDelete:         false,
 		},
 	)
-	user4 := factrues.User.Create(
+	user4 := factories.User.Create(
 		model.User{
 			UserID:           uuid.NewString(),
 			Email:            "test.hal.cinema.4@example.com",
@@ -343,7 +343,7 @@ func TestUpdateUser(t *testing.T) {
 			IsDelete:         false,
 		},
 	)
-	user5 := factrues.User.Create(
+	user5 := factories.User.Create(
 		model.User{
 			UserID:           uuid.NewString(),
 			Email:            "test.hal.cinema.5@example.com",
@@ -358,7 +358,7 @@ func TestUpdateUser(t *testing.T) {
 			IsDelete:         false,
 		},
 	)
-	user6 := factrues.User.Create(
+	user6 := factories.User.Create(
 		model.User{
 			UserID:           uuid.NewString(),
 			Email:            "test.hal.cinema.6@example.com",
@@ -373,7 +373,7 @@ func TestUpdateUser(t *testing.T) {
 			IsDelete:         false,
 		},
 	)
-	user7 := factrues.User.Create(
+	user7 := factories.User.Create(
 		model.User{
 			UserID:           uuid.NewString(),
 			Email:            "test.hal.cinema.7@example.com",
@@ -582,13 +582,13 @@ func TestDeleteUser(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	factrues, err := invoke[*factory.Factories]()
+	factories, err := invoke[*factory.Factories]()
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	userRepo := repository.NewUserRepo(db)
-	user := factrues.User.Create(
+	user := factories.User.Create(
 		model.User{
 			UserID:    uuid.NewString(),
 			Email:     "test.hal.cinema.1@example.com",

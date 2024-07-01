@@ -37,7 +37,7 @@ func GoogleLogin(
 			log.Error(ctx.Request().Context(), "bad request", err)
 			return echo.ErrBadRequest
 		}
-
+		fmt.Println(reqBody)
 		if err := reqBody.Validate(); err != nil {
 			log.Error(ctx.Request().Context(), "bad request", err)
 			return echo.ErrBadRequest
