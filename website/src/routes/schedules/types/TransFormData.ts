@@ -1,10 +1,10 @@
 export type TheaterSchedule = {
-  theaterId: string;
+  theater: string;
   schedules: {
     scheduleId: string;
     startTime: string;
-    term: number;
-    isFull: boolean;
+    endTime: string;
+    isAvailable: boolean;
   }[];
 };
 
