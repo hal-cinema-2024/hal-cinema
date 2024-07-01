@@ -102,6 +102,13 @@ const HeaderContent = styled.div`
   align-items: center;
   width: 100%;
   max-width: 1200px;
+  font-size: 20px;
+  font-family: "M PLUS 1 Code", monospace;
+  // font-family: "BIZ UDPMincho", serif;
+  // font-family: "IBM Plex Sans JP", sans-serif;
+  // font-family: "Noto Sans JP", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
 `;
 
 const Logo1 = styled(Link)`
@@ -157,6 +164,9 @@ const Logo2 = styled(Link)`
 
 const NavItem = styled.li`
   margin: 0 1.5rem;
+  // font-family: "Noto Sans JP", sans-serif;
+  font-family: "M PLUS 1 Code", monospace;
+  font-weight: 500px;
 `;
 
 const FooterNavLink = styled(Link)`

@@ -14,7 +14,7 @@ export const Movies = (props: MoviePropsInterface) => {
           <MoviesContainer key={item.movieId}>
             <SSdev>
               <MovieImage>
-                <img src={item.thumbnail} alt='Movie Poster' />
+                <img src={item.thumbnail} alt="Movie Poster" />
               </MovieImage>
               <MovieTextDiv>
                 <MovieFlexdiv>
@@ -47,6 +47,7 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: "M PLUS 1 Code", monospace;
 `;
 
 const MoviesContainer = styled(Card)`
