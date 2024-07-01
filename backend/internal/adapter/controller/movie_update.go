@@ -40,20 +40,24 @@ func UpdateMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 	return func(ctx echo.Context) error {
 		var req UpdateMovieRequest
 		if err := ctx.Bind(&req); err != nil {
-			return err
+			log.Warn(ctx.Request().Context(), "failed to bind", "error", err)
+			return echo.ErrBadRequest
 		}
 
 		if err := req.Validate(); err != nil {
-			log.Error(ctx.Request().Context(), "movieId is required")
+			log.Warn(ctx.Request().Context(), "failed to validate", "error", err)
+			return echo.ErrBadRequest
 		}
 		form, err := ctx.MultipartForm()
 		if err != nil {
+			log.Warn(ctx.Request().Context(), "failed to validate", "error", err)
 			return echo.ErrBadRequest
 		}
 		var thumbnail *multipart.FileHeader
 
 		imageFiles, ok := form.File["thumbnail"]
 		if !ok {
+			log.Warn(ctx.Request().Context(), "thumbnail is not found")
 			return echo.ErrBadRequest
 		} else {
 			thumbnail = imageFiles[0]
