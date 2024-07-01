@@ -27,8 +27,8 @@ func newRolePermission(db *gorm.DB, opts ...gen.DOOption) rolePermission {
 
 	tableName := _rolePermission.rolePermissionDo.TableName()
 	_rolePermission.ALL = field.NewAsterisk(tableName)
-	_rolePermission.RoleID = field.NewString(tableName, "role_id")
-	_rolePermission.PermissionID = field.NewString(tableName, "permission_id")
+	_rolePermission.RoleID = field.NewInt32(tableName, "role_id")
+	_rolePermission.PermissionID = field.NewInt32(tableName, "permission_id")
 
 	_rolePermission.fillFieldMap()
 
@@ -39,8 +39,8 @@ type rolePermission struct {
 	rolePermissionDo rolePermissionDo
 
 	ALL          field.Asterisk
-	RoleID       field.String
-	PermissionID field.String
+	RoleID       field.Int32
+	PermissionID field.Int32
 
 	fieldMap map[string]field.Expr
 }
@@ -57,8 +57,8 @@ func (r rolePermission) As(alias string) *rolePermission {
 
 func (r *rolePermission) updateTableName(table string) *rolePermission {
 	r.ALL = field.NewAsterisk(table)
-	r.RoleID = field.NewString(table, "role_id")
-	r.PermissionID = field.NewString(table, "permission_id")
+	r.RoleID = field.NewInt32(table, "role_id")
+	r.PermissionID = field.NewInt32(table, "permission_id")
 
 	r.fillFieldMap()
 

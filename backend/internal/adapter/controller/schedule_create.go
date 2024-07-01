@@ -11,7 +11,7 @@ import (
 
 type CreateScheduleRequest struct {
 	MovieID   string `json:"movieId"`
-	TheaterID string `json:"theaterId"`
+	TheaterID int32  `json:"theaterId"`
 	StartTime string `json:"startTime"`
 }
 
@@ -20,7 +20,7 @@ func (r CreateScheduleRequest) Validate() error {
 		return errors.New("movie id is required")
 	}
 
-	if r.TheaterID == "" {
+	if r.TheaterID == 0 {
 		return errors.New("theater id is required")
 	}
 	_, err := str2time(r.StartTime)

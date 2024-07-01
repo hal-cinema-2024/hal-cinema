@@ -836,11 +836,14 @@
     "v1CreateOrderRequest": {
       "type": "object",
       "properties": {
-        "order": {
+        "scheduleId": {
+          "type": "string"
+        },
+        "seatSelects": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v1Orders"
+            "$ref": "#/definitions/v1SeatSelect"
           }
         }
       }
@@ -963,8 +966,34 @@
     "v1GetOrderResponse": {
       "type": "object",
       "properties": {
-        "order": {
-          "$ref": "#/definitions/v1Orders"
+        "movieId": {
+          "type": "string"
+        },
+        "movieName": {
+          "type": "string"
+        },
+        "theaterId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "theaterName": {
+          "type": "string"
+        },
+        "screeningDatetime": {
+          "type": "string"
+        },
+        "totalPrice": {
+          "type": "string"
+        },
+        "seatDetails": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1SeatDetail"
+          }
+        },
+        "user": {
+          "$ref": "#/definitions/v1MiniUser"
         }
       }
     },
@@ -1060,6 +1089,23 @@
         }
       }
     },
+    "v1MiniUser": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "userNameKana": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    },
     "v1Movie": {
       "type": "object",
       "properties": {
@@ -1135,6 +1181,36 @@
           "type": "string"
         },
         "price": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1SeatDetail": {
+      "type": "object",
+      "properties": {
+        "theaterSeatId": {
+          "type": "string"
+        },
+        "seatName": {
+          "type": "string"
+        },
+        "priceType": {
+          "type": "string"
+        },
+        "price": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1SeatSelect": {
+      "type": "object",
+      "properties": {
+        "seatName": {
+          "type": "string"
+        },
+        "priceType": {
           "type": "integer",
           "format": "int32"
         }

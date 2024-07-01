@@ -8,20 +8,20 @@ import {
   UpdateScheduleResponseInterface,
 } from "../interfaces/schedule";
 
-export const getSchedules = async (
-  pageId?: string,
-  pageSize?: string,
-  date?: string
-) => {
+export const getSchedules = async (startDate: string, movieId: string) => {
   try {
-    const res: GetSchedulesResponseInterface = await client.v1.schedules.$get({
-      query: {
-        pageId: pageId,
-        pageSize: pageSize,
-        date: date,
-      },
-    });
-    return res.schedule;
+    if (startDate && movieId) {
+      const res: GetSchedulesResponseInterface = await client.v1.schedules.$get(
+        {
+          query: {
+            startDate: startDate,
+            movieId: movieId,
+          },
+        }
+      );
+
+      return res.schedule;
+    }
   } catch (err) {
     console.log(err);
   }

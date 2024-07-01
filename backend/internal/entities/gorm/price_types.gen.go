@@ -27,7 +27,7 @@ func newPriceType(db *gorm.DB, opts ...gen.DOOption) priceType {
 
 	tableName := _priceType.priceTypeDo.TableName()
 	_priceType.ALL = field.NewAsterisk(tableName)
-	_priceType.PriceTypeID = field.NewString(tableName, "price_type_id")
+	_priceType.PriceTypeID = field.NewInt32(tableName, "price_type_id")
 	_priceType.Name = field.NewString(tableName, "name")
 	_priceType.Price = field.NewInt32(tableName, "price")
 
@@ -40,7 +40,7 @@ type priceType struct {
 	priceTypeDo priceTypeDo
 
 	ALL         field.Asterisk
-	PriceTypeID field.String
+	PriceTypeID field.Int32
 	Name        field.String
 	Price       field.Int32
 
@@ -59,7 +59,7 @@ func (p priceType) As(alias string) *priceType {
 
 func (p *priceType) updateTableName(table string) *priceType {
 	p.ALL = field.NewAsterisk(table)
-	p.PriceTypeID = field.NewString(table, "price_type_id")
+	p.PriceTypeID = field.NewInt32(table, "price_type_id")
 	p.Name = field.NewString(table, "name")
 	p.Price = field.NewInt32(table, "price")
 

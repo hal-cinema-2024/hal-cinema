@@ -8,8 +8,8 @@ const TableNameTheater = "theaters"
 
 // Theater mapped from table <theaters>
 type Theater struct {
-	TheaterID     string `gorm:"column:theater_id;primaryKey" json:"theater_id"`
-	TheaterSizeID string `gorm:"column:theater_size_id;not null" json:"theater_size_id"`
+	TheaterID     int32  `gorm:"column:theater_id;primaryKey" json:"theater_id"`
+	TheaterSizeID int32  `gorm:"column:theater_size_id;not null" json:"theater_size_id"`
 	Name          string `gorm:"column:name;not null" json:"name"`
 }
 

@@ -7,6 +7,6 @@ import (
 )
 
 type TheaterSizeRepo interface {
-	GetTheaterSizeByID(ctx context.Context, theaterSizeID string) (*model.TheatersSize, error)
-	GetTheaterSizes(ctx context.Context) (map[string]*model.TheatersSize, error)
+	GetTheaterSizeByID(ctx context.Context, theaterSizeID int32) (*model.TheatersSize, error)
+	GetTheaterSizes(ctx context.Context) (map[int32]*model.TheatersSize, error)
 }

@@ -27,7 +27,7 @@ func newPermission(db *gorm.DB, opts ...gen.DOOption) permission {
 
 	tableName := _permission.permissionDo.TableName()
 	_permission.ALL = field.NewAsterisk(tableName)
-	_permission.PermissionID = field.NewString(tableName, "permission_id")
+	_permission.PermissionID = field.NewInt32(tableName, "permission_id")
 	_permission.URI = field.NewString(tableName, "uri")
 	_permission.ReqMethod = field.NewString(tableName, "req_method")
 	_permission.Effect = field.NewString(tableName, "effect")
@@ -41,7 +41,7 @@ type permission struct {
 	permissionDo permissionDo
 
 	ALL          field.Asterisk
-	PermissionID field.String
+	PermissionID field.Int32
 	URI          field.String
 	ReqMethod    field.String
 	Effect       field.String
@@ -61,7 +61,7 @@ func (p permission) As(alias string) *permission {
 
 func (p *permission) updateTableName(table string) *permission {
 	p.ALL = field.NewAsterisk(table)
-	p.PermissionID = field.NewString(table, "permission_id")
+	p.PermissionID = field.NewInt32(table, "permission_id")
 	p.URI = field.NewString(table, "uri")
 	p.ReqMethod = field.NewString(table, "req_method")
 	p.Effect = field.NewString(table, "effect")

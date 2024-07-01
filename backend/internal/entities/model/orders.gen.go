@@ -12,9 +12,11 @@ const TableNameOrder = "orders"
 
 // Order mapped from table <orders>
 type Order struct {
-	OrderID   string    `gorm:"column:order_id;primaryKey" json:"order_id"`
-	UserID    string    `gorm:"column:user_id;not null" json:"user_id"`
-	CreatedAt time.Time `gorm:"column:created_at;not null" json:"created_at"`
+	OrderID    string    `gorm:"column:order_id;primaryKey" json:"order_id"`
+	UserID     string    `gorm:"column:user_id;not null" json:"user_id"`
+	ScheduleID string    `gorm:"column:schedule_id;not null" json:"schedule_id"`
+	IsPaid     bool      `gorm:"column:is_paid;not null" json:"is_paid"`
+	CreatedAt  time.Time `gorm:"column:created_at;not null" json:"created_at"`
 }
 
 // TableName Order's table name

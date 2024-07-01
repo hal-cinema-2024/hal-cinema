@@ -36,7 +36,6 @@ func newMovie(db *gorm.DB, opts ...gen.DOOption) movie {
 	_movie.Term = field.NewInt32(tableName, "term")
 	_movie.ReleaseDate = field.NewTime(tableName, "release_date")
 	_movie.EndDate = field.NewTime(tableName, "end_date")
-	_movie.IsDelete = field.NewBool(tableName, "is_delete")
 
 	_movie.fillFieldMap()
 
@@ -56,7 +55,6 @@ type movie struct {
 	Term          field.Int32 // 上映時間
 	ReleaseDate   field.Time
 	EndDate       field.Time
-	IsDelete      field.Bool
 
 	fieldMap map[string]field.Expr
 }
@@ -82,7 +80,6 @@ func (m *movie) updateTableName(table string) *movie {
 	m.Term = field.NewInt32(table, "term")
 	m.ReleaseDate = field.NewTime(table, "release_date")
 	m.EndDate = field.NewTime(table, "end_date")
-	m.IsDelete = field.NewBool(table, "is_delete")
 
 	m.fillFieldMap()
 
@@ -107,7 +104,7 @@ func (m *movie) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (m *movie) fillFieldMap() {
-	m.fieldMap = make(map[string]field.Expr, 10)
+	m.fieldMap = make(map[string]field.Expr, 9)
 	m.fieldMap["movie_id"] = m.MovieID
 	m.fieldMap["name"] = m.Name
 	m.fieldMap["director"] = m.Director
@@ -117,7 +114,6 @@ func (m *movie) fillFieldMap() {
 	m.fieldMap["term"] = m.Term
 	m.fieldMap["release_date"] = m.ReleaseDate
 	m.fieldMap["end_date"] = m.EndDate
-	m.fieldMap["is_delete"] = m.IsDelete
 }
 
 func (m movie) clone(db *gorm.DB) movie {

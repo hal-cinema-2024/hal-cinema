@@ -3,24 +3,13 @@ import { getSchedules } from "../../../../../fe-api/repositories/schedule";
 import { transformData } from "../-utils/TransSchedule";
 import { TransformedData } from "../-types/TransFormData";
 
-export const useSchedules = (
-  pageId?: string,
-  pageSize?: string,
-  date?: string
-) => {
+export const useSchedules = (startDate: string, movieId: string) => {
   const [schedules, setSchedules] = useState<TransformedData[]>();
 
-  const fetchData = async (
-    pageId?: string,
-    pageSize?: string,
-    date?: string
-  ) => {
+  const fetchData = async (startDate: string, movieId: string) => {
     try {
-      const res = await getSchedules(
-        pageId,
-        pageSize,
-        date ? new Date(date).toISOString() : undefined
-      );
+      const res = await getSchedules(startDate, movieId);
+
       if (res) {
         const transform = transformData(res);
         setSchedules(transform);
@@ -31,8 +20,8 @@ export const useSchedules = (
   };
 
   useEffect(() => {
-    fetchData(pageId, pageSize, date);
-  }, [pageId, pageSize, date]);
+    fetchData(startDate, movieId);
+  }, [startDate, movieId]);
 
   return { schedules, setSchedules };
 };

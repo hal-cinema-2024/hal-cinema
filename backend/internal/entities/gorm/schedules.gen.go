@@ -28,7 +28,7 @@ func newSchedule(db *gorm.DB, opts ...gen.DOOption) schedule {
 	tableName := _schedule.scheduleDo.TableName()
 	_schedule.ALL = field.NewAsterisk(tableName)
 	_schedule.ScheduleID = field.NewString(tableName, "schedule_id")
-	_schedule.TheaterID = field.NewString(tableName, "theater_id")
+	_schedule.TheaterID = field.NewInt32(tableName, "theater_id")
 	_schedule.MovieID = field.NewString(tableName, "movie_id")
 	_schedule.StartDate = field.NewTime(tableName, "start_date")
 
@@ -42,7 +42,7 @@ type schedule struct {
 
 	ALL        field.Asterisk
 	ScheduleID field.String
-	TheaterID  field.String
+	TheaterID  field.Int32
 	MovieID    field.String
 	StartDate  field.Time
 
@@ -62,7 +62,7 @@ func (s schedule) As(alias string) *schedule {
 func (s *schedule) updateTableName(table string) *schedule {
 	s.ALL = field.NewAsterisk(table)
 	s.ScheduleID = field.NewString(table, "schedule_id")
-	s.TheaterID = field.NewString(table, "theater_id")
+	s.TheaterID = field.NewInt32(table, "theater_id")
 	s.MovieID = field.NewString(table, "movie_id")
 	s.StartDate = field.NewTime(table, "start_date")
 
