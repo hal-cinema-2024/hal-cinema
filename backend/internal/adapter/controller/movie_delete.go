@@ -20,13 +20,13 @@ func DeleteMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 			return err
 		}
 
-		movieID, err := mi.DeleteMovie(ctx.Request().Context(), req.MovieID)
+		err := mi.DeleteMovie(ctx.Request().Context(), req.MovieID)
 		if err != nil {
 			return err
 		}
 
 		return ctx.JSON(200, DeleteMovieResponse{
-			MovieID: movieID,
+			MovieID: req.MovieID,
 		})
 	}
 }
