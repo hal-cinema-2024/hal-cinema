@@ -373,7 +373,13 @@ message DeleteUserResponse {
 }
 
 message CreateOrderRequest {
-  repeated Orders order = 1;
+  string schedule_id = 1;
+  repeated SeatSelect seat_selects = 2;
+}
+
+message SeatSelect {
+  string seat_name = 1;
+  int32 price_type = 2;
 }
 
 message CreateOrderResponse {
@@ -393,7 +399,28 @@ message GetOrderRequest {
 }
 
 message GetOrderResponse {
-  Orders order = 1;
+  string movie_id = 1;
+  string movie_name = 2;
+  int32 theater_id = 3;
+  string theater_name = 4;
+  string screening_datetime = 5;
+  string total_price = 6;
+  repeated SeatDetail seat_details = 7;
+  MiniUser user = 8;
+}
+
+message MiniUser {
+  string user_id = 1;
+  string user_name = 2;
+  string user_name_kana = 3;
+  string email = 4;
+}
+
+message SeatDetail {
+  string theater_seat_id = 1;
+  string seat_name = 2;
+  string price_type = 3;
+  int32 price = 4;
 }
 
 message DeleteOrderRequest {
