@@ -23,12 +23,12 @@ func TestGetTheaterByID(t *testing.T) {
 
 	testCases := []struct {
 		name      string
-		theaterID string
+		theaterID int32
 		wantErr   error
 	}{
 		{
 			name:      "success",
-			theaterID: "1",
+			theaterID: 1,
 			wantErr:   nil,
 		},
 	}
@@ -57,22 +57,22 @@ func TestGetTheatersByID(t *testing.T) {
 
 	testCases := []struct {
 		name       string
-		theaterIDs []string
+		theaterIDs []int32
 		wantLen    int
 	}{
 		{
 			name:       "success",
-			theaterIDs: []string{"1"},
+			theaterIDs: []int32{1},
 			wantLen:    1,
 		},
 		{
 			name:       "success",
-			theaterIDs: []string{"1", "2"},
+			theaterIDs: []int32{1, 2},
 			wantLen:    2,
 		},
 		{
 			name:       "success",
-			theaterIDs: []string{"1", "2", "3"},
+			theaterIDs: []int32{1, 2, 3},
 			wantLen:    3,
 		},
 	}

@@ -37,7 +37,7 @@ func TestCreateSchedule(t *testing.T) {
 	schedule := factories.Schedule.Create(model.Schedule{
 		ScheduleID: uuid.NewString(),
 		MovieID:    movie.MovieID,
-		TheaterID:  "1",
+		TheaterID:  1,
 		StartDate:  time.Now(),
 	})
 
@@ -50,7 +50,7 @@ func TestCreateSchedule(t *testing.T) {
 			name: "success",
 			arg: model.Schedule{
 				ScheduleID: uuid.NewString(),
-				TheaterID:  "1",
+				TheaterID:  1,
 				MovieID:    movie.MovieID,
 				StartDate:  time.Now(),
 			},
@@ -60,7 +60,7 @@ func TestCreateSchedule(t *testing.T) {
 			name: "failed - duplicate schedule id",
 			arg: model.Schedule{
 				ScheduleID: schedule.ScheduleID,
-				TheaterID:  "1",
+				TheaterID:  1,
 				MovieID:    movie.MovieID,
 				StartDate:  time.Now(),
 			},
@@ -70,7 +70,7 @@ func TestCreateSchedule(t *testing.T) {
 			name: "failed - null movie_id",
 			arg: model.Schedule{
 				ScheduleID: uuid.NewString(),
-				TheaterID:  "1",
+				TheaterID:  1,
 				StartDate:  time.Now(),
 			},
 			wantErrCode: pgerrcode.ForeignKeyViolation,
@@ -88,7 +88,7 @@ func TestCreateSchedule(t *testing.T) {
 			name: "failed - null start date",
 			arg: model.Schedule{
 				ScheduleID: uuid.NewString(),
-				TheaterID:  "1",
+				TheaterID:  1,
 				MovieID:    movie.MovieID,
 			},
 			wantErrCode: pgerrcode.CheckViolation,
@@ -96,7 +96,7 @@ func TestCreateSchedule(t *testing.T) {
 		{
 			name: "failed - schedule id",
 			arg: model.Schedule{
-				TheaterID: "1",
+				TheaterID: 1,
 				MovieID:   movie.MovieID,
 				StartDate: time.Now(),
 			},

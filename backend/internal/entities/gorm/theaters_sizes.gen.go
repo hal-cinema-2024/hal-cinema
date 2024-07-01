@@ -27,7 +27,7 @@ func newTheatersSize(db *gorm.DB, opts ...gen.DOOption) theatersSize {
 
 	tableName := _theatersSize.theatersSizeDo.TableName()
 	_theatersSize.ALL = field.NewAsterisk(tableName)
-	_theatersSize.TheaterSizeID = field.NewString(tableName, "theater_size_id")
+	_theatersSize.TheaterSizeID = field.NewInt32(tableName, "theater_size_id")
 	_theatersSize.Name = field.NewString(tableName, "name")
 	_theatersSize.Capacity = field.NewInt32(tableName, "capacity")
 
@@ -40,7 +40,7 @@ type theatersSize struct {
 	theatersSizeDo theatersSizeDo
 
 	ALL           field.Asterisk
-	TheaterSizeID field.String
+	TheaterSizeID field.Int32
 	Name          field.String
 	Capacity      field.Int32
 
@@ -59,7 +59,7 @@ func (t theatersSize) As(alias string) *theatersSize {
 
 func (t *theatersSize) updateTableName(table string) *theatersSize {
 	t.ALL = field.NewAsterisk(table)
-	t.TheaterSizeID = field.NewString(table, "theater_size_id")
+	t.TheaterSizeID = field.NewInt32(table, "theater_size_id")
 	t.Name = field.NewString(table, "name")
 	t.Capacity = field.NewInt32(table, "capacity")
 

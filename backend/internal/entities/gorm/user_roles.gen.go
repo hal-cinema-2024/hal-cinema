@@ -28,7 +28,7 @@ func newUserRole(db *gorm.DB, opts ...gen.DOOption) userRole {
 	tableName := _userRole.userRoleDo.TableName()
 	_userRole.ALL = field.NewAsterisk(tableName)
 	_userRole.UserID = field.NewString(tableName, "user_id")
-	_userRole.RoleID = field.NewString(tableName, "role_id")
+	_userRole.RoleID = field.NewInt32(tableName, "role_id")
 	_userRole.CreatedAt = field.NewTime(tableName, "created_at")
 
 	_userRole.fillFieldMap()
@@ -41,7 +41,7 @@ type userRole struct {
 
 	ALL       field.Asterisk
 	UserID    field.String
-	RoleID    field.String
+	RoleID    field.Int32
 	CreatedAt field.Time
 
 	fieldMap map[string]field.Expr
@@ -60,7 +60,7 @@ func (u userRole) As(alias string) *userRole {
 func (u *userRole) updateTableName(table string) *userRole {
 	u.ALL = field.NewAsterisk(table)
 	u.UserID = field.NewString(table, "user_id")
-	u.RoleID = field.NewString(table, "role_id")
+	u.RoleID = field.NewInt32(table, "role_id")
 	u.CreatedAt = field.NewTime(table, "created_at")
 
 	u.fillFieldMap()
