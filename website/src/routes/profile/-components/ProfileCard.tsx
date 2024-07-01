@@ -1,10 +1,16 @@
 import styled from "styled-components";
 import { Text, Button, Avatar } from "@yamada-ui/react";
+import { useUser } from "../../../hooks/services/useUser";
+import { useContext } from "react";
+import { UserIdContext } from "../../../store/useUserIdContext";
 
 export const ProfileCard = () => {
+  const { userId } = useContext(UserIdContext);
+  const { user } = useUser(userId!);
+
   return (
     <ProfileContainer>
-      <SAvatar src="/path/to/avatar.jpg" alt="Avatar" />
+      <SAvatar src={user?.userId} alt='Avatar' />
       <EditButton>
         <SText>編集</SText>
       </EditButton>
