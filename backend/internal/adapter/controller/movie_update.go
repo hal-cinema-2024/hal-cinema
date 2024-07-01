@@ -45,6 +45,7 @@ func UpdateMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 
 		if err := req.Validate(); err != nil {
 			log.Error(ctx.Request().Context(), "movieId is required")
+			return echo.ErrBadRequest
 		}
 		form, err := ctx.MultipartForm()
 		if err != nil {

@@ -8,7 +8,6 @@ import (
 	"github.com/hal-cinema-2024/backend/internal/usecase/interactor"
 	"github.com/hal-cinema-2024/backend/pkg/log"
 	"github.com/labstack/echo/v4"
-	"github.com/labstack/gommon/log"
 )
 
 type GetMoviesRequest struct {
@@ -72,7 +71,8 @@ func GetMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 		}
 
 		if err := req.Validate(); err != nil {
-			log.Error(ctx.Request().Context(), fmt.Sprintf("failed to validate request :%v", err))
+			log.Warn(ctx.Request().Context(), fmt.Sprintf("failed to validate request :%v", err))
+			return echo.ErrBadRequest
 		}
 
 		movie, imagePaths, err := mi.GetMovie(ctx.Request().Context(), req.MovieID)
