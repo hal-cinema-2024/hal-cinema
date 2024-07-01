@@ -26,19 +26,22 @@ type UpdateMovie struct {
 
 func (mi *MovieInteractor) UpdateMovie(ctx context.Context, movie UpdateMovie) error {
 	var imagePaths []string
+	var thumbnailPath string
 	// サムネイル画像の保存
-	src, err := movie.Thumbnail.Open()
-	if err != nil {
-		return err
-	}
-	defer src.Close()
-	data, err := io.ReadAll(src)
-	if err != nil {
-		return err
-	}
-	thumbnailPath, err := mi.cloudStorage.UploadBlob(ctx, movie.Thumbnail.Filename, data)
-	if err != nil {
-		return err
+	if movie.Thumbnail != nil {
+		src, err := movie.Thumbnail.Open()
+		if err != nil {
+			return err
+		}
+		defer src.Close()
+		data, err := io.ReadAll(src)
+		if err != nil {
+			return err
+		}
+		thumbnailPath, err = mi.cloudStorage.UploadBlob(ctx, movie.Thumbnail.Filename, data)
+		if err != nil {
+			return err
+		}
 	}
 
 	// 非同期処理で画像を保存
@@ -99,7 +102,7 @@ func (mi *MovieInteractor) UpdateMovie(ctx context.Context, movie UpdateMovie) e
 
 	wg.Wait()
 
-	err = mi.Repositories.UpdateMovie(ctx, &model.Movie{
+	err := mi.Repositories.UpdateMovie(ctx, &model.Movie{
 		MovieID:       movie.MovieID,
 		Name:          movie.Name,
 		Director:      movie.Director,
@@ -109,7 +112,7 @@ func (mi *MovieInteractor) UpdateMovie(ctx context.Context, movie UpdateMovie) e
 		Term:          movie.Term,
 		ReleaseDate:   movie.ReleaseDate,
 		EndDate:       movie.EndDate,
-	}, imagePaths)
+	}, imagePaths, movie.DeleteMovieImage)
 	if err != nil {
 		return err
 	}

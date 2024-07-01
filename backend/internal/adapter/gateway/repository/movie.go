@@ -80,7 +80,7 @@ func (r *MovieRepo) GetMovies(ctx context.Context, limit int, offset int) ([]*mo
 	return movies, nil
 }
 
-func (r *MovieRepo) UpdateMovie(ctx context.Context, movie *model.Movie, imagePaths []string) error {
+func (r *MovieRepo) UpdateMovie(ctx context.Context, movie *model.Movie, imagePaths []string, deleteImagePaths []string) error {
 	movieImages := []model.MovieImage{}
 	pastData, _, err := r.GetMovieByID(ctx, movie.MovieID)
 	if err != nil {
@@ -117,15 +117,24 @@ func (r *MovieRepo) UpdateMovie(ctx context.Context, movie *model.Movie, imagePa
 	}
 
 	// 画像の更新
+	deleteImages := []model.MovieImage{}
+	for _, deleteImagePath := range deleteImagePaths {
+		deleteImages = append(deleteImages, model.MovieImage{
+			MovieID:  movie.MovieID,
+			FilePath: deleteImagePath,
+		})
+	}
 	for _, imagePath := range imagePaths {
 		movieImages = append(movieImages, model.MovieImage{
 			MovieID:  movie.MovieID,
 			FilePath: imagePath,
 		})
 	}
-	result = r.db.Where("movie_id = ?", movie.MovieID).Delete(&model.MovieImage{})
-	if result.Error != nil {
-		return result.Error
+	if len(deleteImages) > 0 {
+		result = r.db.Model(&deleteImages).Where("movie_id = ?", movie.MovieID).Delete(&deleteImages)
+		if result.Error != nil {
+			return result.Error
+		}
 	}
 	if len(movieImages) > 0 {
 		result = r.db.Model(&movieImages).Where("movie_id = ?", movie.MovieID).Create(&movieImages)
@@ -133,7 +142,6 @@ func (r *MovieRepo) UpdateMovie(ctx context.Context, movie *model.Movie, imagePa
 			return result.Error
 		}
 	}
-
 	return nil
 }
 
