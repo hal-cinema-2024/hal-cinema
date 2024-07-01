@@ -92,7 +92,7 @@ func (r *MovieRepo) UpdateMovie(ctx context.Context, movie *model.Movie) error {
 // logical deletion
 func (r *MovieRepo) DeleteMovie(ctx context.Context, movieID string) error {
 	var movie model.Movie
-	result := r.db.Model(&movie).Where("movie_id = ?", movieID)
+	result := r.db.Model(&movie).Where("movie_id = ?", movieID).Delete(&movie)
 	if result.Error != nil {
 		return result.Error
 	}
