@@ -1,7 +1,7 @@
 import styled from "styled-components";
 // import ScreenTime from "./ScreenTime";
 import { ScreenData } from "./ScreenData";
-import { TransformedData } from "../types/TransFormData";
+import { TransformedData } from "../-types/TransFormData";
 
 type MovieBoxProps = {
   schedules: TransformedData[];
