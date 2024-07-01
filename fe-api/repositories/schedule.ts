@@ -16,7 +16,7 @@ export const getSchedules = async (
   try {
     const res: GetSchedulesResponseInterface = await client.v1.schedules.$get({
       query: {
-        pageId: pageId,
+        pageId: pageId!,
         pageSize: pageSize,
         date: date,
       },
