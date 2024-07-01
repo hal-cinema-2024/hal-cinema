@@ -13,6 +13,7 @@ func Setup(engine *echo.Group) {
 		engine: engine,
 	}
 
+	// must login route
 	{
 		v1.userRoute()
 		v1.movieRoute()

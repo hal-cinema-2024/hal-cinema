@@ -33,7 +33,7 @@ func TestCreateSchedule(t *testing.T) {
 
 	repo := repository.NewScheduleRepo(db)
 
-	movie := factories.Movie.Create()
+	movie := factories.Movie.Create(model.Movie{})
 	schedule := factories.Schedule.Create(model.Schedule{
 		ScheduleID: uuid.NewString(),
 		MovieID:    movie.MovieID,

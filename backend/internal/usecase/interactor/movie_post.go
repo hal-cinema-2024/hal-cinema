@@ -25,12 +25,12 @@ type CreateMovie struct {
 func (mi *MovieInteractor) CreateMovie(ctx context.Context, movie CreateMovie) (string, error) {
 	var imagePaths []string
 
-	// 画像の保存
 	uid, err := uuid.NewV7()
 	if err != nil {
 		return "", err
 	}
 
+	// 画像の保存
 	src, err := movie.Thumbnail.Open()
 	if err != nil {
 		return "", err

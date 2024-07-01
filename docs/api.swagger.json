@@ -241,6 +241,12 @@
                 "endDate": {
                   "type": "string"
                 },
+                "deleteMovieImage": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "movieImage": {
                   "type": "array",
                   "items": {
