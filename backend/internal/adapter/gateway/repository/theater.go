@@ -16,7 +16,7 @@ func NewTheaterRepo(db *gorm.DB) *TheaterRepo {
 	return &TheaterRepo{db: db}
 }
 
-func (r *TheaterRepo) GetTheaterByID(ctx context.Context, theaterID string) (*model.Theater, error) {
+func (r *TheaterRepo) GetTheaterByID(ctx context.Context, theaterID int32) (*model.Theater, error) {
 	var theater model.Theater
 	if err := r.db.WithContext(ctx).First(&theater, theaterID).Error; err != nil {
 		return nil, err
@@ -24,13 +24,13 @@ func (r *TheaterRepo) GetTheaterByID(ctx context.Context, theaterID string) (*mo
 	return &theater, nil
 }
 
-func (r *TheaterRepo) GetTheatersByID(ctx context.Context, theaterID []string) (map[string]*model.Theater, error) {
+func (r *TheaterRepo) GetTheatersByID(ctx context.Context, theaterID []int32) (map[int32]*model.Theater, error) {
 	var theaters []*model.Theater
 	if err := r.db.WithContext(ctx).Find(&theaters, theaterID).Error; err != nil {
 		return nil, err
 	}
 
-	theaterMap := make(map[string]*model.Theater)
+	theaterMap := make(map[int32]*model.Theater)
 	for _, theater := range theaters {
 		theaterMap[theater.TheaterID] = theater
 	}

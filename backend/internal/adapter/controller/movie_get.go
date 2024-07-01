@@ -1,24 +1,26 @@
 package controller
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 
 	"github.com/hal-cinema-2024/backend/internal/usecase/interactor"
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/gommon/log"
 )
 
 type GetMoviesRequest struct {
-	PageSize int `json:"page_size" form:"pageSize"`
-	PageID   int `json:"page_id" form:"pageId"`
+	PageSize int `query:"pageSize"`
+	PageID   int `query:"pageId"`
 }
 
-func (req *GetMoviesRequest) Validate() error {
+func (req GetMoviesRequest) Validate() error {
 	if req.PageSize == 0 {
-		req.PageSize = 10
+		return fmt.Errorf("pageSize is required")
 	}
 	if req.PageID == 0 {
-		req.PageID = 1
+		return fmt.Errorf("pageId is required")
 	}
 	return nil
 }
@@ -56,13 +58,16 @@ func GetMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 	return func(ctx echo.Context) error {
 		var req *GetMovieRequest
 		if err := ctx.Bind(&req); err != nil {
-			return err
+			log.Warn(ctx.Request().Context(), "failed to bind request", "error", err)
+			return echo.ErrBadRequest
 		}
 
 		movie, imagePaths, err := mi.GetMovie(ctx.Request().Context(), req.MovieID)
 		if err != nil {
-			return err
+			log.Warn(ctx.Request().Context(), "failed to bind request", "error", err)
+			return echo.ErrInternalServerError
 		}
+
 		return ctx.JSON(http.StatusOK, GetMovieResponse{
 			MovieID:     movie.MovieID,
 			MovieName:   movie.Name,
@@ -80,18 +85,21 @@ func GetMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 
 func GetMovies(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 	return func(ctx echo.Context) error {
-		var req *GetMoviesRequest
+		var req GetMoviesRequest
 		if err := ctx.Bind(&req); err != nil {
-			return err
+			log.Warn(ctx.Request().Context(), "failed to bind request", "error", err)
+			return echo.ErrBadRequest
 		}
 
 		if err := req.Validate(); err != nil {
-			return err
+			log.Warn(ctx.Request().Context(), "failed to validate", "error", err)
+			return echo.ErrBadRequest
 		}
 
 		movies, err := mi.GetMovies(ctx.Request().Context(), req.PageSize, req.PageID)
 		if err != nil {
-			return err
+			log.Warn(ctx.Request().Context(), "failed to get movies", "error", err)
+			return echo.ErrInternalServerError
 		}
 
 		res := make([]GetMovieResponse, 0, len(movies))
@@ -109,6 +117,6 @@ func GetMovies(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 			})
 		}
 
-		return ctx.JSON(200, res)
+		return ctx.JSON(http.StatusOK, res)
 	}
 }

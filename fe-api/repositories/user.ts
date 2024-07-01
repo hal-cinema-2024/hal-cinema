@@ -8,12 +8,12 @@ import type {
   DeleteUserResponseInterface,
 } from "../interfaces/user";
 
-export const getUsers = async (page_id?: string, page_size?: string) => {
+export const getUsers = async (page_id: string, page_size: string) => {
   try {
     const res: GetUsersResponseInterface = await client.v1.users.$get({
       query: {
-        pageId: page_id || undefined,
-        pageSize: page_size || undefined,
+        pageId: page_id,
+        pageSize: page_size,
       },
     });
     return res.user;

@@ -7,6 +7,8 @@ import (
 )
 
 type TheatersSeatsRepo interface {
-	GetTheatersSeatsByScheduleID(ctx context.Context, scheduleID string) ([]*model.TheatersSeat, error)
-	GetTheatersSeatsByScheduleIDs(ctx context.Context, scheduleIDs []string) (map[string][]*model.TheatersSeat, error)
+	CreateTheatersSeats(ctx context.Context, theatersSeats []*model.TheatersSeat) error
+	GetTheaterSeatsByOrderID(ctx context.Context, orderID string) ([]*model.TheatersSeat, error)
+	GetTheaterSeatsByScheduleID(ctx context.Context, scheduleID string) ([]*model.TheatersSeat, error)
+	GetTheaterSeatsByScheduleIDs(ctx context.Context, scheduleIDs []string) (map[string][]*model.TheatersSeat, error)
 }

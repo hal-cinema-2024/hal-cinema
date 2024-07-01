@@ -4,17 +4,13 @@ import { transformData } from "../-utils/TransSchedule";
 import { TransformedData } from "../-types/TransFormData";
 
 export const useSchedules = (
-  pageId?: string,
-  pageSize?: string,
-  date?: string
+  pageId: string,
+  pageSize: string,
+  date: string
 ) => {
   const [schedules, setSchedules] = useState<TransformedData[]>();
 
-  const fetchData = async (
-    pageId?: string,
-    pageSize?: string,
-    date?: string
-  ) => {
+  const fetchData = async (pageId: string, pageSize: string, date: string) => {
     try {
       const res = await getSchedules(
         pageId,

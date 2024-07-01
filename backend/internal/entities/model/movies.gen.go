@@ -21,7 +21,6 @@ type Movie struct {
 	Term          int32     `gorm:"column:term;not null;comment:上映時間" json:"term"` // 上映時間
 	ReleaseDate   time.Time `gorm:"column:release_date;not null" json:"release_date"`
 	EndDate       time.Time `gorm:"column:end_date;not null" json:"end_date"`
-	IsDelete      bool      `gorm:"column:is_delete;not null" json:"is_delete"`
 }
 
 // TableName Movie's table name

@@ -8,7 +8,7 @@ const TableNamePriceType = "price_types"
 
 // PriceType mapped from table <price_types>
 type PriceType struct {
-	PriceTypeID string `gorm:"column:price_type_id;primaryKey" json:"price_type_id"`
+	PriceTypeID int32  `gorm:"column:price_type_id;primaryKey" json:"price_type_id"`
 	Name        string `gorm:"column:name;not null" json:"name"`
 	Price       int32  `gorm:"column:price;not null" json:"price"`
 }

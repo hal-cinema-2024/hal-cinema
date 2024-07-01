@@ -8,7 +8,7 @@ import {
   GetOrdersResponseInterface,
 } from "../interfaces/order";
 
-export const getOrders = async (userId?: string) => {
+export const getOrders = async (userId: string) => {
   try {
     const res: GetOrdersResponseInterface = await client.v1.orders.$get({
       query: { userId },
