@@ -11,14 +11,16 @@ import {
 
 export const getMovies = async (pageId: string, pageSize: string) => {
   try {
-    const res: GetMoviesResponseInterface = await client.v1.movies.$get({
-      query: {
-        pageId: pageId,
-        pageSize: pageSize,
-      },
-    });
+    if ((pageId && pageSize !== undefined) || (pageId && pageSize !== null)) {
+      const res: GetMoviesResponseInterface = await client.v1.movies.$get({
+        query: {
+          pageId: pageId,
+          pageSize: pageSize,
+        },
+      });
 
-    return res.movie;
+      return res.movie;
+    }
   } catch (err) {
     console.log(err);
   }
