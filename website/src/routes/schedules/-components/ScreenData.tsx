@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import ScreenTime from "./ScreenTime";
-import { TheaterSchedule } from "../types/TransFormData";
+import { TheaterSchedule } from "../-types/TransFormData";
 
 type ScreenDataProps = {
   theaterSchedule: TheaterSchedule[];
