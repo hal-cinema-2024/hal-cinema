@@ -13,8 +13,6 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as SchedulesUtilsTransScheduleImport } from './routes/schedules/utils/TransSchedule'
-import { Route as SchedulesTypesTransFormDataImport } from './routes/schedules/types/TransFormData'
 
 // Create Virtual Routes
 
@@ -97,18 +95,6 @@ const SchedulesScheduleIdFormRouteLazyRoute =
     ),
   )
 
-const SchedulesUtilsTransScheduleRoute =
-  SchedulesUtilsTransScheduleImport.update({
-    path: '/utils/TransSchedule',
-    getParentRoute: () => SchedulesRouteLazyRoute,
-  } as any)
-
-const SchedulesTypesTransFormDataRoute =
-  SchedulesTypesTransFormDataImport.update({
-    path: '/types/TransFormData',
-    getParentRoute: () => SchedulesRouteLazyRoute,
-  } as any)
-
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -162,20 +148,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileEditRouteLazyImport
       parentRoute: typeof ProfileRouteLazyImport
     }
-    '/schedules/types/TransFormData': {
-      id: '/schedules/types/TransFormData'
-      path: '/types/TransFormData'
-      fullPath: '/schedules/types/TransFormData'
-      preLoaderRoute: typeof SchedulesTypesTransFormDataImport
-      parentRoute: typeof SchedulesRouteLazyImport
-    }
-    '/schedules/utils/TransSchedule': {
-      id: '/schedules/utils/TransSchedule'
-      path: '/utils/TransSchedule'
-      fullPath: '/schedules/utils/TransSchedule'
-      preLoaderRoute: typeof SchedulesUtilsTransScheduleImport
-      parentRoute: typeof SchedulesRouteLazyImport
-    }
     '/schedules/$scheduleId/form': {
       id: '/schedules/$scheduleId/form'
       path: '/$scheduleId/form'
@@ -204,8 +176,6 @@ export const routeTree = rootRoute.addChildren({
     ProfileEditRouteLazyRoute,
   }),
   SchedulesRouteLazyRoute: SchedulesRouteLazyRoute.addChildren({
-    SchedulesTypesTransFormDataRoute,
-    SchedulesUtilsTransScheduleRoute,
     SchedulesScheduleIdFormRouteLazyRoute,
     SchedulesScheduleIdReservedRouteLazyRoute,
   }),
@@ -245,8 +215,6 @@ export const routeTree = rootRoute.addChildren({
     "/schedules": {
       "filePath": "schedules/route.lazy.tsx",
       "children": [
-        "/schedules/types/TransFormData",
-        "/schedules/utils/TransSchedule",
         "/schedules/$scheduleId/form",
         "/schedules/$scheduleId/reserved"
       ]
@@ -261,14 +229,6 @@ export const routeTree = rootRoute.addChildren({
     "/profile/edit": {
       "filePath": "profile/edit/route.lazy.tsx",
       "parent": "/profile"
-    },
-    "/schedules/types/TransFormData": {
-      "filePath": "schedules/types/TransFormData.ts",
-      "parent": "/schedules"
-    },
-    "/schedules/utils/TransSchedule": {
-      "filePath": "schedules/utils/TransSchedule.ts",
-      "parent": "/schedules"
     },
     "/schedules/$scheduleId/form": {
       "filePath": "schedules/$scheduleId/form/route.lazy.tsx",
