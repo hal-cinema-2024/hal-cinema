@@ -4,7 +4,7 @@ export const Top = () => {
   return (
     <>
       <MainSection>
-        <MainImage className='main-image'></MainImage>
+        <MainImage className="main-image"></MainImage>
       </MainSection>
 
       <Inner>
@@ -20,7 +20,7 @@ export const Top = () => {
             </BoxText>
           </BoxBody>
           <BoxImage>
-            <img src='/src/assets/cinema.jpeg' alt='コンセプト画像' />
+            <img src="/src/assets/cinema.jpeg" alt="コンセプト画像" />
           </BoxImage>
         </Box>
       </Inner>

@@ -41,23 +41,24 @@ export const MovieCard = () => {
               </ImageContainer>
               <div>
                 <TextContainer>
-                  <Text>映画</Text>
+                  {/* <Text>映画</Text> */}
                   <Text>
                     <b>{movie.movieName}</b>
                   </Text>
                 </TextContainer>
                 <TextContainer>
-                  <Text>日付</Text>
+                  <Text>日付：</Text>
                   <Text>{movie.date}</Text>
                 </TextContainer>
                 <TextContainer>
-                  <Text>上映スクリーン</Text>
+                  <Text>上映スクリーン：</Text>
                   <Text>
                     スクリーン{""}
                     {movie.screen}
                   </Text>
+                  <br />
                   <SButton>
-                    <Text>もっと見る</Text>
+                    <DText>予約確認・詳細</DText>
                   </SButton>
                 </TextContainer>
               </div>
@@ -92,6 +93,7 @@ const SCard = styled(Card)`
   flex-direction: row !important;
   align-items: center;
   padding: 10px;
+  background-color: rgba(150, 150, 150, 0.8);
 `;
 
 const TextContainer = styled.div`
@@ -99,17 +101,23 @@ const TextContainer = styled.div`
   flex-direction: column;
   margin-left: 15px;
   padding: 5px;
+  color: white;
 `;
 const Container = styled(SimpleGrid)`
   margin: 0 auto;
   width: 70%;
   padding: 10px;
   gap: 20px;
-  padding-top: 80px;
+  padding-top: 110px;
 `;
 
 const SButton = styled(Button)`
-  position: absolute;
-  bottom: 20px;
-  right: 30px;
+  // position: absolute;
+  // bottom: 20px;
+  // right: 30px;
+  background-color: #333631;
+`;
+
+const DText = styled(Text)`
+  color: white;
 `;

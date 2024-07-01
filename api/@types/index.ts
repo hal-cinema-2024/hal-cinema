@@ -26,7 +26,8 @@ export type V1CreateMovieResponse = {
 }
 
 export type V1CreateOrderRequest = {
-  order?: V1Orders[] | undefined
+  scheduleId?: string | undefined
+  seatSelects?: V1SeatSelect[] | undefined
 }
 
 export type V1CreateOrderResponse = {
@@ -82,7 +83,14 @@ export type V1GetMoviesResponse = {
 }
 
 export type V1GetOrderResponse = {
-  order?: V1Orders | undefined
+  movieId?: string | undefined
+  movieName?: string | undefined
+  theaterId?: number | undefined
+  theaterName?: string | undefined
+  screeningDatetime?: string | undefined
+  totalPrice?: string | undefined
+  seatDetails?: V1SeatDetail[] | undefined
+  user?: V1MiniUser | undefined
 }
 
 export type V1GetOrdersResponse = {
@@ -121,6 +129,13 @@ export type V1GoogleLoginResponse = {
   userId?: string | undefined
 }
 
+export type V1MiniUser = {
+  userId?: string | undefined
+  userName?: string | undefined
+  userNameKana?: string | undefined
+  email?: string | undefined
+}
+
 export type V1Movie = {
   movieId?: string | undefined
   movieName?: string | undefined
@@ -146,6 +161,18 @@ export type V1OrdersDetail = {
   seatName?: string | undefined
   priceType?: string | undefined
   price?: number | undefined
+}
+
+export type V1SeatDetail = {
+  theaterSeatId?: string | undefined
+  seatName?: string | undefined
+  priceType?: string | undefined
+  price?: number | undefined
+}
+
+export type V1SeatSelect = {
+  seatName?: string | undefined
+  priceType?: number | undefined
 }
 
 export type V1UpdateMovieResponse = {
