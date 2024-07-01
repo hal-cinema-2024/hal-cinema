@@ -29,7 +29,16 @@ func (r *TheaterSeatRepo) CreateTheatersSeats(ctx context.Context, theatersSeats
 	return nil
 }
 
-func (r *TheaterSeatRepo) GetTheatersSeatsByScheduleID(ctx context.Context, scheduleID string) ([]*model.TheatersSeat, error) {
+func (r *TheaterSeatRepo) GetTheaterSeatsByOrderID(ctx context.Context, orderID string) ([]*model.TheatersSeat, error) {
+	var theatersSeats []*model.TheatersSeat
+	err := r.db.WithContext(ctx).Where("order_id = ?", orderID).Find(&theatersSeats).Error
+	if err != nil {
+		return nil, err
+	}
+	return theatersSeats, nil
+}
+
+func (r *TheaterSeatRepo) GetTheaterSeatsByScheduleID(ctx context.Context, scheduleID string) ([]*model.TheatersSeat, error) {
 	var theatersSeats []*model.TheatersSeat
 	err := r.db.WithContext(ctx).Where("schedule_id = ?", scheduleID).Find(&theatersSeats).Error
 	if err != nil {
@@ -47,7 +56,7 @@ type OrderTheatersSeat struct {
 	model.TheatersSeat
 }
 
-func (r *TheaterSeatRepo) GetTheatersSeatsByScheduleIDs(ctx context.Context, scheduleIDs []string) (map[string][]*model.TheatersSeat, error) {
+func (r *TheaterSeatRepo) GetTheaterSeatsByScheduleIDs(ctx context.Context, scheduleIDs []string) (map[string][]*model.TheatersSeat, error) {
 	var orderTheatersSeats []*OrderTheatersSeat
 	err := r.db.WithContext(ctx).Where("schedule_id IN (?)", scheduleIDs).Model(&model.Order{}).Joins("JOIN theaters_seats ON orders.order_id == theaters_seats.order_id").Find(&orderTheatersSeats).Error
 	if err != nil {

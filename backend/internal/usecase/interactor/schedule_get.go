@@ -65,7 +65,7 @@ func (i *ScheduleInteractor) GetSchedules(ctx context.Context, startDate time.Ti
 		return nil, errors.Join(err, fmt.Errorf("failed to get theater sizes"))
 	}
 
-	theaterSeats, err := i.Repositories.GetTheatersSeatsByScheduleIDs(ctx, scheduleIds)
+	theaterSeats, err := i.Repositories.GetTheaterSeatsByScheduleIDs(ctx, scheduleIds)
 	if err != nil {
 		return nil, errors.Join(err, fmt.Errorf("failed to get theater seats"))
 	}

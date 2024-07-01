@@ -17,6 +17,7 @@ type GormRepo struct {
 	*TheaterSizeRepo
 	*TheaterSeatRepo
 	*OrderRepo
+	*PriceTypeRepo
 }
 
 func NewGormRepo(gorm *gorm.DB) *GormRepo {
@@ -30,6 +31,7 @@ func NewGormRepo(gorm *gorm.DB) *GormRepo {
 		TheaterSizeRepo: NewTheaterSizeRepo(gorm),
 		TheaterSeatRepo: NewTheaterSeatRepo(gorm),
 		OrderRepo:       NewOrderRepo(gorm),
+		PriceTypeRepo:   NewPriceTypeRepo(gorm),
 	}
 }
 
