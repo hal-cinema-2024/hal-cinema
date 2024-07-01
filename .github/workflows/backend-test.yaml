@@ -53,6 +53,9 @@ jobs:
       run: |
         make migrate-up-test
 
+    - name: set seeder
+      run: go run cmd/seeder/main.go -e .env.test -f cmd/seeder/seeder.json
+
     - name: Build
       run: go build -v ./...
 

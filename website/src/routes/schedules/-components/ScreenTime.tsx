@@ -1,44 +1,41 @@
 import styled from "styled-components";
-import { ScreenType } from "./TimeData";
 import { X } from "@yamada-ui/lucide";
 import { Circle } from "@yamada-ui/lucide";
-
 type ScreenTimeProps = {
-  screenData: ScreenType[];
+  startTime: string;
+  term: number;
+  isFull: boolean;
 };
 
 const ScreenTime = (props: ScreenTimeProps) => {
-  const { screenData } = props;
+  const { startTime, isFull, term } = props;
 
-  const getImg = (buy: string) => {
-    switch (buy) {
-      case "販売終了":
-      case "満席":
+  const getImg = (isFull: boolean) => {
+    switch (isFull) {
+      case false:
         return <StyledX />;
-      case "購入":
+      case true:
         return <StyledCircle />;
       default:
-        return "";
+        return null;
     }
   };
 
   return (
     <>
       <ScreenContainer>
-        {screenData.map((item: ScreenType, index) => (
-          <TimeContainer key={index}>
-            <a href="#">
-              <Start>{item.startTime}</Start>
-              <End>{item.endTime}</End>
-              <BuyContainer buy={item.buy}>
-                <ImgContainer>{getImg(item.buy)}</ImgContainer>
-                <AvailContainer>
-                  <p>{item.buy}</p>
-                </AvailContainer>
-              </BuyContainer>
-            </a>
-          </TimeContainer>
-        ))}
+        <TimeContainer>
+          <a href='#'>
+            <Start>{startTime}〜</Start>
+            <End>{term}分間</End>
+            <BuyContainer isFull={isFull}>
+              <ImgContainer>{getImg(isFull)}</ImgContainer>
+              <AvailContainer>
+                <p>{isFull ? "Full" : "Available"}</p>
+              </AvailContainer>
+            </BuyContainer>
+          </a>
+        </TimeContainer>
       </ScreenContainer>
     </>
   );
@@ -72,7 +69,7 @@ const End = styled.p`
   font-size: 25px;
 `;
 
-const BuyContainer = styled.div<{ buy: string }>`
+const BuyContainer = styled.div<{ isFull: boolean }>`
   width: 100%;
   height: 33.333%;
   position: absolute;
@@ -84,16 +81,7 @@ const BuyContainer = styled.div<{ buy: string }>`
   justify-content: center;
 
   background-color: ${(props) =>
-    props.buy === "販売終了"
-      ? "#ADAAAA"
-      : props.buy === "満席"
-        ? "#ADAAAA"
-        : "rgba(4, 157, 130, 0.5)"};
-  img {
-    width: 50px;
-    height: 50px;
-    background-color: #fff;
-  }
+    props.isFull ? "#ADAAAA" : "rgba(4, 157, 130, 0.5)"};
 `;
 
 const ImgContainer = styled.div`
@@ -109,16 +97,15 @@ const StyledX = styled(X)`
   width: 80%;
   height: 80%;
   stroke-width: 1.3px;
-  color: #ADAAAA;
+  color: #adaaaa;
 `;
 
 const StyledCircle = styled(Circle)`
   width: 80%;
   height: 80%;
   stroke-width: 1.3px;
-  color: #ADAAAA;
+  color: #adaaaa;
 `;
-
 
 const AvailContainer = styled.div`
   text-align: center;
