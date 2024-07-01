@@ -25,8 +25,6 @@ func DeleteMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 			return err
 		}
 
-		return ctx.JSON(200, DeleteMovieResponse{
-			MovieID: req.MovieID,
-		})
+		return ctx.JSON(200, DeleteMovieResponse(req))
 	}
 }
