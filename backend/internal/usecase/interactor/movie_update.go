@@ -43,7 +43,6 @@ func (mi *MovieInteractor) UpdateMovie(ctx context.Context, movie UpdateMovie) e
 
 	// 非同期処理で画像を保存
 	var wg sync.WaitGroup
-	deleteMovieImage := make(chan string, len(movie.DeleteMovieImage))
 	imagePathsChan := make(chan string, len(movie.MovieImage))
 	errChan := make(chan error, len(movie.MovieImage)+len(movie.DeleteMovieImage))
 
@@ -57,7 +56,6 @@ func (mi *MovieInteractor) UpdateMovie(ctx context.Context, movie UpdateMovie) e
 				errChan <- err
 				return
 			}
-			deleteMovieImage <- imagePath
 		}(imagePath)
 	}
 
@@ -87,7 +85,6 @@ func (mi *MovieInteractor) UpdateMovie(ctx context.Context, movie UpdateMovie) e
 
 	go func() {
 		wg.Wait()
-		close(deleteMovieImage)
 		close(imagePathsChan)
 		close(errChan)
 	}()
