@@ -10,7 +10,7 @@ export const Movies = (props: MoviePropsInterface) => {
   return (
     <>
       <Section>
-        {movies.map((item: MovieInterface) => (
+        {movies&&movies.map((item: MovieInterface) => (
           <MoviesContainer key={item.movieId}>
             <SSdev>
               <MovieImage>
