@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob"
+	"github.com/google/uuid"
 	"github.com/hal-cinema-2024/backend/cmd/config"
 )
 
@@ -18,7 +19,12 @@ func NewAzureCloudStorage(bclient *azblob.Client) *AzureCloudStorage {
 }
 
 func (cs *AzureCloudStorage) UploadBlob(ctx context.Context, fileName string, fileData []byte) (string, error) {
-	_, err := cs.bclient.UploadBuffer(ctx, config.Config.Azure.BlobServiceContainerName, fileName, fileData, &azblob.UploadBufferOptions{})
+	uuid, err := uuid.NewV7()
+	if err != nil {
+		return "", err
+	}
+	fileName = fmt.Sprintf("%s-%s", uuid, fileName)
+	_, err = cs.bclient.UploadBuffer(ctx, config.Config.Azure.BlobServiceContainerName, fileName, fileData, &azblob.UploadBufferOptions{})
 	if err != nil {
 		return "", err
 	}
