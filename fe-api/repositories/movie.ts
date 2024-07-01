@@ -9,7 +9,7 @@ import {
   UpdateMovieResponseInterface,
 } from "../interfaces/movie";
 
-export const getMovies = async (pageId?: string, pageSize?: string) => {
+export const getMovies = async (pageId: string, pageSize: string) => {
   try {
     const res: GetMoviesResponseInterface = await client.v1.movies.$get({
       query: {
