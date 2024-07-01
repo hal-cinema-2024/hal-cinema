@@ -2,6 +2,7 @@ package controller
 
 import (
 	"fmt"
+	"time"
 
 	"mime/multipart"
 
@@ -15,11 +16,11 @@ type UpdateMovieRequest struct {
 	Name             string                  `form:"movieName" validate:"required"`
 	Director         string                  `form:"director" validate:"required"`
 	Summary          string                  `form:"summary" validate:"required"`
-	Thumbnail        *multipart.FileHeader   `form:"thumbnail" validate:"required"`
+	Thumbnail        *multipart.FileHeader   `form:"thumbnail"`
 	Link             string                  `form:"link" validate:"required"`
 	Term             int32                   `form:"term" validate:"required"`
-	ReleaseDate      string                  `form:"releaseDate" validate:"required"`
-	EndDate          string                  `form:"endDate" validate:"required"`
+	ReleaseDate      string                  `form:"releaseDate"`
+	EndDate          string                  `form:"endDate"`
 	DeleteMovieImage []string                `form:"deleteMovieImage"`
 	MovieImage       []*multipart.FileHeader `form:"movieImage"`
 }
@@ -57,21 +58,25 @@ func UpdateMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 
 		imageFiles, ok := form.File["thumbnail"]
 		if !ok {
-			log.Warn(ctx.Request().Context(), "thumbnail is not found")
-			return echo.ErrBadRequest
+			thumbnail = nil
 		} else {
 			thumbnail = imageFiles[0]
 		}
-
-		releaseDate, err := str2time(req.ReleaseDate)
-		if err != nil {
-			log.Error(ctx.Request().Context(), "releaseDate is invalid")
-			return echo.ErrBadRequest
+		var releaseDate time.Time
+		if req.ReleaseDate != "" {
+			releaseDate, err = str2time(req.ReleaseDate)
+			if err != nil {
+				log.Error(ctx.Request().Context(), "releaseDate is invalid")
+				return echo.ErrBadRequest
+			}
 		}
-		endDate, err := str2time(req.EndDate)
-		if err != nil {
-			log.Error(ctx.Request().Context(), "endDate is invalid")
-			return echo.ErrBadRequest
+		var endDate time.Time
+		if req.EndDate != "" {
+			endDate, err = str2time(req.EndDate)
+			if err != nil {
+				log.Error(ctx.Request().Context(), "endDate is invalid")
+				return echo.ErrBadRequest
+			}
 		}
 		movieImageFiles, ok := form.File["movieImage"]
 		if !ok {
