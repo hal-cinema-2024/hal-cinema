@@ -40,10 +40,11 @@ func (i *OrderInteractor) CreateOrder(ctx context.Context, param CreateOrderPara
 
 	err = i.Repositories.Transaction(ctx, func(ctx context.Context, da dai.DataAccess) error {
 		if err := da.CreateOrder(ctx, &model.Order{
-			OrderID:   orderID.String(),
-			UserID:    param.UserID,
-			IsPaid:    false,
-			CreatedAt: time.Now(),
+			OrderID:    orderID.String(),
+			UserID:     param.UserID,
+			ScheduleID: param.ScheduleID,
+			IsPaid:     false,
+			CreatedAt:  time.Now(),
 		}); err != nil {
 			return errors.Join(err, fmt.Errorf("failed to create order"))
 		}
@@ -54,7 +55,6 @@ func (i *OrderInteractor) CreateOrder(ctx context.Context, param CreateOrderPara
 				TheaterSeatID: theaterSeatsIDs[i],
 				OrderID:       orderID.String(),
 				PriceType:     seatSelect.PriceType.Int32(),
-				ScheduleID:    param.ScheduleID,
 				SeatName:      seatSelect.SeatName,
 			})
 		}

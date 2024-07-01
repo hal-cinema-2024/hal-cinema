@@ -12,4 +12,5 @@ type OrderRepo interface {
 	GetOrdersByUserID(ctx context.Context, userID string) ([]*model.Order, error)
 	UpdateOrder(ctx context.Context, order *model.Order) error
 	DeleteOrder(ctx context.Context, orderID string) error
+	DeleteOrderByUserID(ctx context.Context, userID string) error
 }

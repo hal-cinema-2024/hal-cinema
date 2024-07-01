@@ -84,14 +84,15 @@ CREATE TABLE "movie_images" (
 CREATE TABLE "theaters_seats" (
   "theater_seat_id" varchar(63) PRIMARY KEY,
   "order_id" varchar(63) NOT NULL,
-  "schedule_id" varchar(63) NOT NULL,
   "seat_name" varchar(31),
-  "price_type" int NOT NULL
+  "price_type" int NOT NULL,
+  "is_used" bool NOT NULL
 );
 
 CREATE TABLE "orders" (
   "order_id" varchar(63) PRIMARY KEY,
   "user_id" varchar(63) NOT NULL,
+  "schedule_id" varchar(63) NOT NULL,
   "is_paid" bool NOT NULL,
   "created_at" timestamptz NOT NULL
 );
@@ -102,7 +103,7 @@ CREATE TABLE "price_types" (
   "price" int NOT NULL
 );
 
-CREATE UNIQUE INDEX ON "theaters_seats" ("schedule_id", "seat_name");
+CREATE UNIQUE INDEX ON "theaters_seats" ("seat_name");
 
 COMMENT ON COLUMN "movies"."term" IS '上映時間';
 
@@ -113,8 +114,6 @@ ALTER TABLE "orders" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("user_id");
 ALTER TABLE "schedules" ADD FOREIGN KEY ("theater_id") REFERENCES "theaters" ("theater_id");
 
 ALTER TABLE "schedules" ADD FOREIGN KEY ("movie_id") REFERENCES "movies" ("movie_id");
-
-ALTER TABLE "theaters_seats" ADD FOREIGN KEY ("schedule_id") REFERENCES "schedules" ("schedule_id");
 
 ALTER TABLE "theaters" ADD FOREIGN KEY ("theater_size_id") REFERENCES "theaters_sizes" ("theater_size_id");
 
@@ -131,3 +130,5 @@ ALTER TABLE "role_permissions" ADD FOREIGN KEY ("permission_id") REFERENCES "per
 ALTER TABLE "theaters_seats" ADD FOREIGN KEY ("price_type") REFERENCES "price_types" ("price_type_id");
 
 ALTER TABLE "theaters_seats" ADD FOREIGN KEY ("order_id") REFERENCES "orders" ("order_id");
+
+ALTER TABLE "orders" ADD FOREIGN KEY ("schedule_id") REFERENCES "schedules" ("schedule_id");

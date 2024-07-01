@@ -29,9 +29,9 @@ func newTheatersSeat(db *gorm.DB, opts ...gen.DOOption) theatersSeat {
 	_theatersSeat.ALL = field.NewAsterisk(tableName)
 	_theatersSeat.TheaterSeatID = field.NewString(tableName, "theater_seat_id")
 	_theatersSeat.OrderID = field.NewString(tableName, "order_id")
-	_theatersSeat.ScheduleID = field.NewString(tableName, "schedule_id")
 	_theatersSeat.SeatName = field.NewString(tableName, "seat_name")
 	_theatersSeat.PriceType = field.NewInt32(tableName, "price_type")
+	_theatersSeat.IsUsed = field.NewBool(tableName, "is_used")
 
 	_theatersSeat.fillFieldMap()
 
@@ -44,9 +44,9 @@ type theatersSeat struct {
 	ALL           field.Asterisk
 	TheaterSeatID field.String
 	OrderID       field.String
-	ScheduleID    field.String
 	SeatName      field.String
 	PriceType     field.Int32
+	IsUsed        field.Bool
 
 	fieldMap map[string]field.Expr
 }
@@ -65,9 +65,9 @@ func (t *theatersSeat) updateTableName(table string) *theatersSeat {
 	t.ALL = field.NewAsterisk(table)
 	t.TheaterSeatID = field.NewString(table, "theater_seat_id")
 	t.OrderID = field.NewString(table, "order_id")
-	t.ScheduleID = field.NewString(table, "schedule_id")
 	t.SeatName = field.NewString(table, "seat_name")
 	t.PriceType = field.NewInt32(table, "price_type")
+	t.IsUsed = field.NewBool(table, "is_used")
 
 	t.fillFieldMap()
 
@@ -99,9 +99,9 @@ func (t *theatersSeat) fillFieldMap() {
 	t.fieldMap = make(map[string]field.Expr, 5)
 	t.fieldMap["theater_seat_id"] = t.TheaterSeatID
 	t.fieldMap["order_id"] = t.OrderID
-	t.fieldMap["schedule_id"] = t.ScheduleID
 	t.fieldMap["seat_name"] = t.SeatName
 	t.fieldMap["price_type"] = t.PriceType
+	t.fieldMap["is_used"] = t.IsUsed
 }
 
 func (t theatersSeat) clone(db *gorm.DB) theatersSeat {

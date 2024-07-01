@@ -53,4 +53,8 @@ func (r *OrderRepo) DeleteOrder(ctx context.Context, orderID string) error {
 	return r.db.Delete(&model.Order{}, orderID).Error
 }
 
+func (r *OrderRepo) DeleteOrderByUserID(ctx context.Context, userID string) error {
+	return r.db.Where("user_id = ?", userID).Delete(&model.Order{}).Error
+}
+
 var _ dai.OrderRepo = (*OrderRepo)(nil)
