@@ -1,6 +1,10 @@
 import styled from "styled-components";
-import type { SlideType } from "./daliy";
 
+type SlideType = {
+  month: string;
+  week: string;
+  day: string;
+};
 type DateDisplayProps = {
   date: SlideType;
 };

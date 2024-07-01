@@ -2,6 +2,8 @@ import { createLazyFileRoute } from "@tanstack/react-router";
 import styled from "styled-components";
 import Slideshow from "./-components/Slideshow";
 import MovieBox from "./-components/MovieBox";
+import { useSchedules } from "./-hooks/useSchedules";
+import { Suspense } from "react";
 
 export const Route = createLazyFileRoute("/schedules")({
   component: Index,
@@ -13,7 +15,9 @@ function Index() {
     <SchedulesContainer>
       <Title>上映スケジュール</Title>
       <Slideshow />
-      <MovieBox schedules={schedules} />
+      <Suspense fallback={<div>loading</div>}>
+        <MovieBox schedules={schedules!} />
+      </Suspense>
     </SchedulesContainer>
   );
 }
