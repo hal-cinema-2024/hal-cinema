@@ -1,6 +1,8 @@
 package controller
 
 import (
+	"net/http"
+
 	"github.com/hal-cinema-2024/backend/internal/framework/hcontext"
 	"github.com/hal-cinema-2024/backend/internal/usecase/interactor"
 	"github.com/hal-cinema-2024/backend/pkg/log"
@@ -24,30 +26,36 @@ func (r CreateOrderRequest) Validate() error {
 	return nil
 }
 
+type CreateOrderResponse struct {
+	OrderID string `json:"orderId"`
+}
+
 func CreateOrder(i *interactor.OrderInteractor) MustLogin {
 	return func(c echo.Context) error {
 		var req CreateOrderRequest
 		ctx := c.Request().Context()
 		if err := c.Bind(&req); err != nil {
 			log.Warn(ctx, "failed to bind request", err)
-			return err
+			return echo.ErrBadRequest
 		}
 
 		if err := req.Validate(); err != nil {
 			log.Warn(ctx, "failed to validate", err)
-			return err
+			return echo.ErrBadRequest
 		}
 
-		err := i.CreateOrder(ctx, interactor.CreateOrderParam{
+		orderID, err := i.CreateOrder(ctx, interactor.CreateOrderParam{
 			ScheduleID:  req.ScheduleID,
 			UserID:      c.Get(string(hcontext.UserID)).(string),
 			SeatSelects: req.SeatSelects,
 		})
 		if err != nil {
 			log.Warn(ctx, "failed to create order", err)
-			return err
+			return echo.ErrInternalServerError
 		}
 
-		return c.NoContent(201)
+		return c.JSON(http.StatusOK, CreateOrderResponse{
+			OrderID: orderID,
+		})
 	}
 }

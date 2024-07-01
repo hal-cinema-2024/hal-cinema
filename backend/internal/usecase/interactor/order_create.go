@@ -23,17 +23,17 @@ type CreateOrderParam struct {
 	SeatSelects []SeatSelect
 }
 
-func (i *OrderInteractor) CreateOrder(ctx context.Context, param CreateOrderParam) error {
+func (i *OrderInteractor) CreateOrder(ctx context.Context, param CreateOrderParam) (string, error) {
 	orderID, err := uuid.NewV7()
 	if err != nil {
-		return errors.Join(err, fmt.Errorf("failed to generate order id"))
+		return "", errors.Join(err, fmt.Errorf("failed to generate order id"))
 	}
 
 	var theaterSeatsIDs []string
 	for range param.SeatSelects {
 		theaterSeatsID, err := uuid.NewV7()
 		if err != nil {
-			return errors.Join(err, fmt.Errorf("failed to generate order id"))
+			return "", errors.Join(err, fmt.Errorf("failed to generate order id"))
 		}
 		theaterSeatsIDs = append(theaterSeatsIDs, theaterSeatsID.String())
 	}
@@ -66,8 +66,8 @@ func (i *OrderInteractor) CreateOrder(ctx context.Context, param CreateOrderPara
 		return nil
 	})
 	if err != nil {
-		return errors.Join(err, fmt.Errorf("failed to transaction"))
+		return "", errors.Join(err, fmt.Errorf("failed to transaction"))
 	}
 
-	return nil
+	return orderID.String(), nil
 }
