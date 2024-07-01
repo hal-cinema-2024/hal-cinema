@@ -10,32 +10,33 @@ export const Movies = (props: MoviePropsInterface) => {
   return (
     <>
       <Section>
-        {movies.map((item: MovieInterface) => (
-          <MoviesContainer key={item.movieId}>
-            <SSdev>
-              <MovieImage>
-                <img src={item.thumbnail} alt='Movie Poster' />
-              </MovieImage>
-              <MovieTextDiv>
-                <MovieFlexdiv>
-                  <MoviesTitleName>
-                    <b>{item.movieName}</b>
-                  </MoviesTitleName>
-                </MovieFlexdiv>
-                <MovieFlexdiv>
-                  <MoviesDirector>監督名：</MoviesDirector>
-                  <MoviesDirectorName>{item.director}</MoviesDirectorName>
-                </MovieFlexdiv>
-              </MovieTextDiv>
+        {movies &&
+          movies.map((item: MovieInterface) => (
+            <MoviesContainer key={item.movieId}>
+              <SSdev>
+                <MovieImage>
+                  <img src={item.thumbnail} alt='Movie Poster' />
+                </MovieImage>
+                <MovieTextDiv>
+                  <MovieFlexdiv>
+                    <MoviesTitleName>
+                      <b>{item.movieName}</b>
+                    </MoviesTitleName>
+                  </MovieFlexdiv>
+                  <MovieFlexdiv>
+                    <MoviesDirector>監督名：</MoviesDirector>
+                    <MoviesDirectorName>{item.director}</MoviesDirectorName>
+                  </MovieFlexdiv>
+                </MovieTextDiv>
 
-              <Link href={`${item.link}`}>
-                <DetailsButton>
-                  <p>詳細へ </p>
-                </DetailsButton>
-              </Link>
-            </SSdev>
-          </MoviesContainer>
-        ))}
+                <Link href={`${item.link}`}>
+                  <DetailsButton>
+                    <p>詳細へ </p>
+                  </DetailsButton>
+                </Link>
+              </SSdev>
+            </MoviesContainer>
+          ))}
       </Section>
     </>
   );
