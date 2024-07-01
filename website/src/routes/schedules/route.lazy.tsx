@@ -10,7 +10,7 @@ export const Route = createLazyFileRoute("/schedules")({
 });
 
 function Index() {
-  const { schedules } = useSchedules();
+  const { schedules } = useSchedules("3", "10");
   return (
     <SchedulesContainer>
       <Title>上映スケジュール</Title>
