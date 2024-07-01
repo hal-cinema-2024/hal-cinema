@@ -1,5 +1,5 @@
 import {
-  V1Schedule,
+  V1GetScheduleResult,
   V1GetSchedulesResponse,
   V1CreateScheduleResponse,
   V1CreateScheduleRequest,
@@ -9,7 +9,7 @@ import {
 
 type UpdateScheduleRequestBodyInterface = V1CreateScheduleRequest;
 export type {
-  V1Schedule as ScheduleInterface,
+  V1GetScheduleResult as ScheduleInterface,
   V1GetSchedulesResponse as GetSchedulesResponseInterface,
   V1CreateScheduleResponse as CreateScheduleResponseInterface,
   V1CreateScheduleRequest as CreateScheduleRequestBodyInterface,
