@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { SeatSelectionContext } from "../SeatSelectionContext";
+import { SeatSelectionContext } from "../-store/SeatSelectionContext";
 
 export const useSeatSelection = () => {
   const context = useContext(SeatSelectionContext);

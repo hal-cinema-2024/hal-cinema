@@ -1,24 +1,14 @@
-import { Stepper, useSteps, VStack, HStack, Button } from "@yamada-ui/react";
-type Steps = {
-  title: string;
-};
-const steps: Steps[] = [
-  { title: "座席・チケット選択" },
-  { title: "購入情報入力" },
-  { title: "購入内容確認" },
-  { title: "お支払い" },
-  { title: "購入完了" },
-];
+import { Stepper, VStack, HStack, Button } from "@yamada-ui/react";
+import { steps } from "./StepperData";
 
 type StepperComponentProps = {
   children: React.ReactNode;
+  activeStep: number;
+  onStepNext: () => void;
+  onStepPrev: () => void;
 };
 export const StepperComponent = (props: StepperComponentProps) => {
-  const { children } = props;
-  const { activeStep, onStepNext, onStepPrev } = useSteps({
-    index: 1,
-    count: steps.length,
-  });
+  const { children, activeStep, onStepNext, onStepPrev } = props;
 
   return (
     <VStack>
