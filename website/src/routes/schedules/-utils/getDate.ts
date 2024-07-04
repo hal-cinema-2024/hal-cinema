@@ -12,7 +12,7 @@ export function get7Days(): SlideDateType[] {
     const day = currentDate.getDate().toString().padStart(2, "0"); // 日 (1-31)
     const week = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][
       currentDate.getDay()
-    ]; // 曜日
+    ];
 
     dates.push({
       month,
