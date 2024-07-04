@@ -20,7 +20,10 @@ export const getSchedules = async (startDate: string, movieId: string) => {
       },
     });
 
-    return res.schedule;
+    if (!res) {
+      throw new Error("schedules is empty");
+    }
+    return res;
   } catch (err) {
     console.log(err);
   }
