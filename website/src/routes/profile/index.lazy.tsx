@@ -3,7 +3,7 @@ import { MovieCard } from "./-components/MovieCard";
 import { ProfileCard } from "./-components/ProfileCard";
 import styled from "styled-components";
 
-export const Route = createLazyFileRoute("/profile")({
+export const Route = createLazyFileRoute("/profile/")({
   component: Index,
 });
 
