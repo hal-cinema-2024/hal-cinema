@@ -1,5 +1,5 @@
 import { GetOrderResponseInterface } from "../../../../../../../../fe-api/interfaces/order";
-import "./Table.css";
+import "../../../-styles/Table.css";
 
 type BuyContentProps = {
   order: GetOrderResponseInterface;
