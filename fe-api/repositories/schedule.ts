@@ -8,10 +8,10 @@ import {
   UpdateScheduleResponseInterface,
 } from "../interfaces/schedule";
 
-export const getSchedules = async (startDate: string, movieId: string) => {
+export const getSchedules = async (startDate: string, movieId?: string) => {
   try {
-    if (!startDate || !movieId) {
-      throw new Error("startDate and movieId are required");
+    if (!startDate) {
+      throw new Error("startDate  are required");
     }
     const res: GetSchedulesResponseInterface = await client.v1.schedules.$get({
       query: {

@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import ScreenTime from "./ScreenTime";
-import { TheaterSchedule } from "../-types/TransFormData";
+import { TransformedData } from "../-types/TransFormData";
+import { Fragment } from "react";
 
 type ScreenDataProps = {
-  theaterSchedule: TheaterSchedule[];
+  theaterSchedule: TransformedData[];
 };
 
 export const ScreenData = (props: ScreenDataProps) => {
@@ -11,15 +12,20 @@ export const ScreenData = (props: ScreenDataProps) => {
 
   return (
     <MovieContainer>
-      {theaterSchedule.map((data, index) => (
+      {theaterSchedule.map((scheduleData, index) => (
         <ScreenContainer key={index}>
-          <Number>スクリーン {index + 1}</Number>
-          {data.schedules.map((data) => (
-            <ScreenTime
-              startTime={data.startTime}
-              term={data.term}
-              isFull={data.isFull}
-            />
+          {scheduleData.theaterSchedule.map((theaterData) => (
+            <Fragment key={theaterData.theater}>
+              <Number>スクリーン {theaterData.theater}</Number>
+              {theaterData.schedules.map((schedule, scheduleIndex) => (
+                <ScreenTime
+                  key={scheduleIndex}
+                  startTime={schedule.startTime}
+                  endTime={schedule.endTime}
+                  isAvailable={schedule.isAvailable}
+                />
+              ))}
+            </Fragment>
           ))}
         </ScreenContainer>
       ))}
