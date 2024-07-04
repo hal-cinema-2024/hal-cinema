@@ -14,7 +14,6 @@ export function Index() {
     index: 1,
     count: steps.length,
   });
-
   return (
     <div>
       <StepperComponent
@@ -22,16 +21,16 @@ export function Index() {
         onStepNext={onStepNext}
         onStepPrev={onStepPrev}
       >
-        {activeStep === 1 ? (
+        {activeStep === 0 ? (
           <div>
             <CinemaSeats />
             <TicketFormModal />
           </div>
-        ) : activeStep === 2 ? (
+        ) : activeStep === 1 ? (
           <div>
             <Result />
           </div>
-        ) : activeStep === 3 ? (
+        ) : activeStep === 4 ? (
           <div>
             <h1>購入完了</h1>
           </div>

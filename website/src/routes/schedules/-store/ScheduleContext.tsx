@@ -31,4 +31,6 @@ const ScheduleProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
+// カスタムフックを作成して、コンテキストを簡単に利用できるようにします
+
 export { ScheduleProvider, ScheduleContext };
