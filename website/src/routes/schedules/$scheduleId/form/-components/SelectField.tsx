@@ -9,7 +9,6 @@ type InputFieldProps = {
 type Option = {
   value: string;
   label: string;
-  mony?: string;
 };
 export const SelectField = (props: InputFieldProps) => {
   const { fieldName, label, option } = props;
@@ -21,7 +20,7 @@ export const SelectField = (props: InputFieldProps) => {
       <NativeSelect {...register(fieldName)}>
         {option.map((item) => (
           <option key={item.value} value={item.value}>
-            {item.label}: {item.mony!}
+            {item.label}
           </option>
         ))}
       </NativeSelect>
