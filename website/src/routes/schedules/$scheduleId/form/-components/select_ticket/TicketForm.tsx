@@ -5,7 +5,7 @@ import { ticketFormSchema } from "./TicketSchema";
 import { useSeatSelection } from "../../-hooks/useSeatSelection";
 import { SelectField } from "../SelectField";
 import { option } from "./TicketOption";
-export function MovieFormProvider() {
+export function TicketFormProvider() {
   const methods = useForm({ resolver: zodResolver(ticketFormSchema) });
   const { handleSubmit } = methods;
   const { selectedSeats } = useSeatSelection();

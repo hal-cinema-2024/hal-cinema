@@ -3,6 +3,8 @@ import { StepperComponent } from "./-components/StepperComponent";
 import { useSteps } from "@yamada-ui/react";
 import { steps } from "./-components/StepperData";
 import { Result } from "./-components/result/Result";
+import CinemaSeats from "./-components/select_ticket/CinemaSeats";
+import { TicketFormModal } from "./-components/select_ticket/TicketFormModal";
 export const Route = createLazyFileRoute("/schedules/$scheduleId/form")({
   component: Index,
 });
@@ -21,7 +23,8 @@ export function Index() {
       >
         {activeStep === 0 ? (
           <div>
-            <h1>座席・チケット選択</h1>
+            <CinemaSeats />
+            <TicketFormModal />
           </div>
         ) : activeStep === 1 ? (
           <div>
