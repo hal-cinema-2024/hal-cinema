@@ -3,9 +3,14 @@ import { useSeatSelection } from "../-hooks/useSeatSelection";
 import { V1SeatSelect } from "../../../../../../../api/@types";
 import { CreateOrderRequestBodyInterface } from "../../../../../../../fe-api/interfaces/order";
 import { createOrder } from "../../../../../../../fe-api/repositories/order";
+import { useOrderId } from "../../../../../hooks/useOrderId";
 
-export function CreateOrderService(scheduleId: string, data: FieldValues) {
+export async function CreateOrderService(
+  scheduleId: string,
+  data: FieldValues
+) {
   const { selectedSeats } = useSeatSelection();
+  const { setOrderId } = useOrderId();
 
   const seatSelects = selectedSeats.map((seat) => {
     const seatId = Array.isArray(data)
@@ -22,6 +27,6 @@ export function CreateOrderService(scheduleId: string, data: FieldValues) {
     seatSelects: seatSelects as V1SeatSelect[],
   };
 
-  const res = createOrder(req);
-  console.log(res);
+  const res = await createOrder(req);
+  if (res) setOrderId(res);
 }
