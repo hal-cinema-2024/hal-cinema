@@ -1,6 +1,6 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import Movie from "./-component/movie";
-export const Route = createLazyFileRoute("/movies/$movieId")({
+export const Route = createLazyFileRoute("/movies/$movieId/")({
   component: Index,
 });
 

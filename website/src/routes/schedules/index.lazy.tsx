@@ -5,7 +5,7 @@ import MovieBox from "./-components/MovieBox";
 import { useSchedules } from "./-hooks/useSchedules";
 import { Suspense } from "react";
 
-export const Route = createLazyFileRoute("/schedules")({
+export const Route = createLazyFileRoute("/schedules/")({
   component: Index,
 });
 function Index() {

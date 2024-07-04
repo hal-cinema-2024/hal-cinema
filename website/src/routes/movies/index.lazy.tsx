@@ -5,7 +5,7 @@ import { useMovies } from "./-hooks/useMovies";
 import { Movies } from "./-component/Movies";
 import { Suspense } from "react";
 
-export const Route = createLazyFileRoute("/movies")({
+export const Route = createLazyFileRoute("/movies/")({
   component: Index,
 });
 
