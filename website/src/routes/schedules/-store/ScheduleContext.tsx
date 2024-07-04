@@ -4,7 +4,7 @@ import React, { createContext, useState, ReactNode } from "react";
 interface ScheduleContextType {
   scheduleId: number;
   setScheduleId: React.Dispatch<React.SetStateAction<number>>;
-  changeId?: (index: number) => void;
+  changeId: (index: number) => void;
 }
 
 // Contextを作成します
