@@ -1,15 +1,10 @@
-import { createLazyFileRoute } from "@tanstack/react-router";
 import styled from "styled-components";
 import Stepper from "./-components/Stepper";
 import BuyContent from "./-components/BuyContent";
 import CustomerInfo from "./-components/CustomerInfo";
 import PaymentInfo from "./-components/PaymentInfo";
 
-export const Route = createLazyFileRoute("/schedules/$scheduleId/reserved")({
-  component: Index,
-});
-
-function Index() {
+export function Index() {
   return (
     <ReservedContainer>
       <Stepper />

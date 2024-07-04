@@ -1,6 +1,6 @@
 import { Carousel, CarouselSlide } from "@yamada-ui/carousel";
 import DateDisp from "./DateDisp";
-import "../styles/Slideshow.css";
+import "../-styles/slideshow.css";
 import { SlideDateType } from "../-types/SlideDate";
 import { useScheduleId } from "../-hooks/useScheduleId";
 import { get7Days } from "../-utils/getDate";
