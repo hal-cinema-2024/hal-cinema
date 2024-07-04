@@ -1,21 +1,22 @@
+import React from "react";
 import { useState } from "react";
 import { Carousel, CarouselSlide } from "@yamada-ui/carousel";
 import DateDisp from "./DateDisp";
 import "../styles/Slideshow.css";
-import { get7Days } from "../-utils/detdate";
+import { get7Days } from "../-utils/getDate";
 import { SlideDateType } from "../-types/SlideDate";
-
+import { useScheduleId } from "../-store/ScheduleContext";
 const Slideshow = () => {
   const [color, setColor] = useState<number>(0);
-  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const { scheduleId, setScheduleId } = useScheduleId();
 
   const changeColor = (index: number) => {
     setColor(index);
-    setSelectedIndex(index);
+    setScheduleId(index);
   };
 
   const slideData = get7Days();
-  const selectedDate = slideData[selectedIndex];
+  const selectedDate = slideData[scheduleId];
 
   return (
     <div className='SlideContainer'>
