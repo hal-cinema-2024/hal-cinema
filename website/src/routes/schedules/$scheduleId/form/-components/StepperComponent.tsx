@@ -17,12 +17,14 @@ export const StepperComponent = (props: StepperComponentProps) => {
 
       {children}
       <HStack>
-        <Button onClick={onStepPrev} disabled={activeStep === 0}>
-          Prev
-        </Button>
-        <Button onClick={onStepNext} disabled={activeStep === steps.length - 1}>
-          Next
-        </Button>
+        {activeStep === steps.length ? null : (
+          <>
+            <Button onClick={onStepPrev} disabled={activeStep === 1}>
+              Prev
+            </Button>
+            <Button onClick={onStepNext}>Next</Button>
+          </>
+        )}
       </HStack>
     </VStack>
   );
