@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import { getSchedules } from "../../../../../fe-api/repositories/schedule";
-import { transformData } from "../-utils/TransSchedule";
 import { TransformedData } from "../-types/TransFormData";
+import { transformData } from "../-utils/TransSchedule";
 
-export const useSchedules = (startDate: string, movieId: string) => {
+export const useSchedules = (startDate: string, movieId?: string) => {
   const [schedules, setSchedules] = useState<TransformedData[]>();
 
-  const fetchData = async (startDate: string, movieId: string) => {
+  const fetchData = async (startDate: string, movieId?: string) => {
     try {
       const res = await getSchedules(startDate, movieId);
 
       if (res) {
-        const transform = transformData(res);
-        setSchedules(transform);
+        const data = transformData(res.schedule!);
+        setSchedules(data!);
       }
     } catch (error) {
       console.error("schedules service error: " + error);
@@ -20,8 +20,8 @@ export const useSchedules = (startDate: string, movieId: string) => {
   };
 
   useEffect(() => {
-    fetchData(startDate, movieId);
-  }, [startDate, movieId]);
+    fetchData(startDate, movieId!);
+  }, []);
 
   return { schedules, setSchedules };
 };
