@@ -7,8 +7,8 @@ type InputFieldProps = {
 };
 
 type Option = {
-  value: string;
   label: string;
+  value: number;
 };
 export const SelectField = (props: InputFieldProps) => {
   const { fieldName, label, option } = props;
