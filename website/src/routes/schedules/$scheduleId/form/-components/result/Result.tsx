@@ -2,9 +2,12 @@ import styled from "styled-components";
 import BuyContent from "./BuyContent";
 import PaymentInfo from "./PaymentInfo";
 import { useOrder } from "../../../../../../hooks/services/useOrder";
+import { useOrderId } from "../../../../../../hooks/useOrderId";
 
 export function Result() {
-  const { order } = useOrder("1");
+  const { orderId } = useOrderId();
+  const { order } = useOrder(orderId);
+
   return (
     <ReservedContainer>
       <Title>
