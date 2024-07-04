@@ -7,6 +7,7 @@ type StepperComponentProps = {
   onStepNext: () => void;
   onStepPrev: () => void;
 };
+
 export const StepperComponent = (props: StepperComponentProps) => {
   const { children, activeStep, onStepNext, onStepPrev } = props;
 
@@ -16,8 +17,12 @@ export const StepperComponent = (props: StepperComponentProps) => {
 
       {children}
       <HStack>
-        <Button onClick={onStepPrev}>Prev</Button>
-        <Button onClick={onStepNext}>Next</Button>
+        <Button onClick={onStepPrev} disabled={activeStep === 0}>
+          Prev
+        </Button>
+        <Button onClick={onStepNext} disabled={activeStep === steps.length - 1}>
+          Next
+        </Button>
       </HStack>
     </VStack>
   );
