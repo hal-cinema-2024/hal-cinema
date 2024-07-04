@@ -5,13 +5,19 @@ import { ticketFormSchema } from "./TicketSchema";
 import { useSeatSelection } from "../../-hooks/useSeatSelection";
 import { SelectField } from "../../../../../../components/SelectField";
 import { option } from "./TicketOption";
+
+import { CreateOrderService } from "../../-service/CreateOrder";
 export function TicketFormProvider() {
   const methods = useForm({ resolver: zodResolver(ticketFormSchema) });
   const { handleSubmit } = methods;
   const { selectedSeats } = useSeatSelection();
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit((data) => console.log(data))}>
+      <form
+        onSubmit={handleSubmit((data) => {
+          CreateOrderService("scheduleId", data);
+        })}
+      >
         {selectedSeats &&
           selectedSeats.map((seat) => (
             <>
