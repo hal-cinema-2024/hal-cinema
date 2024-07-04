@@ -1,21 +1,19 @@
-import { Stepper } from "@yamada-ui/react";
 import styled from "styled-components";
 import BuyContent from "./BuyContent";
-import CustomerInfo from "./CustomerInfo";
 import PaymentInfo from "./PaymentInfo";
+import { useOrder } from "../../../../../../hooks/services/useOrder";
 
-export function Index() {
+export function Result() {
+  const { order } = useOrder("1");
   return (
     <ReservedContainer>
-      <Stepper index={0} />
       <Title>
         <h1>予約内容確認</h1>
         <p>
           以下の内容を確認の上、「決済する」ボタンを押して決済を完了してください。
         </p>
       </Title>
-      <BuyContent />
-      <CustomerInfo />
+      {order && <BuyContent order={order} />}
       <PaymentInfo />
     </ReservedContainer>
   );
