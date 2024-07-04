@@ -3,7 +3,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ticketFormSchema } from "./TicketSchema";
 import { useSeatSelection } from "../../-hooks/useSeatSelection";
-import { SelectField } from "../SelectField";
+import { SelectField } from "../../../../../../components/SelectField";
 import { option } from "./TicketOption";
 export function TicketFormProvider() {
   const methods = useForm({ resolver: zodResolver(ticketFormSchema) });
