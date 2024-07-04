@@ -5,10 +5,10 @@ import DateDisp from "./DateDisp";
 import "../styles/Slideshow.css";
 import { get7Days } from "../-utils/getDate";
 import { SlideDateType } from "../-types/SlideDate";
-import { useScheduleId } from "../-store/ScheduleContext";
+import { useScheduleId } from "../-hooks/useScheduleId";
 const Slideshow = () => {
-  const [color, setColor] = useState<number>(0);
   const { scheduleId, setScheduleId } = useScheduleId();
+  const [color, setColor] = useState<number>(0);
 
   const changeColor = (index: number) => {
     setColor(index);

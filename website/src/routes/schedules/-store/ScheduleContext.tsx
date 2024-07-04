@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useState, ReactNode } from "react";
 
 // Contextの型を正しく定義します
 interface ScheduleContextType {
@@ -23,12 +23,5 @@ const ScheduleProvider = ({ children }: { children: ReactNode }) => {
 };
 
 // カスタムフックを作成して、コンテキストを簡単に利用できるようにします
-const useScheduleId = () => {
-  const context = useContext(ScheduleContext);
-  if (context === undefined) {
-    throw new Error("useScheduleId must be used within a ScheduleProvider");
-  }
-  return context;
-};
 
-export { ScheduleProvider, useScheduleId };
+export { ScheduleProvider, ScheduleContext };
