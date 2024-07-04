@@ -1,16 +1,16 @@
 import styled from "styled-components";
-import { Text, Button, Avatar } from "@yamada-ui/react";
-import { useUser } from "../../../hooks/services/useUser";
-import { useContext } from "react";
-import { UserIdContext } from "../../../store/useUserIdContext";
+import { Text, Button } from "@yamada-ui/react";
+import { UserInterface } from "../../../../../fe-api/interfaces/user";
 
-export const ProfileCard = () => {
-  const { userId } = useContext(UserIdContext);
-  const { user } = useUser(userId!);
-
+type ProfileCardProps = {
+  user: UserInterface;
+};
+export const ProfileCard = (props: ProfileCardProps) => {
+  const { user } = props;
   return (
     <ProfileContainer>
-      <SAvatar src={user?.userId} alt='Avatar' />
+      {user && user?.firstName}
+      {/* <SAvatar src= alt='Avatar' /> */}
       <EditButton>
         <SText>編集</SText>
       </EditButton>
@@ -37,12 +37,12 @@ const EditButton = styled(Button)`
   background-color: #555;
 `;
 
-const SAvatar = styled(Avatar)`
-  width: 150px;
-  height: 150px;
-  position: absolute;
-  top: 60%;
-`;
+// const SAvatar = styled(Avatar)`
+//   width: 150px;
+//   height: 150px;
+//   position: absolute;
+//   top: 60%;
+// `;
 
 const SText = styled(Text)`
   color: white;
