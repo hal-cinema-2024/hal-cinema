@@ -8,7 +8,6 @@ import { Suspense } from "react";
 export const Route = createLazyFileRoute("/schedules")({
   component: Index,
 });
-
 function Index() {
   const { schedules } = useSchedules("10");
   return (

@@ -1,6 +1,6 @@
 import { Carousel, CarouselSlide } from "@yamada-ui/carousel";
 import DateDisp from "./DateDisp";
-import "../styles/Slideshow.css";
+import "../-styles/slideshow.css";
 import { SlideDateType } from "../-types/SlideDate";
 import { useScheduleId } from "../-hooks/useScheduleId";
 import { get7Days } from "../-utils/getDate";
@@ -8,6 +8,14 @@ const Slideshow = () => {
   const { scheduleId, changeId } = useScheduleId();
 
   const slideData = get7Days();
+  const selectedDate = slideData[scheduleId];
+
+  const handleClicked = (index: number) => {
+    if (index === undefined) {
+      console.log("index is not defined");
+    }
+    changeId(index);
+  };
 
   return (
     <div className='SlideContainer'>
@@ -26,7 +34,7 @@ const Slideshow = () => {
                 ? "rgba(4, 157, 130, 0.63)"
                 : "rgba(191, 6, 179, 0.5)"
             }
-            onClick={() => changeId(index!)}
+            onClick={() => handleClicked(index)}
           >
             <div className='DateContainer'>
               <p className='MonthDay'>
