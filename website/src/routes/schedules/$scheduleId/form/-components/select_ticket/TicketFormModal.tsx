@@ -7,7 +7,11 @@ import {
 } from "@yamada-ui/react";
 import { TicketFormProvider } from "./TicketForm";
 
-export const TicketFormModal = () => {
+type TicketFormModalProps = {
+  scheduleId: string;
+};
+export const TicketFormModal = (props: TicketFormModalProps) => {
+  const { scheduleId } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -18,7 +22,7 @@ export const TicketFormModal = () => {
         <ModalHeader>チケット選択</ModalHeader>
 
         <ModalBody>
-          <TicketFormProvider />
+          <TicketFormProvider scheduleId={scheduleId!} />
         </ModalBody>
       </Modal>
     </>

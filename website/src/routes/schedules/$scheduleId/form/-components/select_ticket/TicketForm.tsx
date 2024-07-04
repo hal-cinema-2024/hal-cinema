@@ -7,15 +7,20 @@ import { SelectField } from "../../../../../../components/SelectField";
 import { option } from "./TicketOption";
 
 import { CreateOrderService } from "../../-service/CreateOrder";
-export function TicketFormProvider() {
+
+type TicketFormProps = {
+  scheduleId: string;
+};
+export function TicketFormProvider(props: TicketFormProps) {
+  const { scheduleId } = props;
   const methods = useForm({ resolver: zodResolver(ticketFormSchema) });
   const { handleSubmit } = methods;
   const { selectedSeats } = useSeatSelection();
   return (
     <FormProvider {...methods}>
       <form
-        onSubmit={handleSubmit((data) => {
-          CreateOrderService("scheduleId", data);
+        onSubmit={handleSubmit(async (data) => {
+          await CreateOrderService(scheduleId, data);
         })}
       >
         {selectedSeats &&
