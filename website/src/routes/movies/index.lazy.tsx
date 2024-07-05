@@ -10,7 +10,7 @@ export const Route = createLazyFileRoute("/movies/")({
 });
 
 function Index() {
-  const { movies } = useMovies("2", "10");
+  const { movies } = useMovies("1", "10");
   return (
     <>
       <Moviesboxdiv>
