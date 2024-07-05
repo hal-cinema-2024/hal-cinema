@@ -21,11 +21,14 @@
   z-index: -1;
 }
 
+/* ホバー時のスタイル */
 .ui-carousel__slide__inner:hover {
   background-color: rgba(211, 112, 204, 0.429);
-
   transition: 0.3s;
-  /* opacity: 0.5; */
+}
+
+.selected-slide {
+  pointer-events: none;
 }
 
 .SlideContainer {
