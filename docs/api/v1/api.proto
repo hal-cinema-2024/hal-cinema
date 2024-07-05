@@ -215,6 +215,47 @@ service APIService {
       description: "Delete reservation"
     };
   }
+  rpc UpdateTheaterSeat(UpdateTheaterSeatRequest) returns (UpdateTheaterSeatResponse) {
+    option (google.api.http) = {
+      put: "/v1/theater_seats/{theater_seat_id}"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: ["TheaterSeats"]
+      summary: "Update theater seat"
+      description: "Update theater seat"
+    };
+  }
+  rpc GetTheaterSeatsByID(GetTheaterSeatsRequest) returns (GetTheaterSeatsResponse) {
+    option (google.api.http) = {get: "/v1/theater_seats/{order_id}"};
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: ["TheaterSeats"]
+      summary: "Get theater seat"
+      description: "Get theater seat"
+    };
+  }
+}
+
+message GetTheaterSeatsRequest {
+  string order_id = 1;
+}
+
+message GetTheaterSeatsResponse {
+  string order_id = 1;
+  repeated string seat = 2;
+}
+
+message UpdateTheaterSeatRequest {
+  string theater_seat_id = 1;
+  repeated Seat seats = 2;
+}
+message Seat {
+  string key = 1;
+  string name = 2;
+}
+
+message UpdateTheaterSeatResponse {
+  string theater_seat_id = 1;
 }
 
 message CreateScheduleRequest {

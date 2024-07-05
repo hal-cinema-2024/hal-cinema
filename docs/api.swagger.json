@@ -601,6 +601,87 @@
         ]
       }
     },
+    "/v1/theater_seats/{orderId}": {
+      "get": {
+        "summary": "Get theater seat",
+        "description": "Get theater seat",
+        "operationId": "APIService_GetTheaterSeatsByID",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetTheaterSeatsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TheaterSeats"
+        ]
+      }
+    },
+    "/v1/theater_seats/{theaterSeatId}": {
+      "put": {
+        "summary": "Update theater seat",
+        "description": "Update theater seat",
+        "operationId": "APIService_UpdateTheaterSeat",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateTheaterSeatResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "theaterSeatId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "seats": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "$ref": "#/definitions/v1Seat"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "TheaterSeats"
+        ]
+      }
+    },
     "/v1/users": {
       "get": {
         "summary": "Get user",
@@ -1053,6 +1134,20 @@
         }
       }
     },
+    "v1GetTheaterSeatsResponse": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string"
+        },
+        "seat": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "v1GetUserResponse": {
       "type": "object",
       "properties": {
@@ -1186,6 +1281,17 @@
         }
       }
     },
+    "v1Seat": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "v1SeatDetail": {
       "type": "object",
       "properties": {
@@ -1228,6 +1334,14 @@
       "type": "object",
       "properties": {
         "scheduleId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1UpdateTheaterSeatResponse": {
+      "type": "object",
+      "properties": {
+        "theaterSeatId": {
           "type": "string"
         }
       }
