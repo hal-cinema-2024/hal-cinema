@@ -21,13 +21,10 @@ export const OrderCard = (props: OrderCardProps) => {
                 <div>
                   <TextContainer>
                     映画
-                    <Text>
-                      <b>{movie.movieName}</b>
-                    </Text>
+                    <Text></Text>
                   </TextContainer>
                   <TextContainer>
                     <Text>日付</Text>
-                    <Text>{movie.date}</Text>
                   </TextContainer>
                   <TextContainer>
                     <Text>上映スクリーン：</Text>
