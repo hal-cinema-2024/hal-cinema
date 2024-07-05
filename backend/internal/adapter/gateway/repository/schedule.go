@@ -39,6 +39,16 @@ func (r *ScheduleRepo) GetScheduleByID(ctx context.Context, scheduleID string) (
 	return &schedule, nil
 }
 
+func (r *ScheduleRepo) GetScheduleByOrderID(ctx context.Context, orderID string) (*model.Schedule, error) {
+	var schedule model.Schedule
+	err := r.db.Where("order_id = ?", orderID).First(&schedule).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return &schedule, nil
+}
+
 func (r *ScheduleRepo) GetSchedules(ctx context.Context, startTime time.Time, movieId ...string) ([]model.Schedule, error) {
 	var schedules []model.Schedule
 	query := r.db.Where("start_date BETWEEN ? AND ?", startTime, startTime.Add(24*time.Hour))

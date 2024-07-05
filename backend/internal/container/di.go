@@ -40,6 +40,7 @@ func NewContainer() error {
 		{constructor: interactor.NewUserInteractor, opts: []dig.ProvideOption{}},
 		{constructor: interactor.NewMovieInteractor, opts: []dig.ProvideOption{}},
 		{constructor: interactor.NewScheduleInteractor, opts: []dig.ProvideOption{}},
+		{constructor: interactor.NewTheaterSeatInteractor, opts: []dig.ProvideOption{}},
 	}
 
 	for _, arg := range args {
