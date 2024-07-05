@@ -11,4 +11,5 @@ type TheatersSeatsRepo interface {
 	GetTheaterSeatsByOrderID(ctx context.Context, orderID string) ([]*model.TheatersSeat, error)
 	GetTheaterSeatsByScheduleID(ctx context.Context, scheduleID string) ([]*model.TheatersSeat, error)
 	GetTheaterSeatsByScheduleIDs(ctx context.Context, scheduleIDs []string) (map[string][]*model.TheatersSeat, error)
+	UpdateTheaterSeatByID(ctx context.Context, theaterSeatID, seatName string) error
 }

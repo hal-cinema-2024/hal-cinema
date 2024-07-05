@@ -1,12 +1,7 @@
 import styled from "styled-components";
-
-type SlideType = {
-  month: string;
-  week: string;
-  day: string;
-};
+import { SlideDateType } from "../-types/SlideDate";
 type DateDisplayProps = {
-  date: SlideType;
+  date: SlideDateType;
 };
 
 const DateDisp = (props: DateDisplayProps) => {

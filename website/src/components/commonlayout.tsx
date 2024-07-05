@@ -1,6 +1,7 @@
 import { Outlet, Link } from "@tanstack/react-router";
 import styled from "styled-components";
 import headerImage from "/src/assets/bg.jpg";
+import logoImage from "/src/assets/48.png";
 import { LoginButton } from "../routes/google/callback/-components/LoginButton";
 
 type NavLinksType = {
@@ -23,7 +24,7 @@ function CommonLayout() {
           <HeaderContent>
             <Logo1 to="/">
               <img
-                src="src/assets/48.png"
+                src={logoImage}
                 alt="ロゴ画像"
                 height={"120px"}
                 width={"120px"}
@@ -46,10 +47,10 @@ function CommonLayout() {
         <Footer>
           <Logo2 to="/">
             <img
-              src="src/assets/logo1.png"
+              src={logoImage}
               alt="ロゴ画像"
-              height={"140px"}
-              width={"140px"}
+              height={"120px"}
+              width={"120px"}
             />
           </Logo2>
           <Nav>
@@ -102,6 +103,13 @@ const HeaderContent = styled.div`
   align-items: center;
   width: 100%;
   max-width: 1200px;
+  font-size: 20px;
+  font-family: "M PLUS 1 Code", monospace;
+  // font-family: "BIZ UDPMincho", serif;
+  // font-family: "IBM Plex Sans JP", sans-serif;
+  // font-family: "Noto Sans JP", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
 `;
 
 const Logo1 = styled(Link)`
@@ -157,6 +165,9 @@ const Logo2 = styled(Link)`
 
 const NavItem = styled.li`
   margin: 0 1.5rem;
+  // font-family: "Noto Sans JP", sans-serif;
+  font-family: "M PLUS 1 Code", monospace;
+  font-weight: 500px;
 `;
 
 const FooterNavLink = styled(Link)`
