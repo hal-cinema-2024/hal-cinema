@@ -1,7 +1,9 @@
+import React from "react";
 import { Outlet, Link } from "@tanstack/react-router";
 import styled from "styled-components";
 import headerImage from "/src/assets/bg.jpg";
 import logoImage from "/src/assets/48.png";
+import logoImage2 from "/src/assets/logo1.png";
 import { LoginButton } from "../routes/google/callback/-components/LoginButton";
 
 type NavLinksType = {
@@ -42,18 +44,14 @@ function CommonLayout() {
             </LoginButtonWrapper>
           </HeaderContent>
         </Header>
-        <Outlet />
-
+        <MainContent>
+          <Outlet />
+        </MainContent>
         <Footer>
           <Logo2 to="/">
-            <img
-              src={logoImage}
-              alt="ロゴ画像"
-              height={"120px"}
-              width={"120px"}
-            />
+            <img src={logoImage2} alt="ロゴ画像" width={"160px"} />
           </Logo2>
-          <Nav>
+          <FooterNav>
             <NavItem>
               <FooterNavLink to="/">TOP</FooterNavLink>
             </NavItem>
@@ -69,7 +67,7 @@ function CommonLayout() {
             <NavItem>
               <FooterNavLink to="/profile">マイページ</FooterNavLink>
             </NavItem>
-          </Nav>
+          </FooterNav>
           <Copyright>©HALCinema. All rights Reserved.</Copyright>
         </Footer>
       </BackgroundDiv>
@@ -84,7 +82,7 @@ const BackgroundDiv = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 100vh; /* Ensure it covers the full viewport height */
+  min-height: 100vh;
 `;
 
 const Header = styled.header`
@@ -92,9 +90,18 @@ const Header = styled.header`
   color: #fff;
   padding: 1.5rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+`;
+
+const MainContent = styled.main`
+  padding-top: 100px; /* Adjust padding to ensure content is not hidden under the fixed header */
 `;
 
 const HeaderContent = styled.div`
@@ -105,9 +112,6 @@ const HeaderContent = styled.div`
   max-width: 1200px;
   font-size: 20px;
   font-family: "M PLUS 1 Code", monospace;
-  // font-family: "BIZ UDPMincho", serif;
-  // font-family: "IBM Plex Sans JP", sans-serif;
-  // font-family: "Noto Sans JP", sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
 `;
@@ -123,6 +127,7 @@ const Nav = styled.ul`
   display: flex;
   align-items: center;
   list-style: none;
+  margin-left: auto;
 `;
 
 const NavLinkItem = styled.li`
@@ -147,7 +152,7 @@ const LoginButtonWrapper = styled.div`
 const Footer = styled.footer`
   background-color: #f1f1f1;
   text-align: center;
-  padding: 10px;
+  padding: 20px 0;
   background: linear-gradient(to bottom right, #a6038b, #093f59);
   display: flex;
   flex-direction: column;
@@ -163,9 +168,16 @@ const Logo2 = styled(Link)`
   margin-bottom: 10px;
 `;
 
+const FooterNav = styled.ul`
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+`;
+
 const NavItem = styled.li`
   margin: 0 1.5rem;
-  // font-family: "Noto Sans JP", sans-serif;
   font-family: "M PLUS 1 Code", monospace;
   font-weight: 500px;
 `;
@@ -174,7 +186,7 @@ const FooterNavLink = styled(Link)`
   text-decoration: none;
   color: white;
   transition: color 0.3s ease;
-
+  font-size: 20px;
   &:hover {
     color: #ffca28;
   }
