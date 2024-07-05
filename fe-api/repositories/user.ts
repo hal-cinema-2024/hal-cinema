@@ -10,9 +10,6 @@ import type {
 
 export const getUsers = async (page_id: string, page_size: string) => {
   try {
-    if (!page_id || !page_size) {
-      throw new Error("page_id and page_size are required");
-    }
     const res: GetUsersResponseInterface = await client.v1.users.$get({
       query: {
         pageId: page_id,
@@ -27,9 +24,6 @@ export const getUsers = async (page_id: string, page_size: string) => {
 
 export const getUser = async (userId: string) => {
   try {
-    if (!userId) {
-      throw new Error("userId is required");
-    }
     const res: GetUserResponseInterface = await client.v1.users
       ._userId(userId)
       .$get();
@@ -44,9 +38,6 @@ export const updateUser = async (
   requestBody: UpdateUserRequestInterface
 ) => {
   try {
-    if (!userId || !requestBody) {
-      throw new Error("userId and requestBody are required");
-    }
     const res: UpdateUserResponseInterface = await client.v1.users
       ._userId(userId)
       .$put({
@@ -60,9 +51,6 @@ export const updateUser = async (
 
 export const deleteUser = async (userId: string) => {
   try {
-    if (!userId) {
-      throw new Error("userId is required");
-    }
     const res: DeleteUserResponseInterface = await client.v1.users
       ._userId(userId)
       .$delete();

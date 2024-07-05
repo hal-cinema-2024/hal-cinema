@@ -28,9 +28,6 @@ export const login = async (data: string) => {
   };
 
   try {
-    if (!reqBody) {
-      throw new Error("reqBody is required");
-    }
     const res = await client.login.google.$post({ body: reqBody });
     return res.userId;
   } catch (err) {

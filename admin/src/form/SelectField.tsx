@@ -9,6 +9,7 @@ type InputFieldProps = {
 type Option = {
   value: string;
   label: string;
+  mony?: string;
 };
 export const SelectField = (props: InputFieldProps) => {
   const { fieldName, label, option } = props;
@@ -20,7 +21,7 @@ export const SelectField = (props: InputFieldProps) => {
       <Select {...register(fieldName)}>
         {option.map((item) => (
           <SelectItem key={item.value} value={item.value}>
-            {item.label}
+            {item.label}: {item.mony!}
           </SelectItem>
         ))}
       </Select>

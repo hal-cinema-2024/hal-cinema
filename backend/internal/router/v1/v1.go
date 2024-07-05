@@ -17,6 +17,5 @@ func Setup(engine *echo.Group) {
 		v1.userRoute()
 		v1.movieRoute()
 		v1.scheduleRoute()
-		v1.theaterSeaRoute()
 	}
 }

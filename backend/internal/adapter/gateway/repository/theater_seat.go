@@ -2,7 +2,6 @@ package repository
 
 import (
 	"context"
-	"errors"
 	"time"
 
 	"github.com/hal-cinema-2024/backend/internal/entities/model"
@@ -70,23 +69,6 @@ func (r *TheaterSeatRepo) GetTheaterSeatsByScheduleIDs(ctx context.Context, sche
 	}
 
 	return theatersSeatsMap, nil
-
-}
-
-func (r *TheaterSeatRepo) UpdateTheaterSeatByID(ctx context.Context, theaterSeatID, seatName string) error {
-	if theaterSeatID == "" {
-		return errors.New("theaterSeatID is empty")
-	}
-
-	if seatName == "" {
-		return errors.New("seatName is empty")
-	}
-
-	err := r.db.WithContext(ctx).Model(&model.TheatersSeat{}).Where("id = ?", theaterSeatID).Update("seat_name", seatName).Error
-	if err != nil {
-		return err
-	}
-	return nil
 }
 
 var _ dai.TheatersSeatsRepo = (*TheaterSeatRepo)(nil)

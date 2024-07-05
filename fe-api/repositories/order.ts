@@ -10,9 +10,6 @@ import {
 
 export const getOrders = async (userId: string) => {
   try {
-    if (!userId) {
-      throw new Error("userId is required");
-    }
     const res: GetOrdersResponseInterface = await client.v1.orders.$get({
       query: { userId },
     });
@@ -24,13 +21,10 @@ export const getOrders = async (userId: string) => {
 
 export const getOrder = async (orderId: string) => {
   try {
-    if (!orderId) {
-      throw new Error("orderId is required");
-    }
     const res: GetOrderResponseInterface = await client.v1.orders
       ._orderId(orderId)
       .$get();
-    return res;
+    return res.order;
   } catch (err) {
     console.log(err);
   }
@@ -40,9 +34,6 @@ export const createOrder = async (
   requestBody: CreateOrderRequestBodyInterface
 ) => {
   try {
-    if (!requestBody) {
-      throw new Error("requestBody is required");
-    }
     const res: CreateOrderResponseInterface = await client.v1.orders.$post({
       body: requestBody,
     });
@@ -54,9 +45,6 @@ export const createOrder = async (
 
 export const deleteOrder = async (orderId: string) => {
   try {
-    if (!orderId) {
-      throw new Error("orderId is required");
-    }
     const res: DeleteOrderResponseInterface = await client.v1.orders
       ._orderId(orderId)
       .$delete();
