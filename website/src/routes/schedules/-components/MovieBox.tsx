@@ -2,7 +2,6 @@ import styled from "styled-components";
 // import ScreenTime from "./ScreenTime";
 import { ScreenData } from "./ScreenData";
 import { TransformedData } from "../-types/TransFormData";
-
 type MovieBoxProps = {
   schedules: TransformedData[];
 };
@@ -16,12 +15,7 @@ export const MovieBox = (props: MovieBoxProps) => {
         <NameContainer>
           <p>映画一覧</p>
         </NameContainer>
-        {schedules.map((data) => (
-          <ScreenData
-            key={data.movieName}
-            theaterSchedule={data.theaterSchedule}
-          />
-        ))}
+        {schedules && <ScreenData theaterSchedule={schedules} />}
       </ListContainer>
     </>
   );

@@ -161,7 +161,6 @@ const Cards = styled.ul`
 `;
 
 const CardItem = styled.li<{ index: number }>`
-  // Add the 'index' prop to the component
   display: flex;
   padding: 1rem;
   position: relative;
