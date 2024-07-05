@@ -38,8 +38,8 @@ func (i *TheaterSeatInteractor) GetAvailableTheaterSeats(ctx context.Context, or
 
 	result := make(map[string][]string)
 	for k, v := range availableseat {
-		var r []string
-		for k2, _ := range v {
+		r := []string{}
+		for k2 := range v {
 			r = append(r, k2)
 		}
 		result[k] = r
