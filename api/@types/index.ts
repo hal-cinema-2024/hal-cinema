@@ -74,12 +74,24 @@ export type V1DeleteUserResponse = {
   userId?: string | undefined
 }
 
+export type V1GetMovie = {
+  movieId?: string | undefined
+  movieName?: string | undefined
+  director?: string | undefined
+  thumbnail?: string | undefined
+  summary?: string | undefined
+  link?: string | undefined
+  term?: number | undefined
+  releaseDate?: string | undefined
+  endDate?: string | undefined
+}
+
 export type V1GetMovieResponse = {
   movie?: V1Movie | undefined
 }
 
 export type V1GetMoviesResponse = {
-  movie?: V1Movie[] | undefined
+  movie?: V1GetMovie[] | undefined
 }
 
 export type V1GetOrderResponse = {
