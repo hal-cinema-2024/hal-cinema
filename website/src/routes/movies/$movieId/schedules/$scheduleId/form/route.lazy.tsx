@@ -8,7 +8,7 @@ import { TicketFormModal } from "./-components/select_ticket/TicketFormModal";
 // import { useScheduleId } from "../../-hooks/useScheduleId";
 import { StepperComponent } from "./-components/StepperComponent"; // 追加されたimport
 
-export const Route = createLazyFileRoute("/schedules/$scheduleId/form")({
+export const Route = createLazyFileRoute("/movies/$movieId/schedules/$scheduleId/form")({
   component: Index,
 });
 

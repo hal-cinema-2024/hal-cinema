@@ -5,11 +5,11 @@ import MovieBox from "./-components/MovieBox";
 import { Suspense } from "react";
 import { useSchedules } from "../../../../hooks/services/useSchedules";
 
-export const Route = createLazyFileRoute("/schedules/")({
+export const Route = createLazyFileRoute("/movies/$movieId/schedules/")({
   component: Index,
 });
 function Index() {
-  const { schedules } = useSchedules("");
+  const { schedules } = useSchedules();
 
   return (
     <SchedulesContainer>
