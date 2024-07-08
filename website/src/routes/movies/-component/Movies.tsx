@@ -1,41 +1,47 @@
 import styled from "styled-components";
 import { Card, Link } from "@yamada-ui/react";
-import { MovieInterface } from "../../../../../fe-api/interfaces/movie";
+import {
+  GetMoviesResponseInterface,
+  MovieInterface,
+} from "../../../../../fe-api/interfaces/movie";
+
 interface MoviePropsInterface {
-  movies: MovieInterface[];
+  movies: GetMoviesResponseInterface;
 }
 
 export const Movies = (props: MoviePropsInterface) => {
   const { movies } = props;
+  const data = movies as MovieInterface[];
   return (
     <>
       <Section>
-        {movies&&movies.map((item: MovieInterface) => (
-          <MoviesContainer key={item.movieId}>
-            <SSdev>
-              <MovieImage>
-                <img src={item.thumbnail} alt="Movie Poster" />
-              </MovieImage>
-              <MovieTextDiv>
-                <MovieFlexdiv>
-                  <MoviesTitleName>
-                    <b>{item.movieName}</b>
-                  </MoviesTitleName>
-                </MovieFlexdiv>
-                <MovieFlexdiv>
-                  <MoviesDirector>監督名：</MoviesDirector>
-                  <MoviesDirectorName>{item.director}</MoviesDirectorName>
-                </MovieFlexdiv>
-              </MovieTextDiv>
+        {movies &&
+          data.map((item: MovieInterface) => (
+            <MoviesContainer key={item.movieId}>
+              <SSdev>
+                <MovieImage>
+                  <img src={item.thumbnail} alt='Movie Poster' />
+                </MovieImage>
+                <MovieTextDiv>
+                  <MovieFlexdiv>
+                    <MoviesTitleName>
+                      <b>{item.movieName}</b>
+                    </MoviesTitleName>
+                  </MovieFlexdiv>
+                  <MovieFlexdiv>
+                    <MoviesDirector>監督名：</MoviesDirector>
+                    <MoviesDirectorName>{item.director}</MoviesDirectorName>
+                  </MovieFlexdiv>
+                </MovieTextDiv>
 
-              <Link href={`${item.link}`}>
-                <DetailsButton>
-                  <p>詳細へ </p>
-                </DetailsButton>
-              </Link>
-            </SSdev>
-          </MoviesContainer>
-        ))}
+                <Link href={`${item.link}`}>
+                  <DetailsButton>
+                    <p>詳細へ </p>
+                  </DetailsButton>
+                </Link>
+              </SSdev>
+            </MoviesContainer>
+          ))}
       </Section>
     </>
   );
