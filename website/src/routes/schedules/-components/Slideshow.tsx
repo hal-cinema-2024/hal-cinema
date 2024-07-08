@@ -1,44 +1,47 @@
-import { useState } from "react";
 import { Carousel, CarouselSlide } from "@yamada-ui/carousel";
-import { SlideType, slideData } from "./daliy";
 import DateDisp from "./DateDisp";
-import "../styles/Slideshow.css";
-
+import "../-styles/slideshow.css";
+import { SlideDateType } from "../-types/SlideDate";
+import { useScheduleId } from "../-hooks/useScheduleId";
+import { get7Days } from "../-utils/getDate";
 const Slideshow = () => {
-  const [color, setColor] = useState<number>(0);
-  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const { scheduleId, changeId } = useScheduleId();
 
-  const changeColor = (index: number) => {
-    setColor(index);
-    setSelectedIndex(index);
+  const slideData = get7Days();
+  const selectedDate = slideData[scheduleId];
+
+  const handleClicked = (index: number) => {
+    if (index === undefined) {
+      console.log("index is not defined");
+    }
+    changeId(index);
   };
 
-  const selectedDate = slideData[selectedIndex];
-
   return (
-    <div className="SlideContainer">
+    <div className='SlideContainer'>
       <Carousel
-        slideSize="25%"
+        slideSize='25%'
         slidesToScroll={4}
         loop={false}
-        className="Carousel"
+        className='Carousel'
       >
-        {slideData.map((item: SlideType, index: number) => (
+        {slideData.map((item: SlideDateType, index: number) => (
           <CarouselSlide
             key={index}
+            className={index === scheduleId ? 'selected-slide' : ''}
             style={{ cursor: "pointer", position: "relative" }}
             bg={
-              index === color
+              index === scheduleId
                 ? "rgba(4, 157, 130, 0.63)"
                 : "rgba(191, 6, 179, 0.5)"
             }
-            onClick={() => changeColor(index)}
+            onClick={() => handleClicked(index)}
           >
-            <div className="DateContainer">
-              <p className="MonthDay">
+            <div className='DateContainer'>
+              <p className='MonthDay'>
                 {item.month}/{item.day}
               </p>
-              <p className="Week">({item.week})</p>
+              <p className='Week'>({item.week})</p>
             </div>
           </CarouselSlide>
         ))}

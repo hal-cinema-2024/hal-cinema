@@ -3,15 +3,15 @@ import { X } from "@yamada-ui/lucide";
 import { Circle } from "@yamada-ui/lucide";
 type ScreenTimeProps = {
   startTime: string;
-  term: number;
-  isFull: boolean;
+  endTime: string;
+  isAvailable: boolean;
 };
 
 const ScreenTime = (props: ScreenTimeProps) => {
-  const { startTime, isFull, term } = props;
+  const { startTime, isAvailable, endTime } = props;
 
-  const getImg = (isFull: boolean) => {
-    switch (isFull) {
+  const getImg = (isAvailable: boolean) => {
+    switch (isAvailable) {
       case false:
         return <StyledX />;
       case true:
@@ -27,11 +27,11 @@ const ScreenTime = (props: ScreenTimeProps) => {
         <TimeContainer>
           <a href='#'>
             <Start>{startTime}〜</Start>
-            <End>{term}分間</End>
-            <BuyContainer isFull={isFull}>
-              <ImgContainer>{getImg(isFull)}</ImgContainer>
+            <End>{endTime}</End>
+            <BuyContainer isAvailable={isAvailable}>
+              <ImgContainer>{getImg(isAvailable)}</ImgContainer>
               <AvailContainer>
-                <p>{isFull ? "Full" : "Available"}</p>
+                <p>{isAvailable ? "空席" : "満員"}</p>
               </AvailContainer>
             </BuyContainer>
           </a>
@@ -69,7 +69,7 @@ const End = styled.p`
   font-size: 25px;
 `;
 
-const BuyContainer = styled.div<{ isFull: boolean }>`
+const BuyContainer = styled.div<{ isAvailable: boolean }>`
   width: 100%;
   height: 33.333%;
   position: absolute;
@@ -81,7 +81,7 @@ const BuyContainer = styled.div<{ isFull: boolean }>`
   justify-content: center;
 
   background-color: ${(props) =>
-    props.isFull ? "#ADAAAA" : "rgba(4, 157, 130, 0.5)"};
+    props.isAvailable ? "rgba(4, 157, 130, 0.5)" : "#ADAAAA"};
 `;
 
 const ImgContainer = styled.div`

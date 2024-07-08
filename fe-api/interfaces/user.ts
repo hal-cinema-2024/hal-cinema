@@ -4,6 +4,7 @@ import {
   V1UpdateUserResponse,
   V1DeleteUserResponse,
   V1GetUsersResponse,
+  V1MiniUser,
 } from "../../api/@types/index.ts";
 
 type UpdateUserRequestInterface = {
@@ -15,6 +16,7 @@ type UpdateUserRequestInterface = {
 };
 export type {
   V1User as UserInterface,
+  V1MiniUser as MiniUserInterface,
   V1GetUsersResponse as GetUsersResponseInterface,
   V1GetUserResponse as GetUserResponseInterface,
   V1UpdateUserResponse as UpdateUserResponseInterface,

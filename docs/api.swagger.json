@@ -601,6 +601,87 @@
         ]
       }
     },
+    "/v1/theater_seats/{orderId}": {
+      "get": {
+        "summary": "Get theater seat",
+        "description": "Get theater seat",
+        "operationId": "APIService_GetTheaterSeatsByID",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetTheaterSeatsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TheaterSeats"
+        ]
+      }
+    },
+    "/v1/theater_seats/{theaterSeatId}": {
+      "put": {
+        "summary": "Update theater seat",
+        "description": "Update theater seat",
+        "operationId": "APIService_UpdateTheaterSeat",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateTheaterSeatResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "theaterSeatId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "seats": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "$ref": "#/definitions/v1Seat"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "TheaterSeats"
+        ]
+      }
+    },
     "/v1/users": {
       "get": {
         "summary": "Get user",
@@ -836,11 +917,14 @@
     "v1CreateOrderRequest": {
       "type": "object",
       "properties": {
-        "order": {
+        "scheduleId": {
+          "type": "string"
+        },
+        "seatSelects": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v1Orders"
+            "$ref": "#/definitions/v1SeatSelect"
           }
         }
       }
@@ -963,8 +1047,34 @@
     "v1GetOrderResponse": {
       "type": "object",
       "properties": {
-        "order": {
-          "$ref": "#/definitions/v1Orders"
+        "movieId": {
+          "type": "string"
+        },
+        "movieName": {
+          "type": "string"
+        },
+        "theaterId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "theaterName": {
+          "type": "string"
+        },
+        "screeningDatetime": {
+          "type": "string"
+        },
+        "totalPrice": {
+          "type": "string"
+        },
+        "seatDetails": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1SeatDetail"
+          }
+        },
+        "user": {
+          "$ref": "#/definitions/v1MiniUser"
         }
       }
     },
@@ -1024,6 +1134,20 @@
         }
       }
     },
+    "v1GetTheaterSeatsResponse": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string"
+        },
+        "seat": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "v1GetUserResponse": {
       "type": "object",
       "properties": {
@@ -1056,6 +1180,23 @@
       "type": "object",
       "properties": {
         "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1MiniUser": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "userNameKana": {
+          "type": "string"
+        },
+        "email": {
           "type": "string"
         }
       }
@@ -1140,6 +1281,47 @@
         }
       }
     },
+    "v1Seat": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "v1SeatDetail": {
+      "type": "object",
+      "properties": {
+        "theaterSeatId": {
+          "type": "string"
+        },
+        "seatName": {
+          "type": "string"
+        },
+        "priceType": {
+          "type": "string"
+        },
+        "price": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1SeatSelect": {
+      "type": "object",
+      "properties": {
+        "seatName": {
+          "type": "string"
+        },
+        "priceType": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
     "v1UpdateMovieResponse": {
       "type": "object",
       "properties": {
@@ -1152,6 +1334,14 @@
       "type": "object",
       "properties": {
         "scheduleId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1UpdateTheaterSeatResponse": {
+      "type": "object",
+      "properties": {
+        "theaterSeatId": {
           "type": "string"
         }
       }

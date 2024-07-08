@@ -6,7 +6,7 @@ export const useMovies = (pageId: string, pageSize: string) => {
 
   const fetchData = async (pageId: string, pageSize: string) => {
     try {
-      const res = await getMovies("1", "50");
+      const res = await getMovies(pageId, pageSize);
       if (res) setMovies(res);
     } catch (error) {
       console.error("movie service error: " + error);
