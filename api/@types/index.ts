@@ -113,6 +113,11 @@ export type V1GetSchedulesResponse = {
   schedule?: V1GetScheduleResult[] | undefined
 }
 
+export type V1GetTheaterSeatsResponse = {
+  orderId?: string | undefined
+  seat?: string[] | undefined
+}
+
 export type V1GetUserResponse = {
   user?: V1User | undefined
 }
@@ -163,6 +168,11 @@ export type V1OrdersDetail = {
   price?: number | undefined
 }
 
+export type V1Seat = {
+  key?: string | undefined
+  name?: string | undefined
+}
+
 export type V1SeatDetail = {
   theaterSeatId?: string | undefined
   seatName?: string | undefined
@@ -181,6 +191,10 @@ export type V1UpdateMovieResponse = {
 
 export type V1UpdateScheduleResponse = {
   scheduleId?: string | undefined
+}
+
+export type V1UpdateTheaterSeatResponse = {
+  theaterSeatId?: string | undefined
 }
 
 export type V1UpdateUserResponse = {
