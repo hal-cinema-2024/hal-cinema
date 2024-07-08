@@ -13,10 +13,10 @@ type GetOrderParam struct {
 }
 
 type SeatDetail struct {
-	theaterSeatID string
-	SeatName      string
-	PriceType     string
-	Price         int32
+	TheaterSeatID string `json:"theaterSeatID"`
+	SeatName      string `json:"seatName"`
+	PriceType     string `json:"priceType"`
+	Price         int32  `json:"price"`
 }
 
 type GetOrderResult struct {
@@ -64,7 +64,7 @@ func (i *OrderInteractor) GetOrder(ctx context.Context, param GetOrderParam) (*G
 	for _, seat := range theaterSeats {
 		totalPrice += priceType[seat.PriceType].Price
 		seatDetails = append(seatDetails, SeatDetail{
-			theaterSeatID: seat.TheaterSeatID,
+			TheaterSeatID: seat.TheaterSeatID,
 			SeatName:      seat.SeatName,
 			PriceType:     priceType[seat.PriceType].Name,
 			Price:         priceType[seat.PriceType].Price,

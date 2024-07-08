@@ -26,7 +26,8 @@ export type V1CreateMovieResponse = {
 }
 
 export type V1CreateOrderRequest = {
-  order?: V1Orders[] | undefined
+  scheduleId?: string | undefined
+  seatSelects?: V1SeatSelect[] | undefined
 }
 
 export type V1CreateOrderResponse = {
@@ -82,7 +83,14 @@ export type V1GetMoviesResponse = {
 }
 
 export type V1GetOrderResponse = {
-  order?: V1Orders | undefined
+  movieId?: string | undefined
+  movieName?: string | undefined
+  theaterId?: number | undefined
+  theaterName?: string | undefined
+  screeningDatetime?: string | undefined
+  totalPrice?: string | undefined
+  seatDetails?: V1SeatDetail[] | undefined
+  user?: V1MiniUser | undefined
 }
 
 export type V1GetOrdersResponse = {
@@ -105,6 +113,11 @@ export type V1GetSchedulesResponse = {
   schedule?: V1GetScheduleResult[] | undefined
 }
 
+export type V1GetTheaterSeatsResponse = {
+  orderId?: string | undefined
+  seat?: string[] | undefined
+}
+
 export type V1GetUserResponse = {
   user?: V1User | undefined
 }
@@ -119,6 +132,13 @@ export type V1GoogleLoginRequest = {
 
 export type V1GoogleLoginResponse = {
   userId?: string | undefined
+}
+
+export type V1MiniUser = {
+  userId?: string | undefined
+  userName?: string | undefined
+  userNameKana?: string | undefined
+  email?: string | undefined
 }
 
 export type V1Movie = {
@@ -148,12 +168,33 @@ export type V1OrdersDetail = {
   price?: number | undefined
 }
 
+export type V1Seat = {
+  key?: string | undefined
+  name?: string | undefined
+}
+
+export type V1SeatDetail = {
+  theaterSeatId?: string | undefined
+  seatName?: string | undefined
+  priceType?: string | undefined
+  price?: number | undefined
+}
+
+export type V1SeatSelect = {
+  seatName?: string | undefined
+  priceType?: number | undefined
+}
+
 export type V1UpdateMovieResponse = {
   movieId?: string | undefined
 }
 
 export type V1UpdateScheduleResponse = {
   scheduleId?: string | undefined
+}
+
+export type V1UpdateTheaterSeatResponse = {
+  theaterSeatId?: string | undefined
 }
 
 export type V1UpdateUserResponse = {

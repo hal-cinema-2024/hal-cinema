@@ -1,25 +1,30 @@
 import { useEffect, useState } from "react";
 import { getSchedules } from "../../../../../fe-api/repositories/schedule";
-import { transformData } from "../-utils/TransSchedule";
 import { TransformedData } from "../-types/TransFormData";
+import { transformData } from "../-utils/TransSchedule";
+import { useScheduleId } from "./useScheduleId";
+import { get7Days } from "../-utils/getDate";
+import { TransRFCDate } from "../-utils/TransRFC";
 
-export const useSchedules = (
-  pageId: string,
-  pageSize: string,
-  date: string
-) => {
+export const useSchedules = (movieId?: string) => {
   const [schedules, setSchedules] = useState<TransformedData[]>();
+  const { scheduleId } = useScheduleId();
 
-  const fetchData = async (pageId: string, pageSize: string, date: string) => {
+  const selectDate = (scheduleId: number) => {
+    const date = get7Days();
+    const select = date[scheduleId];
+    const rfc = TransRFCDate(select);
+    return rfc;
+  };
+
+  const startDate = selectDate(scheduleId);
+  const fetchData = async (startDate: string, movieId?: string) => {
     try {
-      const res = await getSchedules(
-        pageId,
-        pageSize,
-        date ? new Date(date).toISOString() : undefined
-      );
+      const res = await getSchedules(startDate, movieId);
+
       if (res) {
-        const transform = transformData(res);
-        setSchedules(transform);
+        const data = transformData(res.schedule!);
+        setSchedules(data!);
       }
     } catch (error) {
       console.error("schedules service error: " + error);
@@ -27,8 +32,8 @@ export const useSchedules = (
   };
 
   useEffect(() => {
-    fetchData(pageId, pageSize, date);
-  }, [pageId, pageSize, date]);
+    fetchData(startDate, movieId!);
+  }, [scheduleId]);
 
   return { schedules, setSchedules };
 };

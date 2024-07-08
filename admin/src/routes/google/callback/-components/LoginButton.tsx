@@ -1,7 +1,7 @@
 import { useGoogleLogin } from "@react-oauth/google";
 import { Button } from "@yamada-ui/react";
 import { login } from "../../../../../../fe-api/repositories/login";
-import { UserIdContext } from "../-store/useUserIdContext";
+import { UserIdContext } from "../../../../store/useUserIdContext";
 import { useContext } from "react";
 export function LoginButton() {
   const { setUserId, userId } = useContext(UserIdContext);

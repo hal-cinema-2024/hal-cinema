@@ -1,34 +1,106 @@
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { Skeleton } from "@yamada-ui/react";
 
-export const Top = () => {
+export const Top: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000); // 2秒後に読み込み完了とする
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <>
+        <MainSection>
+          <Skeleton height="450px" width="100%" color="#f0f0f0" />
+        </MainSection>
+
+        <Inner>
+          <Box>
+            <BoxBody>
+              <BoxTitle>
+                <Skeleton height="40px" width="150px" />
+              </BoxTitle>
+              <BoxText>
+                <Skeleton height="20px" width="300px" />
+                <Skeleton height="20px" width="300px" />
+              </BoxText>
+            </BoxBody>
+            <BoxImage>
+              <Skeleton height="450px" width="100%" />
+            </BoxImage>
+          </Box>
+        </Inner>
+
+        <Main>
+          <Title>
+            <Skeleton height="25px" width="200px" />
+          </Title>
+          <Cards>
+            {Array.from({ length: 6 }).map((_, index) => (
+              <CardItem key={index} index={index}>
+                <Card>
+                  <CardImage>
+                    <Skeleton height="auto" width="100%" />
+                  </CardImage>
+                  <CardContent>
+                    <CardTitle>
+                      <Skeleton height="20px" width="350px" />
+                    </CardTitle>
+                    <CardText>
+                      <Skeleton height="15px" width="100%" />
+                      <Skeleton height="15px" width="100%" />
+                    </CardText>
+                    <Skeleton height="40px" width="100%" />
+                  </CardContent>
+                </Card>
+              </CardItem>
+            ))}
+          </Cards>
+          <MoreButtonWrapper>
+            <MoreButton>もっと見る</MoreButton>
+          </MoreButtonWrapper>
+        </Main>
+      </>
+    );
+  }
+
   return (
     <>
       <MainSection>
-        <MainImage className='main-image'></MainImage>
+        <MainImage className="main-image"></MainImage>
       </MainSection>
 
       <Inner>
         <Box>
           <BoxBody>
-            <BoxTitle>
-              <b>CONCEPT</b>
-            </BoxTitle>
+            <BoxTitle>CONCEPT</BoxTitle>
             <BoxText>
-              HALCinemaへようこそ。
-              <br />
-              ナイトシネマで、忘れられない映画の夜をお過ごしください。
+              <TextLine fontSize="24px" fontWeight="bold">
+                HALシネマへようこそ。
+              </TextLine>
+              <TextLine>
+                夜の闇が深まる時間、特別なナイトシネマの扉が開きます。
+              </TextLine>
+              <TextLine>
+                大スクリーンに映し出される鮮やかな映像と、響き渡る臨場感溢れる音響が、未知の世界へと誘います。
+              </TextLine>
             </BoxText>
           </BoxBody>
           <BoxImage>
-            <img src='/src/assets/cinema.jpeg' alt='コンセプト画像' />
+            <img src="/src/assets/cinema.jpeg" alt="コンセプト画像" />
           </BoxImage>
         </Box>
       </Inner>
 
       <Main>
-        <Title>
-          <b>上映映画一覧</b>
-        </Title>
+        <Title>上映映画一覧</Title>
         <Cards>
           {cardData.map((card, index) => (
             <CardItem key={card.id} index={index}>
@@ -46,6 +118,9 @@ export const Top = () => {
             </CardItem>
           ))}
         </Cards>
+        <MoreButtonWrapper>
+          <MoreButton>もっと見る</MoreButton>
+        </MoreButtonWrapper>
       </Main>
     </>
   );
@@ -69,56 +144,106 @@ const Inner = styled.div`
   max-width: 1000px;
   width: 100%;
   margin-right: auto;
+  margin-bottom: 90px;
   margin-left: auto;
   padding: 50px 20px 50px;
+`;
+
+const BoxBody = styled.div`
+  height: auto;
+  width: 50%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  @media screen and (max-width: 767px) {
+    width: 100%;
+    padding: 25px;
+  }
+`;
+
+const BoxTitle = styled.h2`
+  font-size: 48px;
+  font-weight: 800;
+  color: #ffffff;
+  font-family: "Kaisei Tokumin", serif;
+  margin-bottom: 25px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 3px;
+  position: relative;
+
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: #ffffff;
+    transition: width 0.3s ease;
+  }
+
+  &:hover:after {
+    width: 100px;
+  }
+`;
+
+const BoxText = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+const TextLine = styled.p<{ fontSize?: string; fontWeight?: string }>`
+  font-size: ${(props) => props.fontSize || "18px"};
+  font-weight: ${(props) => props.fontWeight || "normal"};
+  line-height: 1.8;
+  color: #ffffff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.5px;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateX(10px);
+  }
 `;
 
 const Box = styled.div`
   display: flex;
   flex-direction: row;
-  & + & {
-    margin-top: 80px;
-  }
+  align-items: center;
+  gap: 40px;
+  margin-top: 80px;
+
+  border-radius: 15px;
+  padding: 30px;
+
   @media screen and (max-width: 767px) {
-    display: block;
-    & + & {
-      margin-top: 60px;
-    }
+    flex-direction: column;
+    margin-top: 60px;
+    padding: 20px;
   }
-`;
-
-const BoxBody = styled.div`
-  height: 300px;
-  width: 50%;
-  padding: 50px;
-  @media screen and (max-width: 767px) {
-    width: 100%;
-    padding: 0;
-  }
-`;
-
-const BoxTitle = styled.h2`
-  font-size: 40px;
-  text-transform: uppercase;
-  color: white;
-  font-family: "Kaisei Tokumin", serif;
-`;
-
-const BoxText = styled.p`
-  font-size: 17px;
-  margin-top: 20px;
-  color: white;
 `;
 
 const BoxImage = styled.figure`
   width: 50%;
   img {
-    // width: 100%;
+    width: 100%;
     height: 450px;
     object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.03);
+    }
   }
+
   @media screen and (max-width: 767px) {
-    margin-top: 20px;
+    margin-top: 30px;
     width: 100%;
   }
 `;
@@ -144,7 +269,7 @@ const Main = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 25px;
+  font-size: 40px;
   font-weight: 400;
   text-align: center;
   color: white;
@@ -161,7 +286,6 @@ const Cards = styled.ul`
 `;
 
 const CardItem = styled.li<{ index: number }>`
-  // Add the 'index' prop to the component
   display: flex;
   padding: 1rem;
   position: relative;
@@ -211,7 +335,6 @@ const CardTitle = styled.h2`
   letter-spacing: 1px;
   text-transform: capitalize;
   margin: 0px;
-  //  font-family: "Kaisei Tokumin", serif;
 `;
 
 const CardText = styled.p`
@@ -220,7 +343,6 @@ const CardText = styled.p`
   line-height: 1.5;
   margin-top: 1rem;
   margin-bottom: 1rem;
-  font-weight: 400;
 `;
 
 const Button = styled.button`
@@ -240,4 +362,24 @@ const Button = styled.button`
     background-color: rgba(255, 255, 255, 0.12);
   }
 `;
-export default Top;
+
+const MoreButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+`;
+
+const MoreButton = styled.button`
+  background-color: rgb(70, 70, 70);
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: rgb(95, 95, 95);
+  }
+`;
