@@ -64,7 +64,7 @@ func UpdateMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 		}
 		var releaseDate time.Time
 		if req.ReleaseDate != "" {
-			releaseDate, err = str2time(req.ReleaseDate)
+			releaseDate, err = str2date(req.ReleaseDate)
 			if err != nil {
 				log.Error(ctx.Request().Context(), "releaseDate is invalid")
 				return echo.ErrBadRequest
@@ -72,7 +72,7 @@ func UpdateMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 		}
 		var endDate time.Time
 		if req.EndDate != "" {
-			endDate, err = str2time(req.EndDate)
+			endDate, err = str2date(req.EndDate)
 			if err != nil {
 				log.Error(ctx.Request().Context(), "endDate is invalid")
 				return echo.ErrBadRequest
