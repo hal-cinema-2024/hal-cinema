@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import BuyContent from "./BuyContent";
 import PaymentInfo from "./PaymentInfo";
-import { useOrder } from "../../../../../../../../hooks/services/useOrder";
-import { useOrderId } from "../../../../../../../../hooks/useOrderId";
+import { useOrder } from "../../../../../../hooks/services/useOrder";
+import { useOrderId } from "../../../../../../hooks/useOrderId";
 
 export function Result() {
   const { orderId } = useOrderId();
