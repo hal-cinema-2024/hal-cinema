@@ -2,7 +2,6 @@ import { createLazyFileRoute } from "@tanstack/react-router";
 import styled from "styled-components";
 import Slideshow from "./-components/Slideshow";
 import MovieBox from "./-components/MovieBox";
-import { useTransSchedules } from "./-hooks/useTransSchedules";
 import { Suspense } from "react";
 import { useSchedules } from "../../hooks/services/useSchedules";
 

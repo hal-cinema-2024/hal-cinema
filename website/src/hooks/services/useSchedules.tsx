@@ -6,8 +6,8 @@ import { get7Days } from "../../routes/schedules/-utils/getDate";
 import { TransDate } from "../../routes/schedules/-utils/TransDate";
 import { transformData } from "../../routes/schedules/-utils/TransSchedule";
 
-export const useSchedules = async (movieId?: string) => {
-  const [transSchedules, setTransSchedules] = useState<TransformedData[]>();
+export const useSchedules = (movieId?: string) => {
+  const [schedules, setSchedules] = useState<TransformedData[]>();
   const { scheduleId } = useScheduleId();
 
   const selectDate = (scheduleId: number) => {
@@ -17,14 +17,14 @@ export const useSchedules = async (movieId?: string) => {
     return startDate;
   };
 
-  const startDate = await selectDate(scheduleId);
+  const startDate = selectDate(scheduleId);
   const fetchData = async (startDate: string, movieId?: string) => {
     try {
       const res = await getSchedules(startDate, movieId);
 
       if (res) {
         const data = await transformData(res.schedule!);
-        await setTransSchedules(data!);
+        await setSchedules(data!);
       }
     } catch (error) {
       console.error("schedules service error: " + error);
@@ -35,5 +35,5 @@ export const useSchedules = async (movieId?: string) => {
     fetchData(startDate, movieId!);
   }, []);
 
-  return { transSchedules, setTransSchedules };
+  return { schedules, setSchedules };
 };

@@ -1,9 +1,9 @@
 import styled from "styled-components";
 // import ScreenTime from "./ScreenTime";
 import { ScreenData } from "./ScreenData";
-import { GetSchedulesResponseInterface } from "../../../../../fe-api/interfaces/schedule";
+import { TransformedData } from "../-types/TransFormData";
 type MovieBoxProps = {
-  schedules: GetSchedulesResponseInterface;
+  schedules: TransformedData[];
 };
 
 export const MovieBox = (props: MovieBoxProps) => {
