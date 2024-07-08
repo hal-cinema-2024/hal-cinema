@@ -1,16 +1,23 @@
 import styled from "styled-components";
 import { Card, Link } from "@yamada-ui/react";
 import { MovieInterface } from "../../../../../fe-api/interfaces/movie";
+
 interface MoviePropsInterface {
   movies: MovieInterface[];
 }
 
 export const Movies = (props: MoviePropsInterface) => {
   const { movies } = props;
+
+  if (!movies || movies.length === 0) {
+    console.error("映画情報が取得できませんでした。");
+    return null;
+  }
+
   return (
     <>
       <Section>
-        {movies&&movies.map((item: MovieInterface) => (
+        {movies.map((item: MovieInterface) => (
           <MoviesContainer key={item.movieId}>
             <SSdev>
               <MovieImage>
@@ -30,7 +37,7 @@ export const Movies = (props: MoviePropsInterface) => {
 
               <Link href={`${item.link}`}>
                 <DetailsButton>
-                  <p>詳細へ </p>
+                  <p>詳細へ</p>
                 </DetailsButton>
               </Link>
             </SSdev>
@@ -175,23 +182,3 @@ const MoviesDirectorName = styled.p`
     font-size: 16px;
   }
 `;
-
-// const MoviePerformer = styled.p`
-//   font-size: 18px;
-//   margin: 0;
-//   color: #ddd;
-
-//   @media (max-width: 768px) {
-//     font-size: 16px;
-//   }
-// `;
-
-// const MoviePerformerName = styled.p`
-//   font-size: 18px;
-//   margin: 0;
-//   color: #fff;
-
-//   @media (max-width: 768px) {
-//     font-size: 16px;
-//   }
-// `;
