@@ -39,7 +39,11 @@ func (r *UpdateMovieRequest) Validate() error {
 
 func UpdateMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 	return func(ctx echo.Context) error {
-		var req UpdateMovieRequest
+		var (
+			req         UpdateMovieRequest
+			releaseDate time.Time
+			endDate     time.Time
+		)
 		if err := ctx.Bind(&req); err != nil {
 			log.Warn(ctx.Request().Context(), "failed to bind", "error", err)
 			return echo.ErrBadRequest
@@ -62,7 +66,7 @@ func UpdateMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 		} else {
 			thumbnail = imageFiles[0]
 		}
-		var releaseDate time.Time
+
 		if req.ReleaseDate != "" {
 			releaseDate, err = str2date(req.ReleaseDate)
 			if err != nil {
@@ -70,7 +74,7 @@ func UpdateMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 				return echo.ErrBadRequest
 			}
 		}
-		var endDate time.Time
+
 		if req.EndDate != "" {
 			endDate, err = str2date(req.EndDate)
 			if err != nil {
