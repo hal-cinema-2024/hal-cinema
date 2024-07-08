@@ -289,7 +289,19 @@ message GetMoviesRequest {
 }
 
 message GetMoviesResponse {
-  repeated Movie movie = 1;
+  repeated GetMovie movie = 1;
+}
+
+message GetMovie {
+  string movie_id = 1;
+  string movie_name = 2;
+  string director = 3;
+  bytes thumbnail = 4;
+  string summary = 5;
+  string link = 6;
+  int32 term = 7;
+  string release_date = 8;
+  string end_date = 9;
 }
 
 message GetMovieRequest {

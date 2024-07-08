@@ -946,6 +946,40 @@
         }
       }
     },
+    "v1GetMovie": {
+      "type": "object",
+      "properties": {
+        "movieId": {
+          "type": "string"
+        },
+        "movieName": {
+          "type": "string"
+        },
+        "director": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string",
+          "format": "byte"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "link": {
+          "type": "string"
+        },
+        "term": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "releaseDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        }
+      }
+    },
     "v1GetMovieResponse": {
       "type": "object",
       "properties": {
@@ -961,7 +995,7 @@
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/v1Movie"
+            "$ref": "#/definitions/v1GetMovie"
           }
         }
       }
