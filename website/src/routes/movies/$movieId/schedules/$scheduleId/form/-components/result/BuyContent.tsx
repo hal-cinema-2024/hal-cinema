@@ -1,4 +1,4 @@
-import { GetOrderResponseInterface } from "../../../../../../../../fe-api/interfaces/order";
+import { GetOrderResponseInterface } from "../../../../../../../../../../fe-api/interfaces/order";
 import "../../../-styles/Table.css";
 
 type BuyContentProps = {

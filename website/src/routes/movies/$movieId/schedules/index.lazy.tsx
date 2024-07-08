@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Slideshow from "./-components/Slideshow";
 import MovieBox from "./-components/MovieBox";
 import { Suspense } from "react";
-import { useSchedules } from "../../hooks/services/useSchedules";
+import { useSchedules } from "../../../../hooks/services/useSchedules";
 
 export const Route = createLazyFileRoute("/schedules/")({
   component: Index,

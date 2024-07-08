@@ -1,4 +1,4 @@
-import { ScheduleInterface } from "../../../../../fe-api/interfaces/schedule";
+import { ScheduleInterface } from "../../../../../../../fe-api/interfaces/schedule";
 import { TheaterSchedule, TransformedData } from "../-types/TransFormData";
 
 export function transformData(data: ScheduleInterface[]): TransformedData[] {

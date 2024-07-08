@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { getSchedules } from "../../../../fe-api/repositories/schedule";
-import { useScheduleId } from "../../routes/schedules/-hooks/useScheduleId";
-import { TransformedData } from "../../routes/schedules/-types/TransFormData";
-import { get7Days } from "../../routes/schedules/-utils/getDate";
-import { TransDate } from "../../routes/schedules/-utils/TransDate";
-import { transformData } from "../../routes/schedules/-utils/TransSchedule";
+import { useScheduleId } from "../../routes/movies/$movieId/schedules/-hooks/useScheduleId";
+import { TransformedData } from "../../routes/movies/$movieId/schedules/-types/TransFormData";
+import { get7Days } from "../../routes/movies/$movieId/schedules/-utils/getDate";
+import { TransDate } from "../../routes/movies/$movieId/schedules/-utils/TransDate";
+import { transformData } from "../../routes/movies/$movieId/schedules/-utils/TransSchedule";
 
 export const useSchedules = (movieId?: string) => {
   const [schedules, setSchedules] = useState<TransformedData[]>();
