@@ -1,21 +1,25 @@
 import styled from "styled-components";
 import { Card } from "@yamada-ui/react";
 import { SimpleGrid, GridItem, Text, Button } from "@yamada-ui/react";
-import { OrdersInterface } from "../../../../../fe-api/interfaces/order";
+import {
+  GetOrdersResponseInterface,
+  OrdersInterface,
+} from "../../../../../fe-api/interfaces/order";
 
 type OrderCardProps = {
-  orders: OrdersInterface[];
+  orders: GetOrdersResponseInterface;
 };
 
 export const OrderCard = (props: OrderCardProps) => {
   const { orders } = props;
+  const data = orders as OrdersInterface[];
   return (
     <>
       <Container columns={2}>
         <DText>予約確認</DText>
 
-        {orders &&
-          orders.map((data: OrdersInterface, index: number) => (
+        {data &&
+          data.map((data: OrdersInterface, index: number) => (
             <SGridItem key={index}>
               <SCard>
                 <div>

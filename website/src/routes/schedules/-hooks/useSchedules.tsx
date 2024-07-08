@@ -4,7 +4,7 @@ import { TransformedData } from "../-types/TransFormData";
 import { transformData } from "../-utils/TransSchedule";
 import { useScheduleId } from "./useScheduleId";
 import { get7Days } from "../-utils/getDate";
-import { TransRFCDate } from "../-utils/TransRFC";
+import { TransDate } from "../-utils/TransDate";
 
 export const useSchedules = (movieId?: string) => {
   const [schedules, setSchedules] = useState<TransformedData[]>();
@@ -13,8 +13,7 @@ export const useSchedules = (movieId?: string) => {
   const selectDate = (scheduleId: number) => {
     const date = get7Days();
     const select = date[scheduleId];
-    const rfc = TransRFCDate(select);
-    return rfc;
+    return TransDate(select);
   };
 
   const startDate = selectDate(scheduleId);
