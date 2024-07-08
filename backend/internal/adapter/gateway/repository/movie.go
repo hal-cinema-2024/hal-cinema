@@ -145,7 +145,6 @@ func (r *MovieRepo) UpdateMovie(ctx context.Context, movie *model.Movie, imagePa
 	return nil
 }
 
-// logical deletion
 func (r *MovieRepo) DeleteMovie(ctx context.Context, movieID string) error {
 	var movie model.Movie
 	result := r.db.Model(&movie).Where("movie_id = ?", movieID)
