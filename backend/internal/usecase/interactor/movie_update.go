@@ -86,12 +86,6 @@ func (mi *MovieInteractor) UpdateMovie(ctx context.Context, movie UpdateMovie) e
 		}(image)
 	}
 
-	go func() {
-		wg.Wait()
-		close(imagePathsChan)
-		close(errChan)
-	}()
-
 	for err := range errChan {
 		return err
 	}
@@ -101,6 +95,8 @@ func (mi *MovieInteractor) UpdateMovie(ctx context.Context, movie UpdateMovie) e
 	}
 
 	wg.Wait()
+	close(imagePathsChan)
+	close(errChan)
 
 	err := mi.Repositories.UpdateMovie(ctx, &model.Movie{
 		MovieID:       movie.MovieID,
