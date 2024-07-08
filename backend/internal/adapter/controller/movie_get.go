@@ -26,6 +26,7 @@ func (req GetMoviesRequest) Validate() error {
 }
 
 type GetMovieRequest struct {
+
 	MovieID string `param:"movie_id" validate:"required"`
 }
 

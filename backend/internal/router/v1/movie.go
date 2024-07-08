@@ -14,4 +14,5 @@ func (v1 *v1Router) movieRoute() {
 	movieRoute.GET("", controller.GetMovies(mi))
 	movieRoute.GET("/:movie_id", controller.GetMovie(mi))
 	movieRoute.PUT("/:movie_id", controller.UpdateMovie(mi))
+  movieRoute.DELETE("/:movie_id", controller.DeleteMovie(mi))
 }
