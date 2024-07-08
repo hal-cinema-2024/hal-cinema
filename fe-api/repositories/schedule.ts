@@ -40,7 +40,7 @@ export const createSchedule = async (
       await client.v1.schedules.$post({
         body: requestBody,
       });
-    return res.scheduleId;
+    return res;
   } catch (err) {
     console.log(err);
   }
@@ -59,7 +59,7 @@ export const updateSchedule = async (
       .$put({
         body: requestBody,
       });
-    return res.scheduleId;
+    return res;
   } catch (err) {
     console.log(err);
   }

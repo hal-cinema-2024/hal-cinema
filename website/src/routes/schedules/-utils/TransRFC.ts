@@ -11,6 +11,8 @@ export function TransRFCDate(data: SlideDateType): string {
     parseInt(data.day)
   );
 
-  // RFC形式の日付文字列を返す
+  //iso8601形式に変換
+  const day: Date = date.toISOString();
+  console.log(day);
   return date.toISOString();
 }
