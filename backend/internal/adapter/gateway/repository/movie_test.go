@@ -364,10 +364,12 @@ func TestUpdateMovie(t *testing.T) {
 	}
 
 	testCases := []struct {
-		name        string
-		changeMovie model.Movie
-		wantMovie   model.Movie
-		wantErrCode string
+		name             string
+		changeMovie      model.Movie
+		imagePaths       []string
+		deleteImagePaths []string
+		wantMovie        model.Movie
+		wantErrCode      string
 	}{
 		{
 			name: "success - update movie",
@@ -401,6 +403,17 @@ func TestUpdateMovie(t *testing.T) {
 				ReleaseDate:   time.Now(),
 				EndDate:       time.Now(),
 			},
+			imagePaths: []string{
+				"test1",
+				"test2",
+				"test3",
+				"test4",
+				"test5",
+			},
+			deleteImagePaths: []string{
+				"test1",
+				"test2",
+			},
 			wantMovie: model.Movie{
 				MovieID:       movie.MovieID,
 				Name:          "updatedName",
@@ -410,6 +423,28 @@ func TestUpdateMovie(t *testing.T) {
 				Link:          "updatedLink",
 				Term:          180,
 				ReleaseDate:   time.Now(),
+				EndDate:       time.Now(),
+			},
+			wantErrCode: "",
+		},
+		{
+			name: "success - update some fields",
+			changeMovie: model.Movie{
+				MovieID:  movie.MovieID,
+				Name:     "updatedName2",
+				Director: "updatedDirector2",
+				Summary:  "updatedSummary2",
+				EndDate:  time.Now(),
+			},
+			wantMovie: model.Movie{
+				MovieID:       movie.MovieID,
+				Name:          "updatedName2",
+				Director:      "updatedDirector2",
+				Summary:       "updatedSummary2",
+				ThumbnailPath: "updatedThumbnailPath",
+				Link:          "updatedLink",
+				Term:          180,
+				ReleaseDate:   movie.ReleaseDate,
 				EndDate:       time.Now(),
 			},
 			wantErrCode: "",
@@ -444,7 +479,7 @@ func TestUpdateMovie(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			err := movieRepo.UpdateMovie(ctx, &tc.changeMovie)
+			err := movieRepo.UpdateMovie(ctx, &tc.changeMovie, tc.imagePaths, tc.deleteImagePaths)
 			if err != nil {
 				var pgErr *pq.Error
 				if errors.As(err, &pgErr) {
