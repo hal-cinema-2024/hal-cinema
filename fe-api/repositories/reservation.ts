@@ -17,7 +17,7 @@ export const createReservation = async (
       await client.v1.reservations.$post({
         body: requestBody,
       });
-    return res.theaterSeatId;
+    return res;
   } catch (err) {
     console.log(err);
   }
@@ -30,7 +30,7 @@ export const deleteReservation = async (theaterSeatId: string) => {
     }
     const res: DeleteSeatReservationResponseInterface =
       await client.v1.reservations._theaterSeatId(theaterSeatId).$delete();
-    return res.theaterSeatId;
+    return res;
   } catch (err) {
     console.log(err);
   }
