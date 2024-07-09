@@ -147,7 +147,12 @@ func (r *MovieRepo) UpdateMovie(ctx context.Context, movie *model.Movie, imagePa
 
 func (r *MovieRepo) DeleteMovie(ctx context.Context, movieID string) error {
 	var movie model.Movie
-	result := r.db.Model(&movie).Where("movie_id = ?", movieID)
+	var movieImage model.MovieImage
+	result := r.db.Model(&movieImage).Where("movie_id = ?", movieID).Delete(&movieImage)
+	if result.Error != nil {
+		return result.Error
+	}
+	result = r.db.Model(&movie).Where("movie_id = ?", movieID).Delete(&movie)
 	if result.Error != nil {
 		return result.Error
 	}

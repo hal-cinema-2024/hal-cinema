@@ -4,8 +4,9 @@ import Slideshow from "./-components/Slideshow";
 import MovieBox from "./-components/MovieBox";
 import { Suspense } from "react";
 import { useSchedules } from "../../hooks/services/useSchedules";
+import { SelectMovie } from "./-components/SelectMovie";
 
-export const Route = createLazyFileRoute("/movies/$movieId/schedules/")({
+export const Route = createLazyFileRoute("/schedules/")({
   component: Index,
 });
 function Index() {
@@ -15,6 +16,7 @@ function Index() {
     <SchedulesContainer>
       <Title>上映スケジュール</Title>
       <Slideshow />
+      <SelectMovie />
       <Suspense fallback={<div>loading</div>}>
         <MovieBox schedules={schedules!} />
       </Suspense>
