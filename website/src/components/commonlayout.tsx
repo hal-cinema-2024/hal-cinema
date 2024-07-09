@@ -1,4 +1,3 @@
-import React from "react";
 import { Outlet, Link } from "@tanstack/react-router";
 import styled from "styled-components";
 import headerImage from "/src/assets/bg.jpg";
@@ -50,11 +49,21 @@ function CommonLayout() {
             <img src={logoImage2} alt='ロゴ画像' width={"160px"} />
           </Logo2>
           <FooterNav>
-            {NavLinksData.map((navLink) => (
-              <NavItem key={navLink.link}>
-                <FooterNavLink to={navLink.link}>{navLink.name}</FooterNavLink>
-              </NavItem>
-            ))}
+            <NavItem>
+              <FooterNavLink to='/'>TOP</FooterNavLink>
+            </NavItem>
+            <NavItem>
+              <FooterNavLink to='/movies'>映画一覧</FooterNavLink>
+            </NavItem>
+            <NavItem>
+              <FooterNavLink to='/schedules'>スクリーン一覧</FooterNavLink>
+            </NavItem>
+            <NavItem>
+              <FooterNavLink to='/movie'>チケット購入</FooterNavLink>
+            </NavItem>
+            <NavItem>
+              <FooterNavLink to='/profile'>マイページ</FooterNavLink>
+            </NavItem>
           </FooterNav>
           <Copyright>©HALCinema. All rights Reserved.</Copyright>
         </Footer>

@@ -28,5 +28,5 @@ export async function CreateOrderService(
   };
 
   const res = await createOrder(req);
-  if (res) setOrderId(res);
+  if (res) setOrderId(res.orderId!);
 }
