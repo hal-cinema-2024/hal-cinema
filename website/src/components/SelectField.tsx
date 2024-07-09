@@ -3,13 +3,9 @@ import { useFormContext } from "react-hook-form";
 type InputFieldProps = {
   fieldName: string;
   label: string;
-  option: Option[];
+  option: { label: string; value: string }[];
 };
 
-type Option = {
-  label: string;
-  value: number | string;
-};
 export const SelectField = (props: InputFieldProps) => {
   const { fieldName, label, option } = props;
   const { register, formState } = useFormContext();
