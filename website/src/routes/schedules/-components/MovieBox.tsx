@@ -8,7 +8,6 @@ type MovieBoxProps = {
 
 export const MovieBox = (props: MovieBoxProps) => {
   const { schedules } = props;
-
   return (
     <>
       <ListContainer>
