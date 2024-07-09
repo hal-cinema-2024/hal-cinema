@@ -1,4 +1,3 @@
-import React from "react";
 import { Outlet, Link } from "@tanstack/react-router";
 import styled from "styled-components";
 import headerImage from "/src/assets/bg.jpg";
@@ -13,6 +12,7 @@ type NavLinksType = {
 const NavLinksData: NavLinksType[] = [
   { link: "/", name: "TOP" },
   { link: "/movies", name: "映画一覧" },
+  { link: "/schedules", name: "上映スケジュール" },
   { link: "/profile", name: "マイページ" },
 ];
 
