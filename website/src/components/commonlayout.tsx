@@ -12,6 +12,7 @@ type NavLinksType = {
 const NavLinksData: NavLinksType[] = [
   { link: "/", name: "TOP" },
   { link: "/movies", name: "映画一覧" },
+  { link: "/schedules", name: "上映スケジュール" },
   { link: "/profile", name: "マイページ" },
 ];
 
@@ -49,21 +50,11 @@ function CommonLayout() {
             <img src={logoImage2} alt='ロゴ画像' width={"160px"} />
           </Logo2>
           <FooterNav>
-            <NavItem>
-              <FooterNavLink to='/'>TOP</FooterNavLink>
-            </NavItem>
-            <NavItem>
-              <FooterNavLink to='/movies'>映画一覧</FooterNavLink>
-            </NavItem>
-            <NavItem>
-              <FooterNavLink to='/schedules'>スクリーン一覧</FooterNavLink>
-            </NavItem>
-            <NavItem>
-              <FooterNavLink to='/movie'>チケット購入</FooterNavLink>
-            </NavItem>
-            <NavItem>
-              <FooterNavLink to='/profile'>マイページ</FooterNavLink>
-            </NavItem>
+            {NavLinksData.map((navLink) => (
+              <NavItem key={navLink.link}>
+                <FooterNavLink to={navLink.link}>{navLink.name}</FooterNavLink>
+              </NavItem>
+            ))}
           </FooterNav>
           <Copyright>©HALCinema. All rights Reserved.</Copyright>
         </Footer>
