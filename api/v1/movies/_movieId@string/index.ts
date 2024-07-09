@@ -31,6 +31,7 @@ export type Methods = {
       term?: number | undefined
       releaseDate?: string | undefined
       endDate?: string | undefined
+      deleteMovieImage?: string[] | undefined
       movieImage?: string[] | undefined
     }
   }

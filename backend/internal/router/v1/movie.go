@@ -13,4 +13,5 @@ func (v1 *v1Router) movieRoute() {
 	movieRoute.POST("", controller.CreateMovie(mi))
 	movieRoute.GET("", controller.GetMovies(mi))
 	movieRoute.GET("/:movie_id", controller.GetMovie(mi))
+	movieRoute.PUT("/:movie_id", controller.UpdateMovie(mi))
 }
