@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { getSchedules } from "../../../../../fe-api/repositories/schedule";
+import { GetSchedulesResponseInterface } from "../../../../../fe-api/interfaces/schedule";
 
 export const useSchedules = (pageId: string, pageSize: string) => {
-  const [schedules, setSchedules] = useState();
+  const [schedules, setSchedules] = useState<GetSchedulesResponseInterface>();
   const fetchData = async (startDate: string, movieId: string) => {
     try {
       const res = await getSchedules(startDate, movieId);

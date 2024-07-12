@@ -21,7 +21,7 @@ export const getMovies = async (pageId: string, pageSize: string) => {
       },
     });
 
-    return res.movie;
+    return res;
   } catch (err) {
     console.log(err);
   }
@@ -35,7 +35,7 @@ export const getMovie = async (movieId: string) => {
     const res: GetMovieResponseInterface = await client.v1.movies
       ._movieId(movieId)
       .$get();
-    return res.movie;
+    return res;
   } catch (err) {
     console.log(err);
   }
@@ -50,7 +50,7 @@ export const createMovie = async (requestBody: CreateMovieRequestInterface) => {
     const res: CreateMovieResponseInterface = await client.v1.movies.$post({
       body: requestBody,
     });
-    return res.movieId;
+    return res;
   } catch (err) {
     console.log(err);
   }
@@ -69,7 +69,7 @@ export const updateMovie = async (
       .$put({
         body: requestBody,
       });
-    return res.movieId;
+    return res;
   } catch (err) {
     console.log(err);
   }
@@ -84,7 +84,7 @@ export const deleteMovie = async (movieId: string) => {
       ._movieId(movieId)
       .$delete();
 
-    return res.movieId;
+    return res;
   } catch (err) {
     console.log(err);
   }

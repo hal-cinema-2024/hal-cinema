@@ -1,15 +1,16 @@
 import { NativeSelect } from "@yamada-ui/react";
 import { useFormContext } from "react-hook-form";
+
+type Option = {
+  label: string;
+  value: string | number;
+};
 type InputFieldProps = {
   fieldName: string;
   label: string;
   option: Option[];
 };
 
-type Option = {
-  label: string;
-  value: number | string;
-};
 export const SelectField = (props: InputFieldProps) => {
   const { fieldName, label, option } = props;
   const { register, formState } = useFormContext();

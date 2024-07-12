@@ -9,6 +9,8 @@ import type { Methods as Methods_1rgm8b3 } from './v1/reservations';
 import type { Methods as Methods_f1jgdz } from './v1/reservations/_theaterSeatId@string';
 import type { Methods as Methods_1lrqztm } from './v1/schedules';
 import type { Methods as Methods_18xz7cx } from './v1/schedules/_scheduleId@string';
+import type { Methods as Methods_1gan6s8 } from './v1/theater_seats/_orderId@string';
+import type { Methods as Methods_8a38bk } from './v1/theater_seats/_theaterSeatId@string';
 import type { Methods as Methods_odq9yo } from './v1/users';
 import type { Methods as Methods_e2jjl1 } from './v1/users/_userId@string';
 
@@ -19,7 +21,8 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
   const PATH2 = '/v1/orders';
   const PATH3 = '/v1/reservations';
   const PATH4 = '/v1/schedules';
-  const PATH5 = '/v1/users';
+  const PATH5 = '/v1/theater_seats';
+  const PATH6 = '/v1/users';
   const GET = 'GET';
   const POST = 'POST';
   const PUT = 'PUT';
@@ -267,9 +270,49 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
         $path: (option?: { method?: 'get' | undefined; query: Methods_1lrqztm['get']['query'] } | undefined) =>
           `${prefix}${PATH4}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
       },
+      theater_seats: {
+        _orderId: (val2: string) => {
+          const prefix2 = `${PATH5}/${val2}`;
+
+          return {
+            /**
+             * Get theater seat
+             * @returns A successful response.
+             */
+            get: (option?: { config?: T | undefined } | undefined) =>
+              fetch<Methods_1gan6s8['get']['resBody'], BasicHeaders, Methods_1gan6s8['get']['status']>(prefix, prefix2, GET, option).json(),
+            /**
+             * Get theater seat
+             * @returns A successful response.
+             */
+            $get: (option?: { config?: T | undefined } | undefined) =>
+              fetch<Methods_1gan6s8['get']['resBody'], BasicHeaders, Methods_1gan6s8['get']['status']>(prefix, prefix2, GET, option).json().then(r => r.body),
+            $path: () => `${prefix}${prefix2}`,
+          };
+        },
+        _theaterSeatId: (val2: string) => {
+          const prefix2 = `${PATH5}/${val2}`;
+
+          return {
+            /**
+             * Update theater seat
+             * @returns A successful response.
+             */
+            put: (option: { body: Methods_8a38bk['put']['reqBody'], config?: T | undefined }) =>
+              fetch<Methods_8a38bk['put']['resBody'], BasicHeaders, Methods_8a38bk['put']['status']>(prefix, prefix2, PUT, option).json(),
+            /**
+             * Update theater seat
+             * @returns A successful response.
+             */
+            $put: (option: { body: Methods_8a38bk['put']['reqBody'], config?: T | undefined }) =>
+              fetch<Methods_8a38bk['put']['resBody'], BasicHeaders, Methods_8a38bk['put']['status']>(prefix, prefix2, PUT, option).json().then(r => r.body),
+            $path: () => `${prefix}${prefix2}`,
+          };
+        },
+      },
       users: {
         _userId: (val2: string) => {
-          const prefix2 = `${PATH5}/${val2}`;
+          const prefix2 = `${PATH6}/${val2}`;
 
           return {
             /**
@@ -316,15 +359,15 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
          * @returns A successful response.
          */
         get: (option?: { query?: Methods_odq9yo['get']['query'] | undefined, config?: T | undefined } | undefined) =>
-          fetch<Methods_odq9yo['get']['resBody'], BasicHeaders, Methods_odq9yo['get']['status']>(prefix, PATH5, GET, option).json(),
+          fetch<Methods_odq9yo['get']['resBody'], BasicHeaders, Methods_odq9yo['get']['status']>(prefix, PATH6, GET, option).json(),
         /**
          * Get user
          * @returns A successful response.
          */
         $get: (option?: { query?: Methods_odq9yo['get']['query'] | undefined, config?: T | undefined } | undefined) =>
-          fetch<Methods_odq9yo['get']['resBody'], BasicHeaders, Methods_odq9yo['get']['status']>(prefix, PATH5, GET, option).json().then(r => r.body),
+          fetch<Methods_odq9yo['get']['resBody'], BasicHeaders, Methods_odq9yo['get']['status']>(prefix, PATH6, GET, option).json().then(r => r.body),
         $path: (option?: { method?: 'get' | undefined; query: Methods_odq9yo['get']['query'] } | undefined) =>
-          `${prefix}${PATH5}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
+          `${prefix}${PATH6}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
       },
     },
   };

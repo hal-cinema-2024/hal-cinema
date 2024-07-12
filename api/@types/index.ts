@@ -74,12 +74,24 @@ export type V1DeleteUserResponse = {
   userId?: string | undefined
 }
 
+export type V1GetMovie = {
+  movieId?: string | undefined
+  movieName?: string | undefined
+  director?: string | undefined
+  thumbnail?: string | undefined
+  summary?: string | undefined
+  link?: string | undefined
+  term?: number | undefined
+  releaseDate?: string | undefined
+  endDate?: string | undefined
+}
+
 export type V1GetMovieResponse = {
   movie?: V1Movie | undefined
 }
 
 export type V1GetMoviesResponse = {
-  movie?: V1Movie[] | undefined
+  movie?: V1GetMovie[] | undefined
 }
 
 export type V1GetOrderResponse = {
@@ -111,6 +123,11 @@ export type V1GetSchedulesResponse = {
   selectedDate?: string | undefined
   selectedMovies?: string | undefined
   schedule?: V1GetScheduleResult[] | undefined
+}
+
+export type V1GetTheaterSeatsResponse = {
+  orderId?: string | undefined
+  seat?: string[] | undefined
 }
 
 export type V1GetUserResponse = {
@@ -163,6 +180,11 @@ export type V1OrdersDetail = {
   price?: number | undefined
 }
 
+export type V1Seat = {
+  key?: string | undefined
+  name?: string | undefined
+}
+
 export type V1SeatDetail = {
   theaterSeatId?: string | undefined
   seatName?: string | undefined
@@ -181,6 +203,10 @@ export type V1UpdateMovieResponse = {
 
 export type V1UpdateScheduleResponse = {
   scheduleId?: string | undefined
+}
+
+export type V1UpdateTheaterSeatResponse = {
+  theaterSeatId?: string | undefined
 }
 
 export type V1UpdateUserResponse = {

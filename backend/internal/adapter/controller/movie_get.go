@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/hal-cinema-2024/backend/internal/usecase/interactor"
+	"github.com/hal-cinema-2024/backend/pkg/log"
 	"github.com/labstack/echo/v4"
-	"github.com/labstack/gommon/log"
 )
 
 type GetMoviesRequest struct {
@@ -26,7 +26,16 @@ func (req GetMoviesRequest) Validate() error {
 }
 
 type GetMovieRequest struct {
-	MovieID string `json:"movie_id" param:"movieId" validate:"required"`
+
+	MovieID string `param:"movie_id" validate:"required"`
+}
+
+func (r GetMovieRequest) Validate() error {
+	if r.MovieID == "" {
+		return fmt.Errorf("movie_id is required")
+	}
+
+	return nil
 }
 
 type GetMoviesResponse struct {
@@ -56,9 +65,14 @@ type GetMovieResponse struct {
 
 func GetMovie(mi *interactor.MovieInteractor) func(ctx echo.Context) error {
 	return func(ctx echo.Context) error {
-		var req *GetMovieRequest
+		var req GetMovieRequest
 		if err := ctx.Bind(&req); err != nil {
 			log.Warn(ctx.Request().Context(), "failed to bind request", "error", err)
+			return echo.ErrBadRequest
+		}
+
+		if err := req.Validate(); err != nil {
+			log.Warn(ctx.Request().Context(), fmt.Sprintf("failed to validate request :%v", err))
 			return echo.ErrBadRequest
 		}
 

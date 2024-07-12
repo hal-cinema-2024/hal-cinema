@@ -16,7 +16,7 @@ export const getOrders = async (userId: string) => {
     const res: GetOrdersResponseInterface = await client.v1.orders.$get({
       query: { userId },
     });
-    return res.order;
+    return res;
   } catch (err) {
     console.log(err);
   }
@@ -46,7 +46,7 @@ export const createOrder = async (
     const res: CreateOrderResponseInterface = await client.v1.orders.$post({
       body: requestBody,
     });
-    return res.orderId;
+    return res;
   } catch (err) {
     console.log(err);
   }

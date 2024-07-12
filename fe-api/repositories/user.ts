@@ -19,7 +19,7 @@ export const getUsers = async (page_id: string, page_size: string) => {
         pageSize: page_size,
       },
     });
-    return res.user;
+    return res;
   } catch (err) {
     console.log(err);
   }
@@ -33,7 +33,7 @@ export const getUser = async (userId: string) => {
     const res: GetUserResponseInterface = await client.v1.users
       ._userId(userId)
       .$get();
-    return res.user;
+    return res;
   } catch (err) {
     console.log(err);
   }
@@ -52,7 +52,7 @@ export const updateUser = async (
       .$put({
         body: requestBody,
       });
-    return res.userId;
+    return res;
   } catch (err) {
     console.log(err);
   }
@@ -66,7 +66,7 @@ export const deleteUser = async (userId: string) => {
     const res: DeleteUserResponseInterface = await client.v1.users
       ._userId(userId)
       .$delete();
-    return res.userId;
+    return res;
   } catch (err) {
     console.log(err);
   }

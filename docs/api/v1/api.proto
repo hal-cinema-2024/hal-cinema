@@ -226,7 +226,7 @@ service APIService {
       description: "Update theater seat"
     };
   }
-  rpc GetTheaterSeatsByID(GetTheaterSeatsRequest) returns (GetTheaterSeatsResponse) {
+  rpc GetTheaterSeatsByID(GetTheaterSeatsByIDRequest) returns (GetTheaterSeatsByIDResponse) {
     option (google.api.http) = {get: "/v1/theater_seats/{order_id}"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["TheaterSeats"]
@@ -236,11 +236,11 @@ service APIService {
   }
 }
 
-message GetTheaterSeatsRequest {
+message GetTheaterSeatsByIDRequest {
   string order_id = 1;
 }
 
-message GetTheaterSeatsResponse {
+message GetTheaterSeatsByIDResponse {
   string order_id = 1;
   repeated string seat = 2;
 }
@@ -330,7 +330,19 @@ message GetMoviesRequest {
 }
 
 message GetMoviesResponse {
-  repeated Movie movie = 1;
+  repeated GetMovie movie = 1;
+}
+
+message GetMovie {
+  string movie_id = 1;
+  string movie_name = 2;
+  string director = 3;
+  bytes thumbnail = 4;
+  string summary = 5;
+  string link = 6;
+  int32 term = 7;
+  string release_date = 8;
+  string end_date = 9;
 }
 
 message GetMovieRequest {
@@ -352,7 +364,8 @@ message UpdateMovieRequest {
   int32 term = 7;
   string release_date = 8;
   string end_date = 9;
-  repeated bytes movie_image = 10;
+  repeated string delete_movie_image = 10;
+  repeated bytes movie_image = 11;
 }
 
 message UpdateMovieResponse {

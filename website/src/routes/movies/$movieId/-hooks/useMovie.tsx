@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { getMovie } from "../../../../../../fe-api/repositories/movie";
-import { MovieInterface } from "../../../../../../fe-api/interfaces/movie";
+import { GetMovieResponseInterface } from "../../../../../../fe-api/interfaces/movie";
 export const useMovie = (movieId: string) => {
-  const [movie, setMovie] = useState<MovieInterface>();
+  const [movie, setMovie] = useState<GetMovieResponseInterface>();
 
   const fetchData = async (movieId: string) => {
     try {

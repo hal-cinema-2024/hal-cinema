@@ -1,16 +1,21 @@
 import styled from "styled-components";
 import { Text, Button } from "@yamada-ui/react";
-import { UserInterface } from "../../../../../fe-api/interfaces/user";
+import {
+  GetUserResponseInterface,
+  UserInterface,
+} from "../../../../../fe-api/interfaces/user";
 
 type ProfileCardProps = {
-  user: UserInterface;
+  user: GetUserResponseInterface;
 };
 export const ProfileCard = (props: ProfileCardProps) => {
   const { user } = props;
+  const data = user as UserInterface;
+  console.log(data);
   return (
     <ProfileContainer>
-      {user && user?.firstName}
-      {/* <SAvatar src= alt='Avatar' /> */}
+      {data && data?.firstName}
+      {data && data?.lastName}
       <EditButton>
         <SText>編集</SText>
       </EditButton>

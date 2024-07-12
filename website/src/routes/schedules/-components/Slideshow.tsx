@@ -28,6 +28,7 @@ const Slideshow = () => {
         {slideData.map((item: SlideDateType, index: number) => (
           <CarouselSlide
             key={index}
+            className={index === scheduleId ? 'selected-slide' : ''}
             style={{ cursor: "pointer", position: "relative" }}
             bg={
               index === scheduleId
