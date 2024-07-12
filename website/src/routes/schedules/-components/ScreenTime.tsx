@@ -23,11 +23,11 @@ const ScreenTime = (props: ScreenTimeProps) => {
 
   const formatTime = (time: string) => {
     const date = new Date(time);
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const hours = date.getUTCHours().toString().padStart(2, '0');
+    const minutes = date.getUTCMinutes().toString().padStart(2, '0');
     return `${hours}:${minutes}`;
   };
-
+ 
   return (
     <>
       <ScreenContainer>
@@ -58,6 +58,7 @@ const ScreenContainer = styled.div`
 
 const TimeContainer = styled.div`
   width: 23.8%;
+  /* min-width: 40.8%; */
   margin: 5px;
   aspect-ratio: 1 / 1;
   position: relative;

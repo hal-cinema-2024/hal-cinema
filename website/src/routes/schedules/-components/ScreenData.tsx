@@ -11,50 +11,58 @@ export const ScreenData = (props: ScreenDataProps) => {
   const { theaterSchedule } = props;
 
   return (
-    <MovieContainer>
+    <>
       {theaterSchedule.map((scheduleData, index) => (
-        <ScreenContainer key={index}>
+        <MovieContainer key={index}>
           {scheduleData.theaterSchedule.map((theaterData) => (
-            <StyleFragment key={theaterData.theater}>
+            <ScreenContainer key={theaterData.theater}>
               <Number>スクリーン<br/> {theaterData.theater}</Number>
               {theaterData.schedules.map((schedule, scheduleIndex) => (
-                <ScreenTime
-                  key={scheduleIndex}
-                  startTime={schedule.startTime}
-                  endTime={schedule.endTime}
-                  isAvailable={schedule.isAvailable}
-                />
+              <ScreenTime
+                key={scheduleIndex}
+                startTime={schedule.startTime}
+                endTime={schedule.endTime}
+                isAvailable={schedule.isAvailable}
+              />
               ))}
-            </StyleFragment>
+            </ScreenContainer>
           ))}
-        </ScreenContainer>
+        </MovieContainer>
       ))}
-    </MovieContainer>
+    </>
   );
 };
 
 const MovieContainer = styled.div`
   width: 100%;
   padding: 10px 5px;
+
+  background-color: red;
 `;
 
 const ScreenContainer = styled.div`
   padding: 10px 0px;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  /* flex-direction: column; */
   align-items: center;
   /* background-color: #ddd; */
 `;
 
-const StyleFragment = styled.div`
-  display: flex;
-  align-items: center;
-`;
+// const StyleFragment = styled.div`
+//   justify-content: space-between;
+
+//   background-color: beige;
+//   display: flex;
+//   /* flex-direction: row; */
+
+//   align-items: center;
+// `;
 
 
 const Number = styled.div`
   font-size: 30px;
   color: #fff;
-  text-align: center;
+  /* text-align: center; */
 `;
