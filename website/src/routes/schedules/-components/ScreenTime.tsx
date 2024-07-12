@@ -30,7 +30,7 @@ const ScreenTime = (props: ScreenTimeProps) => {
  
   return (
     <>
-      <ScreenContainer>
+      {/* <ScreenContainer> */}
         <TimeContainer>
           <a href='#'>
             <Start>{formatTime(startTime)}</Start>
@@ -43,22 +43,22 @@ const ScreenTime = (props: ScreenTimeProps) => {
             </BuyContainer>
           </a>
         </TimeContainer>
-      </ScreenContainer>
+      {/* </ScreenContainer> */}
     </>
   );
 };
 
 export default ScreenTime;
 
-const ScreenContainer = styled.div`
-  width: 850px;
-  display: flex;
-  flex-wrap: wrap;
-`;
+// const ScreenContainer = styled.div`
+//   width: 850px;
+//   display: flex;
+//   flex-wrap: wrap;
+// `;
 
 const TimeContainer = styled.div`
   width: 23.8%;
-  /* min-width: 40.8%; */
+  /* width: 100%; */
   margin: 5px;
   aspect-ratio: 1 / 1;
   position: relative;

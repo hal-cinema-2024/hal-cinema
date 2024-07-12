@@ -17,14 +17,16 @@ export const ScreenData = (props: ScreenDataProps) => {
           {scheduleData.theaterSchedule.map((theaterData) => (
             <ScreenContainer key={theaterData.theater}>
               <Number>スクリーン<br/> {theaterData.theater}</Number>
-              {theaterData.schedules.map((schedule, scheduleIndex) => (
-              <ScreenTime
-                key={scheduleIndex}
-                startTime={schedule.startTime}
-                endTime={schedule.endTime}
-                isAvailable={schedule.isAvailable}
-              />
-              ))}
+              <TimeContainer>
+                {theaterData.schedules.map((schedule, scheduleIndex) => (
+                <ScreenTime
+                  key={scheduleIndex}
+                  startTime={schedule.startTime}
+                  endTime={schedule.endTime}
+                  isAvailable={schedule.isAvailable}
+                />
+                ))}
+              </TimeContainer>
             </ScreenContainer>
           ))}
         </MovieContainer>
@@ -36,13 +38,11 @@ export const ScreenData = (props: ScreenDataProps) => {
 const MovieContainer = styled.div`
   width: 100%;
   padding: 10px 5px;
-
-  background-color: red;
 `;
 
 const ScreenContainer = styled.div`
-  padding: 10px 0px;
-  /* justify-content: space-between; */
+  padding: 10px 0px 10px 15px;
+  justify-content: space-between;
   display: flex;
   flex-wrap: wrap;
   /* flex-direction: column; */
@@ -64,5 +64,13 @@ const ScreenContainer = styled.div`
 const Number = styled.div`
   font-size: 30px;
   color: #fff;
-  /* text-align: center; */
+  text-align: center;
+`;
+
+const TimeContainer = styled.div`
+  width: 850px;
+  display: flex;
+  flex-wrap: wrap;
+
+  /* background-color: #ede; */
 `;
