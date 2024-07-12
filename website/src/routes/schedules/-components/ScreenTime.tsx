@@ -50,15 +50,8 @@ const ScreenTime = (props: ScreenTimeProps) => {
 
 export default ScreenTime;
 
-// const ScreenContainer = styled.div`
-//   width: 850px;
-//   display: flex;
-//   flex-wrap: wrap;
-// `;
-
 const TimeContainer = styled.div`
   width: 23.8%;
-  /* width: 100%; */
   margin: 5px;
   aspect-ratio: 1 / 1;
   position: relative;

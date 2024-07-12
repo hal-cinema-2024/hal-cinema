@@ -45,21 +45,8 @@ const ScreenContainer = styled.div`
   justify-content: space-between;
   display: flex;
   flex-wrap: wrap;
-  /* flex-direction: column; */
   align-items: center;
-  /* background-color: #ddd; */
 `;
-
-// const StyleFragment = styled.div`
-//   justify-content: space-between;
-
-//   background-color: beige;
-//   display: flex;
-//   /* flex-direction: row; */
-
-//   align-items: center;
-// `;
-
 
 const Number = styled.div`
   font-size: 30px;
@@ -71,6 +58,4 @@ const TimeContainer = styled.div`
   width: 850px;
   display: flex;
   flex-wrap: wrap;
-
-  /* background-color: #ede; */
 `;
