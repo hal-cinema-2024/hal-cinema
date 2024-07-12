@@ -122,7 +122,7 @@ export type V1GetScheduleResult = {
 export type V1GetSchedulesResponse = {
   selectedDate?: string | undefined
   selectedMovies?: string | undefined
-  schedule?: V1GetScheduleResult[] | undefined
+  schedules?: V1GetScheduleResult[] | undefined
 }
 
 export type V1GetTheaterSeatsResponse = {

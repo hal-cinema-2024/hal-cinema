@@ -5,7 +5,7 @@ export type Methods = {
   /** Get all schedules */
   get: {
     query?: {
-      startDate?: string | undefined
+      startTime?: string | undefined
       movieId?: string | undefined
     } | undefined
 
