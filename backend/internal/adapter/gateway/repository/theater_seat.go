@@ -59,7 +59,7 @@ type OrderTheatersSeat struct {
 
 func (r *TheaterSeatRepo) GetTheaterSeatsByScheduleIDs(ctx context.Context, scheduleIDs []string) (map[string][]*model.TheatersSeat, error) {
 	var orderTheatersSeats []*OrderTheatersSeat
-	err := r.db.WithContext(ctx).Where("schedule_id IN (?)", scheduleIDs).Model(&model.Order{}).Joins("JOIN theaters_seats ON orders.order_id == theaters_seats.order_id").Find(&orderTheatersSeats).Error
+	err := r.db.WithContext(ctx).Where("schedule_id IN (?)", scheduleIDs).Model(&model.Order{}).Joins("JOIN theaters_seats ON orders.order_id = theaters_seats.order_id").Find(&orderTheatersSeats).Error
 	if err != nil {
 		return nil, err
 	}

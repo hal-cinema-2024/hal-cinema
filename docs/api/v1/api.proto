@@ -260,7 +260,7 @@ message UpdateTheaterSeatResponse {
 
 message CreateScheduleRequest {
   string movie_id = 1;
-  string theater_id = 2;
+  int32 theater_id = 2;
   string start_time = 3;
 }
 
