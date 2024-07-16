@@ -15,7 +15,7 @@ export const getSchedules = async (startDate: string, movieId?: string) => {
     }
     const res: GetSchedulesResponseInterface = await client.v1.schedules.$get({
       query: {
-        startDate: startDate,
+        startTime: startDate,
         movieId: movieId,
       },
     });

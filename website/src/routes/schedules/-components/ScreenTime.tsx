@@ -21,13 +21,20 @@ const ScreenTime = (props: ScreenTimeProps) => {
     }
   };
 
+  const formatTime = (time: string) => {
+    const date = new Date(time);
+    const hours = date.getUTCHours().toString().padStart(2, '0');
+    const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
+  };
+ 
   return (
     <>
-      <ScreenContainer>
+      {/* <ScreenContainer> */}
         <TimeContainer>
           <a href='#'>
-            <Start>{startTime}〜</Start>
-            <End>{endTime}</End>
+            <Start>{formatTime(startTime)}</Start>
+            <End>〜{formatTime(endTime)}</End>
             <BuyContainer isAvailable={isAvailable}>
               <ImgContainer>{getImg(isAvailable)}</ImgContainer>
               <AvailContainer>
@@ -36,18 +43,12 @@ const ScreenTime = (props: ScreenTimeProps) => {
             </BuyContainer>
           </a>
         </TimeContainer>
-      </ScreenContainer>
+      {/* </ScreenContainer> */}
     </>
   );
 };
 
 export default ScreenTime;
-
-const ScreenContainer = styled.div`
-  width: 850px;
-  display: flex;
-  flex-wrap: wrap;
-`;
 
 const TimeContainer = styled.div`
   width: 23.8%;

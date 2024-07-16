@@ -12,7 +12,9 @@ export const MovieBox = (props: MovieBoxProps) => {
     <>
       <ListContainer>
         <NameContainer>
-          <p>映画一覧</p>
+          {schedules && schedules.map((schedule, index) => (
+          <p key={index}>{schedule.movieName}</p>
+        ))}
         </NameContainer>
         {schedules && <ScreenData theaterSchedule={schedules} />}
       </ListContainer>
