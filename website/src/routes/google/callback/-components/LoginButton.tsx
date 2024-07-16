@@ -18,7 +18,6 @@ export function LoginButton() {
       const code = codeResponse.code;
       const decoded = atob(code);
       const res = await login(decoded);
-      console.log(res);
       setUserId(res!);
       console.log(userId);
     },

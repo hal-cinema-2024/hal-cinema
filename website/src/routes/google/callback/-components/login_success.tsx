@@ -1,3 +1,4 @@
+import { Button, Link } from "@yamada-ui/react";
 import React from "react";
 
 export const Result: React.FC = () => {
@@ -6,15 +7,17 @@ export const Result: React.FC = () => {
       <div style={styles.body}>
         <div style={styles.container}>
           <img
-            src="../src/assets/check.png"
-            alt="チェック"
+            src='../src/assets/check.png'
+            alt='チェック'
             style={styles.checkImage}
           />
           <h1 style={styles.title}>ログイン成功</h1>
           <p style={styles.description}>
             ログインが完了しました。 引き続きHALシネマをお楽しみください。
           </p>
-          <button style={styles.button}>TOPへ戻る</button>
+          <Link href='/'>
+            <Button style={styles.button}>TOPへ戻る</Button>
+          </Link>
         </div>
       </div>
     </>

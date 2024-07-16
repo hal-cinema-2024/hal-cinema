@@ -13,8 +13,12 @@ export const Route = createLazyFileRoute("/profile/")({
 
 function Index() {
   const { userId } = useUserId();
+  console.log("userId", userId);
   const { user } = useUser(userId!);
   const { orders } = useOrders(userId!);
+
+  console.log("user", user);
+  console.log("orders", orders);
 
   return (
     <Container>
