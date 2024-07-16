@@ -23,7 +23,7 @@ export const useSchedules = (movieId?: string) => {
       const res = await getSchedules(startDate, movieId);
 
       if (res) {
-        const data = await transformData(res.schedule!);
+        const data = await transformData(res.schedules!);
         await setSchedules(data!);
       }
     } catch (error) {
