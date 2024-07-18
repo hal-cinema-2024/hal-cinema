@@ -1,9 +1,9 @@
 import { ReactNode, createContext, useState, FC } from "react";
-import { UserInterface } from "../../../fe-api/interfaces/user";
+import { GetUserResponseInterface } from "../../../fe-api/interfaces/user";
 
 interface UserContextType {
-  user: UserInterface | undefined;
-  setUser: (user: UserInterface | undefined) => void;
+  user: GetUserResponseInterface | undefined;
+  setUser: (user: GetUserResponseInterface | undefined) => void;
 }
 
 export const UserContext = createContext<UserContextType>(
@@ -11,7 +11,7 @@ export const UserContext = createContext<UserContextType>(
 );
 
 export const UserDataProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<UserInterface | undefined>();
+  const [user, setUser] = useState<GetUserResponseInterface | undefined>();
 
   return (
     <UserContext.Provider
