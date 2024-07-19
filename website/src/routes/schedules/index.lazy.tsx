@@ -5,21 +5,31 @@ import MovieBox from "./-components/MovieBox";
 import { Suspense } from "react";
 import { useSchedules } from "../../hooks/services/useSchedules";
 import { SelectMovie } from "./-components/SelectMovie";
+import { useScheduleId } from "./-hooks/useScheduleId";
 
 export const Route = createLazyFileRoute("/schedules/")({
   component: Index,
 });
 function Index() {
   const { schedules } = useSchedules();
+  const { scheduleId } = useScheduleId();
 
   return (
     <SchedulesContainer>
       <Title>上映スケジュール</Title>
       <Slideshow />
       <SelectMovie />
-      <Suspense fallback={<div>loading</div>}>
-        <MovieBox schedules={schedules!} />
-      </Suspense>
+
+      {scheduleId === 0 && (
+        <Suspense fallback={<div>loading</div>}>
+          <MovieBox schedules={schedules!} />
+        </Suspense>
+      )}
+      {scheduleId && (
+        <Suspense fallback={<div>loading</div>}>
+          <MovieBox schedules={schedules!} />
+        </Suspense>
+      )}
     </SchedulesContainer>
   );
 }
