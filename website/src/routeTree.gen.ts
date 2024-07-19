@@ -20,10 +20,13 @@ const IndexLazyImport = createFileRoute('/')()
 const SchedulesIndexLazyImport = createFileRoute('/schedules/')()
 const ProfileIndexLazyImport = createFileRoute('/profile/')()
 const MoviesIndexLazyImport = createFileRoute('/movies/')()
+const SchedulesScheduleIdIndexLazyImport = createFileRoute(
+  '/schedules/$scheduleId/',
+)()
 const MoviesMovieIdIndexLazyImport = createFileRoute('/movies/$movieId/')()
 const GoogleCallbackIndexLazyImport = createFileRoute('/google/callback/')()
-const SchedulesScheduleIdFormRouteLazyImport = createFileRoute(
-  '/schedules/$scheduleId/form',
+const SchedulesScheduleIdFormIndexLazyImport = createFileRoute(
+  '/schedules/$scheduleId/form/',
 )()
 
 // Create/Update Routes
@@ -50,6 +53,14 @@ const MoviesIndexLazyRoute = MoviesIndexLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/movies/index.lazy').then((d) => d.Route))
 
+const SchedulesScheduleIdIndexLazyRoute =
+  SchedulesScheduleIdIndexLazyImport.update({
+    path: '/schedules/$scheduleId/',
+    getParentRoute: () => rootRoute,
+  } as any).lazy(() =>
+    import('./routes/schedules/$scheduleId/index.lazy').then((d) => d.Route),
+  )
+
 const MoviesMovieIdIndexLazyRoute = MoviesMovieIdIndexLazyImport.update({
   path: '/movies/$movieId/',
   getParentRoute: () => rootRoute,
@@ -64,12 +75,12 @@ const GoogleCallbackIndexLazyRoute = GoogleCallbackIndexLazyImport.update({
   import('./routes/google/callback/index.lazy').then((d) => d.Route),
 )
 
-const SchedulesScheduleIdFormRouteLazyRoute =
-  SchedulesScheduleIdFormRouteLazyImport.update({
-    path: '/schedules/$scheduleId/form',
+const SchedulesScheduleIdFormIndexLazyRoute =
+  SchedulesScheduleIdFormIndexLazyImport.update({
+    path: '/schedules/$scheduleId/form/',
     getParentRoute: () => rootRoute,
   } as any).lazy(() =>
-    import('./routes/schedules/$scheduleId/form/route.lazy').then(
+    import('./routes/schedules/$scheduleId/form/index.lazy').then(
       (d) => d.Route,
     ),
   )
@@ -106,13 +117,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SchedulesIndexLazyImport
       parentRoute: typeof rootRoute
     }
-    '/schedules/$scheduleId/form': {
-      id: '/schedules/$scheduleId/form'
-      path: '/schedules/$scheduleId/form'
-      fullPath: '/schedules/$scheduleId/form'
-      preLoaderRoute: typeof SchedulesScheduleIdFormRouteLazyImport
-      parentRoute: typeof rootRoute
-    }
     '/google/callback/': {
       id: '/google/callback/'
       path: '/google/callback'
@@ -127,6 +131,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MoviesMovieIdIndexLazyImport
       parentRoute: typeof rootRoute
     }
+    '/schedules/$scheduleId/': {
+      id: '/schedules/$scheduleId/'
+      path: '/schedules/$scheduleId'
+      fullPath: '/schedules/$scheduleId'
+      preLoaderRoute: typeof SchedulesScheduleIdIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/schedules/$scheduleId/form/': {
+      id: '/schedules/$scheduleId/form/'
+      path: '/schedules/$scheduleId/form'
+      fullPath: '/schedules/$scheduleId/form'
+      preLoaderRoute: typeof SchedulesScheduleIdFormIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -137,9 +155,10 @@ export const routeTree = rootRoute.addChildren({
   MoviesIndexLazyRoute,
   ProfileIndexLazyRoute,
   SchedulesIndexLazyRoute,
-  SchedulesScheduleIdFormRouteLazyRoute,
   GoogleCallbackIndexLazyRoute,
   MoviesMovieIdIndexLazyRoute,
+  SchedulesScheduleIdIndexLazyRoute,
+  SchedulesScheduleIdFormIndexLazyRoute,
 })
 
 /* prettier-ignore-end */
@@ -154,9 +173,10 @@ export const routeTree = rootRoute.addChildren({
         "/movies/",
         "/profile/",
         "/schedules/",
-        "/schedules/$scheduleId/form",
         "/google/callback/",
-        "/movies/$movieId/"
+        "/movies/$movieId/",
+        "/schedules/$scheduleId/",
+        "/schedules/$scheduleId/form/"
       ]
     },
     "/": {
@@ -171,14 +191,17 @@ export const routeTree = rootRoute.addChildren({
     "/schedules/": {
       "filePath": "schedules/index.lazy.tsx"
     },
-    "/schedules/$scheduleId/form": {
-      "filePath": "schedules/$scheduleId/form/route.lazy.tsx"
-    },
     "/google/callback/": {
       "filePath": "google/callback/index.lazy.tsx"
     },
     "/movies/$movieId/": {
       "filePath": "movies/$movieId/index.lazy.tsx"
+    },
+    "/schedules/$scheduleId/": {
+      "filePath": "schedules/$scheduleId/index.lazy.tsx"
+    },
+    "/schedules/$scheduleId/form/": {
+      "filePath": "schedules/$scheduleId/form/index.lazy.tsx"
     }
   }
 }
