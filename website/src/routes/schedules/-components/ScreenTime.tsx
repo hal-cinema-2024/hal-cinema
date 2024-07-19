@@ -32,7 +32,7 @@ const ScreenTime = (props: ScreenTimeProps) => {
   return (
     <>
       <TimeContainer>
-        <a href={`/schedule/${scheduleId}/form`}>
+        <a href={`/schedules/${scheduleId}/form`}>
           <Start>{formatTime(startTime)}</Start>
           <End>〜{formatTime(endTime)}</End>
           <BuyContainer isAvailable={isAvailable}>
