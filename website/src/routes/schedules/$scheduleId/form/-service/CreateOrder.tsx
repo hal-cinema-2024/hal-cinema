@@ -13,12 +13,12 @@ export async function CreateOrderService(
   const { setOrderId } = useOrderId();
 
   const seatSelects = selectedSeats.map((seat) => {
-    const seatId = Array.isArray(data)
+    const priceType = Array.isArray(data)
       ? (data[selectedSeats.indexOf(seat)] as number[])
       : (data as unknown as number);
     return {
       seatName: `${seat.row}${seat.number}`,
-      seatId: seatId as number,
+      priceType: priceType as number,
     };
   });
 

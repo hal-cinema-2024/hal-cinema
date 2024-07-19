@@ -20,7 +20,7 @@ export function LoginButton() {
       const res = await login(decoded);
       console.log(decoded);
       console.log(res);
-      setUserId(res!);
+      if (res) setUserId(res);
       console.log(userId);
     },
   });
