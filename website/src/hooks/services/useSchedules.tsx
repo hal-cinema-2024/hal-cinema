@@ -6,7 +6,7 @@ import { get7Days } from "../../routes/schedules/-utils/getDate";
 import { TransDate } from "../../routes/schedules/-utils/TransDate";
 import { transformData } from "../../routes/schedules/-utils/TransSchedule";
 
-export const useSchedules = (movieId?: string) => {
+export const useSchedules = async (movieId?: string) => {
   const [schedules, setSchedules] = useState<TransformedData[]>();
   const { scheduleId } = useScheduleId();
 
@@ -17,7 +17,7 @@ export const useSchedules = (movieId?: string) => {
     return startDate;
   };
 
-  const startDate = selectDate(scheduleId);
+  const startDate = await selectDate(scheduleId);
   const fetchData = async (startDate: string, movieId?: string) => {
     try {
       const res = await getSchedules(startDate, movieId);
@@ -33,7 +33,7 @@ export const useSchedules = (movieId?: string) => {
 
   useEffect(() => {
     fetchData(startDate, movieId!);
-  }, []);
+  }, [startDate, movieId, scheduleId]);
 
   return { schedules, setSchedules };
 };
