@@ -4,11 +4,9 @@ import { steps } from "./-components/StepperData";
 import { Result } from "./-components/result/Result";
 import CinemaSeats from "./-components/select_ticket/CinemaSeats";
 import { TicketFormModal } from "./-components/select_ticket/TicketFormModal";
-// 不要なimportを削除
-// import { useScheduleId } from "../../-hooks/useScheduleId";
 import { StepperComponent } from "./-components/StepperComponent"; // 追加されたimport
 
-export const Route = createLazyFileRoute("/schedules/$scheduleId/form")({
+export const Route = createLazyFileRoute("/schedules/$scheduleId/form/")({
   component: Index,
 });
 
@@ -18,7 +16,9 @@ export function Index() {
     index: 1,
     count: steps.length,
   });
+console.log(activeStep
 
+)
   // 不要な閉じカーリーブラケットを削除しました
   return (
     <div>

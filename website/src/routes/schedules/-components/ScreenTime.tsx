@@ -1,14 +1,15 @@
 import styled from "styled-components";
-import { X } from "@yamada-ui/lucide";
-import { Circle } from "@yamada-ui/lucide";
+import { X, Circle } from "@yamada-ui/lucide";
+
 type ScreenTimeProps = {
   startTime: string;
   endTime: string;
   isAvailable: boolean;
+  scheduleId: string;
 };
 
 const ScreenTime = (props: ScreenTimeProps) => {
-  const { startTime, isAvailable, endTime } = props;
+  const { startTime, isAvailable, endTime, scheduleId } = props;
 
   const getImg = (isAvailable: boolean) => {
     switch (isAvailable) {
@@ -30,20 +31,18 @@ const ScreenTime = (props: ScreenTimeProps) => {
  
   return (
     <>
-      {/* <ScreenContainer> */}
-        <TimeContainer>
-          <a href='#'>
-            <Start>{formatTime(startTime)}</Start>
-            <End>〜{formatTime(endTime)}</End>
-            <BuyContainer isAvailable={isAvailable}>
-              <ImgContainer>{getImg(isAvailable)}</ImgContainer>
-              <AvailContainer>
-                <p>{isAvailable ? "空席" : "満員"}</p>
-              </AvailContainer>
-            </BuyContainer>
-          </a>
-        </TimeContainer>
-      {/* </ScreenContainer> */}
+      <TimeContainer>
+        <a href={`/schedules/${scheduleId}/form`}>
+          <Start>{formatTime(startTime)}</Start>
+          <End>〜{formatTime(endTime)}</End>
+          <BuyContainer isAvailable={isAvailable}>
+            <ImgContainer>{getImg(isAvailable)}</ImgContainer>
+            <AvailContainer>
+              <p>{isAvailable ? "空席" : "満員"}</p>
+            </AvailContainer>
+          </BuyContainer>
+        </a>
+      </TimeContainer>
     </>
   );
 };

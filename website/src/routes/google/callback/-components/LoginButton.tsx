@@ -1,10 +1,10 @@
 import { useGoogleLogin } from "@react-oauth/google";
 import { Button } from "@yamada-ui/react";
 import { login } from "../../../../../../fe-api/repositories/login";
-import { UserIdContext } from "../../../../store/useUserIdContext";
-import { useContext } from "react";
+
+import { useUserId } from "../../../../hooks/useUserId";
 export function LoginButton() {
-  const { setUserId, userId } = useContext(UserIdContext);
+  const { setUserId, userId } = useUserId();
 
   const googleLogin = useGoogleLogin({
     onError: (error) => console.error(error),
@@ -18,6 +18,7 @@ export function LoginButton() {
       const code = codeResponse.code;
       const decoded = atob(code);
       const res = await login(decoded);
+      console.log(decoded);
       console.log(res);
       setUserId(res!);
       console.log(userId);

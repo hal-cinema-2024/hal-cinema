@@ -24,6 +24,7 @@ export const ScreenData = (props: ScreenDataProps) => {
                   startTime={schedule.startTime}
                   endTime={schedule.endTime}
                   isAvailable={schedule.isAvailable}
+                  scheduleId={schedule.scheduleId!}
                 />
                 ))}
               </TimeContainer>
