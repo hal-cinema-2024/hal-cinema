@@ -13,6 +13,7 @@ export const useSchedules = (movieId?: string) => {
   const selectDate = (scheduleId: number) => {
     const date = get7Days();
     const select = date[scheduleId];
+
     const startDate = TransDate(select);
     return startDate;
   };
@@ -22,9 +23,10 @@ export const useSchedules = (movieId?: string) => {
     try {
       const res = await getSchedules(startDate, movieId);
 
-      if (res) {
-        const data = await transformData(res.schedules!);
-        await setSchedules(data!);
+      if (res && res.schedules) {
+        const data = await transformData(res.schedules);
+        console.log(data);
+        await setSchedules(data);
       }
     } catch (error) {
       console.error("schedules service error: " + error);
@@ -33,7 +35,7 @@ export const useSchedules = (movieId?: string) => {
 
   useEffect(() => {
     fetchData(startDate, movieId!);
-  }, []);
+  }, [startDate, movieId, scheduleId]);
 
   return { schedules, setSchedules };
 };
