@@ -9,11 +9,13 @@ import { transformData } from "../../routes/schedules/-utils/TransSchedule";
 export const useSchedules = (movieId?: string) => {
   const [schedules, setSchedules] = useState<TransformedData[]>();
   const { scheduleId } = useScheduleId();
+  console.log(scheduleId);
 
   const selectDate = (scheduleId: number) => {
     const date = get7Days();
     const select = date[scheduleId];
     const startDate = TransDate(select);
+    console.log(startDate);
     return startDate;
   };
 
