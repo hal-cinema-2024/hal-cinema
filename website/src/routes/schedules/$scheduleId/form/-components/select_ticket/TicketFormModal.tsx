@@ -22,7 +22,7 @@ export const TicketFormModal = (props: TicketFormModalProps) => {
         <ModalHeader>チケット選択</ModalHeader>
 
         <ModalBody>
-          <TicketFormProvider scheduleId={scheduleId!} />
+          {scheduleId && <TicketFormProvider scheduleId={scheduleId} />}
         </ModalBody>
       </Modal>
     </>

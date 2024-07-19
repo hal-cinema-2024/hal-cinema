@@ -28,5 +28,6 @@ export async function CreateOrderService(
   };
 
   const res = await createOrder(req);
+  console.log(res);
   if (res) setOrderId(res.orderId!);
 }

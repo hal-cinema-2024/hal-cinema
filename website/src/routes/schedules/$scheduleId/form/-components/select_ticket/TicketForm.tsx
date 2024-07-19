@@ -13,14 +13,18 @@ type TicketFormProps = {
 };
 export function TicketFormProvider(props: TicketFormProps) {
   const { scheduleId } = props;
+  console.log(scheduleId);
   const methods = useForm({ resolver: zodResolver(ticketFormSchema) });
   const { handleSubmit } = methods;
   const { selectedSeats } = useSeatSelection();
+  if (!scheduleId) return null;
   return (
     <FormProvider {...methods}>
       <form
         onSubmit={handleSubmit(async (data) => {
+          console.log(data);
           await CreateOrderService(scheduleId, data);
+          console.log(scheduleId);
         })}
       >
         {selectedSeats &&
@@ -34,7 +38,9 @@ export function TicketFormProvider(props: TicketFormProps) {
               />
             </>
           ))}
-        <Button type='submit'>Submit</Button>
+        <Button type='submit' disabled={selectedSeats.length === 0}>
+          Submit
+        </Button>
       </form>
     </FormProvider>
   );
