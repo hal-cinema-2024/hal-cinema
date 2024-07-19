@@ -1,14 +1,22 @@
 export const option = [
   {
-    label: "大人",
-    value: 2000,
+    label: "一般",
+    value: 1800,
   },
   {
-    label: "子供",
+    label: "大学生等",
+    value: 1600,
+  },
+  {
+    label: "中学 高校",
+    value: 1500,
+  },
+  {
+    label: "小学生 幼児",
     value: 1000,
   },
   {
-    label: "シニア",
-    value: 1500,
+    label: "幼児",
+    value: 500,
   },
 ];
