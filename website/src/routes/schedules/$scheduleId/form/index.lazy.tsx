@@ -5,6 +5,7 @@ import { Result } from "./-components/result/Result";
 import CinemaSeats from "./-components/select_ticket/CinemaSeats";
 import { TicketFormModal } from "./-components/select_ticket/TicketFormModal";
 import { StepperComponent } from "./-components/StepperComponent"; // 追加されたimport
+import { useSeatSelection } from "./-hooks/useSeatSelection";
 
 export const Route = createLazyFileRoute("/schedules/$scheduleId/form/")({
   component: Index,
@@ -12,14 +13,12 @@ export const Route = createLazyFileRoute("/schedules/$scheduleId/form/")({
 
 export function Index() {
   const { scheduleId } = Route.useParams();
+  const { selectedSeats } = useSeatSelection();
+
   const { activeStep, onStepNext, onStepPrev } = useSteps({
     index: 1,
     count: steps.length,
   });
-console.log(activeStep
-
-)
-  // 不要な閉じカーリーブラケットを削除しました
   return (
     <div>
       <StepperComponent
@@ -30,7 +29,10 @@ console.log(activeStep
         {activeStep === 1 ? (
           <div>
             <CinemaSeats />
-            <TicketFormModal scheduleId={scheduleId} />
+
+            {scheduleId && selectedSeats.length > 0 ? (
+              <TicketFormModal scheduleId={scheduleId} />
+            ) : null}
           </div>
         ) : activeStep === 2 ? (
           <div>
