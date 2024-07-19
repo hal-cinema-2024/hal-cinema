@@ -21,7 +21,9 @@ export function TicketFormProvider(props: TicketFormProps) {
       z.object(
         selectedSeats.reduce(
           (acc, seat) => {
-            acc[`${seat.row + seat.number}`] = z.number();
+            acc[`${seat.row + seat.number}`] = z
+              .string()
+              .transform((val) => Number(val));
             return acc;
           },
           {} as { [key: string]: z.ZodType<number> }

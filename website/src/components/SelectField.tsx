@@ -3,7 +3,7 @@ import { useFormContext } from "react-hook-form";
 
 type Option = {
   label: string;
-  value: string | number;
+  value: number;
 };
 type InputFieldProps = {
   fieldName: string;
