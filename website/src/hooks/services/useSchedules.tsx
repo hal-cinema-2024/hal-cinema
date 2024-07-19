@@ -9,13 +9,12 @@ import { transformData } from "../../routes/schedules/-utils/TransSchedule";
 export const useSchedules = (movieId?: string) => {
   const [schedules, setSchedules] = useState<TransformedData[]>();
   const { scheduleId } = useScheduleId();
-  console.log(scheduleId);
 
   const selectDate = (scheduleId: number) => {
     const date = get7Days();
     const select = date[scheduleId];
+
     const startDate = TransDate(select);
-    console.log(startDate);
     return startDate;
   };
 
@@ -24,9 +23,10 @@ export const useSchedules = (movieId?: string) => {
     try {
       const res = await getSchedules(startDate, movieId);
 
-      if (res) {
-        const data = await transformData(res.schedules!);
-        await setSchedules(data!);
+      if (res && res.schedules) {
+        const data = await transformData(res.schedules);
+        console.log(data);
+        await setSchedules(data);
       }
     } catch (error) {
       console.error("schedules service error: " + error);
