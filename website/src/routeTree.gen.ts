@@ -20,9 +20,6 @@ const IndexLazyImport = createFileRoute('/')()
 const SchedulesIndexLazyImport = createFileRoute('/schedules/')()
 const ProfileIndexLazyImport = createFileRoute('/profile/')()
 const MoviesIndexLazyImport = createFileRoute('/movies/')()
-const SchedulesScheduleIdIndexLazyImport = createFileRoute(
-  '/schedules/$scheduleId/',
-)()
 const MoviesMovieIdIndexLazyImport = createFileRoute('/movies/$movieId/')()
 const GoogleCallbackIndexLazyImport = createFileRoute('/google/callback/')()
 const SchedulesScheduleIdFormIndexLazyImport = createFileRoute(
@@ -52,14 +49,6 @@ const MoviesIndexLazyRoute = MoviesIndexLazyImport.update({
   path: '/movies/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/movies/index.lazy').then((d) => d.Route))
-
-const SchedulesScheduleIdIndexLazyRoute =
-  SchedulesScheduleIdIndexLazyImport.update({
-    path: '/schedules/$scheduleId/',
-    getParentRoute: () => rootRoute,
-  } as any).lazy(() =>
-    import('./routes/schedules/$scheduleId/index.lazy').then((d) => d.Route),
-  )
 
 const MoviesMovieIdIndexLazyRoute = MoviesMovieIdIndexLazyImport.update({
   path: '/movies/$movieId/',
@@ -131,13 +120,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MoviesMovieIdIndexLazyImport
       parentRoute: typeof rootRoute
     }
-    '/schedules/$scheduleId/': {
-      id: '/schedules/$scheduleId/'
-      path: '/schedules/$scheduleId'
-      fullPath: '/schedules/$scheduleId'
-      preLoaderRoute: typeof SchedulesScheduleIdIndexLazyImport
-      parentRoute: typeof rootRoute
-    }
     '/schedules/$scheduleId/form/': {
       id: '/schedules/$scheduleId/form/'
       path: '/schedules/$scheduleId/form'
@@ -157,7 +139,6 @@ export const routeTree = rootRoute.addChildren({
   SchedulesIndexLazyRoute,
   GoogleCallbackIndexLazyRoute,
   MoviesMovieIdIndexLazyRoute,
-  SchedulesScheduleIdIndexLazyRoute,
   SchedulesScheduleIdFormIndexLazyRoute,
 })
 
@@ -175,7 +156,6 @@ export const routeTree = rootRoute.addChildren({
         "/schedules/",
         "/google/callback/",
         "/movies/$movieId/",
-        "/schedules/$scheduleId/",
         "/schedules/$scheduleId/form/"
       ]
     },
@@ -196,9 +176,6 @@ export const routeTree = rootRoute.addChildren({
     },
     "/movies/$movieId/": {
       "filePath": "movies/$movieId/index.lazy.tsx"
-    },
-    "/schedules/$scheduleId/": {
-      "filePath": "schedules/$scheduleId/index.lazy.tsx"
     },
     "/schedules/$scheduleId/form/": {
       "filePath": "schedules/$scheduleId/form/index.lazy.tsx"

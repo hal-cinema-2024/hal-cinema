@@ -9,8 +9,8 @@ import { SelectMovie } from "./-components/SelectMovie";
 export const Route = createLazyFileRoute("/schedules/")({
   component: Index,
 });
-async function Index() {
-  const { schedules } = await useSchedules();
+function Index() {
+  const { schedules } = useSchedules();
 
   return (
     <SchedulesContainer>
