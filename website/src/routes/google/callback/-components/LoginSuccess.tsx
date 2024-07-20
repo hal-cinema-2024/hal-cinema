@@ -1,7 +1,7 @@
 import { Button, Link } from "@yamada-ui/react";
 import React from "react";
 
-export const Result: React.FC = () => {
+export const LoginSuccess: React.FC = () => {
   return (
     <>
       <div style={styles.body}>
