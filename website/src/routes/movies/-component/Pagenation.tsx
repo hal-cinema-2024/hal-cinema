@@ -15,4 +15,12 @@ export function Pagenation() {
 
 const Pa = styled(Pagination)`
   margin: 10px 0 50px 0;
+
+  .ui-pagination__item {
+    color: white; // ページ番号の文字を白くする
+  }
+
+  .ui-pagination__item--active {
+    color: white; // 現在のページ番号の文字を白くする
+  }
 `;
