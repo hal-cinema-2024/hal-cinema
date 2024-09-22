@@ -3,8 +3,9 @@ import { Button } from "@yamada-ui/react";
 import { login } from "../../../../../../fe-api/repositories/login";
 import { UserIdContext } from "../../../../store/useUserIdContext";
 import { useContext } from "react";
+import { V1GoogleLoginRequest } from "../../../../../../api/@types";
 export function LoginButton() {
-  const { setUserId, userId } = useContext(UserIdContext);
+  const { setUserId } = useContext(UserIdContext);
 
   const googleLogin = useGoogleLogin({
     onError: (error) => console.error(error),
@@ -17,10 +18,13 @@ export function LoginButton() {
     onSuccess: async (codeResponse) => {
       const code = codeResponse.code;
       const decoded = atob(code);
-      const res = await login(decoded);
-      console.log(res);
-      setUserId(res!);
-      console.log(userId);
+      const requestData: V1GoogleLoginRequest = {
+        code: decoded,
+      };
+      const res = await login(requestData);
+      if (res) {
+        setUserId(res.userId!);
+      }
     },
   });
 

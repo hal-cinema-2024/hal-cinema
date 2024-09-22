@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { login } from "../../../fe-api/repositories/login";
 import { V1GoogleLoginRequest } from "../../../api/@types";
 
-export const useGetParams = () => {
+export const useGetGoogleParams = () => {
   const [url, setURL] = useState<V1GoogleLoginRequest>();
   const reqlogin = async () => {
     const code = new URLSearchParams(window.location.search).get("code");
@@ -12,7 +12,7 @@ export const useGetParams = () => {
   };
   useEffect(() => {
     reqlogin();
-  }, []);
+  }, [url]);
 
   return {
     url,

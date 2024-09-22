@@ -8,23 +8,6 @@ import { V1GoogleLoginRequest, V1GoogleLoginResponse } from "../../api/@types";
 // }
 
 export const login = async (data: V1GoogleLoginRequest) => {
-  // try {
-  //   let reqBody: GoogleLoginRequest = {
-  //     code: data,
-  //   }
-
-  //   const res = await fetch("http://localhost:8080/login/google", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(reqBody),
-  //   })
-  //   return res;
-  // }catch {
-  //   console.log("error");
-  // }
-
   try {
     if (!data) {
       throw new Error("reqBody is required");
