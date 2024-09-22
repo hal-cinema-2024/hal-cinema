@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { login } from "../../../fe-api/repositories/login";
+import { V1GoogleLoginRequest } from "../../../api/@types";
 
 export const useGetParams = () => {
-  const [url, setURL] = useState<string>();
+  const [url, setURL] = useState<V1GoogleLoginRequest>();
+  const reqlogin = async () => {
+    const code = new URLSearchParams(window.location.search).get("code");
+    await setURL({ code: code! });
 
+    await login({ code: code! });
+  };
   useEffect(() => {
-    const reqlogin = async () => {
-      const code = new URLSearchParams(window.location.search).get("code");
-      await setURL(code!);
-
-      await login(code!);
-    };
     reqlogin();
   }, []);
 
