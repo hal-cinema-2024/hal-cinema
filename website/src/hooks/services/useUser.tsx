@@ -16,6 +16,6 @@ export const useUser = (user_id: string) => {
 
   useEffect(() => {
     fetchData(user_id);
-  }, [user_id]);
+  }, []);
   return { user, setUser };
 };

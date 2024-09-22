@@ -19,6 +19,6 @@ export const useUsers = (page_id: string, page_size: string) => {
 
   useEffect(() => {
     fetchData(page_id, page_size);
-  }, [page_id, page_size]);
+  }, []);
   return { users, setUsers };
 };

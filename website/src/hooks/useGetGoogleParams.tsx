@@ -12,7 +12,7 @@ export const useGetGoogleParams = () => {
   };
   useEffect(() => {
     reqlogin();
-  }, [url]);
+  }, []);
 
   return {
     url,

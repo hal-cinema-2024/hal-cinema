@@ -16,7 +16,7 @@ export const useOrder = (orderId: string) => {
 
   useEffect(() => {
     fetchData(orderId);
-  }, [orderId]);
+  }, []);
 
   return { order, setOrder };
 };
