@@ -15,9 +15,10 @@ export const TicketFormModal = (props: TicketFormModalProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <>
+    <div style={styles.centerContainer}>
+      {" "}
+      {/* 中央に配置するためのコンテナ */}
       <Button onClick={onOpen}>チケット選択</Button>
-
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalHeader>チケット選択</ModalHeader>
 
@@ -25,6 +26,15 @@ export const TicketFormModal = (props: TicketFormModalProps) => {
           {scheduleId && <TicketFormProvider scheduleId={scheduleId} />}
         </ModalBody>
       </Modal>
-    </>
+    </div>
   );
+};
+
+const styles = {
+  centerContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "60px",
+  },
 };
