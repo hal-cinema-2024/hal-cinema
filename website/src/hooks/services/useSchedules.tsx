@@ -35,7 +35,7 @@ export const useSchedules = (movieId?: string) => {
 
   useEffect(() => {
     fetchData(startDate, movieId!);
-  }, [startDate, movieId, scheduleId]);
+  }, []);
 
   return { schedules, setSchedules };
 };

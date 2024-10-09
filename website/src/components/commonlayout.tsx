@@ -22,10 +22,10 @@ function CommonLayout() {
       <BackgroundDiv>
         <Header>
           <HeaderContent>
-            <Logo1 to='/'>
+            <Logo1 to="/">
               <img
                 src={logoImage}
-                alt='ロゴ画像'
+                alt="ロゴ画像"
                 height={"120px"}
                 width={"120px"}
               />
@@ -46,8 +46,8 @@ function CommonLayout() {
           <Outlet />
         </MainContent>
         <Footer>
-          <Logo2 to='/'>
-            <img src={logoImage2} alt='ロゴ画像' width={"160px"} />
+          <Logo2 to="/">
+            <img src={logoImage2} alt="ロゴ画像" width={"160px"} />
           </Logo2>
           <FooterNav>
             {NavLinksData.map((navLink) => (
@@ -76,7 +76,7 @@ const BackgroundDiv = styled.div`
 const Header = styled.header`
   background: linear-gradient(to bottom right, #a6038b, #093f59);
   color: #fff;
-  padding: 1.5rem;
+  padding: 1rem; /* パディングを1.5remから1remに減らす */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -88,20 +88,20 @@ const Header = styled.header`
   z-index: 1000;
 `;
 
-const MainContent = styled.main`
-  padding-top: 100px; /* Adjust padding to ensure content is not hidden under the fixed header */
-`;
-
 const HeaderContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   max-width: 1200px;
-  font-size: 20px;
+  font-size: 18px; /* フォントサイズを少し小さくする */
   font-family: "M PLUS 1 Code", monospace;
   font-optical-sizing: auto;
   font-weight: 500;
+`;
+
+const MainContent = styled.main`
+  padding-top: 100px; /* Adjust padding to ensure content is not hidden under the fixed header */
 `;
 
 const Logo1 = styled(Link)`
@@ -140,7 +140,7 @@ const LoginButtonWrapper = styled.div`
 const Footer = styled.footer`
   background-color: #f1f1f1;
   text-align: center;
-  padding: 20px 0;
+  padding: 10px 0; /* パディングを20pxから10pxに減らす */
   background: linear-gradient(to bottom right, #a6038b, #093f59);
   display: flex;
   flex-direction: column;
@@ -148,12 +148,12 @@ const Footer = styled.footer`
 `;
 
 const Logo2 = styled(Link)`
-  font-size: 24px;
+  font-size: 20px; /* フォントサイズを少し小さくする */
   font-weight: bold;
   text-decoration: none;
   color: white;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 5px; /* マージンを減らしてスペースを狭くする */
 `;
 
 const FooterNav = styled.ul`
@@ -161,27 +161,27 @@ const FooterNav = styled.ul`
   align-items: center;
   list-style: none;
   padding: 0;
-  margin: 10px 0;
+  margin: 5px 0; /* マージンを減らしてスペースを狭くする */
 `;
 
 const NavItem = styled.li`
-  margin: 0 1.5rem;
+  margin: 0 1rem; /* マージンを少し減らす */
   font-family: "M PLUS 1 Code", monospace;
-  font-weight: 500px;
+  font-weight: 500;
 `;
 
 const FooterNavLink = styled(Link)`
   text-decoration: none;
   color: white;
   transition: color 0.3s ease;
-  font-size: 20px;
+  font-size: 18px; /* フォントサイズを少し小さくする */
   &:hover {
     color: #ffca28;
   }
 `;
 
 const Copyright = styled.p`
-  margin-top: 1rem;
-  font-size: 0.875rem;
+  margin-top: 0.5rem; /* マージンを減らしてスペースを狭くする */
+  font-size: 0.75rem; /* フォントサイズを小さくする */
   color: white;
 `;

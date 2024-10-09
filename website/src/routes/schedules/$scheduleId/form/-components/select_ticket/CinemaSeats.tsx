@@ -1,34 +1,43 @@
 import { useSeatSelection } from "../../-hooks/useSeatSelection";
+import React from "react"; // React.CSSPropertiesを使用するためにインポート
 
-const ROWS = "ABCD".slice(0).split("");
-const SEATS_PER_ROW = 10;
+const ROWS = "ABCDEF".split(""); // 行を増やしました
+const SEATS_PER_ROW = 7; // 各行の座席数を調整しました
 
 const CinemaSeats = () => {
   const { selectedSeats, toggleSeatSelection } = useSeatSelection();
 
   return (
-    <div>
-      {Array.from({ length: ROWS.length }, (_, rowIndex) => (
-        <div key={rowIndex}>
-          <div style={{ display: "flex" }}>
+    <div style={styles.container}>
+      <h2>座席予約</h2>
+      <p>ご希望の座席をお選びください。</p>
+      <div style={styles.seatGrid}>
+        {ROWS.map((row, rowIndex) => (
+          <div key={rowIndex} style={styles.row}>
             {Array.from({ length: SEATS_PER_ROW }, (_, seatIndex) => {
-              const seat = { row: ROWS[rowIndex], number: seatIndex + 1 };
+              const seat = { row, number: seatIndex + 1 };
+              const isSelected = selectedSeats.some(
+                (s) => s.row === seat.row && s.number === seat.number
+              );
+              const isReserved = seat.row === "E" && seat.number === 3; // 例として特定の座席を予約済みに設定(E3)
               return (
                 <button
                   key={`${seat.row}-${seat.number}`}
                   style={{
-                    width: "30px",
-                    height: "30px",
-                    margin: "5px",
-                    backgroundColor: selectedSeats.some(
-                      (s) => s.row === seat.row && s.number === seat.number
-                    )
-                      ? "red"
-                      : "gray",
+                    ...styles.seat,
+                    backgroundColor: isReserved
+                      ? "white"
+                      : isSelected
+                        ? "red"
+                        : "blue",
+                    cursor: isReserved ? "not-allowed" : "pointer",
                   }}
                   onClick={() => {
-                    toggleSeatSelection(seat);
+                    if (!isReserved) {
+                      toggleSeatSelection(seat);
+                    }
                   }}
+                  disabled={isReserved}
                 >
                   {seat.row}
                   {seat.number}
@@ -36,10 +45,67 @@ const CinemaSeats = () => {
               );
             })}
           </div>
+        ))}
+      </div>
+      <div style={styles.legend}>
+        <div style={styles.legendItem}>
+          <div style={{ ...styles.seat, backgroundColor: "blue" }}></div>
+          <span>選択可能（空席）</span>
         </div>
-      ))}
+        <div style={styles.legendItem}>
+          <div style={{ ...styles.seat, backgroundColor: "red" }}></div>
+          <span>選択席</span>
+        </div>
+        <div style={styles.legendItem}>
+          <div style={{ ...styles.seat, backgroundColor: "white" }}></div>
+          <span>選択不可（購入済み/販売対象外）</span>
+        </div>
+      </div>
     </div>
   );
+};
+
+// CSSPropertiesを使用してスタイルを定義
+const styles: { [key: string]: React.CSSProperties } = {
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    backgroundColor: "#2f2f2f",
+    color: "white",
+    padding: "20px",
+    borderRadius: "10px",
+    width: "fit-content",
+    margin: "0 auto",
+  },
+  seatGrid: {
+    display: "grid",
+    gap: "10px",
+  },
+  row: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  seat: {
+    width: "40px",
+    height: "40px",
+    margin: "5px",
+    borderRadius: "5px",
+    border: "none",
+    textAlign: "center" as "center", // 型エラーを避けるためにasでキャスト
+    lineHeight: "40px",
+    fontSize: "14px",
+  },
+  legend: {
+    display: "flex",
+    justifyContent: "space-around",
+    marginTop: "20px",
+    width: "100%",
+  },
+  legendItem: {
+    display: "flex",
+    alignItems: "center",
+  },
 };
 
 export default CinemaSeats;

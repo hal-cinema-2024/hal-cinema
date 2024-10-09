@@ -11,7 +11,7 @@ const Slideshow = () => {
   const selectedDate = slideData[scheduleId];
 
   const handleClicked = (index: number) => {
-    if (index === undefined) {
+    if (index == undefined) {
       console.log("index is not defined");
     }
     changeId(index);
@@ -28,7 +28,7 @@ const Slideshow = () => {
         {slideData.map((item: SlideDateType, index: number) => (
           <CarouselSlide
             key={index}
-            className={index === scheduleId ? 'selected-slide' : ''}
+            className={index === scheduleId ? "selected-slide" : ""}
             style={{ cursor: "pointer", position: "relative" }}
             bg={
               index === scheduleId

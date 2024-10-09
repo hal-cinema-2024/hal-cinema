@@ -1,7 +1,11 @@
 import { Button, Link } from "@yamada-ui/react";
 import React from "react";
+import { useGetGoogleParams } from "../../../../hooks/useGetGoogleParams";
 
 export const Result: React.FC = () => {
+  const { url } = useGetGoogleParams();
+  if (!url) return <div>loading...</div>;
+
   return (
     <>
       <div style={styles.body}>
