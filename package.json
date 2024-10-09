@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@aspida/axios": "^1.14.0",
+    "@yamada-ui/table": "^1.2.4",
     "aspida": "^1.14.0",
     "axios": "^1.7.2",
     "qs": "^6.12.1"
