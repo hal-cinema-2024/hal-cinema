@@ -1,6 +1,5 @@
 import { Outlet, Link } from "@tanstack/react-router";
 import styled from "styled-components";
-import headerImage from "/src/assets/bg.jpg";
 
 type NavLinksType = {
   link: string;
@@ -63,7 +62,6 @@ function CommonLayout() {
 export default CommonLayout;
 
 const BackgroundDiv = styled.div`
-  background-image: url(${headerImage});
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -116,9 +114,9 @@ const NavLink = styled(Link)`
   }
 `;
 
-const LoginButtonWrapper = styled.div`
-  margin-left: auto;
-`;
+// const LoginButtonWrapper = styled.div`
+//   margin-left: auto;
+// `;
 
 const Footer = styled.footer`
   background-color: #f1f1f1;
