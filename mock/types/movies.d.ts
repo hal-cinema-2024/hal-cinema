@@ -1,4 +1,4 @@
-interface Movies {
+export interface MoviesMock {
   movieId?: string;
   movieName?: string;
   director?: string;
