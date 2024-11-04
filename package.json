@@ -7,7 +7,8 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "mock": "json-server --watch mock/movie.json -p 3055"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +16,7 @@
     "@aspida/axios": "^1.14.0",
     "aspida": "^1.14.0",
     "axios": "^1.7.2",
+    "json-server": "^1.0.0-beta.3",
     "qs": "^6.12.1"
   },
   "devDependencies": {
