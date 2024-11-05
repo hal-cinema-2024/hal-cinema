@@ -18,10 +18,10 @@ function CommonLayout() {
       <BackgroundDiv>
         <Header>
           <HeaderContent>
-            <Logo1 to='/'>
+            <Logo1 to="/">
               <img
-                src='src/assets/48.png'
-                alt='ロゴ画像'
+                src="src/assets/48.png"
+                alt="ロゴ画像"
                 height={"120px"}
                 width={"120px"}
               />
@@ -38,10 +38,10 @@ function CommonLayout() {
         <Outlet />
 
         <Footer>
-          <Logo2 to='/'>
+          <Logo2 to="/">
             <img
-              src='src/assets/logo1.png'
-              alt='ロゴ画像'
+              src="src/assets/logo1.png"
+              alt="ロゴ画像"
               height={"140px"}
               width={"140px"}
             />
