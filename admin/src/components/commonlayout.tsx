@@ -1,9 +1,8 @@
-import { Outlet } from "@tanstack/react-router";
-// import styled from 'styled-components';
+import { DataTable } from "../data_table/Table";
 
 function CommonLayout() {
   return (
-    <Outlet />
+    <DataTable />
   );
 }
 
