@@ -1,9 +1,81 @@
 body {
-  margin: 0;
+  width: 1100px;
+  margin: 0 auto;
   padding: 1rem;
   font-family: system-ui, sans-serif;
   color: black;
   background-color: white;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+button:hover {
+  border-color: #646cff;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+
+  a:hover {
+    color: #747bff;
+  }
+
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+.narrowWrap {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.narrowWrap select {
+  margin: 5px 40px 5px 5px;
+  cursor: pointer;
+}
+
+.serchWrap {
+  display: flex;
+  padding: 20px;
+  justify-content: space-around;
+}
+
+.searchInput {
+  width: 45%;
+  cursor: pointer;
+}
+
+.dateInput {
+  width: 45%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dateInput P {
+  margin: 0 10px;
 }
 
 h1 {
@@ -11,20 +83,48 @@ h1 {
   font-size: 1.5rem;
 }
 
+/* テーブル全体のスタイル */
 table {
+  margin-top: 20px;
+  width: 100%;
   border-collapse: collapse;
-  border: 2px solid black;
-  padding: 1px;
+  font-family: Arial, sans-serif;
+  border-bottom: 1.5px solid #ddd;
+  border-top: none;
+  border-left: none;
+  border-right: none;
 }
 
 th {
-  border: 1px dashed lightgray;
-  border-bottom: 1px solid black;
-  padding: 4px;
-  background: lavender;
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  border-top: none;
+}
+
+th.special-row {
+  border-bottom: 1px solid #000;
+  border-top: none;
 }
 
 td {
-  border: 1px dashed lightgray;
-  padding: 4px;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  border-left: none;
+  border-right: none;
+  vertical-align: middle;
+}
+
+tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+table tr:last-child td {
+  border-bottom: 1px solid #ddd;
+  border-left: none;
+  border-right: none;
+}
+
+tbody tr {
+  height: 48px;
 }

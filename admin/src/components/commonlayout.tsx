@@ -1,16 +1,10 @@
 import { Outlet } from "@tanstack/react-router";
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
 function CommonLayout() {
   return (
-    <Sdiv>
-      <Outlet />
-    </Sdiv>
+    <Outlet />
   );
 }
 
 export default CommonLayout;
-
-const Sdiv = styled.div `
-  background-color  : #ddd;
-`
