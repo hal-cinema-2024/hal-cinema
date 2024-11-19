@@ -1,14 +1,13 @@
 import React from "react";
-import "./App.css";
-import { DataTable } from "./data-table/DataTable"; // DataTable をインポート
+import DataTable from "./data-table/DataTable";
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <h1>Data Table Example</h1>
-      <DataTable tableColumns={[]} data={[]} /> {/* テーブルデータは空のまま */}
+    <div>
+      <h1>映画リスト</h1>
+      <DataTable />
     </div>
   );
-}
+};
 
 export default App;

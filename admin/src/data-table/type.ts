@@ -7,3 +7,4 @@ export interface TableColumnsType {
 
 // 挿入するデータの型を定義
 export type DataSourceType = MoviesMock;
+export type { MoviesMock };
