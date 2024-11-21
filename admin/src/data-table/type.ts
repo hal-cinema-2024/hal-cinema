@@ -1,10 +1,7 @@
-import { MoviesMock } from "../../../mock/types";
+import { MoviesMock } from "../../../mock/types/movies";
 
-export interface TableColumnsType {
-  header: string;
-  accessorKey: string;
-}
-
-// 挿入するデータの型を定義
-export type DataSourceType = MoviesMock;
-export type { MoviesMock };
+export type DataType = MoviesMock;
+export type ColumnType<T extends DataType> = {
+  header: keyof T;
+  accessorKey: keyof T;
+};
