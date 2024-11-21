@@ -1,6 +1,6 @@
 import { Table } from "@yamada-ui/table";
 import { useMovies } from "../../../mock/hooks/useMovies";
-
+import { Center } from "@yamada-ui/react";
 export const MovieTable = () => {
   const { movies } = useMovies();
   const columns = [
@@ -18,5 +18,19 @@ export const MovieTable = () => {
     },
   ];
 
-  return <Table columns={columns} data={movies} />;
+  return (
+    <>
+      <Center
+        style={{
+          width: "100%",
+          height: "100%",
+          overflow: "auto",
+          padding: "20px",
+          boxSizing: "border-box",
+        }}
+      >
+        <Table columns={columns} data={movies} />
+      </Center>
+    </>
+  );
 };
