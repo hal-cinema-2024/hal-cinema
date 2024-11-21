@@ -9,6 +9,13 @@ export const MovieTable = () => {
     { header: "Director", accessorKey: "director" },
     { header: "Link", accessorKey: "link" },
     { header: "Term", accessorKey: "term" },
+    {
+      header: "Edit",
+      accessorKey: "edit",
+      cell: (info: any) => (
+        <a href={`/movies/${info.row.original.movieId}`}>Edit</a>
+      ),
+    },
   ];
 
   return <Table columns={columns} data={movies} />;
