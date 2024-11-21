@@ -9,7 +9,7 @@ export const useUser = (userId: string) => {
       const url = "http://localhost:8080/users";
       const res = await fetch(url + `?userId=${userId}`);
       const data = await res.json();
-      setUser(data[0]); // Assuming the response is an array
+      setUser(data);
     } catch (error) {
       console.error("user service error: " + error);
     }
