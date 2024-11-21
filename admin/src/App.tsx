@@ -1,17 +1,8 @@
-import { RouterProvider, createRouter } from "@tanstack/react-router";
-import "./App.css";
-import { routeTree } from "./routeTree.gen";
+import React from "react";
+import { MovieTable } from "./data-table/MovieTable";
 
-const router = createRouter({ routeTree: routeTree });
-
-declare module "@tanstack/react-router" {
-  interface Register {
-    router: typeof router;
-  }
-}
-
-function App() {
-  return <RouterProvider router={router} />;
-}
+const App: React.FC = () => {
+  return <MovieTable />;
+};
 
 export default App;

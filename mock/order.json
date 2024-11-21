@@ -1,0 +1,22 @@
+{
+  "orders": [
+    {
+      "orderId": "12345",
+      "userId": "user789",
+      "movieName": "Example Movie",
+      "screen": "Screen 1",
+      "orderDetail": [
+        {
+          "seatName": "A1",
+          "priceType": "Adult",
+          "price": 1500
+        },
+        {
+          "seatName": "A2",
+          "priceType": "Child",
+          "price": 1000
+        }
+      ]
+    }
+  ]
+}
