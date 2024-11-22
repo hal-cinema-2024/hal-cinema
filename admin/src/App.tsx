@@ -1,5 +1,5 @@
 import React from "react";
-import { MovieTable } from "./routes/MovieTable";
+import { MovieTable } from "./data-table/MovieTable";
 import { Route, Routes } from "react-router";
 import { Home } from "./routes/Home";
 

@@ -4,6 +4,7 @@ import { Button, Center } from "@yamada-ui/react";
 import { useNavigate } from "react-router";
 const TableComponents = () => {
   const { movies } = useMovies();
+
   const router = useNavigate();
   const columns = [
     { header: "Movie ID", accessorKey: "movieId" },
@@ -30,7 +31,6 @@ const TableComponents = () => {
         </Button>
       ),
     },
-
     {
       header: "Delete",
       accessorKey: "delete",
