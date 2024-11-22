@@ -2,12 +2,13 @@ import { Table } from "@yamada-ui/table";
 import { useMovies } from "../../../mock/hooks/useMovies";
 import { Button, Center } from "@yamada-ui/react";
 import { useNavigate } from "react-router";
+import { deleteMovie } from "../form/acrions/movie";
 const TableComponents = () => {
   const { movies } = useMovies();
 
   const router = useNavigate();
   const columns = [
-    { header: "Movie ID", accessorKey: "movieId" },
+    { header: "Movie ID", accessorKey: "id" },
     { header: "Movie Name", accessorKey: "movieName" },
     { header: "Director", accessorKey: "director" },
     { header: "Link", accessorKey: "link" },
@@ -24,10 +25,10 @@ const TableComponents = () => {
             backgroundColor: "#a9ffcd",
           }}
           onClick={() => {
-            router(`/movies/${info.row.original.movieId}`);
+            router(`/movies/${info.row.original.id}`);
           }}
         >
-          編集
+          詳細/編集
         </Button>
       ),
     },
@@ -43,7 +44,8 @@ const TableComponents = () => {
             backgroundColor: "#ffa9a9",
           }}
           onClick={() => {
-            console.log("delete", info.row.original.movieId);
+            deleteMovie(info.row.original.id);
+            window.location.reload();
           }}
         >
           削除
