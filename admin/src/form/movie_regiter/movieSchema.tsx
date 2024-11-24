@@ -14,10 +14,9 @@ export const movieSchema = z.object({
   director: z.string().nonempty({ message: "監督名は必須です" }),
   summary: z.string().nonempty({ message: "あらすじは必須です" }),
   link: z.string().nonempty({ message: "リンクは必須です" }),
-  term: z
-    .number()
-    .int({ message: "期間は整数で入力してください" })
-    .min(1, { message: "期間は1日以上でなければなりません" }),
+  term: z.string().refine((val) => !Number.isNaN(parseInt(val, 10)), {
+    message: "数字を入力してください",
+  }),
   releaseDate: z.string().nonempty({ message: "公開日は必須です" }),
   endDate: z.string().nonempty({ message: "終了日は必須です" }),
 
