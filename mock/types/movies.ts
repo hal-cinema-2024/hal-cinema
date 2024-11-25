@@ -10,3 +10,8 @@ export interface MoviesMock {
   endDate?: string;
   movieImage?: string[];
 }
+
+export type CreateMovie = Partial<Omit<MoviesMock, "movieId">>;
+
+export type UpdateMovie = Partial<Omit<MoviesMock, "movieId">>;
+export type DeleteMovie = Pick<MoviesMock, "movieId">;

@@ -8,18 +8,27 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "mock": "json-server --watch mock/movie.json -p 3055"
+    "mock:movie": "json-server --watch mock/movie.json -p 8080",
+    "mock:order": "json-server --watch mock/order.json -p 8081",
+    "mock:schedule": "json-server --watch mock/schedule.json -p 8082",
+    "mock:user": "json-server --watch mock/user.json -p 8083",
+    "mock": "concurrently \"npm:mock:movie\" \"npm:mock:order\" \"npm:mock:schedule\" \"npm:mock:user\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "@aspida/axios": "^1.14.0",
     "aspida": "^1.14.0",
     "axios": "^1.7.2",
+    "concurrently": "^9.1.0",
     "json-server": "^1.0.0-beta.3",
     "qs": "^6.12.1"
   },
   "devDependencies": {
-    "@types/qs": "^6.9.15"
+    "@types/qs": "^6.9.15",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1"
   }
 }
