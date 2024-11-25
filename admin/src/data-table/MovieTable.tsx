@@ -20,7 +20,7 @@ const TableComponents = () => {
       cell: (info: any) => (
         <Button
           style={{
-            width: "45%",
+            width: "60%",
             height: "30px",
             borderRadius: "3px",
             backgroundColor: "#a9ffcd",
@@ -39,7 +39,7 @@ const TableComponents = () => {
       cell: (info: any) => (
         <Button
           style={{
-            width: "45%",
+            width: "50%",
             height: "30px",
             borderRadius: "3px",
             backgroundColor: "#ffa9a9",
@@ -62,7 +62,7 @@ const TableComponents = () => {
           width: "100%",
           height: "100%",
           overflow: "auto",
-          padding: "20px",
+          padding: "0 50px",
           boxSizing: "border-box",
         }}
       >

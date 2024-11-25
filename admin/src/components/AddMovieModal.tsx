@@ -13,7 +13,7 @@ export const AddMovieModal = () => {
 
   return (
     <>
-      <Button onClick={onOpen}>Open Modal</Button>
+      <Button style={{ margin: "0px 50px" }} onClick={onOpen}>Open Modal</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalHeader>映画情報追加</ModalHeader>
@@ -23,7 +23,7 @@ export const AddMovieModal = () => {
         </ModalBody>
         <ModalFooter>
           <Button variant='ghost' onClick={onClose}>
-            とじる
+            閉じる
           </Button>
         </ModalFooter>
       </Modal>

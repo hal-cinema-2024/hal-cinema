@@ -1,15 +1,19 @@
 import React from "react";
+import { Routes, Route } from "react-router-dom";
 import { MovieTable } from "./data-table/MovieTable";
-import { Route, Routes } from "react-router";
 import { Home } from "./routes/Home";
+import { Layout } from "./components/Layout";
 
 const App: React.FC = () => {
   return (
-    <Routes>
-      <Route path='/' element={<Home />} />
-      <Route path='/movies' element={<MovieTable />} />
-      <Route path='/movies/:movieId' element={<MovieTable />} />
-    </Routes>
+
+      <Routes>
+        <Route path="/" element={<Home />}/>
+          <Route  element={<Layout />} >
+          <Route path="movies" element={<MovieTable />} />
+          <Route path="movies/:movieId" element={<MovieTable />} />
+        </Route>
+      </Routes>
   );
 };
 
