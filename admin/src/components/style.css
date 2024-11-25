@@ -2,7 +2,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 50px;
+  width: 100%;
+  padding: 10px 50px;
 }
 
 .headerWrap div{
@@ -25,5 +26,5 @@ nav ul li{
 }
 
 p{
-  font-size: 20px;
+  font-size: 18px;
 }
