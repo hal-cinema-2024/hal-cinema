@@ -7,3 +7,6 @@ export type ScheduleMock = {
   endTime?: string;
   isAvailable?: boolean;
 };
+
+export type CreateSchedule = Partial<ScheduleMock>;
+export type UpdateSchedule = Partial<Omit<ScheduleMock, "id">>;

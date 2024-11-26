@@ -11,7 +11,6 @@ export interface MoviesMock {
   movieImage?: string[];
 }
 
-export type CreateMovie = Partial<Omit<MoviesMock, "movieId">>;
+export type CreateMovie = Partial<MoviesMock>;
 
-export type UpdateMovie = Partial<Omit<MoviesMock, "movieId">>;
-export type DeleteMovie = Pick<MoviesMock, "id">;
+export type UpdateMovie = Partial<Omit<MoviesMock, "id">>;
