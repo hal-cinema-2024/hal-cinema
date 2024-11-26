@@ -6,7 +6,7 @@ export const useMovies = (pageId?: string, pageSize?: string) => {
 
   const fetchData = async (pageId?: string, pageSize?: string) => {
     try {
-      const url = import.meta.env.VITE_MOVIE_MOCK_URL;
+      const url = "http://localhost:8011/movies";
       const res = await apiGet(url + `?pageId=${pageId}&pageSize=${pageSize}`);
       setMovies(res);
     } catch (error) {

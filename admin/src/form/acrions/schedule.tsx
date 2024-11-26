@@ -11,9 +11,9 @@ export const createSchedule = async (data: CreateSchedule) => {
   }
 };
 
-export const deleteMovie = async (movieId: string) => {
+export const deleteSchedule = async (scheduleId: number) => {
   try {
-    const url = `http://localhost:8080/movies/${movieId}`;
+    const url = `${process.env.VITE_SCHEDULE_MOCK_URL}/schedules/${scheduleId}`;
     const res = await apiDelete(url);
     return res;
   } catch (error) {

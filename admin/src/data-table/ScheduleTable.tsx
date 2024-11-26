@@ -4,12 +4,14 @@ import { useMovies } from "../../../mock/hooks/useMovies";
 import { useSchedules } from "../../../mock/hooks/useSchedule";
 import { AddMovieModal } from "../components/AddMovieModal";
 import { Table } from "@yamada-ui/table";
+import { deleteSchedule } from "../form/acrions/schedule";
+import { useNavigate } from "react-router";
 
 export const ScheduleTable = () => {
   const { movies } = useMovies();
   const [selectedMovieId, setSelectedMovieId] = useState<number>(1);
   const { schedules } = useSchedules(selectedMovieId);
-
+  const router = useNavigate();
   const column = [
     {
       header: "ID",
@@ -35,6 +37,45 @@ export const ScheduleTable = () => {
       header: "予約可能",
       accessorKey: "isAvailable",
     },
+    {
+      header: "Edit",
+      accessorKey: "edit",
+      cell: (info: any) => (
+        <Button
+          style={{
+            width: "60%",
+            height: "30px",
+            borderRadius: "3px",
+            backgroundColor: "#a9ffcd",
+          }}
+          onClick={() => {
+            router(`/schedules/${info.row.original.id}`);
+          }}
+        >
+          詳細/編集
+        </Button>
+      ),
+    },
+    {
+      header: "Delete",
+      accessorKey: "delete",
+      cell: (info: any) => (
+        <Button
+          style={{
+            width: "50%",
+            height: "30px",
+            borderRadius: "3px",
+            backgroundColor: "#ffa9a9",
+          }}
+          onClick={() => {
+            deleteSchedule(info.row.original.id);
+            window.location.reload();
+          }}
+        >
+          削除
+        </Button>
+      ),
+    },
   ];
 
   useEffect(() => {
@@ -54,7 +95,6 @@ export const ScheduleTable = () => {
         ))}
       </NativeSelect>
 
-      <AddMovieModal />
       <Table data={schedules} columns={column} />
     </>
   );

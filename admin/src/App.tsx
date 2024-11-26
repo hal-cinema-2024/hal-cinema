@@ -1,6 +1,5 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { MovieTable } from "./data-table/MovieTable";
 import { Home } from "./routes/Home";
 import { Schedules } from "./routes/Schedules";
 import { Movies } from "./routes/Movies";
@@ -10,11 +9,12 @@ const App: React.FC = () => {
   return (
     <Routes>
       <Route path='/' element={<Home />} />
-      <Route path='/' element={<Layout />} >
-      <Route path='/movies' element={<MovieTable />} />
-      <Route path='/movies/:movieId' element={<Movies />} />
-      <Route path='/schedules' element={<Schedules />} />
-    </Route>
+      <Route path='/' element={<Layout />}>
+        <Route path='/movies' element={<Movies />} />
+        <Route path='/movies/:id' element={<Movies />} />
+        <Route path='/schedules' element={<Schedules />} />
+        <Route path='/schedules/:id' element={<Schedules />} />
+      </Route>
     </Routes>
   );
 };

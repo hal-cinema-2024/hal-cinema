@@ -6,7 +6,7 @@ export const useUser = (userId: number) => {
 
   const fetchData = async (userId?: number) => {
     try {
-      const url = "";
+      const url = "http://localhost:8014/users";
       const res = await fetch(url + `?userId=${userId}`);
       const data = await res.json();
       setUser(data);

@@ -6,7 +6,7 @@ export const useOrders = (userId: number) => {
 
   const fetchData = async (userId?: number) => {
     try {
-      const url = import.meta.env.VITE_USER_MOCK_URL;
+      const url = "http://localhost:8012/orders";
       const res = await fetch(url + `?userId=${userId}`);
       const data = await res.json();
       setOrders(data);
