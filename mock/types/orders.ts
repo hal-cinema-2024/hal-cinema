@@ -5,7 +5,7 @@ export interface OrdersDetail {
   price?: number;
 }
 export interface OrdersMock {
-  orderId?: number;
+  id?: number;
   userId?: number;
   movieName?: string;
   screen?: string;
