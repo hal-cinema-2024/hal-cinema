@@ -8,10 +8,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "mock:movie": "json-server --watch mock/movie.json -p 8080",
-    "mock:order": "json-server --watch mock/order.json -p 8081",
-    "mock:schedule": "json-server --watch mock/schedule.json -p 8082",
-    "mock:user": "json-server --watch mock/user.json -p 8083",
+    "mock:movie": "json-server --watch mock/movie.json -p 8011",
+    "mock:order": "json-server --watch mock/order.json -p 8012",
+    "mock:schedule": "json-server --watch mock/schedule.json -p 8013",
+    "mock:user": "json-server --watch mock/user.json -p 8014",
     "mock": "concurrently \"npm:mock:movie\" \"npm:mock:order\" \"npm:mock:schedule\" \"npm:mock:user\""
   },
   "author": "",
@@ -24,8 +24,6 @@
     "json-server": "^1.0.0-beta.3",
     "qs": "^6.12.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "styled-components": "^6.1.13"
     "react-dom": "^18.3.1"
   },
   "devDependencies": {

@@ -1,8 +1,8 @@
 {
   "orders": [
     {
-      "id": "1",
-      "userId": "user789",
+      "id": 1,
+      "userId": 1,
       "movieName": "Example Movie",
       "screen": "Screen 1",
       "orderDetail": [

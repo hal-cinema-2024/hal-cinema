@@ -6,7 +6,7 @@ export const useMovies = (pageId?: string, pageSize?: string) => {
 
   const fetchData = async (pageId?: string, pageSize?: string) => {
     try {
-      const url = "http://localhost:8080/movies";
+      const url = "http://localhost:8011/movies";
       const res = await apiGet(url + `?pageId=${pageId}&pageSize=${pageSize}`);
       setMovies(res);
     } catch (error) {

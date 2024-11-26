@@ -3,8 +3,7 @@ import { useMovies } from "../../../mock/hooks/useMovies";
 import { Button, Center } from "@yamada-ui/react";
 import { useNavigate } from "react-router";
 import { deleteMovie } from "../form/acrions/movie";
-import { AddMovieModal } from "../components/AddMovieModal";
-const TableComponents = () => {
+export const MovieTable = () => {
   const { movies } = useMovies();
 
   const router = useNavigate();
@@ -68,15 +67,6 @@ const TableComponents = () => {
       >
         <Table columns={columns} data={movies} />
       </Center>
-    </>
-  );
-};
-
-export const MovieTable = () => {
-  return (
-    <>
-      <AddMovieModal />
-      <TableComponents />
     </>
   );
 };

@@ -1,6 +1,6 @@
 export type ScheduleMock = {
-  scheduleId?: string;
-  movieId?: string;
+  scheduleId?: number;
+  movieId?: number;
   movieName?: string;
   theater?: string;
   startTime?: string;

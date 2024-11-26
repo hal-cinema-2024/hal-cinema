@@ -1,5 +1,5 @@
 export interface MoviesMock {
-  movieId?: string;
+  movieId?: number;
   movieName?: string;
   director?: string;
   thumbnail?: string;
