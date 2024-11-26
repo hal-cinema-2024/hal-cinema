@@ -42,21 +42,18 @@ export const ScheduleTable = () => {
   }, [selectedMovieId]);
   return (
     <>
-      <form action=''>
-        <NativeSelect
-          name='movieId'
-          value={selectedMovieId}
-          onChange={(e) => setSelectedMovieId(Number(e.target.value))}
-        >
-          {movies.map((movie) => (
-            <option key={movie.movieId} value={movie.movieId}>
-              {movie.movieName}
-            </option>
-          ))}
-        </NativeSelect>
+      <NativeSelect
+        name='movieId'
+        value={selectedMovieId}
+        onChange={(e) => setSelectedMovieId(Number(e.target.value))}
+      >
+        {movies.map((movie) => (
+          <option key={movie.id} value={movie.id}>
+            {movie.movieName}
+          </option>
+        ))}
+      </NativeSelect>
 
-        <Button type='submit'>Search</Button>
-      </form>
       <AddMovieModal />
       <Table data={schedules} columns={column} />
     </>
