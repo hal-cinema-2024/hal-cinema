@@ -3,8 +3,9 @@ import { Button } from "@yamada-ui/react";
 import { useForm, FormProvider } from "react-hook-form";
 import { InputField } from "../InputField";
 import { scheduleSchema } from "./scheduleSchema";
+import { createSchedule } from "../acrions/schedule";
 
-export function MovieForm() {
+export function ScheduleForm() {
   const methods = useForm({
     resolver: zodResolver(scheduleSchema),
   });
@@ -14,6 +15,7 @@ export function MovieForm() {
     <FormProvider {...methods}>
       <form
         onSubmit={handleSubmit((data) => {
+          createSchedule(data);
           window.location.reload();
         })}
       >
