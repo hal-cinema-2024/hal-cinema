@@ -2,7 +2,6 @@ import { NativeSelect, Button } from "@yamada-ui/react";
 import { useEffect, useState } from "react";
 import { useMovies } from "../../../mock/hooks/useMovies";
 import { useSchedules } from "../../../mock/hooks/useSchedule";
-import { AddMovieModal } from "../components/AddMovieModal";
 import { Table } from "@yamada-ui/table";
 import { deleteSchedule } from "../form/acrions/schedule";
 import { useNavigate } from "react-router";
