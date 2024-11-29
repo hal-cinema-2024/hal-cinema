@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "userId": 1,
+      "firstName": "太郎",
+      "lastName": "山田",
+      "firstNameReading": "たろう",
+      "lastNameReading": "やまだ",
+      "gender": 1
+    },
+    {
+      "userId": 2,
+      "firstName": "花子",
+      "lastName": "佐藤",
+      "firstNameReading": "はなこ",
+      "lastNameReading": "さとう",
+      "gender": 2
+    }
+  ]
+}

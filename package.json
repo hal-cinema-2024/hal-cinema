@@ -7,7 +7,12 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "mock:movie": "json-server --watch mock/movie.json -p 8011",
+    "mock:order": "json-server --watch mock/order.json -p 8012",
+    "mock:schedule": "json-server --watch mock/schedule.json -p 8013",
+    "mock:user": "json-server --watch mock/user.json -p 8014",
+    "mock": "concurrently \"npm:mock:movie\" \"npm:mock:order\" \"npm:mock:schedule\" \"npm:mock:user\""
   },
   "author": "",
   "license": "ISC",
@@ -16,9 +21,16 @@
     "@yamada-ui/table": "^1.2.4",
     "aspida": "^1.14.0",
     "axios": "^1.7.2",
-    "qs": "^6.12.1"
+    "concurrently": "^9.1.0",
+    "json-server": "^1.0.0-beta.3",
+    "qs": "^6.12.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@types/qs": "^6.9.15"
+    "@types/json-server": "^0.14.7",
+    "@types/qs": "^6.9.15",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1"
   }
 }

@@ -1,20 +1,23 @@
 import { useEffect, useState } from "react";
-import { getMovies } from "../../../../../fe-api/repositories/movie";
-import { GetMoviesResponseInterface } from "../../../../../fe-api/interfaces/movie";
+import { MoviesMock } from "../../../../../mock/types/movies";
+
 export const useMovies = (pageId: string, pageSize: string) => {
-  const [movies, setMovies] = useState<GetMoviesResponseInterface>();
+  const [movies, setMovies] = useState<MoviesMock[]>([]);
 
   const fetchData = async (pageId: string, pageSize: string) => {
     try {
-      const res = await getMovies(pageId, pageSize);
-      if (res) setMovies(res);
+      const url = import.meta.env.VITE_MOCK_URL + "/movies";
+      const res = await fetch(url + `?pageId=${pageId}&pageSize=${pageSize}`);
+      const data = await res.json();
+      setMovies(data);
     } catch (error) {
       console.error("movie service error: " + error);
     }
   };
+
   useEffect(() => {
     fetchData(pageId, pageSize);
-  }, []);
+  }, [pageId, pageSize]);
 
   return { movies, setMovies };
 };

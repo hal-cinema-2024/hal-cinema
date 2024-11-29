@@ -1,22 +1,18 @@
 import styled from "styled-components";
 import { Card, Link } from "@yamada-ui/react";
-import {
-  GetMoviesResponseInterface,
-  MovieInterface,
-} from "../../../../../fe-api/interfaces/movie";
+import { MoviesMock } from "../../../../../mock/types/movies";
 
 interface MoviePropsInterface {
-  movies: GetMoviesResponseInterface;
+  movies: MoviesMock[];
 }
 
 export const Movies = (props: MoviePropsInterface) => {
   const { movies } = props;
-  const data = movies as MovieInterface[];
   return (
     <>
       <Section>
         {movies &&
-          data.map((item: MovieInterface) => (
+          movies.map((item: MoviesMock) => (
             <MoviesContainer key={item.movieId}>
               <SSdev>
                 <MovieImage>
