@@ -1,5 +1,5 @@
 export type ScheduleMock = {
-  id?: string;
+  id?: number;
   movieId?: string;
   movieName?: string;
   theater?: string;

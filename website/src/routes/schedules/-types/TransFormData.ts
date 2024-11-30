@@ -1,7 +1,7 @@
 export type TheaterSchedule = {
   theater: string;
   schedules: {
-    scheduleId: string;
+    id: number;
     startTime: string;
     endTime: string;
     isAvailable: boolean;

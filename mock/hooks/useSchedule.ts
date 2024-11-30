@@ -1,23 +1,23 @@
 import { useEffect, useState } from "react";
 import { ScheduleMock } from "../types/schedule";
+import { apiGet } from "../../util/apiClient";
 
-export const useSchedules = (movieId: number) => {
+export const useSchedules = () => {
   const [schedules, setSchedules] = useState<ScheduleMock[]>([]);
 
-  const fetchData = async (movieId?: number) => {
+  const fetchData = async () => {
     try {
       const url = "http://localhost:8013/schedules";
-      const res = await fetch(url + `?movieId=${movieId}`);
-      const data = await res.json();
-      setSchedules(data);
+      const res = await apiGet(url);
+      setSchedules(res);
     } catch (error) {
       console.error("schedule service error: " + error);
     }
   };
 
   useEffect(() => {
-    fetchData(movieId);
-  }, [movieId]);
+    fetchData();
+  }, []);
 
   return { schedules, setSchedules };
 };

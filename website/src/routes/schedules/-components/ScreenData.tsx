@@ -1,37 +1,40 @@
 import styled from "styled-components";
 import ScreenTime from "./ScreenTime";
-import { TransformedData } from "../-types/TransFormData";
-// import { Fragment } from "react";
+import { ScheduleMock } from "../../../../../mock/types/schedule";
 
 type ScreenDataProps = {
-  theaterSchedule: TransformedData[];
+  schedules: ScheduleMock[];
 };
 
 export const ScreenData = (props: ScreenDataProps) => {
-  const { theaterSchedule } = props;
+  const { schedules } = props;
 
   return (
     <>
-      {theaterSchedule.map((scheduleData, index) => (
-        <MovieContainer key={index}>
-          {scheduleData.theaterSchedule.map((theaterData) => (
-            <ScreenContainer key={theaterData.theater}>
-              <Number>スクリーン<br/> {theaterData.theater}</Number>
-              <TimeContainer>
-                {theaterData.schedules.map((schedule, scheduleIndex) => (
-                <ScreenTime
-                  key={scheduleIndex}
-                  startTime={schedule.startTime}
-                  endTime={schedule.endTime}
-                  isAvailable={schedule.isAvailable}
-                  scheduleId={schedule.scheduleId!}
-                />
-                ))}
-              </TimeContainer>
-            </ScreenContainer>
-          ))}
-        </MovieContainer>
-      ))}
+      <MovieContainer>
+        {schedules.map((schedule: ScheduleMock, index) => (
+          <div key={index}>
+            <p
+              style={{
+                fontSize: "1.2rem",
+                fontWeight: "bold",
+                margin: "10px 0",
+                color: "#fff",
+              }}
+            >
+              {schedule.theater} {schedule.movieName}
+            </p>
+            <ScreenTime
+              key={index}
+              startTime={schedule.startTime || ""}
+              endTime={schedule.endTime || ""}
+              isAvailable={schedule.isAvailable || false}
+              scheduleId={schedule.id!.toString()}
+            />
+          </div>
+        ))}
+      </MovieContainer>
+      <TimeContainer />
     </>
   );
 };
@@ -39,20 +42,6 @@ export const ScreenData = (props: ScreenDataProps) => {
 const MovieContainer = styled.div`
   width: 100%;
   padding: 10px 5px;
-`;
-
-const ScreenContainer = styled.div`
-  padding: 10px 0px 10px 15px;
-  justify-content: space-between;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-`;
-
-const Number = styled.div`
-  font-size: 30px;
-  color: #fff;
-  text-align: center;
 `;
 
 const TimeContainer = styled.div`

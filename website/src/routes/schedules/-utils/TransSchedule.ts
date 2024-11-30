@@ -1,7 +1,7 @@
-import { ScheduleInterface } from "../../../../../fe-api/interfaces/schedule";
+import { ScheduleMock } from "../../../../../mock/types/schedule";
 import { TheaterSchedule, TransformedData } from "../-types/TransFormData";
 
-export function transformData(data: ScheduleInterface[]): TransformedData[] {
+export function transformData(data: ScheduleMock[]): TransformedData[] {
   const groupedByMovie: {
     [movieName: string]: { [theater: string]: TheaterSchedule };
   } = {};
@@ -20,7 +20,7 @@ export function transformData(data: ScheduleInterface[]): TransformedData[] {
       }
 
       groupedByMovie[item.movieName][item.theater].schedules.push({
-        scheduleId: item.scheduleId || "",
+        id: item.id || 0,
         startTime: item.startTime || "",
         endTime: item.endTime || "",
         isAvailable: item.isAvailable || false,
