@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Card } from "@yamada-ui/react";
-import { SimpleGrid, GridItem, Text, Button } from "@yamada-ui/react";
+import { SimpleGrid, GridItem, Text } from "@yamada-ui/react";
 import { OrdersDetail, OrdersMock } from "../../../../../mock/types/orders";
 
 type OrderCardProps = {
@@ -88,13 +88,6 @@ const Container = styled(SimpleGrid)`
   padding: 10px;
   gap: 20px;
   padding-top: 110px;
-`;
-
-const SButton = styled(Button)`
-  // position: absolute;
-  // bottom: 20px;
-  // right: 30px;
-  background-color: #333631;
 `;
 
 const DText = styled(Text)`

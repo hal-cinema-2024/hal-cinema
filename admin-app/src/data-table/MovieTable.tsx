@@ -16,6 +16,7 @@ export const MovieTable = () => {
     {
       header: "Edit",
       accessorKey: "edit",
+
       cell: (info: any) => (
         <Button
           style={{
