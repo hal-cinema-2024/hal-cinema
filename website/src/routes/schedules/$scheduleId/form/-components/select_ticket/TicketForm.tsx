@@ -5,8 +5,8 @@ import { useSeatSelection } from "../../-hooks/useSeatSelection";
 import { SelectField } from "../../../../../../components/SelectField";
 import { option } from "./TicketOption";
 import { z, ZodString } from "zod";
-import { CreateOrderService } from "../../-service/CreateOrder";
-
+import { PostOrder } from "../../../../../../../../mock/hooks/postOrder";
+import { CreateSeatSelects } from "../../-service/CreateSeatSelects";
 type TicketFormProps = {
   scheduleId: string;
 };
@@ -35,7 +35,14 @@ export function TicketFormProvider(props: TicketFormProps) {
     <FormProvider {...methods}>
       <form
         onSubmit={handleSubmit((data) => {
-          CreateOrderService(data);
+          const seat = CreateSeatSelects(data, selectedSeats);
+          PostOrder({
+            id: Number(scheduleId),
+            userId: 1,
+            movieName: "movieName",
+            screen: "screen",
+            orderDetail: seat,
+          });
         })}
       >
         {selectedSeats &&
