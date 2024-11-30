@@ -1,4 +1,4 @@
-import { Button, m } from "@yamada-ui/react";
+import { Button } from "@yamada-ui/react";
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSeatSelection } from "../../-hooks/useSeatSelection";
