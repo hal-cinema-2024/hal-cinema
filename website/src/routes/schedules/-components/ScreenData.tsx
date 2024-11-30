@@ -10,21 +10,24 @@ type ScreenDataProps = {
 export const ScreenData = (props: ScreenDataProps) => {
   const { movies } = useMovies();
   const { schedules } = props;
-  console.log(movies.map((movie) => movie.id));
-  const list = schedules.map((schedule) => {
-    const movie = movies.find((movie) => movie.id === schedule.movieId);
+  const scheduleList = schedules.map((schedule) => {
+    const movie = movies.find(
+      (movie) => Number(movie.id) === Number(schedule.movieId)
+    );
+    console.log("Found Movie:", movie); // Log the found movie
+
     return {
       ...schedule,
-      movieName: movie?.movieName,
+      movieName: movie ? movie.movieName : "",
     };
   });
 
-  console.log(list);
+  console.log(scheduleList);
 
   return (
     <>
       <MovieContainer>
-        {list.map((schedule: ScheduleMock, index) => (
+        {scheduleList.map((schedule: ScheduleMock, index) => (
           <div key={index}>
             <p
               style={{

@@ -11,7 +11,7 @@
     },
     {
       "id": 2,
-      "movieId": 1,
+      "movieId": 2,
       "movieName": "映画B",
       "theater": "シアター2",
       "startTime": "2023-10-01T14:00:00",

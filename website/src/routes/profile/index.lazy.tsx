@@ -11,9 +11,7 @@ export const Route = createLazyFileRoute("/profile/")({
 
 function Index() {
   const { user } = useUser(1);
-  const { orders } = useOrderByUser(1);
-
-  console.log("user", user);
+  const { orders } = useOrderByUser(user?.id ?? 1);
 
   return (
     <Container>
