@@ -1,5 +1,5 @@
 export interface UserMock {
-  id?: number;
+  id?: string;
   firstName?: string;
   lastName?: string;
   firstNameReading?: string;
