@@ -3,7 +3,6 @@ import styled from "styled-components";
 import headerImage from "/src/assets/bg.jpg";
 import logoImage from "/src/assets/48.png";
 import logoImage2 from "/src/assets/logo1.png";
-import { LoginButton } from "../routes/google/callback/-components/LoginButton";
 
 type NavLinksType = {
   link: string;
@@ -22,10 +21,10 @@ function CommonLayout() {
       <BackgroundDiv>
         <Header>
           <HeaderContent>
-            <Logo1 to="/">
+            <Logo1 to='/'>
               <img
                 src={logoImage}
-                alt="ロゴ画像"
+                alt='ロゴ画像'
                 height={"120px"}
                 width={"120px"}
               />
@@ -37,17 +36,14 @@ function CommonLayout() {
                 </NavLinkItem>
               ))}
             </Nav>
-            <LoginButtonWrapper>
-              <LoginButton />
-            </LoginButtonWrapper>
           </HeaderContent>
         </Header>
         <MainContent>
           <Outlet />
         </MainContent>
         <Footer>
-          <Logo2 to="/">
-            <img src={logoImage2} alt="ロゴ画像" width={"160px"} />
+          <Logo2 to='/'>
+            <img src={logoImage2} alt='ロゴ画像' width={"160px"} />
           </Logo2>
           <FooterNav>
             {NavLinksData.map((navLink) => (
@@ -131,10 +127,6 @@ const NavLink = styled(Link)`
   &:hover {
     color: #ffca28;
   }
-`;
-
-const LoginButtonWrapper = styled.div`
-  margin-left: auto;
 `;
 
 const Footer = styled.footer`

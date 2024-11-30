@@ -8,12 +8,12 @@
       "orderDetail": [
         {
           "seatName": "A1",
-          "priceType": "Adult",
+          "priceType": 0,
           "price": 1500
         },
         {
           "seatName": "A2",
-          "priceType": "Child",
+          "priceType": 0,
           "price": 1000
         }
       ]

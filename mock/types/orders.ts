@@ -1,13 +1,14 @@
-import { V1OrdersDetail } from "../../api/@types";
 export interface OrdersDetail {
   seatName?: string;
-  priceType?: string;
+  priceType?: number;
   price?: number;
 }
 export interface OrdersMock {
   id?: number;
-  userId?: string;
+  userId?: number;
   movieName?: string;
   screen?: string;
-  orderDetail?: V1OrdersDetail[];
+  orderDetail?: OrdersDetail[];
 }
+
+export type CreateOrder = Partial<OrdersMock>;

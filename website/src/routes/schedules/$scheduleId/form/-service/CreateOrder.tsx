@@ -1,33 +1,51 @@
 import { FieldValues } from "react-hook-form";
 import { useSeatSelection } from "../-hooks/useSeatSelection";
-import { V1SeatSelect } from "../../../../../../../api/@types";
-import { CreateOrderRequestBodyInterface } from "../../../../../../../fe-api/interfaces/order";
-import { createOrder } from "../../../../../../../fe-api/repositories/order";
 import { useOrderId } from "../../../../../hooks/useOrderId";
+import type { CreateOrder } from ".../../../mock/types/orders";
+import { apiPost } from "../../../../../../../util/apiClient";
 
-export async function CreateOrderService(
-  scheduleId: string,
-  data: FieldValues
-) {
+type OrderDetail = {
+  seatName: string;
+  priceType: number;
+  price: number;
+};
+
+export type CreateOrderRequest = {
+  id: number;
+  userId: number;
+  movieName: string;
+  screen: string;
+  orderDetail: OrderDetail[];
+};
+
+export const PostOrder = async (req: CreateOrder) => {
+  const res = apiPost("/api/orders", req);
+  return res;
+};
+export async function CreateOrderService(data: FieldValues) {
   const { selectedSeats } = useSeatSelection();
   const { setOrderId } = useOrderId();
 
-  const seatSelects = selectedSeats.map((seat) => {
+  const seatSelects: OrderDetail[] = selectedSeats.map((seat) => {
     const priceType = Array.isArray(data)
       ? (data[selectedSeats.indexOf(seat)] as number[])
       : (data as unknown as number);
+    const price = priceType === 0 ? 1800 : priceType === 1 ? 1500 : 1200;
     return {
       seatName: `${seat.row}${seat.number}`,
       priceType: priceType as number,
+      price: price,
     };
   });
 
-  const req: CreateOrderRequestBodyInterface = {
-    scheduleId: scheduleId,
-    seatSelects: seatSelects as V1SeatSelect[],
+  const req: CreateOrderRequest = {
+    id: 1,
+    userId: 1,
+    movieName: "Example Movie",
+    screen: "Screen 1",
+    orderDetail: seatSelects,
   };
-
-  const res = await createOrder(req);
+  const res = await PostOrder(req);
   console.log(res);
-  if (res) setOrderId(res.orderId!);
+  if (res) setOrderId(res.id!);
 }

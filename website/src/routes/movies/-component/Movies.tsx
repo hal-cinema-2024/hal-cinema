@@ -13,7 +13,7 @@ export const Movies = (props: MoviePropsInterface) => {
       <Section>
         {movies &&
           movies.map((item: MoviesMock) => (
-            <MoviesContainer key={item.movieId}>
+            <MoviesContainer key={item.id}>
               <SSdev>
                 <MovieImage>
                   <img src={item.thumbnail} alt='Movie Poster' />

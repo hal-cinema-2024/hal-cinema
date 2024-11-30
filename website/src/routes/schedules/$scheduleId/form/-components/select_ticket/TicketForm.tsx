@@ -4,23 +4,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useSeatSelection } from "../../-hooks/useSeatSelection";
 import { SelectField } from "../../../../../../components/SelectField";
 import { option } from "./TicketOption";
-
-import { CreateOrderService } from "../../-service/CreateOrder";
 import { z, ZodString } from "zod";
+import { CreateOrderService } from "../../-service/CreateOrder";
 
 type TicketFormProps = {
   scheduleId: string;
 };
 
 export function TicketFormProvider(props: TicketFormProps) {
+  const { selectedSeats } = useSeatSelection();
   const { scheduleId } = props;
-  const { selectedSeats } = useSeatSelection(); // 移動されたselectedSeatsの宣言
   const methods = useForm({
     resolver: zodResolver(
       z.object(
         selectedSeats.reduce(
           (acc, seat) => {
-            //
             acc[`${seat.row + seat.number}`] = z
               .string()
               .transform((val) => Number(val));
@@ -37,7 +35,7 @@ export function TicketFormProvider(props: TicketFormProps) {
     <FormProvider {...methods}>
       <form
         onSubmit={handleSubmit((data) => {
-          CreateOrderService(scheduleId, data);
+          CreateOrderService(data);
         })}
       >
         {selectedSeats &&
