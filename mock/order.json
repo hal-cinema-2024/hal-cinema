@@ -1,24 +1,6 @@
 {
   "orders": [
     {
-      "id": "1",
-      "userId": 1,
-      "movieName": "Example Movie",
-      "screen": "Screen 1",
-      "orderDetail": [
-        {
-          "seatName": "A1",
-          "priceType": 0,
-          "price": 1500
-        },
-        {
-          "seatName": "A2",
-          "priceType": 0,
-          "price": 1000
-        }
-      ]
-    },
-    {
       "id": 1,
       "userId": 1,
       "movieName": "movieName",

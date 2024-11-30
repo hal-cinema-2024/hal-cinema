@@ -2,19 +2,16 @@ import { createLazyFileRoute } from "@tanstack/react-router";
 import { OrderCard } from "./-components/OrderCard";
 import { ProfileCard } from "./-components/ProfileCard";
 import styled from "styled-components";
-import { useOrders } from "../../hooks/services/useOrders";
-import { useUserId } from "../../hooks/useUserId";
 import { Suspense } from "react";
-import { useUser } from "../../hooks/services/useUser";
-
+import { useOrderByUser } from "../../../../mock/hooks/useOrderByUser";
+import { useUser } from "../../../../mock/hooks/useUser";
 export const Route = createLazyFileRoute("/profile/")({
   component: Index,
 });
 
 function Index() {
-  const { userId } = useUserId();
-  const { user } = useUser(userId!);
-  const { orders } = useOrders(userId!);
+  const { user } = useUser(1);
+  const { orders } = useOrderByUser(1);
 
   console.log("user", user);
 

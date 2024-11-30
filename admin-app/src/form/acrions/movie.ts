@@ -1,7 +1,7 @@
 import { CreateMovie, UpdateMovie } from "../../../../mock/types/movies";
 import { apiDelete, apiGet, apiPost, apiPut } from "../../../../util/apiClient";
 
-export const url = "http://localhost:8080/movies";
+export const url = "http://localhost:8011/movies";
 
 export const createMovie = async (data: CreateMovie) => {
   try {
