@@ -1,19 +1,6 @@
 {
   "orders": [
     {
-      "id": 1,
-      "userId": 1,
-      "movieName": "movieName",
-      "screen": "screen",
-      "orderDetail": [
-        {
-          "seatName": "F5",
-          "priceType": 1800,
-          "price": 1200
-        }
-      ]
-    },
-    {
       "id": "cfc5",
       "userId": 1,
       "orderDetail": [
