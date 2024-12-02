@@ -1,18 +1,16 @@
 import { Table } from "@yamada-ui/table";
-import { useMovies } from "../../../mock/hooks/useMovies";
+import { useUser } from "../../../mock/hooks/useUsers";
 import { Button, Center } from "@yamada-ui/react";
 import { useNavigate } from "react-router";
-import { deleteMovie } from "../form/acrions/movie";
-
 export const UserTable = () => {
-  const { movies } = useMovies();
+  const { user } = useUser();
 
   const router = useNavigate();
   const columns = [
     { header: "User ID", accessorKey: "id" },
-    { header: "Last Name", accessorKey: "movieName" },
-    { header: "First Name", accessorKey: "director" },
-    { header: "Gender", accessorKey: "link" },
+    { header: "Last Name", accessorKey: "lastName" },
+    { header: "First Name", accessorKey: "firstName" },
+    { header: "Gender", accessorKey: "gender" },
     {
       header: "Edit",
       accessorKey: "edit",
@@ -26,7 +24,7 @@ export const UserTable = () => {
             backgroundColor: "#a9ffcd",
           }}
           onClick={() => {
-            router(`/movies/${info.row.original.id}`);
+            router(`/users/${info.row.original.id}`);
           }}
         >
           詳細/編集
@@ -66,7 +64,7 @@ export const UserTable = () => {
           boxSizing: "border-box",
         }}
       >
-        <Table columns={columns} data={movies} />
+        <Table columns={columns} data={user} />
       </Center>
     </>
   );
