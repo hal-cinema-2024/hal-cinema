@@ -18,7 +18,7 @@ export const Layout = () => {
                 <Link to='/schedules'>上映スケジュール</Link>
               </li>
               <li>
-                <Link to='/useres' state={{ user }}>
+                <Link to='/users' state={{ user }}>
                   利用者情報
                 </Link>
               </li>
