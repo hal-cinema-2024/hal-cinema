@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { OrdersMock } from "../types/orders";
 import { apiGet } from "../../util/apiClient";
 
-export const useOrderByUser = (userId: number) => {
+export const useOrderByUser = (userId: string) => {
   const [orders, setOrders] = useState<OrdersMock[]>([]);
 
-  const fetchData = async (userId?: number) => {
+  const fetchData = async (userId?: string) => {
     try {
       const url = "http://localhost:8012/orders";
       const customUrl = url + `?userId=${userId}`;

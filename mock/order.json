@@ -2,7 +2,7 @@
   "orders": [
     {
       "id": "cfc5",
-      "userId": 1,
+      "userId": "1",
       "orderDetail": [
         {
           "seatName": "E2",
@@ -13,7 +13,7 @@
     },
     {
       "id": "dd39",
-      "userId": 1,
+      "userId": "1",
       "orderDetail": [
         {
           "seatName": "E2",
@@ -24,7 +24,7 @@
     },
     {
       "id": "0745",
-      "userId": 1,
+      "userId": "1",
       "movieName": "マルセル 靴をはいた小さな貝",
       "screen": "sdv",
       "orderDetail": [
@@ -47,7 +47,7 @@
     },
     {
       "id": "d1a1",
-      "userId": 1,
+      "userId": "1",
       "movieName": "マルセル 靴をはいた小さな貝",
       "screen": "シアター1",
       "orderDetail": [
@@ -70,7 +70,7 @@
     },
     {
       "id": "896f",
-      "userId": 1,
+      "userId": "1",
       "movieName": "マルセル 靴をはいた小さな貝",
       "screen": "シアター1",
       "orderDetail": [
@@ -83,7 +83,7 @@
     },
     {
       "id": "c47b",
-      "userId": 1,
+      "userId": "1",
       "movieName": "マルセル 靴をはいた小さな貝",
       "screen": "シアター1",
       "orderDetail": [
@@ -96,7 +96,7 @@
     },
     {
       "id": "ce3c",
-      "userId": 1,
+      "userId": "1",
       "movieName": "マルセル 靴をはいた小さな貝",
       "screen": "シアター1",
       "orderDetail": [
@@ -109,7 +109,7 @@
     },
     {
       "id": "a4c2",
-      "userId": 1,
+      "userId": "1",
       "movieName": "マルセル 靴をはいた小さな貝",
       "screen": "シアター1",
       "orderDetail": [
@@ -122,7 +122,7 @@
     },
     {
       "id": "4bf6",
-      "userId": 1,
+      "userId": "1",
       "movieName": "マルセル 靴をはいた小さな貝",
       "screen": "シアター1",
       "orderDetail": [
@@ -135,7 +135,7 @@
     },
     {
       "id": "6090",
-      "userId": 1,
+      "userId": "1",
       "movieName": "マルセル 靴をはいた小さな貝",
       "screen": "シアター1",
       "orderDetail": [
