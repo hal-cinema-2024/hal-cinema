@@ -132,6 +132,24 @@
           "price": 1200
         }
       ]
+    },
+    {
+      "id": "6090",
+      "userId": 1,
+      "movieName": "マルセル 靴をはいた小さな貝",
+      "screen": "シアター1",
+      "orderDetail": [
+        {
+          "seatName": "E2",
+          "priceType": 1800,
+          "price": 1200
+        },
+        {
+          "seatName": "D4",
+          "priceType": 1800,
+          "price": 1200
+        }
+      ]
     }
   ]
 }
