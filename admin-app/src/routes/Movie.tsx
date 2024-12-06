@@ -17,7 +17,9 @@ export const Movie = () => {
         <h2>Movie Name: {movie.movieName}</h2>
         <h2>Director: {movie.director}</h2>
         <h2>Link: {movie.link}</h2>
-        <h2>Term: {movie.term}</h2>
+        <h2>開始日 : {movie.releaseDate}</h2>
+        <h2>終了日 : {movie.endDate}</h2>
+        <h2>Term : {movie.term}</h2>
       </div>
     </div>
   );
