@@ -1,10 +1,10 @@
-import { AddMovieModal } from "../components/AddMovieModal";
+import { AddUserModal } from "../components/AddUserModal";
 import { UserTable } from "../data-table/UserTable"
 
 export const Users = () => {
   return (
     <>
-      <AddMovieModal />
+      <AddUserModal />
       <UserTable />
     </>
   )

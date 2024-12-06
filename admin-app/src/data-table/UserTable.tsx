@@ -2,6 +2,8 @@ import { Table } from "@yamada-ui/table";
 import { useUser } from "../../../mock/hooks/useUsers";
 import { Button, Center } from "@yamada-ui/react";
 import { useNavigate } from "react-router";
+import { deleteUser } from "../form/acrions/user";
+
 export const UserTable = () => {
   const { user } = useUser();
 
@@ -43,7 +45,7 @@ export const UserTable = () => {
             backgroundColor: "#ffa9a9",
           }}
           onClick={() => {
-            deleteMovie(info.row.original.id);
+            deleteUser(info.row.original.id);
             window.location.reload();
           }}
         >
