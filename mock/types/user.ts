@@ -6,3 +6,4 @@ export interface UserMock {
   lastNameReading?: string;
   gender?: number;
 }
+export type CreateUser =Partial<UserMock>
