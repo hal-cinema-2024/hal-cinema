@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { UserMock } from "../types/user";
 
-export const useUser = (userId: number) => {
-  const [user, setUser] = useState<UserMock[]>([]);
+export const useUser = (userId: string) => {
+  const [user, setUser] = useState<UserMock>();
 
-  const fetchData = async (userId?: number) => {
+  const fetchData = async (userId?: string) => {
     try {
-      const url = "http://localhost:8014/users";
-      const res = await fetch(url + `?userId=${userId}`);
+      const url = `http://localhost:8014/users/${userId}`;
+      const res = await fetch(url);
       const data = await res.json();
       setUser(data);
     } catch (error) {

@@ -1,43 +1,44 @@
 import styled from "styled-components";
 import { Card } from "@yamada-ui/react";
-import { SimpleGrid, GridItem, Text, Button } from "@yamada-ui/react";
-import {
-  GetOrdersResponseInterface,
-  OrdersInterface,
-} from "../../../../../fe-api/interfaces/order";
+import { SimpleGrid, GridItem, Text } from "@yamada-ui/react";
+import { OrdersDetail, OrdersMock } from "../../../../../mock/types/orders";
 
 type OrderCardProps = {
-  orders: GetOrdersResponseInterface;
+  orders: OrdersMock[];
 };
 
 export const OrderCard = (props: OrderCardProps) => {
   const { orders } = props;
-  const data = orders as OrdersInterface[];
+  console.log("orders", orders);
   return (
     <>
       <Container columns={2}>
         <DText>予約確認</DText>
 
-        {data &&
-          data.map((data: OrdersInterface, index: number) => (
+        {orders &&
+          orders.map((data: OrdersMock, index: number) => (
             <SGridItem key={index}>
               <SCard>
                 <div>
                   <TextContainer>
                     映画
-                    <Text></Text>
-                  </TextContainer>
-                  <TextContainer>
-                    <Text>日付</Text>
-                  </TextContainer>
-                  <TextContainer>
-                    <Text>上映スクリーン：</Text>
+                    <Text>{data.movieName}</Text>
+                    <br />
                     <Text>
-                      スクリーン{""}
+                      スクリーン
                       {data.screen}
                     </Text>
                     <br />
-                    <SButton></SButton>
+                    {data.orderDetail &&
+                      data.orderDetail.map(
+                        (data: OrdersDetail, index: number) => (
+                          <div key={index}>
+                            <Text>
+                              {data.seatName} {data.priceType}
+                            </Text>
+                          </div>
+                        )
+                      )}
                   </TextContainer>
                 </div>
               </SCard>
@@ -87,13 +88,6 @@ const Container = styled(SimpleGrid)`
   padding: 10px;
   gap: 20px;
   padding-top: 110px;
-`;
-
-const SButton = styled(Button)`
-  // position: absolute;
-  // bottom: 20px;
-  // right: 30px;
-  background-color: #333631;
 `;
 
 const DText = styled(Text)`

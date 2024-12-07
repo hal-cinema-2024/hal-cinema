@@ -1,8 +1,8 @@
 {
   "schedules": [
     {
-      "id": 1,
-      "movieId": 1,
+      "id": "1",
+      "movieId": "1",
       "movieName": "映画A",
       "theater": "シアター1",
       "startTime": "2023-10-01T10:00:00",
@@ -10,8 +10,8 @@
       "isAvailable": true
     },
     {
-      "id": 2,
-      "movieId": 1,
+      "id": "2",
+      "movieId": "2",
       "movieName": "映画B",
       "theater": "シアター2",
       "startTime": "2023-10-01T14:00:00",

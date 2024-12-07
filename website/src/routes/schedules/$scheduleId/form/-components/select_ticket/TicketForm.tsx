@@ -4,23 +4,25 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useSeatSelection } from "../../-hooks/useSeatSelection";
 import { SelectField } from "../../../../../../components/SelectField";
 import { option } from "./TicketOption";
-
-import { CreateOrderService } from "../../-service/CreateOrder";
 import { z, ZodString } from "zod";
-
+import { PostOrder } from "../../../../../../../../mock/hooks/postOrder";
+import { useMovieById } from "../../../../../../../../mock/hooks/useMovieById";
+import { useScheduleById } from "../../../../../../../../mock/hooks/useScheduleById";
+import { CreateSeatSelects } from "../../-service/CreateSeatSelects";
 type TicketFormProps = {
-  scheduleId: string;
+  scheduleId: number;
 };
 
 export function TicketFormProvider(props: TicketFormProps) {
-  const { scheduleId } = props;
-  const { selectedSeats } = useSeatSelection(); // 移動されたselectedSeatsの宣言
+  const { selectedSeats } = useSeatSelection();
+  const { schedule } = useScheduleById(props.scheduleId);
+  const { movie } = useMovieById(schedule?.movieId);
+
   const methods = useForm({
     resolver: zodResolver(
       z.object(
         selectedSeats.reduce(
           (acc, seat) => {
-            //
             acc[`${seat.row + seat.number}`] = z
               .string()
               .transform((val) => Number(val));
@@ -32,12 +34,17 @@ export function TicketFormProvider(props: TicketFormProps) {
     ),
   });
   const { handleSubmit } = methods;
-  if (!scheduleId) return null;
   return (
     <FormProvider {...methods}>
       <form
         onSubmit={handleSubmit((data) => {
-          CreateOrderService(scheduleId, data);
+          const seat = CreateSeatSelects(data, selectedSeats);
+          PostOrder({
+            userId: 1,
+            movieName: movie?.movieName,
+            screen: schedule?.theater,
+            orderDetail: seat,
+          });
         })}
       >
         {selectedSeats &&

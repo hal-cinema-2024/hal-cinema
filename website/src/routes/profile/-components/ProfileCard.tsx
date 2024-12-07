@@ -1,21 +1,30 @@
 import styled from "styled-components";
 import { Text, Button } from "@yamada-ui/react";
-import {
-  GetUserResponseInterface,
-  UserInterface,
-} from "../../../../../fe-api/interfaces/user";
+import { UserMock } from "../../../../../mock/types/user";
 
 type ProfileCardProps = {
-  user: GetUserResponseInterface;
+  user: UserMock;
 };
 export const ProfileCard = (props: ProfileCardProps) => {
   const { user } = props;
-  const data = user as UserInterface;
-  console.log(data);
   return (
     <ProfileContainer>
-      {data && data?.firstName}
-      {data && data?.lastName}
+      <p
+        style={{
+          fontSize: "2rem",
+          color: "#fff",
+        }}
+      >
+        {user && user?.firstName}
+      </p>
+      <p
+        style={{
+          fontSize: "1.2rem",
+          color: "#fff",
+        }}
+      >
+        {user && user?.lastName}
+      </p>
       <EditButton>
         <SText>編集</SText>
       </EditButton>
@@ -26,7 +35,7 @@ export const ProfileCard = (props: ProfileCardProps) => {
 const ProfileContainer = styled.div`
   width: 100%;
   height: 30vh;
-  background-color: #f0f0f0;
+  background-color: #333;
   padding: 40px 0;
   display: flex;
   justify-content: center;

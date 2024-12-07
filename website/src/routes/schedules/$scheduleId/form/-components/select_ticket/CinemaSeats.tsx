@@ -1,8 +1,8 @@
 import { useSeatSelection } from "../../-hooks/useSeatSelection";
 import React from "react"; // React.CSSPropertiesを使用するためにインポート
 
-const ROWS = "ABCDEF".split(""); // 行を増やしました
-const SEATS_PER_ROW = 7; // 各行の座席数を調整しました
+const ROWS = "ABCDEF".split("");
+const SEATS_PER_ROW = 7;
 
 const CinemaSeats = () => {
   const { selectedSeats, toggleSeatSelection } = useSeatSelection();
@@ -92,7 +92,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     margin: "5px",
     borderRadius: "5px",
     border: "none",
-    textAlign: "center" as "center", // 型エラーを避けるためにasでキャスト
+    textAlign: "center",
     lineHeight: "40px",
     fontSize: "14px",
   },

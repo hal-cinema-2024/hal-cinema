@@ -1,31 +1,25 @@
 import { Select } from "@yamada-ui/react";
-import { useMovies } from "../../movies/-hooks/useMovies";
-import {
-  GetMoviesResponseInterface,
-  MovieInterface,
-} from "../../../../../fe-api/interfaces/movie";
+import { useMovies } from "../../../../../mock/hooks/useMovies";
+
 import { useSelectMovie } from "../-hooks/useSelectMovie";
+import { MoviesMock } from "../../../../../mock/types/movies";
 
 type Option = {
   label: string;
-  value: string;
+  value: number;
 };
 
 export const SelectMovie = () => {
-  const { movies } = useMovies("1", "20");
+  const { movies } = useMovies();
   const { setSelectedMovie } = useSelectMovie();
 
-  function transformMovies(movies: GetMoviesResponseInterface): Option[] {
-    const option = movies as MovieInterface[];
-    return (
-      option &&
-      option
-        .filter((movie) => movie.movieName && movie.movieId)
-        .map((movie) => ({
-          label: movie.movieName as string,
-          value: movie.movieId as string,
-        }))
-    );
+  function transformMovies(movies: MoviesMock[]): Option[] {
+    return movies
+      .filter((movie) => movie.movieName && movie.id)
+      .map((movie) => ({
+        label: movie.movieName as string,
+        value: movie.id as number,
+      }));
   }
 
   const data = transformMovies(movies!);

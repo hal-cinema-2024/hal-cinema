@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { Pagenation } from "./-component/Pagenation";
-import { useMovies } from "./-hooks/useMovies";
+import { useMovies } from "../../../../mock/hooks/useMovies";
 import { Movies } from "./-component/Movies";
 import { Suspense } from "react";
 
@@ -10,7 +10,7 @@ export const Route = createLazyFileRoute("/movies/")({
 });
 
 function Index() {
-  const { movies } = useMovies("1", "10");
+  const { movies } = useMovies();
   return (
     <>
       <Moviesboxdiv>
