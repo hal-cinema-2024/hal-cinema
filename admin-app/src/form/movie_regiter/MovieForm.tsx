@@ -22,12 +22,10 @@ export function MovieForm() {
         <InputField fieldName='movieName' />
         <InputField fieldName='director' />
         <InputField fieldName='summary' />
-        <ImageField fieldName='thumbnail' />
         <InputField fieldName='link' />
         <InputField fieldName='term' type='number' />
         <InputField fieldName='releaseDate' />
         <InputField fieldName='endDate' />
-        <ImageField fieldName='movieImage' />
         <Button type='submit'>Submit</Button>
       </form>
     </FormProvider>
