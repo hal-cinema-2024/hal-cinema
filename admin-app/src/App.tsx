@@ -16,7 +16,6 @@ const App: React.FC = () => {
         <Route path='/movies/:id' element={<Movie />} />
         <Route path='/schedules' element={<Schedules />} />
         <Route path='/schedules/:id' element={<Schedules />} />
-
         <Route path='/users' element={<Users />} />
         <Route path='/users/:id' element={<Users />} />
       </Route>
