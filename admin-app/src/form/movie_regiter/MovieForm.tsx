@@ -3,7 +3,6 @@ import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InputField } from "../InputField";
 import { movieSchema } from "./movieSchema";
-import { ImageField } from "../ImageField";
 import { createMovie } from "../acrions/movie";
 export function MovieForm() {
   const methods = useForm({
