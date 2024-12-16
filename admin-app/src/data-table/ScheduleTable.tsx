@@ -9,7 +9,7 @@ import { useNavigate } from "react-router";
 export const ScheduleTable = () => {
   const { movies } = useMovies();
   const [selectedMovieId, setSelectedMovieId] = useState<number>(1);
-  const { schedules } = useSchedules(selectedMovieId);
+  const { schedules } = useSchedules();
   const router = useNavigate();
   const column = [
     {

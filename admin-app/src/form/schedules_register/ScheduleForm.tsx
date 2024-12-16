@@ -19,8 +19,7 @@ export function ScheduleForm() {
           window.location.reload();
         })}
       >
-        <InputField fieldName='movieId'  />
-        <InputField fieldName='movieName' />
+        <InputField fieldName='movieId' />
         <InputField fieldName='theater' />
         <InputField fieldName='startTime' />
         <InputField fieldName='endTime' />
