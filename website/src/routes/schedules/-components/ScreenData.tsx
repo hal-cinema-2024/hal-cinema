@@ -27,27 +27,29 @@ export const ScreenData = (props: ScreenDataProps) => {
   return (
     <>
       <MovieContainer>
-        {scheduleList.map((schedule: ScheduleMock, index) => (
-          <div key={index}>
-            <p
-              style={{
-                fontSize: "1.2rem",
-                fontWeight: "bold",
-                margin: "10px 0",
-                color: "#fff",
-              }}
-            >
-              {schedule.theater} {schedule.movieName}
-            </p>
-            <ScreenTime
-              key={index}
-              startTime={schedule.startTime || ""}
-              endTime={schedule.endTime || ""}
-              isAvailable={schedule.isAvailable || false}
-              scheduleId={schedule.id ? schedule.id.toString() : ""}
-            />
-          </div>
-        ))}
+        {scheduleList
+          .filter((schedule) => schedule.isAvailable === "true")
+          .map((schedule: ScheduleMock, index) => (
+            <div key={index}>
+              <p
+                style={{
+                  fontSize: "1.2rem",
+                  fontWeight: "bold",
+                  margin: "10px 0",
+                  color: "#fff",
+                }}
+              >
+                {schedule.theater} {schedule.movieName}
+              </p>
+              <ScreenTime
+                key={index}
+                startTime={schedule.startTime || ""}
+                endTime={schedule.endTime || ""}
+                isAvailable={schedule.isAvailable === "true"}
+                scheduleId={schedule.id ? schedule.id.toString() : ""}
+              />
+            </div>
+          ))}
       </MovieContainer>
       <TimeContainer />
     </>

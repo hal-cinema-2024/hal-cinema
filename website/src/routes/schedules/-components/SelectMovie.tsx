@@ -6,7 +6,7 @@ import { MoviesMock } from "../../../../../mock/types/movies";
 
 type Option = {
   label: string;
-  value: number;
+  value: string;
 };
 
 export const SelectMovie = () => {
@@ -18,7 +18,7 @@ export const SelectMovie = () => {
       .filter((movie) => movie.movieName && movie.id)
       .map((movie) => ({
         label: movie.movieName as string,
-        value: movie.id as number,
+        value: movie.id as string,
       }));
   }
 

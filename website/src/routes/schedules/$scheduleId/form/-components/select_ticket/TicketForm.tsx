@@ -10,13 +10,13 @@ import { useMovieById } from "../../../../../../../../mock/hooks/useMovieById";
 import { useScheduleById } from "../../../../../../../../mock/hooks/useScheduleById";
 import { CreateSeatSelects } from "../../-service/CreateSeatSelects";
 type TicketFormProps = {
-  scheduleId: number;
+  scheduleId: string;
 };
 
 export function TicketFormProvider(props: TicketFormProps) {
   const { selectedSeats } = useSeatSelection();
   const { schedule } = useScheduleById(props.scheduleId);
-  const { movie } = useMovieById(schedule?.movieId);
+  const { movie } = useMovieById(schedule?.movieId || "");
 
   const methods = useForm({
     resolver: zodResolver(
@@ -40,7 +40,7 @@ export function TicketFormProvider(props: TicketFormProps) {
         onSubmit={handleSubmit((data) => {
           const seat = CreateSeatSelects(data, selectedSeats);
           PostOrder({
-            userId: 1,
+            userId: "1",
             movieName: movie?.movieName,
             screen: schedule?.theater,
             orderDetail: seat,
