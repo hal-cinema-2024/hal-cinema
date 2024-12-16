@@ -19,7 +19,7 @@ export const ProfileCard = (props: ProfileCardProps) => {
       </p>
       <p
         style={{
-          fontSize: "1.2rem",
+          fontSize: "2rem",
           color: "#fff",
         }}
       >
