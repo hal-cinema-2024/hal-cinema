@@ -28,7 +28,7 @@ export const ScreenData = (props: ScreenDataProps) => {
     <>
       <MovieContainer>
         {scheduleList
-          .filter((schedule) => schedule.isAvailable === true)
+          .filter((schedule) => schedule.isAvailable === "true")
           .map((schedule: ScheduleMock, index) => (
             <div key={index}>
               <p

@@ -5,7 +5,7 @@ export type ScheduleMock = {
   theater?: string;
   startTime?: string;
   endTime?: string;
-  isAvailable?: boolean;
+  isAvailable?: string;
 };
 
 export type CreateSchedule = Partial<ScheduleMock>;
