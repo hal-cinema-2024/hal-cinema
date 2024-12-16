@@ -45,7 +45,7 @@ export const ScreenData = (props: ScreenDataProps) => {
                 key={index}
                 startTime={schedule.startTime || ""}
                 endTime={schedule.endTime || ""}
-                isAvailable={schedule.isAvailable || false}
+                isAvailable={schedule.isAvailable === "true"}
                 scheduleId={schedule.id ? schedule.id.toString() : ""}
               />
             </div>
