@@ -6,7 +6,7 @@ import { useMovieById } from "../../../../mock/hooks/useMovieById";
 import { useSeatSelection } from "./store/useSeatSelection";
 import { SelectField } from "../../components/form/SelectField";
 import { useScheduleById } from "../../../../mock/hooks/useScheduleById";
-// import { PostOrder } from "../order/api";
+import { createOrder } from "../order/api";
 import { CreateSeatSelects } from "./CreateSeatSelects";
 type TicketFormProps = {
   scheduleId: string;
@@ -56,13 +56,13 @@ export function OrderFormProvider(props: TicketFormProps) {
     <FormProvider {...methods}>
       <form
         onSubmit={handleSubmit((data) => {
-          // const seat = CreateSeatSelects(data, selectedSeats);
-          // PostOrder({
-          //   userId: "1",
-          //   movieName: movie?.movieName,
-          //   screen: schedule?.theater,
-          //   orderDetail: seat,
-          // });
+          const seat = CreateSeatSelects(data, selectedSeats);
+          createOrder({
+            userId: "1",
+            movieName: movie?.movieName,
+            screen: schedule?.theater,
+            orderDetail: seat,
+          });
         })}
       >
         {selectedSeats &&

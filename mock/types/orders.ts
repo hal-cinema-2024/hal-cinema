@@ -12,3 +12,4 @@ export interface OrdersMock {
 }
 
 export type CreateOrder = Partial<OrdersMock>;
+export type UpdateOrder = Partial<OrdersMock>;
