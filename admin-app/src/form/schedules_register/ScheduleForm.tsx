@@ -19,11 +19,11 @@ export function ScheduleForm() {
           window.location.reload();
         })}
       >
-        <InputField fieldName='movieId' />
-        <InputField fieldName='theater' />
-        <InputField fieldName='startTime' />
-        <InputField fieldName='endTime' />
-        <InputField fieldName='isAvailable' />
+        <InputField name='movieId' />
+        <InputField name='theater' />
+        <InputField name='startTime' />
+        <InputField name='endTime' />
+        <InputField name='isAvailable' />
 
         <Button type='submit'>Submit</Button>
       </form>

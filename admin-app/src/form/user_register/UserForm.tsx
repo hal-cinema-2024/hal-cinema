@@ -20,19 +20,20 @@ export function UserForm() {
           window.location.reload();
         })}
       >
-        <InputField fieldName='firstName' />
-        <InputField fieldName='lastName' />
-        <InputField fieldName='firstNameReading' />
-        <InputField fieldName='lastNameReading' />
-        {/* <InputField fieldName='gender' type='number' /> */}
+        <InputField name='firstName' />
+        <InputField name='lastName' />
+        <InputField name='firstNameReading' />
+        <InputField name='lastNameReading' />
+        {/* <InputField name='gender' type='number' /> */}
         <SelectField
-          fieldName="gender"
-          label="gender"
+          select={{
+            name: "gender",
+          }}
           option={[
             { value: "1", label: "男性" },
             { value: "2", label: "女性" },
             { value: "3", label: "その他" },
-        ]}
+          ]}
         />
         <Button type='submit'>Submit</Button>
       </form>

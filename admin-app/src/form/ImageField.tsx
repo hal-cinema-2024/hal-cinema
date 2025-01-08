@@ -1,25 +1,21 @@
 import { Input } from "@yamada-ui/react";
 import { useFormContext } from "react-hook-form";
 
-type InputFieldProps = {
-  fieldName: string;
-};
-
-export const ImageField = (props: InputFieldProps) => {
-  const { fieldName } = props;
+export const ImageField = (props: React.ComponentProps<"input">) => {
+  const { name } = props;
   const { register, formState } = useFormContext();
 
   return (
     <>
-      <label htmlFor={fieldName}>{fieldName}</label>
+      <label htmlFor={name}>{name}</label>
       <Input
         type='file'
         accept='.png, .jpg'
         multiple
-        {...register(fieldName)}
+        {...register(name as string)}
       />
-      {formState.errors[fieldName] && (
-        <span>{formState.errors[fieldName]!.message as string}</span>
+      {formState.errors[name as string] && (
+        <span>{formState.errors[name as string]!.message as string}</span>
       )}
     </>
   );
