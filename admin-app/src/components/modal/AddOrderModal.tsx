@@ -6,7 +6,7 @@ import {
   ModalBody,
   ModalFooter,
 } from "@yamada-ui/react";
-import { SeatForm } from "../../feature/order/register/seatForm/SeatForm";
+import { SeatForm } from "../../feature/order/register/SeatForm/SeatForm";
 
 export const AddOrderModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

@@ -1,12 +1,10 @@
 import styled from "styled-components";
 import BuyContent from "./BuyContent";
 import PaymentInfo from "./PaymentInfo";
-import { useOrder } from "../../../../../../hooks/services/useOrder";
-import { useOrderId } from "../../../../../../hooks/useOrderId";
+import { useOrderByUser } from "../../../../../../../../mock/hooks/useOrderByUser";
 
 export function Result() {
-  const { orderId } = useOrderId();
-  const { order } = useOrder(orderId);
+  const { orders } = useOrderByUser("1");
 
   return (
     <ReservedContainer>
@@ -16,7 +14,7 @@ export function Result() {
           以下の内容を確認の上、「決済する」ボタンを押して決済を完了してください。
         </p>
       </Title>
-      {order && <BuyContent order={order} />}
+      {orders && <BuyContent order={orders} />}
       <PaymentInfo />
     </ReservedContainer>
   );
