@@ -23,7 +23,7 @@ export const Layout = () => {
                 </Link>
               </li>
               <li>
-                <Link to='/reserved'>予約情報</Link>
+                <Link to='/orders'>予約情報</Link>
               </li>
             </ul>
           </nav>
