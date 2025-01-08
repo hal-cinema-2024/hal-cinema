@@ -1,11 +1,12 @@
 import React from "react"; // React.CSSPropertiesを使用するためにインポート
 import { useSeatSelection } from "../../store/useSeatSelection";
-
+import { useSeat } from "../../../../../../mock/hooks/useSeat";
 const ROWS = "ABCDEF".split("");
 const SEATS_PER_ROW = 7;
 
 const CinemaSeats = () => {
   const { selectedSeats, toggleSeatSelection } = useSeatSelection();
+  const { isReservedSeat } = useSeat();
 
   return (
     <div style={styles.container}>
@@ -19,25 +20,24 @@ const CinemaSeats = () => {
               const isSelected = selectedSeats.some(
                 (s) => s.row === seat.row && s.number === seat.number
               );
-              const isReserved = seat.row === "E" && seat.number === 3; // 例として特定の座席を予約済みに設定(E3)
               return (
                 <button
                   key={`${seat.row}-${seat.number}`}
                   style={{
                     ...styles.seat,
-                    backgroundColor: isReserved
+                    backgroundColor: isReservedSeat
                       ? "white"
                       : isSelected
                       ? "red"
                       : "blue",
-                    cursor: isReserved ? "not-allowed" : "pointer",
+                    cursor: isReservedSeat ? "not-allowed" : "pointer",
                   }}
                   onClick={() => {
-                    if (!isReserved) {
+                    if (!isReservedSeat) {
                       toggleSeatSelection(seat);
                     }
                   }}
-                  disabled={isReserved}
+                  disabled={isReservedSeat ? true : false}
                 >
                   {seat.row}
                   {seat.number}
