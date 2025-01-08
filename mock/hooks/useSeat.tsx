@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { OrdersDetail, OrdersMock } from "../types/orders";
 import { apiGet } from "../../util/apiClient";
 
-export const useSeat = (userId: string) => {
-  const [seat, setSeat] = useState<OrdersMock[]>([]);
+export const useSeat = () => {
+  const [isReservedSeat, setIsReservedSeat] = useState<string[]>([]);
 
-  const fetchData = async (userId?: string) => {
+  const fetchData = async () => {
     try {
       const url = "http://localhost:8012/orders";
       const res = await apiGet(url);
@@ -17,15 +17,15 @@ export const useSeat = (userId: string) => {
           return item.seatName;
         });
       });
-      setSeat(SeatData);
+      setIsReservedSeat(SeatData);
     } catch (error) {
       console.error("order service error: " + error);
     }
   };
 
   useEffect(() => {
-    fetchData(userId);
-  }, [userId]);
+    fetchData();
+  }, []);
 
-  return { seat, setSeat };
+  return { isReservedSeat, setIsReservedSeat };
 };
