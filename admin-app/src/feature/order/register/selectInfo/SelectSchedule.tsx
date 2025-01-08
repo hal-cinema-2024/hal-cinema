@@ -5,7 +5,7 @@ import { useSchedules } from "../../../../../../mock/hooks/useSchedule";
 
 export const SelectSchedule = () => {
   const { schedules } = useSchedules();
-  const [selectedScheduleId, setSelectedScheduleId] = useState<string>("");
+  const [selectedScheduleId, setSelectedScheduleId] = useState<number>(1);
   useEffect(() => {
     setSelectedScheduleId(selectedScheduleId);
   }, [selectedScheduleId]);
@@ -14,7 +14,7 @@ export const SelectSchedule = () => {
       <NativeSelect
         name='movieId'
         value={selectedScheduleId}
-        onChange={(e) => setSelectedScheduleId(e.target.value)}
+        onChange={(e) => setSelectedScheduleId(Number(e.target.value))}
       >
         {schedules.map((schedule: MoviesMock) => (
           <option key={schedule.id} value={schedule.id}>
