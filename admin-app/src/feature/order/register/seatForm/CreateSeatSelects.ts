@@ -1,5 +1,5 @@
 import { FieldValues } from "react-hook-form";
-import type { OrdersDetail } from "../../../../../mock/types/orders";
+import type { OrdersDetail } from "../../../../../../mock/types/orders";
 type SelectedSeat = {
   row: string;
   number: number;

@@ -6,7 +6,7 @@ import {
   ModalBody,
   ModalFooter,
 } from "@yamada-ui/react";
-import { OrderForm } from "../../feature/order/register/OrderForm";
+import { SeatForm } from "../../feature/order/register/seatForm/SeatForm";
 
 export const AddOrderModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -20,7 +20,7 @@ export const AddOrderModal = () => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalHeader>オーダー追加</ModalHeader>
         <ModalBody>
-          <OrderForm scheduleId={""} />
+          <SeatForm scheduleId={""} />
         </ModalBody>
         <ModalFooter>
           <Button variant='ghost' onClick={onClose}>

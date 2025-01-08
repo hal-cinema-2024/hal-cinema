@@ -1,5 +1,5 @@
 import React from "react"; // React.CSSPropertiesを使用するためにインポート
-import { useSeatSelection } from "../store/useSeatSelection";
+import { useSeatSelection } from "../../store/useSeatSelection";
 
 const ROWS = "ABCDEF".split("");
 const SEATS_PER_ROW = 7;

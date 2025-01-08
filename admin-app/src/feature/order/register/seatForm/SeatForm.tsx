@@ -2,11 +2,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@yamada-ui/react";
 import { FormProvider, useForm } from "react-hook-form";
 import { z, ZodString } from "zod";
-import { useMovieById } from "../../../../../mock/hooks/useMovieById";
-import { useSeatSelection } from "../store/useSeatSelection";
-import { SelectField } from "../../../components/form/SelectField";
-import { useScheduleById } from "../../../../../mock/hooks/useScheduleById";
-import { createOrder } from "../api";
+import { useMovieById } from "../../../../../../mock/hooks/useMovieById";
+import { useSeatSelection } from "../../store/useSeatSelection";
+import { SelectField } from "../../../../components/form/SelectField";
+import { useScheduleById } from "../../../../../../mock/hooks/useScheduleById";
+import { createOrder } from "../../api";
 import { CreateSeatSelects } from "./CreateSeatSelects";
 type TicketFormProps = {
   scheduleId: string;
@@ -34,7 +34,7 @@ const option = [
   },
 ];
 
-export function OrderForm(props: TicketFormProps) {
+export function SeatForm(props: TicketFormProps) {
   const { selectedSeats } = useSeatSelection();
   const { schedule } = useScheduleById(props.scheduleId);
   const { movie } = useMovieById(schedule?.movieId || "");

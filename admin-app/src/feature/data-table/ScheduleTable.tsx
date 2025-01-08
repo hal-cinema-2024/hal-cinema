@@ -1,14 +1,10 @@
 import { useNavigate } from "react-router";
-import { MoviesMock } from "../../../../mock/types/movies";
-import { Button, NativeSelect } from "@yamada-ui/react";
+import { Button } from "@yamada-ui/react";
 import { Table } from "@yamada-ui/table";
-import { useState, useEffect } from "react";
 import { deleteSchedule } from "../schedule/api";
-import { useMovies } from "../../../../mock/hooks/useMovies";
 import { useSchedules } from "../../../../mock/hooks/useSchedule";
+import { SelectMovie } from "../order/register/selectInfo/SelectMovie";
 export const ScheduleTable = () => {
-  const { movies } = useMovies();
-  const [selectedMovieId, setSelectedMovieId] = useState<number>(1);
   const { schedules } = useSchedules();
   const router = useNavigate();
   const column = [
@@ -79,23 +75,9 @@ export const ScheduleTable = () => {
     },
   ];
 
-  useEffect(() => {
-    setSelectedMovieId(selectedMovieId);
-  }, [selectedMovieId]);
   return (
     <>
-      <NativeSelect
-        name='movieId'
-        value={selectedMovieId}
-        onChange={(e) => setSelectedMovieId(Number(e.target.value))}
-      >
-        {movies.map((movie: MoviesMock) => (
-          <option key={movie.id} value={movie.id}>
-            {movie.movieName}
-          </option>
-        ))}
-      </NativeSelect>
-
+      <SelectMovie />
       <Table data={schedules} columns={column} />
     </>
   );
