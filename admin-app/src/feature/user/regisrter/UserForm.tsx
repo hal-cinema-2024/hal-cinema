@@ -1,9 +1,9 @@
 import { Button } from "@yamada-ui/react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { InputField } from "../../../components/InputField";
+import { InputField } from "../../../components/form/InputField";
 import { userSchema } from "./UserSchema";
-import { SelectField } from "../../../components/SelectField";
+import { SelectField } from "../../../components/form/SelectField";
 import { createUser } from "../api";
 
 export function UserForm() {

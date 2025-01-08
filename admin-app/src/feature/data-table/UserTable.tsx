@@ -1,22 +1,21 @@
-import { Table } from "@yamada-ui/table";
-import { useMovies } from "../../../mock/hooks/useMovies";
 import { Button, Center } from "@yamada-ui/react";
+import { Table } from "@yamada-ui/table";
 import { useNavigate } from "react-router";
-import { deleteMovie } from "../feature/movie/api";
-export const MovieTable = () => {
-  const { movies } = useMovies();
+import { deleteUser } from "../user/api";
+import { useUsers } from "../../../../mock/hooks/useUsers";
+export const UserTable = () => {
+  const { users } = useUsers();
 
   const router = useNavigate();
   const columns = [
-    { header: "Movie ID", accessorKey: "id" },
-    { header: "Movie Name", accessorKey: "movieName" },
-    { header: "Director", accessorKey: "director" },
-    { header: "Link", accessorKey: "link" },
-    { header: "Term", accessorKey: "term" },
+    { header: "User ID", accessorKey: "id" },
+    { header: "Last Name", accessorKey: "lastName" },
+    { header: "First Name", accessorKey: "firstName" },
+    { header: "Gender", accessorKey: "gender" },
     {
       header: "Edit",
       accessorKey: "edit",
-
+      //eslint-disable-next-line
       cell: (info: any) => (
         <Button
           style={{
@@ -26,7 +25,7 @@ export const MovieTable = () => {
             backgroundColor: "#a9ffcd",
           }}
           onClick={() => {
-            router(`/movies/${info.row.original.id}`);
+            router(`/users/${info.row.original.id}`);
           }}
         >
           詳細/編集
@@ -36,6 +35,7 @@ export const MovieTable = () => {
     {
       header: "Delete",
       accessorKey: "delete",
+      //eslint-disable-next-line
       cell: (info: any) => (
         <Button
           style={{
@@ -45,7 +45,7 @@ export const MovieTable = () => {
             backgroundColor: "#ffa9a9",
           }}
           onClick={() => {
-            deleteMovie(info.row.original.id);
+            deleteUser(info.row.original.id);
             window.location.reload();
           }}
         >
@@ -66,7 +66,7 @@ export const MovieTable = () => {
           boxSizing: "border-box",
         }}
       >
-        <Table columns={columns} data={movies} />
+        <Table columns={columns} data={users} />
       </Center>
     </>
   );

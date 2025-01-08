@@ -1,7 +1,7 @@
 import { Button } from "@yamada-ui/react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { InputField } from "../../../components/InputField";
+import { InputField } from "../../../components/form/InputField";
 import { movieSchema } from "./movieSchema";
 import { createMovie } from "../api";
 export function MovieForm() {

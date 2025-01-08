@@ -1,5 +1,5 @@
-import { useSeatSelection } from "../../-hooks/useSeatSelection";
 import React from "react"; // React.CSSPropertiesを使用するためにインポート
+import { useSeatSelection } from "./store/useSeatSelection";
 
 const ROWS = "ABCDEF".split("");
 const SEATS_PER_ROW = 7;
@@ -28,8 +28,8 @@ const CinemaSeats = () => {
                     backgroundColor: isReserved
                       ? "white"
                       : isSelected
-                        ? "red"
-                        : "blue",
+                      ? "red"
+                      : "blue",
                     cursor: isReserved ? "not-allowed" : "pointer",
                   }}
                   onClick={() => {

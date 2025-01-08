@@ -1,11 +1,11 @@
-import { NativeSelect, Button } from "@yamada-ui/react";
-import { useEffect, useState } from "react";
-import { useMovies } from "../../../mock/hooks/useMovies";
-import { useSchedules } from "../../../mock/hooks/useSchedule";
-import { Table } from "@yamada-ui/table";
-import { deleteSchedule } from "../feature/schedule/api";
 import { useNavigate } from "react-router";
-
+import { MoviesMock } from "../../../../mock/types/movies";
+import { Button, NativeSelect } from "@yamada-ui/react";
+import { Table } from "@yamada-ui/table";
+import { useState, useEffect } from "react";
+import { deleteSchedule } from "../schedule/api";
+import { useMovies } from "../../../../mock/hooks/useMovies";
+import { useSchedules } from "../../../../mock/hooks/useSchedule";
 export const ScheduleTable = () => {
   const { movies } = useMovies();
   const [selectedMovieId, setSelectedMovieId] = useState<number>(1);
@@ -39,6 +39,7 @@ export const ScheduleTable = () => {
     {
       header: "Edit",
       accessorKey: "edit",
+      //eslint-disable-next-line
       cell: (info: any) => (
         <Button
           style={{
@@ -58,6 +59,7 @@ export const ScheduleTable = () => {
     {
       header: "Delete",
       accessorKey: "delete",
+      //eslint-disable-next-line
       cell: (info: any) => (
         <Button
           style={{
@@ -87,7 +89,7 @@ export const ScheduleTable = () => {
         value={selectedMovieId}
         onChange={(e) => setSelectedMovieId(Number(e.target.value))}
       >
-        {movies.map((movie) => (
+        {movies.map((movie: MoviesMock) => (
           <option key={movie.id} value={movie.id}>
             {movie.movieName}
           </option>

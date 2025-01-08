@@ -6,9 +6,9 @@ import {
   ModalBody,
   ModalFooter,
 } from "@yamada-ui/react";
-import { ScheduleForm } from "../feature/schedule/regisrter/ScheduleForm";
+import { MovieForm } from "../../feature/movie/regisrter/MovieForm";
 
-export const AddOrderModal = () => {
+export const AddMovieModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -18,10 +18,10 @@ export const AddOrderModal = () => {
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalHeader>オーダー追加</ModalHeader>
+        <ModalHeader>映画情報追加</ModalHeader>
 
         <ModalBody>
-          <ScheduleForm />
+          <MovieForm />
         </ModalBody>
         <ModalFooter>
           <Button variant='ghost' onClick={onClose}>

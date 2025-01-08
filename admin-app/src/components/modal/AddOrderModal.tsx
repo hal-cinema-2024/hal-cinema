@@ -6,9 +6,9 @@ import {
   ModalBody,
   ModalFooter,
 } from "@yamada-ui/react";
-import { ScheduleForm } from "../feature/schedule/regisrter/ScheduleForm";
+import { ScheduleForm } from "../../feature/schedule/regisrter/ScheduleForm";
 
-export const AddSchedulesModal = () => {
+export const AddOrderModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -18,7 +18,7 @@ export const AddSchedulesModal = () => {
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalHeader>スケジュール追加</ModalHeader>
+        <ModalHeader>オーダー追加</ModalHeader>
 
         <ModalBody>
           <ScheduleForm />

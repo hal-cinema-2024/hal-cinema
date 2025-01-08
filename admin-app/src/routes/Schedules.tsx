@@ -1,4 +1,4 @@
-import { AddSchedulesModal } from "../components/AddSchedulesModal";
+import { AddSchedulesModal } from "../components/modal/AddSchedulesModal";
 import { ScheduleTable } from "../data-table/ScheduleTable";
 
 export const Schedules = () => {

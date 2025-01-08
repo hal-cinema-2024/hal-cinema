@@ -4,11 +4,35 @@ import { FormProvider, useForm } from "react-hook-form";
 import { z, ZodString } from "zod";
 import { useMovieById } from "../../../../mock/hooks/useMovieById";
 import { useSeatSelection } from "./store/useSeatSelection";
-import { SelectField } from "../../components/SelectField";
-
+import { SelectField } from "../../components/form/SelectField";
+import { useScheduleById } from "../../../../mock/hooks/useScheduleById";
+// import { PostOrder } from "../order/api";
+import { CreateSeatSelects } from "./CreateSeatSelects";
 type TicketFormProps = {
   scheduleId: string;
 };
+const option = [
+  {
+    label: "一般",
+    value: 1800,
+  },
+  {
+    label: "大学生等",
+    value: 1600,
+  },
+  {
+    label: "中学 高校",
+    value: 1500,
+  },
+  {
+    label: "小学生 幼児",
+    value: 1000,
+  },
+  {
+    label: "幼児",
+    value: 500,
+  },
+];
 
 export function OrderFormProvider(props: TicketFormProps) {
   const { selectedSeats } = useSeatSelection();
@@ -32,13 +56,13 @@ export function OrderFormProvider(props: TicketFormProps) {
     <FormProvider {...methods}>
       <form
         onSubmit={handleSubmit((data) => {
-          const seat = CreateSeatSelects(data, selectedSeats);
-          PostOrder({
-            userId: "1",
-            movieName: movie?.movieName,
-            screen: schedule?.theater,
-            orderDetail: seat,
-          });
+          // const seat = CreateSeatSelects(data, selectedSeats);
+          // PostOrder({
+          //   userId: "1",
+          //   movieName: movie?.movieName,
+          //   screen: schedule?.theater,
+          //   orderDetail: seat,
+          // });
         })}
       >
         {selectedSeats &&

@@ -6,7 +6,7 @@ type InputFieldProps = {
 };
 
 type Option = {
-  value: string;
+  value: string | number;
   label: string;
 };
 export const SelectField = (props: InputFieldProps) => {
