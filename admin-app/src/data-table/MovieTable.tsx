@@ -2,7 +2,7 @@ import { Table } from "@yamada-ui/table";
 import { useMovies } from "../../../mock/hooks/useMovies";
 import { Button, Center } from "@yamada-ui/react";
 import { useNavigate } from "react-router";
-import { deleteMovie } from "../form/acrions/movie";
+import { deleteMovie } from "../feature/movie/api";
 export const MovieTable = () => {
   const { movies } = useMovies();
 

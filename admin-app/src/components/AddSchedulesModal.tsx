@@ -6,7 +6,7 @@ import {
   ModalBody,
   ModalFooter,
 } from "@yamada-ui/react";
-import { ScheduleForm } from "../form/schedules_register/ScheduleForm";
+import { ScheduleForm } from "../feature/schedule/regisrter/ScheduleForm";
 
 export const AddSchedulesModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

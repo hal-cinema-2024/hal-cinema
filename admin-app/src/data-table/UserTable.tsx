@@ -2,7 +2,7 @@ import { Table } from "@yamada-ui/table";
 import { useUser } from "../../../mock/hooks/useUsers";
 import { Button, Center } from "@yamada-ui/react";
 import { useNavigate } from "react-router";
-import { deleteUser } from "../form/acrions/user";
+import { deleteUser } from "../feature/user/api";
 
 export const UserTable = () => {
   const { user } = useUser();

@@ -1,9 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@yamada-ui/react";
 import { useForm, FormProvider } from "react-hook-form";
-import { InputField } from "../InputField";
+import { InputField } from "../../../components/InputField";
 import { scheduleSchema } from "./scheduleSchema";
-import { createSchedule } from "../acrions/schedule";
+import { createSchedule } from "../api";
 
 export function ScheduleForm() {
   const methods = useForm({

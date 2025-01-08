@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useMovies } from "../../../mock/hooks/useMovies";
 import { useSchedules } from "../../../mock/hooks/useSchedule";
 import { Table } from "@yamada-ui/table";
-import { deleteSchedule } from "../form/acrions/schedule";
+import { deleteSchedule } from "../feature/schedule/api";
 import { useNavigate } from "react-router";
 
 export const ScheduleTable = () => {

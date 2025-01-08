@@ -1,9 +1,9 @@
 import { Button } from "@yamada-ui/react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { InputField } from "../InputField";
+import { InputField } from "../../../components/InputField";
 import { movieSchema } from "./movieSchema";
-import { createMovie } from "../acrions/movie";
+import { createMovie } from "../api";
 export function MovieForm() {
   const methods = useForm({
     resolver: zodResolver(movieSchema),
@@ -18,13 +18,13 @@ export function MovieForm() {
           window.location.reload();
         })}
       >
-        <InputField fieldName='movieName' />
-        <InputField fieldName='director' />
-        <InputField fieldName='summary' />
-        <InputField fieldName='link' />
-        <InputField fieldName='term' type='number' />
-        <InputField fieldName='releaseDate' />
-        <InputField fieldName='endDate' />
+        <InputField name='movieName' />
+        <InputField name='director' />
+        <InputField name='summary' />
+        <InputField name='link' />
+        <InputField name='term' type='number' />
+        <InputField name='releaseDate' />
+        <InputField name='endDate' />
         <Button type='submit'>Submit</Button>
       </form>
     </FormProvider>
