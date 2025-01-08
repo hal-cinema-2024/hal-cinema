@@ -1,20 +1,17 @@
 import { NativeSelect } from "@yamada-ui/react";
 import { MoviesMock } from "../../../../../../mock/types/movies";
 import { useMovies } from "../../../../../../mock/hooks/useMovies";
-import { useState, useEffect } from "react";
+import { useSelectMovie } from "./hooks/useSelectMovie";
 
 export const SelectMovie = () => {
   const { movies } = useMovies();
-  const [selectedMovieId, setSelectedMovieId] = useState<number>(1);
-  useEffect(() => {
-    setSelectedMovieId(selectedMovieId);
-  }, [selectedMovieId]);
+  const { handleChangeSelectMovie, selectedMovieId } = useSelectMovie();
   return (
     <>
       <NativeSelect
         name='movieId'
         value={selectedMovieId}
-        onChange={(e) => setSelectedMovieId(Number(e.target.value))}
+        onChange={handleChangeSelectMovie}
       >
         {movies.map((movie: MoviesMock) => (
           <option key={movie.id} value={movie.id}>

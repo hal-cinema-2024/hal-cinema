@@ -1,22 +1,19 @@
 import { NativeSelect } from "@yamada-ui/react";
-import { MoviesMock } from "../../../../../../mock/types/movies";
-import { useState, useEffect } from "react";
 import { useSchedules } from "../../../../../../mock/hooks/useSchedule";
+import { useSelectSchedule } from "./hooks/useSelectSchedule";
+import { ScheduleMock } from "../../../../../../mock/types/schedule";
 
 export const SelectSchedule = () => {
   const { schedules } = useSchedules();
-  const [selectedScheduleId, setSelectedScheduleId] = useState<number>(1);
-  useEffect(() => {
-    setSelectedScheduleId(selectedScheduleId);
-  }, [selectedScheduleId]);
+  const { selectedScheduleId, handleSelectSchedule } = useSelectSchedule();
   return (
     <>
       <NativeSelect
         name='movieId'
         value={selectedScheduleId}
-        onChange={(e) => setSelectedScheduleId(Number(e.target.value))}
+        onChange={handleSelectSchedule}
       >
-        {schedules.map((schedule: MoviesMock) => (
+        {schedules.map((schedule: ScheduleMock) => (
           <option key={schedule.id} value={schedule.id}>
             {schedule.movieName}
           </option>
