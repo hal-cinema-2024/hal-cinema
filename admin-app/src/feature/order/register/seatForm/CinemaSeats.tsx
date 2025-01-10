@@ -24,8 +24,8 @@ const CinemaSeats = (props: Props) => {
 
   return (
     <div style={styles.container}>
-      <h2>座席予約</h2>
-      <p>ご希望の座席をお選びください。</p>
+      <h2 style={{color: "black"}}>座席予約</h2>
+      <p style={{color: "black"}}>ご希望の座席をお選びください。</p>
       <div style={styles.seatGrid}>
         {ROWS.map((row, rowIndex) => (
           <div key={rowIndex} style={styles.row}>
@@ -43,7 +43,7 @@ const CinemaSeats = (props: Props) => {
                   style={{
                     ...styles.seat,
                     backgroundColor: isReserved
-                      ? "white"
+                      ? "black"
                       : isSelected
                       ? "red"
                       : "blue",
@@ -67,15 +67,15 @@ const CinemaSeats = (props: Props) => {
       <div style={styles.legend}>
         <div style={styles.legendItem}>
           <div style={{ ...styles.seat, backgroundColor: "blue" }}></div>
-          <span>選択可能（空席）</span>
+          <span style={{color: "black"}}>選択可能(空席)</span>
         </div>
         <div style={styles.legendItem}>
           <div style={{ ...styles.seat, backgroundColor: "red" }}></div>
-          <span>選択席</span>
+          <span style={{color: "black"}}>選択席</span>
         </div>
         <div style={styles.legendItem}>
-          <div style={{ ...styles.seat, backgroundColor: "white" }}></div>
-          <span>選択不可（購入済み/販売対象外）</span>
+          <div style={{ ...styles.seat, backgroundColor: "black" }}></div>
+          <span style={{color: "black"}}>選択不可(購入済み/販売対象外)</span>
         </div>
       </div>
     </div>
@@ -88,7 +88,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    backgroundColor: "#2f2f2f",
+    // backgroundColor: "#2f2f2f",
     color: "white",
     padding: "20px",
     borderRadius: "10px",
