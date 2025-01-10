@@ -25,8 +25,8 @@ export const OrderTable = () => {
     },
 
     {
-      header: "Edit",
-      accessorKey: "edit",
+      header: "display",
+      accessorKey: "display",
       //eslint-disable-next-line
       cell: (info: any) => (
         <Button
@@ -37,10 +37,10 @@ export const OrderTable = () => {
             backgroundColor: "#a9ffcd",
           }}
           onClick={() => {
-            router(`/schedules/${info.row.original.id}`);
+            router(`/orders/${info.row.original.id}`);
           }}
         >
-          詳細/編集
+          チケット表示
         </Button>
       ),
     },
