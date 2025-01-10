@@ -5,12 +5,14 @@ import { InputField } from "../../components/form/InputField";
 import { orderSchema } from "./OrderSchema";
 import { SeatForm } from "./register/SeatForm/SeatForm";
 import { createOrder } from "./api";
-import { getSchedule } from "../schedule/api";
 import { SelectField } from "../../components/form/SelectField";
 import { useMovies } from "../../../../mock/hooks/useMovies";
+import { useSchedules } from "../../../../mock/hooks/useSchedule";
+import { getSchedule } from "../schedule/api";
 
 export function OrderForm() {
   const { movies } = useMovies();
+  const { schedules } = useSchedules();
   const methods = useForm({
     resolver: zodResolver(orderSchema),
   });
@@ -32,7 +34,15 @@ export function OrderForm() {
           window.location.reload();
         })}
       >
-        <InputField name='scheduleId' />
+        <SelectField
+          select={{
+            name: "scheduleId",
+          }}
+          option={schedules.map((schedule) => ({
+            value: schedule.id || "",
+            label: schedule.id || "",
+          }))}
+        />
         <SelectField
           select={{
             name: "movieName",
