@@ -7,6 +7,7 @@ import {
   ModalFooter,
 } from "@yamada-ui/react";
 import { OrderForm } from "../../feature/order/OrderForm";
+import "./OrderModal.css";
 
 export const AddOrderModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -17,17 +18,21 @@ export const AddOrderModal = () => {
         Open Modal
       </Button>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalHeader>オーダー追加</ModalHeader>
-        <ModalBody>
-          <OrderForm />
-        </ModalBody>
-        <ModalFooter>
-          <Button variant='ghost' onClick={onClose}>
-            閉じる
-          </Button>
-        </ModalFooter>
+      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+        <div className="custom-modal">
+          <ModalHeader>オーダー追加</ModalHeader>
+          <ModalBody>
+            <OrderForm />
+          </ModalBody>
+          <ModalFooter>
+            <Button variant='ghost' onClick={onClose}>
+              閉じる
+            </Button>
+          </ModalFooter>
+        </div>
       </Modal>
     </>
   );
 };
+
+
