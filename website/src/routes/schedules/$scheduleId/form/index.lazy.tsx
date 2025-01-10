@@ -28,8 +28,7 @@ export function Index() {
       >
         {activeStep === 1 ? (
           <div>
-            <CinemaSeats />
-
+            <CinemaSeats scheduleId={scheduleId} />
             {scheduleId && selectedSeats.length > 0 ? (
               <TicketFormModal scheduleId={scheduleId} />
             ) : null}

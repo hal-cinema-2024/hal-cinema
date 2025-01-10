@@ -1,17 +1,21 @@
 import { useSeatSelection } from "../../-hooks/useSeatSelection";
-import React from "react"; 
-import { useOrders } from "../../../../../../../../mock/hooks/useOrders";
-import { OrdersMock, OrdersDetail } from "../../../../../../../../mock/types/orders";
+import React from "react";
+import { useOrderBySchedule } from "../../../../../../../../mock/hooks/useOrderBySchedule";
+import {
+  OrdersMock,
+  OrdersDetail,
+} from "../../../../../../../../mock/types/orders";
 const ROWS = "ABCDEF".split("");
 const SEATS_PER_ROW = 7;
-
-const CinemaSeats = () => {
+type Props = {
+  scheduleId: string;
+};
+const CinemaSeats = (props: Props) => {
   const { selectedSeats, toggleSeatSelection } = useSeatSelection();
-  const { orders } = useOrders();
-  const reservedSeats 
-  = orders.flatMap((order: OrdersMock) => {
+  const { orderBySchedule } = useOrderBySchedule(props.scheduleId);
+  const reservedSeats = orderBySchedule.flatMap((order: OrdersMock) => {
     if (order && order.orderDetail) {
-       return order.orderDetail.map((detail: OrdersDetail) => {
+      return order.orderDetail.map((detail: OrdersDetail) => {
         const seatName = detail.seatName;
         if (!seatName) return;
         const row = seatName?.charAt(0);
@@ -20,8 +24,6 @@ const CinemaSeats = () => {
       });
     }
   });
- 
-
 
   return (
     <div style={styles.container}>
@@ -35,13 +37,9 @@ const CinemaSeats = () => {
               const isSelected = selectedSeats.some(
                 (s) => s.row === seat.row && s.number === seat.number
               );
-              const isReserved = 
-              reservedSeats?.some(
-                (s) => 
-                {
-                  return s?.row === seat.row && s?.number === seat.number;
-                }
-              );
+              const isReserved = reservedSeats?.some((s) => {
+                return s?.row === seat.row && s?.number === seat.number;
+              });
               return (
                 <button
                   key={`${seat.row}-${seat.number}`}
