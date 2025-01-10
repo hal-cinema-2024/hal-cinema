@@ -1,12 +1,26 @@
-import React from "react"; // React.CSSPropertiesを使用するためにインポート
+import React from "react";
+import { useOrderBySchedule } from "../../../../../../mock/hooks/useOrderBySchedule";
+import { OrdersMock, OrdersDetail } from "../../../../../../mock/types/orders";
 import { useSeatSelection } from "../../store/useSeatSelection";
-import { useSeat } from "../../../../../../mock/hooks/useSeat";
 const ROWS = "ABCDEF".split("");
 const SEATS_PER_ROW = 7;
-
-const CinemaSeats = () => {
+type Props = {
+  scheduleId: string;
+};
+const CinemaSeats = (props: Props) => {
   const { selectedSeats, toggleSeatSelection } = useSeatSelection();
-  const { isReservedSeat } = useSeat();
+  const { orderBySchedule } = useOrderBySchedule(props.scheduleId);
+  const reservedSeats = orderBySchedule.flatMap((order: OrdersMock) => {
+    if (order && order.orderDetail) {
+      return order.orderDetail.map((detail: OrdersDetail) => {
+        const seatName = detail.seatName;
+        if (!seatName) return;
+        const row = seatName?.charAt(0);
+        const number = parseInt(seatName.slice(1), 10);
+        return { row, number };
+      });
+    }
+  });
 
   return (
     <div style={styles.container}>
@@ -20,24 +34,27 @@ const CinemaSeats = () => {
               const isSelected = selectedSeats.some(
                 (s) => s.row === seat.row && s.number === seat.number
               );
+              const isReserved = reservedSeats?.some((s) => {
+                return s?.row === seat.row && s?.number === seat.number;
+              });
               return (
                 <button
                   key={`${seat.row}-${seat.number}`}
                   style={{
                     ...styles.seat,
-                    backgroundColor: isReservedSeat
+                    backgroundColor: isReserved
                       ? "white"
                       : isSelected
                       ? "red"
                       : "blue",
-                    cursor: isReservedSeat ? "not-allowed" : "pointer",
+                    cursor: isReserved ? "not-allowed" : "pointer",
                   }}
                   onClick={() => {
-                    if (!isReservedSeat) {
+                    if (!isReserved) {
                       toggleSeatSelection(seat);
                     }
                   }}
-                  disabled={isReservedSeat ? true : false}
+                  disabled={isReserved}
                 >
                   {seat.row}
                   {seat.number}

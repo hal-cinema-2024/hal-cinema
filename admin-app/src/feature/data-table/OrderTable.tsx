@@ -4,7 +4,7 @@ import { deleteSchedule } from "../schedule/api";
 import { useOrders } from "../../../../mock/hooks/useOrders";
 import { Button } from "@yamada-ui/react";
 export const OrderTable = () => {
-  const { orders } = useOrders("1");
+  const { orders } = useOrders();
   const router = useNavigate();
   const column = [
     {
@@ -12,12 +12,12 @@ export const OrderTable = () => {
       accessorKey: "id",
     },
     {
-      header: "映画ID",
-      accessorKey: "movieId",
+      header: "映画名",
+      accessorKey: "movieName",
     },
     {
-      header: "スクリーン",
-      accessorKey: "screen",
+      header: "シアター",
+      accessorKey: "theater",
     },
     {
       header: "予約内容",

@@ -1,11 +1,29 @@
 import { useSeatSelection } from "../../-hooks/useSeatSelection";
-import React from "react"; // React.CSSPropertiesを使用するためにインポート
-
+import React from "react";
+import { useOrderBySchedule } from "../../../../../../../../mock/hooks/useOrderBySchedule";
+import {
+  OrdersMock,
+  OrdersDetail,
+} from "../../../../../../../../mock/types/orders";
 const ROWS = "ABCDEF".split("");
 const SEATS_PER_ROW = 7;
-
-const CinemaSeats = () => {
+type Props = {
+  scheduleId: string;
+};
+const CinemaSeats = (props: Props) => {
   const { selectedSeats, toggleSeatSelection } = useSeatSelection();
+  const { orderBySchedule } = useOrderBySchedule(props.scheduleId);
+  const reservedSeats = orderBySchedule.flatMap((order: OrdersMock) => {
+    if (order && order.orderDetail) {
+      return order.orderDetail.map((detail: OrdersDetail) => {
+        const seatName = detail.seatName;
+        if (!seatName) return;
+        const row = seatName?.charAt(0);
+        const number = parseInt(seatName.slice(1), 10);
+        return { row, number };
+      });
+    }
+  });
 
   return (
     <div style={styles.container}>
@@ -19,7 +37,9 @@ const CinemaSeats = () => {
               const isSelected = selectedSeats.some(
                 (s) => s.row === seat.row && s.number === seat.number
               );
-              const isReserved = seat.row === "E" && seat.number === 3; // 例として特定の座席を予約済みに設定(E3)
+              const isReserved = reservedSeats?.some((s) => {
+                return s?.row === seat.row && s?.number === seat.number;
+              });
               return (
                 <button
                   key={`${seat.row}-${seat.number}`}
