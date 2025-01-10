@@ -1,39 +1,9 @@
 {
   "orders": [
     {
-      "id": "287b",
-      "userId": "1",
-      "movieName": "マルセル 靴をはいた小さな貝",
-      "screen": "シアター1",
-      "orderDetail": [
-        {
-          "seatName": "C2",
-          "priceType": 1800,
-          "price": 1200
-        }
-      ]
-    },
-    {
-      "id": "db3a",
-      "userId": "1",
-      "movieName": "マルセル 靴をはいた小さな貝",
-      "screen": "シアター1",
-      "orderDetail": [
-        {
-          "seatName": "B1",
-          "priceType": 1800,
-          "price": 1200
-        },
-        {
-          "seatName": "D4",
-          "priceType": 1800,
-          "price": 1200
-        }
-      ]
-    },
-    {
       "id": "f4dc",
       "userId": "1",
+      "scheduleId": "1",
       "movieName": "マルセル 靴をはいた小さな貝",
       "screen": "シアター1",
       "orderDetail": [
@@ -42,21 +12,7 @@
           "priceType": 1800,
           "price": 1200
         },
-        {
-          "seatName": "D4",
-          "priceType": 1800,
-          "price": 1200
-        },
-        {
-          "seatName": "D5",
-          "priceType": 1800,
-          "price": 1200
-        },
-        {
-          "seatName": "E5",
-          "priceType": 1800,
-          "price": 1200
-        },
+
         {
           "seatName": "E3",
           "priceType": 1800,
@@ -67,57 +23,12 @@
     {
       "id": "9d88",
       "userId": "1",
+      "scheduleId": "1",
       "movieName": "マルセル 靴をはいた小さな貝",
       "screen": "シアター1",
       "orderDetail": [
         {
           "seatName": "D2",
-          "priceType": 1800,
-          "price": 1200
-        }
-      ]
-    },
-    {
-      "id": "9dec",
-      "userId": "1",
-      "movieName": "マルセル 靴をはいた小さな貝",
-      "screen": "シアター1",
-      "orderDetail": [
-        {
-          "seatName": "C3",
-          "priceType": 1800,
-          "price": 1200
-        }
-      ]
-    },
-    {
-      "id": "9d88",
-      "userId": "1",
-      "movieName": "マルセル 靴をはいた小さな貝",
-      "screen": "シアター1",
-      "orderDetail": [
-        {
-          "seatName": "B2",
-          "priceType": 1800,
-          "price": 1200
-        },
-        {
-          "seatName": "B3",
-          "priceType": 1800,
-          "price": 1200
-        },
-        {
-          "seatName": "A2",
-          "priceType": 1800,
-          "price": 1200
-        },
-        {
-          "seatName": "A1",
-          "priceType": 1800,
-          "price": 1200
-        },
-        {
-          "seatName": "A3",
           "priceType": 1800,
           "price": 1200
         }

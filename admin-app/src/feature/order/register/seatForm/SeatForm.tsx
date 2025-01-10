@@ -59,6 +59,7 @@ export function SeatForm(props: TicketFormProps) {
           const seat = CreateSeatSelects(data, selectedSeats);
           createOrder({
             userId: "1",
+            scheduleId: schedule?.id,
             movieName: movie?.movieName,
             screen: schedule?.theater,
             orderDetail: seat,
