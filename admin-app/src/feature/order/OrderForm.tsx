@@ -9,6 +9,7 @@ import { useSchedules } from "../../../../mock/hooks/useSchedule";
 import { getSchedule } from "../schedule/api";
 import CinemaSeats from "./register/SeatForm/CinemaSeats";
 import { useSeatSelection } from "./store/useSeatSelection";
+
 const option = [
   {
     label: "一般",
@@ -31,7 +32,6 @@ const option = [
     value: "4",
   },
 ];
-
 export function OrderForm() {
   const { movies } = useMovies();
   const { schedules } = useSchedules();
@@ -39,7 +39,8 @@ export function OrderForm() {
   const methods = useForm({
     resolver: zodResolver(orderSchema),
   });
-  const { handleSubmit } = methods;
+  const { handleSubmit, watch } = methods;
+  const scheduleId = watch("scheduleId");
 
   return (
     <FormProvider {...methods}>
@@ -89,7 +90,8 @@ export function OrderForm() {
             label: schedule.startTime || "",
           }))}
         />
-        <CinemaSeats />
+        {/* 選択したscheduleIdをCinemaSeatsに渡す */}
+        <CinemaSeats scheduleId={scheduleId as string} />
         {selectedSeats &&
           selectedSeats.map((seat, index) => (
             <SelectField

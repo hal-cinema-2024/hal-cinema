@@ -74,6 +74,88 @@
           "price": 1800
         }
       ]
+    },
+    {
+      "id": "71e0",
+      "userId": "1",
+      "scheduleId": "1",
+      "movieName": "マルセル 靴をはいた小さな貝",
+      "theater": "シアター1",
+      "orderDetail": [
+        {
+          "seatName": "E5",
+          "priceType": 0,
+          "price": 1800
+        },
+        {
+          "seatName": "C6",
+          "priceType": 0,
+          "price": 1800
+        },
+        {
+          "seatName": "B5",
+          "priceType": 0,
+          "price": 1800
+        }
+      ]
+    },
+    {
+      "id": "b745",
+      "userId": "1",
+      "scheduleId": "1",
+      "movieName": "マルセル 靴をはいた小さな貝",
+      "theater": "シアター1",
+      "orderDetail": [
+        {
+          "seatName": "E5",
+          "priceType": 0,
+          "price": 1800
+        },
+        {
+          "seatName": "C6",
+          "priceType": 0,
+          "price": 1800
+        },
+        {
+          "seatName": "B5",
+          "priceType": 0,
+          "price": 1800
+        },
+        {
+          "seatName": "F7",
+          "priceType": 0,
+          "price": 1800
+        }
+      ]
+    },
+    {
+      "id": "354e",
+      "userId": "1",
+      "scheduleId": "2",
+      "movieName": "CLOSE/クロース",
+      "theater": "シアター2",
+      "orderDetail": [
+        {
+          "seatName": "E5",
+          "priceType": 0,
+          "price": 1800
+        },
+        {
+          "seatName": "C6",
+          "priceType": 0,
+          "price": 1800
+        },
+        {
+          "seatName": "B5",
+          "priceType": 0,
+          "price": 1800
+        },
+        {
+          "seatName": "F7",
+          "priceType": 0,
+          "price": 1800
+        }
+      ]
     }
   ]
 }

@@ -1,14 +1,16 @@
 import React from "react";
-import { useOrders } from "../../../../../../mock/hooks/useOrders";
+import { useOrderBySchedule } from "../../../../../../mock/hooks/useOrderBySchedule";
 import { OrdersMock, OrdersDetail } from "../../../../../../mock/types/orders";
 import { useSeatSelection } from "../../store/useSeatSelection";
 const ROWS = "ABCDEF".split("");
 const SEATS_PER_ROW = 7;
-
-const CinemaSeats = () => {
+type Props = {
+  scheduleId: string;
+};
+const CinemaSeats = (props: Props) => {
   const { selectedSeats, toggleSeatSelection } = useSeatSelection();
-  const { orders } = useOrders();
-  const reservedSeats = orders.flatMap((order: OrdersMock) => {
+  const { orderBySchedule } = useOrderBySchedule(props.scheduleId);
+  const reservedSeats = orderBySchedule.flatMap((order: OrdersMock) => {
     if (order && order.orderDetail) {
       return order.orderDetail.map((detail: OrdersDetail) => {
         const seatName = detail.seatName;
