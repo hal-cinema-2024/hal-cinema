@@ -40,8 +40,6 @@ export const SeatSelectionProvider: FC<{
 
   useEffect(() => {
     setSeatCount(selectedSeats.length);
-    console.log(selectedSeats);
-    console.log(seatCount);
   }, [selectedSeats, seatCount]);
 
   return (
