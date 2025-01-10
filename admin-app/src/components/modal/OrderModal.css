@@ -1,0 +1,7 @@
+.custom-modal {
+  max-width: 1000px;
+   /* 必要に応じて画面幅に合わせて縮小 */
+  margin: 0 auto; /* 中央揃え */
+  max-height: 90vh;
+  overflow-y: auto;
+}
