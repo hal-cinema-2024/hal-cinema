@@ -58,6 +58,7 @@ export function OrderForm() {
                   : 1200,
             };
           });
+          console.log(orderDetails);
           createOrder({
             userId: "1",
             scheduleId: data.scheduleId || "1",

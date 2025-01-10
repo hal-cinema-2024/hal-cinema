@@ -12,7 +12,6 @@
           "priceType": 1800,
           "price": 1200
         },
-
         {
           "seatName": "E3",
           "priceType": 1800,
@@ -31,6 +30,48 @@
           "seatName": "D2",
           "priceType": 1800,
           "price": 1200
+        }
+      ]
+    },
+    {
+      "id": "86da",
+      "userId": "1",
+      "scheduleId": "5824",
+      "movieName": "Pearl パール",
+      "theater": "シアター1",
+      "orderDetail": [
+        {
+          "seatName": "A2",
+          "priceType": 0,
+          "price": 1800
+        }
+      ]
+    },
+    {
+      "id": "410e",
+      "userId": "1",
+      "scheduleId": "5824",
+      "movieName": "Pearl パール",
+      "theater": "シアター1",
+      "orderDetail": [
+        {
+          "seatName": "A2",
+          "priceType": 0,
+          "price": 1800
+        }
+      ]
+    },
+    {
+      "id": "66b7",
+      "userId": "1",
+      "scheduleId": "2",
+      "movieName": "CLOSE/クロース",
+      "theater": "シアター2",
+      "orderDetail": [
+        {
+          "seatName": "B4",
+          "priceType": 0,
+          "price": 1800
         }
       ]
     }

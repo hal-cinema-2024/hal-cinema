@@ -1,7 +1,7 @@
 import { CreateOrder, UpdateOrder } from "../../../../mock/types/orders";
 import { apiDelete, apiGet, apiPost, apiPut } from "../../../../util/apiClient";
 
-export const url = "http://localhost:8012/Orders";
+export const url = "http://localhost:8012/orders";
 
 export const createOrder = async (data: CreateOrder) => {
   try {
