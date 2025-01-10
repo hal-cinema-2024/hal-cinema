@@ -7,18 +7,15 @@ export const orderSchema = z.object({
   movieName: z.string().nonempty({
     message: "映画名は必須です",
   }),
-  orderDetail: z.array(
-    z.object({
-      priceType: z
-        .string({
-          message: "priceTypeは必須です",
-        })
-        .transform((val) => {
-          if (isNaN(Number(val))) {
-            throw new Error("priceTypeは数値である必要があります");
-          }
-          return Number(val);
-        }),
+
+  priceType: z
+    .string({
+      message: "priceTypeは必須です",
     })
-  ),
+    .transform((val) => {
+      if (isNaN(Number(val))) {
+        throw new Error("priceTypeは数値である必要があります");
+      }
+      return Number(val);
+    }),
 });

@@ -45,6 +45,7 @@ export function OrderForm() {
     <FormProvider {...methods}>
       <form
         onSubmit={handleSubmit(async (data) => {
+          if (!selectedSeats) return;
           const orderDetails = selectedSeats.map((seat) => {
             return {
               seatName: seat.row + seat.number,
@@ -57,7 +58,6 @@ export function OrderForm() {
                   : 1200,
             };
           });
-          console.log(data);
           createOrder({
             userId: "1",
             scheduleId: data.scheduleId || "1",
@@ -67,6 +67,7 @@ export function OrderForm() {
               .catch(() => "シアター１"),
             orderDetail: orderDetails,
           });
+          console.log(data);
         })}
       >
         <SelectField
