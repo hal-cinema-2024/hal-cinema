@@ -43,7 +43,7 @@ export function TicketFormProvider(props: TicketFormProps) {
             userId: "1",
             scheduleId: schedule?.id,
             movieName: movie?.movieName,
-            screen: schedule?.theater,
+            theater: schedule?.theater,
             orderDetail: seat,
           });
         })}

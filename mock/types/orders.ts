@@ -8,7 +8,7 @@ export interface OrdersMock {
   userId?: string;
   scheduleId?: string;
   movieName?: string;
-  screen?: string;
+  theater?: string;
   orderDetail?: OrdersDetail[];
 }
 

@@ -5,7 +5,7 @@
       "userId": "1",
       "scheduleId": "1",
       "movieName": "マルセル 靴をはいた小さな貝",
-      "screen": "シアター1",
+      "theater": "シアター1",
       "orderDetail": [
         {
           "seatName": "C4",
@@ -25,7 +25,7 @@
       "userId": "1",
       "scheduleId": "1",
       "movieName": "マルセル 靴をはいた小さな貝",
-      "screen": "シアター1",
+      "theater": "シアター1",
       "orderDetail": [
         {
           "seatName": "D2",

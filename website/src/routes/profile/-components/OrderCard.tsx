@@ -22,7 +22,7 @@ export const OrderCard = (props: OrderCardProps) => {
                   <TextTitle>映画</TextTitle>
                   <TextContent>{data.movieName}</TextContent>
                   <TextTitle>スクリーン</TextTitle>
-                  <TextContent>{data.screen}</TextContent>
+                  <TextContent>{data.theater}</TextContent>
                   <SeatContainer>
                     {data.orderDetail &&
                       data.orderDetail.map(
